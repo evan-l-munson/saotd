@@ -1,0 +1,11 @@
+Package: SAoTD
+Type: Package
+Title: Sentiment Analysis of Twitter Data
+Version: 1.0
+Date: 2018-01-17
+Author: Evan L. Munson
+Maintainer: Evan L. Munson <evan.l.munson@email.com>
+Description: This analytic is an in initial forray into sentiment analysis.  This analytic will allow a user to access the Twitter API (once they create their own developer account), ingest tweets of their interest, clean / tidy data, perform topic modeling in interested, compute sentiment scores utilizing the Bing Lexicon, and output visualizations.
+License: GPL (>= 2)
+Imports: Rcpp (>= 0.12.14)
+LinkingTo: Rcpp
