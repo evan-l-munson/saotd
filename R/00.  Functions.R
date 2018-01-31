@@ -23,39 +23,19 @@ library(widyr)
 Bing <- as.data.frame(get_sentiments("bing")) %>% 
   plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
 
-# Bing / Emoticon Lexicon -------------------------------------------------
-
-# # Emoticon Sentiment Data
-# # Acquired data from:  http://kt.ijs.si/data/Emoji_sentiment_ranking/index.html
-# # Webscraped into .xlsx file
-# EmoticonSent  <- readxl::read_xlsx("Lexicon Dictionaries/Emoji.xlsx", sheet = "Data") %>% 
-#   plyr::rename(c("Unicode name" = "Description"))
-# 
-# # Emoticon Dictionary Data
-# # Dictionary from:  https://github.com/today-is-a-good-day/emojis/blob/master/emojis.csv
-# EmoticonDict <- readr::read_csv("Lexicon Dictionaries/emojiDictionary.csv") %>% 
-#   plyr::rename(c("EN" = "Description")) %>% 
-#   plyr::rename(c("utf8" = "Token")) %>% 
-#   dplyr::select("unicode", "Description", "Token") %>% 
-#   dplyr::mutate(Description = toupper(Description))
-# 
-# # Merge Emoticon Sentiment with Dictionary
-# EmoticonSentiment <- merge(EmoticonSent, EmoticonDict, by = "Description") %>% 
-#   plyr::rename(c("Sentiment score" = "SentiScore")) %>% 
-#   plyr::rename(c("Neg" = "NegScore")) %>% 
-#   plyr::rename(c("Pos" = "PosScore")) %>% 
-#   plyr::rename(c("Neut" = "ObjScore")) %>% 
-#   dplyr::mutate(Sentiment = ifelse(SentiScore > 0, "positive",
-#                                    ifelse(SentiScore < 0, "negative", "neutral"))) %>% 
-#   dplyr::filter(Sentiment != "neutral") %>% 
-#   dplyr::select("Token", "Sentiment")
-# 
-# # Merge Bing library with Emoticon Library
-# EmoticonBing <- as.data.frame(get_sentiments("bing")) %>% 
-#   plyr::rename(c("word" = "Token", "sentiment" = "Sentiment")) %>% 
-#   rbind(EmoticonSentiment)
-
 # Tidy and Scores ---------------------------------------------------------
+
+#' @title Tidy Twitter Data
+#'
+#' @description Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual tweet
+#'
+#'
+#' @param DataFrame DataFrame of Twitter Data
+#' 
+#' @return A Tidy DataFrame
+#' 
+#' @examples TD.Tidy(DataFrame = newdata)
+#' @export
 
 # Function to Tidy Twitter Data and remove all emoticons and maintain actual tweet
 TD.Tidy <- function(DataFrame) {
