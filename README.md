@@ -1,9 +1,12 @@
 Sentiment Analysis of Twitter Data
 ================
 CPT Evan L. Munson
-17 January 2018
+05 February 2018
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
+
+[![Build
+Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
 
 # Analytic Data Product Information
 
