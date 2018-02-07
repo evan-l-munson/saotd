@@ -64,7 +64,6 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' 
 #' @export
 
-# Function development
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
   twitteR::setup_twitter_oauth(consumer_key, 
