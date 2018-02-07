@@ -3,14 +3,13 @@
 
 library(data.table)
 library(readxl)
-library(utils)
+#library(utils)
+library(twitteR)
+library(httr)
 library(readr)
 library(plyr)
-library(dplyr)
+library(tidyverse)
 library(tidytext)
-#library(stringi)
-library(stringr)
-library(ggplot2)
 library(lubridate)
 library(topicmodels)
 library(ggraph)
@@ -22,6 +21,72 @@ library(widyr)
 
 Bing <- as.data.frame(get_sentiments("bing")) %>% 
   plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
+
+# Acquire Tweets ----------------------------------------------------------
+
+#' @title Acquire Twitter Tweets
+#'
+#' @description Function will enable a user to access the twitter API throught the 
+#' [Twitter Application Management](https://apps.twitter.com/) site.
+#' Once a user has a twitter developers account and has recieved their individual consumer key, 
+#' consumer secret key, access token, and access secret key and acquire tweets they can 
+#' acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
+#'
+#' @param consumer_key Twitter Application management consumer key.
+#' @param consumer_secret Twitter Application management consumer secret key.
+#' @param access_token Twitter Application management access token.
+#' @param access_secret Twitter Application management access secret key.
+#' @param HT A single hashtag or a list of hashtags the user has specified.
+#' @param file_name User desired output .RData file name.
+#' @param distinct Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.
+#' 
+#' @return A DataFrame.
+#' 
+#' @examples 
+#' consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
+#' consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#' access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#' access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#' 
+#' hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
+#' 
+#' Acquire(consumer_key = consumer_key, 
+#'         consumer_secret = consumer_secret, 
+#'         access_token = access_token, 
+#'         access_secret = access_secret, 
+#'         HT = hashtags, 
+#'         num_tweets = 10, 
+#'         file_name = "test_tweets.RData"
+#'         distinct = TRUE)
+#'         
+#' load("test_tweets.RData")
+#' View(raw_tweets)
+#' 
+#' @export
+
+# Function development
+Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
+  
+  twitteR::setup_twitter_oauth(consumer_key, 
+                               consumer_secret, 
+                               access_token, 
+                               access_secret)
+  
+  twitter_data <- list()
+  for (i in ht) {
+    twitter_data[[i]] <- twitteR::twListToDF(twitteR::searchTwitter(i, 
+                                                                    n = num_tweets, 
+                                                                    lang = "en")) %>% 
+      dplyr::mutate(hashtag = substr(i, 2, nchar(i)))
+  }
+  
+  raw_tweets <- purrr::map_df(twitter_data, rbind) %>% 
+    dplyr::mutate(key = paste(screenName, created)) %>% 
+    dplyr::distinct(key, .keep_all = distinct)
+  
+    save(raw_tweets, file = file_name)
+    
+}
 
 # Tidy and Scores ---------------------------------------------------------
 
@@ -35,13 +100,13 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
+#' data <- raw_tweets
 #' tidy_data <- TD.Tidy(DataFrame = data)
 #' tidy_data
 #' 
 #' @export
 
-TD.Tidy <- function(DataFrame) {
+Tidy <- function(DataFrame) {
   reg_words <- "([^A-Za-z_\\d#@']|'(?![A-Za-z_\\d#@]))"
   
   TD_Tidy <- DataFrame %>%
@@ -76,7 +141,7 @@ TD.Tidy <- function(DataFrame) {
 #' 
 #' @export
 
-TD.Scores <- function(DataFrameTidy, HT_Topic) {
+Scores <- function(DataFrameTidy, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_Hashtag_Scores <- DataFrameTidy %>% 
       dplyr::inner_join(Bing, by = "Token") %>% 
@@ -313,7 +378,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' 
 #' @export
 
-TD.Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
+Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
     TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
       dplyr::arrange(TweetSentimentScore) %>% 
@@ -368,7 +433,7 @@ TD.Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NUL
 #' 
 #' @export
 
-TD.Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
+Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
     TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::arrange(-TweetSentimentScore) %>% 
@@ -396,16 +461,47 @@ TD.Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NUL
 
 # Word Grams --------------------------------------------------------------
 
+#' @title Twitter Positive and Negative Words
+#'
+#' @description Determines and displays the most positive and negative words within the twitter data.
+#' 
+#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
+#' @param num_words Desired number of words to be returned.
+#' @param filterword Word or words to be removed
+#' 
+#' @return A ggplot
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- twitter_data
+#' tidy_data <- TD.Tidy(DataFrame = data)
+#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
+#'                           n = 10)
+#'                           
+#' data <- twitter_data
+#' tidy_data <- TD.Tidy(DataFrame = data)
+#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
+#'                           n = 10,
+#'                           filterword = "fail")
+#'                           
+#' data <- twitter_data
+#' tidy_data <- TD.Tidy(DataFrame = data)
+#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
+#'                           n = 10,
+#'                           filterword = c("fail", "urgent")                           
+#'                           
+#' @export
+
 # Most common positive and negative words
 # If I want this to be more general, add conditional statements and have a seperate code chunk for each lexicon
-TD.PosNeg.Words <- function(DataFrameTidy, Lexicon = "Bing", filterword = NULL) {
+PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
   TD_PosNeg_Words <- DataFrameTidy %>%  
-    dplyr::inner_join(eval(as.name(Lexicon)), by = "Token") %>% 
+    dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
     dplyr::filter(!(Token %in% filterword)) %>% 
     dplyr::count(Token, Sentiment) %>%
     dplyr::ungroup() %>% 
     dplyr::group_by(Sentiment) %>%
-    dplyr::top_n(10, n) %>%
+    dplyr::top_n(num_words, n) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(Token = reorder(Token, n)) %>%
     ggplot2::ggplot(aes(Token, n, fill = Sentiment)) +
@@ -419,7 +515,7 @@ TD.PosNeg.Words <- function(DataFrameTidy, Lexicon = "Bing", filterword = NULL) 
 }
 
 # Uni-Gram
-TD.Unigram <- function(DataFrame){
+Unigram <- function(DataFrame){
   TD_Unigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
     dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -433,7 +529,7 @@ TD.Unigram <- function(DataFrame){
 }
 
 # Bi-Gram
-TD.Bigram <- function(DataFrame){
+Bigram <- function(DataFrame){
   TD_Bigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
     dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -449,7 +545,7 @@ TD.Bigram <- function(DataFrame){
 }
 
 # Tri-Gram
-TD.Trigram <- function(DataFrame) {
+Trigram <- function(DataFrame) {
   TD_Trigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
     dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -467,7 +563,7 @@ TD.Trigram <- function(DataFrame) {
 
 # Bi-Gram Network
 # acceptable Layouts:  'star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds', 'randomly', 'fr', 'kk', 'drl', 'lgl'
-TD.Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  seed = 1234) {
+Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  seed = 1234) {
   TD_Bigram_Network <- BiGramDataFrame %>% 
     dplyr::filter(n > number) %>% 
     igraph::graph_from_data_frame()
@@ -485,7 +581,7 @@ TD.Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge
 # Word Correlations -------------------------------------------------------
 
 # Word Correlations
-TD.Word.Corr <- function(DataFrameTidy, n, sort = TRUE) {
+Word.Corr <- function(DataFrameTidy, n, sort = TRUE) {
   TD_Word_Correlation <- DataFrameTidy %>%
     dplyr::group_by(Token) %>%
     dplyr::filter(n() >= n) %>%
@@ -494,7 +590,7 @@ TD.Word.Corr <- function(DataFrameTidy, n, sort = TRUE) {
 
 # Word Correlations Plot
 # acceptable Layouts:  'star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds', 'randomly', 'fr', 'kk', 'drl', 'lgl'
-TD.Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  seed = 1234) {
+Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  seed = 1234) {
   set.seed(seed)
   
   WordCorr %>%
@@ -511,7 +607,7 @@ TD.Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_
 # Sentiment Distributions -------------------------------------------------
 
 # TweetSentiment Corpus Distribution
-TD.Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, colour = "black", fill = "white") {
+Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, colour = "black", fill = "white") {
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(aes(TweetSentimentScore)) +
     geom_histogram(binwidth = binwidth, colour = colour, fill = fill) +
@@ -524,7 +620,7 @@ TD.Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, colour = "
 
 # TweetSentiScore Distribution by each Hashtag or Topic
 # For HT_Topic select:  "hashtag" or "topic"
-TD.Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
+Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
   if(HT_Topic == "hashtag") {
     TD_HT_Distribution <- DataFrameTidyScores %>% 
       ggplot2::ggplot(aes(TweetSentimentScore)) +
@@ -552,7 +648,7 @@ TD.Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color =
 
 # Box Plot select between hashtag or topic
 # For HT_Topic select:  "hashtag" or "topic"
-TD.BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
+BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_BoxPlot <- DataFrameTidyScores %>% 
       ggplot2::ggplot(aes(hashtag, TweetSentimentScore)) +
@@ -578,7 +674,7 @@ TD.BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 
 # Violin Plot
 # For HT_Topic select:  "hashtag" or "topic"
-TD.ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
+ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_ViolinPlot <- DataFrameTidyScores %>% 
       ggplot2:: ggplot(aes(hashtag, TweetSentimentScore)) +
@@ -604,7 +700,7 @@ TD.ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 
 # Sentiment Timescale facet wrap
 # For HT_Topic select:  "hashtag" or "topic"
-TD.TimeScale <- function(DataFrameTidyScores, HT_Topic) {
+TimeScale <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_TimeScale <- DataFrameTidyScores %>% 
       dplyr::group_by(hashtag, date) %>% 
@@ -640,7 +736,7 @@ TD.TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 
 # World Map of Tweets by hashtag
 # For HT_Topic select:  "hashtag" or "topic"
-TD.WorldMap <- function(DataFrame, HT_Topic) {
+WorldMap <- function(DataFrame, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_WorldMap <- ggplot2::map_data("world") %>% 
       ggplot2::ggplot() + 
@@ -670,83 +766,3 @@ TD.WorldMap <- function(DataFrame, HT_Topic) {
   }
 }
 
-
-# For later reference
-# # From website:  https://github.com/today-is-a-good-day/emojis/blob/master/emoji_analysis.R
-# 
-# # tweets cleaning pipe
-# cleanPosts <- function(text) {
-#   clean_texts <- text %>%
-#     gsub("<.*>", "", .) %>% # remove emojis
-#     gsub("&amp;", "", .) %>% # remove &
-#     gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", .) %>% # remove retweet entities
-#     gsub("@\\w+", "", .) %>% # remove at people
-#     hashgrep %>%
-#     gsub("[[:punct:]]", "", .) %>% # remove punctuation
-#     gsub("[[:digit:]]", "", .) %>% # remove digits
-#     gsub("http\\w+", "", .) %>% # remove html links
-#     iconv(from = "latin1", to = "ASCII", sub="") %>% # remove emoji and bizarre signs
-#     gsub("[ \t]{2,}", " ", .) %>% # remove unnecessary spaces
-#     gsub("^\\s+|\\s+$", "", .) %>% # remove unnecessary spaces
-#     tolower
-#   return(clean_texts)
-# }
-
-# # Create DTM, and conduct LDA.  Remove Emoticons from tweets but do not Tidy data
-# Tweet.Topics <- function(DataFrame, clusters = 2, setseed = 1234, matrix = "beta") {
-#   lda_prep <- DataFrame %>% 
-#     dplyr::mutate(text = iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
-#     dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
-#     dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
-#     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
-#     dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-#     dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
-#     dplyr::group_by(key) %>%
-#     tidytext::unnest_tokens(word, text) %>% 
-#     dplyr::anti_join(stop_words) %>% 
-#     dplyr::count(key, word, sort = TRUE) %>% 
-#     tidytext::cast_dtm(key, word, n)
-#   
-#   tweet_lda <- LDA(lda_prep, k = clusters, control = list(seed = setseed))
-#   
-#   tweet_topics <- tidy(tweet_lda, matrix = "beta")
-#   
-#   return(tweet_topics)
-# }
-# 
-# # LDA top terms chart
-# Top.Tweet.Terms <- function(TweetTopics, n = 5) {
-#   Top_Tweet_Terms <- TweetTopics %>% 
-#     dplyr::group_by(topic) %>% 
-#     dplyr::top_n(n, beta) %>% 
-#     dplyr::ungroup() %>% 
-#     dplyr::arrange(topic, -beta)
-#   return(Top_Tweet_Terms)
-# }
-# 
-# # LDA top terms plot
-# Top.Tweets.Topic.Plot <- function(TopTweetTerms) {
-#   Top_Tweet_Topic_Plot <- TopTweetTerms %>% 
-#     dplyr::mutate(term = reorder(term, beta)) %>%
-#     ggplot2::ggplot(aes(term, beta, fill = factor(topic))) +
-#     geom_col(show.legend = FALSE) +
-#     facet_wrap(~ topic, scales = "free") +
-#     coord_flip()
-#   return(Top_Tweet_Topic_Plot)
-# }
-
-# # Function Tidy Twitter Data to include Emoticons --> needs more work.
-# TD.Tidy.wEmoticons <- function(DataFrame) {
-#   TD_Tidy <- DataFrame %>% 
-#     tidytext::unnest_tokens(word, text, "regex") # This will retain emoticons
-#   
-#   TD_Tidy <- TD_Tidy %>% 
-#     dplyr::mutate(word = iconv(TD_Tidy$word, "latin1", "ASCII", "byte")) %>% # Convert from Latin to ASCII
-#     dplyr::mutate(word = stringr::str_replace_all(word, "#", "")) %>% # Remove hashtag
-#     dplyr::mutate(word = stringr::str_replace_all(word, "[:punct:]", "")) %>% # Remove punctuation
-#     dplyr::mutate(word = stringr::str_replace_all(word, "RT", "")) %>% # Remove retweet note
-#     dplyr::mutate(word = stringr::str_replace_all(word, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-#     dplyr::mutate(word = stringr::str_replace_all(word, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% # Remove links
-#     dplyr::filter(!word %in% stop_words$word, str_detect(word, "[a-z]")) %>%  # Remove stopwords
-#     plyr::rename(c("word" = "Token")) # Rename word to token to capture words and emoticons
-# }

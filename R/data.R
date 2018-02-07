@@ -24,4 +24,4 @@
 #'  \item{latitude}{witter georeferenced location for the latitude of tweet.}
 #'  }
 #'
-'twitter_data'
+"twitter_data"
