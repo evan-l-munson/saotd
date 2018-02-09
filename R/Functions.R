@@ -60,6 +60,7 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #'         distinct = TRUE)
 #'         
 #' load("test_tweets.RData")
+#' 
 #' View(raw_tweets)
 #' 
 #' @export
@@ -72,7 +73,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
                                access_secret)
   
   twitter_data <- list()
-  for (i in ht) {
+  for (i in HT) {
     twitter_data[[i]] <- twitteR::twListToDF(twitteR::searchTwitter(i, 
                                                                     n = num_tweets, 
                                                                     lang = "en")) %>% 
@@ -100,7 +101,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' @examples 
 #' library(SAoTD)
 #' data <- raw_tweets
-#' tidy_data <- TD.Tidy(DataFrame = data)
+#' tidy_data <- Tidy(DataFrame = data)
 #' tidy_data
 #' 
 #' @export
@@ -132,10 +133,10 @@ Tidy <- function(DataFrame) {
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-#'                         HT_Topic = "hashtag")
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
 #' score_data
 #' 
 #' @export
@@ -183,7 +184,7 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
+#' data <- raw_tweets
 #' data <- Merge.Terms(DataFrame = data, 
 #'                     term = "ice cream", 
 #'                     term_replacement = "ice_cream")
@@ -219,7 +220,7 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
+#' data <- raw_tweets
 #' LDA_Topic_Plot <- Number.Topics(DataFrame = data,
 #'                                 num_cores = 2L,
 #'                                 min_clusters = 2,
@@ -291,7 +292,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
+#' data <- raw_tweets
 #' LDA_data <- Tweet.Topics(DataFrame = data,
 #'                          clusters = 8,
 #'                          method = "Gibbs",
@@ -360,20 +361,20 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-#'                         HT_Topic = "hashtag")
-#' min_scores <- TD.Min.Scores(DataFrameTidyScores = score_data, 
-#'                             HT_Topic = "hashtag")
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "hashtag")
+#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag")
 #'                             
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-#'                         HT_Topic = "hashtag")
-#' min_scores <- TD.Min.Scores(DataFrameTidyScores = score_data, 
-#'                             HT_Topic = "hashtag",
-#'                             HT_Topic_Selection = "icecream")
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag",
+#'                          HT_Topic_Selection = "icecream")
 #' 
 #' @export
 
@@ -415,20 +416,20 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' score_data <- TD.Scores(DataFrameTidy = tidy_data, 
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
 #'                         HT_Topic = "hashtag")
-#' min_scores <- TD.Max.Scores(DataFrameTidyScores = score_data, 
-#'                             HT_Topic = "hashtag")
 #'                             
 #' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-#'                         HT_Topic = "hashtag")
-#' min_scores <- TD.Max.Scores(DataFrameTidyScores = score_data, 
-#'                             HT_Topic = "hashtag",
-#'                             HT_Topic_Selection = "icecream")
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag",
+#'                          HT_Topic_Selection = "icecream")
 #' 
 #' @export
 
@@ -472,27 +473,28 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' 
 #' @examples 
 #' library(SAoTD)
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-#'                           n = 10)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10)
+#' posneg
 #'                           
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-#'                           n = 10,
-#'                           filterword = "fail")
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10,
+#'                        filterword = "fail")
+#' posneg
 #'                           
-#' data <- twitter_data
-#' tidy_data <- TD.Tidy(DataFrame = data)
-#' posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-#'                           n = 10,
-#'                           filterword = c("fail", "urgent")                           
-#'                           
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10,
+#'                        filterword = c("fail", "urgent")                           
+#' posneg
+#' 
 #' @export
 
-# Most common positive and negative words
-# If I want this to be more general, add conditional statements and have a seperate code chunk for each lexicon
 PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
   TD_PosNeg_Words <- DataFrameTidy %>%  
     dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
@@ -513,7 +515,22 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
   return(TD_PosNeg_Words)
 }
 
-# Uni-Gram
+#' @title Twitter Uni-Grams
+#'
+#' @description Determines and displays the text Uni-Grams within the Twitter data in sequence from the most used to the least used.  A Uni-Gram is a single word.
+#' 
+#' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @return A tribble.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' TD_Unigram <- Unigram(DataFrame = data)
+#' TD_Unigram
+#'                           
+#' @export
+
 Unigram <- function(DataFrame){
   TD_Unigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
@@ -525,9 +542,25 @@ Unigram <- function(DataFrame){
     tidytext::unnest_tokens(word, text) %>%  
     dplyr::filter(!word %in% c(stop_words$word, '[0-9]+')) %>% 
     dplyr::count(word, sort = TRUE)
+  return(TD_Unigram)
 }
 
-# Bi-Gram
+#' @title Twitter Bi-Grams
+#'
+#' @description Determines and displays the text Bi-Grams within the Twitter data in sequence from the most used to the least used.  A Bi-Gram is a combination of two consecutive words.
+#' 
+#' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @return A tribble.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' TD_Bigram <- Bigram(DataFrame = data)
+#' TD_Bigram
+#'                           
+#' @export
+
 Bigram <- function(DataFrame){
   TD_Bigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
@@ -541,9 +574,25 @@ Bigram <- function(DataFrame){
     dplyr::filter(!word1 %in% c(stop_words$word, '[0-9]+')) %>% 
     dplyr::filter(!word2 %in% c(stop_words$word, '[0-9]+')) %>%
     dplyr::count(word1, word2, sort = TRUE)
+  return(TD_Bigram)
 }
 
-# Tri-Gram
+#' @title Twitter Tri-Grams
+#'
+#' @description Determines and displays the text Tri-Grams within the Twitter data in sequence from the most used to the least used.  A Tri-Gram is a combination of three consecutive words.
+#' 
+#' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @return A tribble.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' TD_Trigram <- Trigram(DataFrame = data)
+#' TD_Trigram
+#'                           
+#' @export
+
 Trigram <- function(DataFrame) {
   TD_Trigram <- DataFrame %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
@@ -558,16 +607,45 @@ Trigram <- function(DataFrame) {
     dplyr::filter(!word2 %in% c(stop_words$word, '[0-9]+')) %>%
     dplyr::filter(!word3 %in% c(stop_words$word, '[0-9]+')) %>%
     dplyr::count(word1, word2, word3, sort = TRUE)
+  return(TD_Trigram)
 }
 
-# Bi-Gram Network
-# acceptable Layouts:  'star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds', 'randomly', 'fr', 'kk', 'drl', 'lgl'
-Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  seed = 1234) {
+#' @title Twitter Bi-Gram Network
+#'
+#' @description Displays the Bi-Gram Network.  Bi-Gram networks builds on computed Bi-Grams.  Bi-Gram networks serve as a visualization tool that displays the relationships between the words simultaneously as opposed to a tabular display of Bi-Gram words.
+#' 
+#' @param BiGramDataFrame DataFrame of Bi-Grams.
+#' @param number The minimum desired number of Bi-Gram occurances to be displayed (number = 300, would display all Bi-Grams that have at least 300 instances.)
+#' @param layout Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"
+#' @param edge_color User desired edge color.
+#' @param node_color User desired node color.
+#' @param node_size User desired node size.
+#' @param set_seed Seed for reproducable results.
+#' 
+#' @return A ggraph plot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' TD_Bigram <- Bigram(DataFrame = data)
+#' TD_Bigram_Network <- Bigram.Network(BiGramDataFrame = TD_Bigram,
+#'                                     number = 300,
+#'                                     layout = "fr",
+#'                                     edge_color = "royalblue",
+#'                                     node_color = "black",
+#'                                     node_size = 3
+#'                                     set_seed = 1234)
+#'
+#' TD_Bigram_Network
+#'                           
+#' @export
+
+Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
   TD_Bigram_Network <- BiGramDataFrame %>% 
-    dplyr::filter(n > number) %>% 
+    dplyr::filter(n >= number) %>% 
     igraph::graph_from_data_frame()
   
-  set.seed(seed)
+  set.seed(set_seed)
   
   ggraph::ggraph(TD_Bigram_Network, layout = layout) +
     geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE, end_cap = circle(.07, 'inches')) +
@@ -579,18 +657,73 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 
 # Word Correlations -------------------------------------------------------
 
-# Word Correlations
-Word.Corr <- function(DataFrameTidy, n, sort = TRUE) {
+#' @title Twitter Word Correlations
+#'
+#' @description The word correlation displays the mutual relationship between words.
+#' 
+#' @param BiGramDataFrame DataFrame of Bi-Grams.
+#' @param number The number of word instances to be included.
+#' @param sort Rank order the results from most to least correlated.
+#' 
+#' @return A tribble
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data, 
+#'                           number = 500,
+#'                           sort = TRUE)
+#'
+#' TD_Word_Corr
+#'                           
+#' @export
+
+Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
   TD_Word_Correlation <- DataFrameTidy %>%
     dplyr::group_by(Token) %>%
-    dplyr::filter(n() >= n) %>%
+    dplyr::filter(n() >= number) %>%
     widyr::pairwise_cor(Token, key, sort = sort)
 }
 
+#' @title Twitter Word Correlations
+#'
+#' @description The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.
+#' 
+#' @param WordCorr DataFrame of Word Correlations.
+#' @param Correlation Minimum level of correlation to be displayed.
+#' @param sort Rank order the results from most to least correlated.
+#' @param layout Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"
+#' @param edge_color User desired edge color.
+#' @param node_color User desired node color.
+#' @param node_size User desired node size.
+#' @param set_seed Seed for reproducable results.
+#' 
+#' @return A tribble
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data, 
+#'                           number = 500,
+#'                           sort = TRUE)
+#' TD_Word_Corr_Network <- Word.Corr.Plot(WordCorr = TD_Word_Corr,
+#'                                        Correlation = 0.15,
+#'                                        layout = "fr",
+#'                                        edge_color = "royalblue",
+#'                                        node_color = "black",
+#'                                        node_size = 2,
+#'                                        set_seed = 1234)
+#'
+#' TD_Word_Corr_Network
+#'                           
+#' @export
+
 # Word Correlations Plot
 # acceptable Layouts:  'star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds', 'randomly', 'fr', 'kk', 'drl', 'lgl'
-Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  seed = 1234) {
-  set.seed(seed)
+Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
+  set.seed(set_seed)
   
   WordCorr %>%
     filter(correlation > Correlation) %>%
@@ -606,10 +739,10 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 # Sentiment Distributions -------------------------------------------------
 
 # TweetSentiment Corpus Distribution
-Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, colour = "black", fill = "white") {
+Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(aes(TweetSentimentScore)) +
-    geom_histogram(binwidth = binwidth, colour = colour, fill = fill) +
+    geom_histogram(binwidth = binwidth, colour = color, fill = fill) +
     theme(legend.position = "none") +
     ggtitle("Sentiment Score Distribution") +
     xlab('Sentiment') +

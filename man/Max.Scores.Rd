@@ -21,19 +21,19 @@ Determines the Maximum scores for either the entire dataset or the Maximum score
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-score_data <- TD.Scores(DataFrameTidy = tidy_data, 
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+score_data <- Scores(DataFrameTidy = tidy_data, 
+                     HT_Topic = "hashtag")
+min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
                         HT_Topic = "hashtag")
-min_scores <- TD.Max.Scores(DataFrameTidyScores = score_data, 
-                            HT_Topic = "hashtag")
                             
 data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-                        HT_Topic = "hashtag")
-min_scores <- TD.Max.Scores(DataFrameTidyScores = score_data, 
-                            HT_Topic = "hashtag",
-                            HT_Topic_Selection = "icecream")
+tidy_data <- Tidy(DataFrame = data)
+score_data <- Scores(DataFrameTidy = tidy_data, 
+                     HT_Topic = "hashtag")
+min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
+                         HT_Topic = "hashtag",
+                         HT_Topic_Selection = "icecream")
 
 }

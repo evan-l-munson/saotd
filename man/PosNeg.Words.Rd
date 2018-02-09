@@ -21,21 +21,24 @@ Determines and displays the most positive and negative words within the twitter 
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-                          n = 10)
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+                       n = 10)
+posneg
                           
-data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-                          n = 10,
-                          filterword = "fail")
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+                       n = 10,
+                       filterword = "fail")
+posneg
                           
-data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-posneg <- TD.PosNeg.Words(DataFrameTidy = tidy_data,
-                          n = 10,
-                          filterword = c("fail", "urgent")                           
-                          
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+                       n = 10,
+                       filterword = c("fail", "urgent")                           
+posneg
+
 }

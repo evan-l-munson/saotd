@@ -19,10 +19,10 @@ Function to Calculate Sentiment Scores that will account for sentiment by hashta
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
-tidy_data <- TD.Tidy(DataFrame = data)
-score_data <- TD.Scores(DataFrameTidy = tidy_data, 
-                        HT_Topic = "hashtag")
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+score_data <- Scores(DataFrameTidy = tidy_data, 
+                     HT_Topic = "hashtag")
 score_data
 
 }

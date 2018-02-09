@@ -30,7 +30,7 @@ Prepares tweet text, creates DTM, conducts LDA, display data terms associated wi
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
+data <- raw_tweets
 LDA_data <- Tweet.Topics(DataFrame = data,
                          clusters = 8,
                          method = "Gibbs",

@@ -24,7 +24,7 @@ While each entry is different, they all refer to the same individual.  Using Mer
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
+data <- raw_tweets
 data <- Merge.Terms(DataFrame = data, 
                     term = "ice cream", 
                     term_replacement = "ice_cream")

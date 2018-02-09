@@ -18,7 +18,7 @@ Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual 
 \examples{
 library(SAoTD)
 data <- raw_tweets
-tidy_data <- TD.Tidy(DataFrame = data)
+tidy_data <- Tidy(DataFrame = data)
 tidy_data
 
 }

@@ -29,7 +29,7 @@ Uses the `ldatuning` package and outputs an ldatuning plot.
 }
 \examples{
 library(SAoTD)
-data <- twitter_data
+data <- raw_tweets
 LDA_Topic_Plot <- Number.Topics(DataFrame = data,
                                 num_cores = 2L,
                                 min_clusters = 2,

@@ -50,6 +50,7 @@ Acquire(consumer_key = consumer_key,
         distinct = TRUE)
         
 load("test_tweets.RData")
+
 View(raw_tweets)
 
 }

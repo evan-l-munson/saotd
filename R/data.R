@@ -1,9 +1,9 @@
 #' @title Twitter Data Set
 #' 
 #' @description 
-#' Dataset containing 7000 (1000 per hashtag) tweets from 7 different hashtags (#job, #Friday, #fail, #icecream, #random, #kitten, #airline), acquired on 07 July 2017.  
+#' Dataset containing 6,984 tweets from 7 different hashtags (986 x #job, 985 x #Friday, 1000 x #fail, 999 x #icecream, 993 x #random, 998 x #kitten, 987 x #airline), acquired on 09 February 2018. 
 #' 
-#' @format A \code{tribble} with 7000 rows and 16 variables
+#' @format A \code{tribble} with 6,984 rows and 18 variables
 #' 
 #' \describe{
 #'  \item{text}{The text of the status.}
@@ -21,7 +21,9 @@
 #'  \item{isRetweet}{TRUE if this is a retweet.}
 #'  \item{retweeted}{TRUE if this status has been retweeted.}
 #'  \item{longitude}{Twitter georeferenced location for the longitude of tweet.}
-#'  \item{latitude}{witter georeferenced location for the latitude of tweet.}
+#'  \item{latitude}{Twitter georeferenced location for the latitude of tweet.}
+#'  \item{hashtag}{Hashtag that the individual tweet was acquired from.}
+#'  \item{key}{Unique key based on the tweets originators user id and the created date time group.}
 #'  }
 #'
-"twitter_data"
+"raw_tweets"
