@@ -720,8 +720,6 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #'                           
 #' @export
 
-# Word Correlations Plot
-# acceptable Layouts:  'star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds', 'randomly', 'fr', 'kk', 'drl', 'lgl'
 Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
   set.seed(set_seed)
   
@@ -738,7 +736,31 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 
 # Sentiment Distributions -------------------------------------------------
 
-# TweetSentiment Corpus Distribution
+#' @title Twitter Corpus Distribution
+#'
+#' @description Determines the scores distribution for the entire Twitter data corpus.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param binwidth The width of the bins.  Default is 1.
+#' @param color The user selected color to highlight the bins.
+#' @param fill The interior color of the bins.
+#' 
+#' @return A ggplot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "hashtag") 
+#' Corp_Dist <- Corpus.Distribution(DataFrameTidyScores = score_data,
+#'                                  binwidth = 1,
+#'                                  color = "black", 
+#'                                  fill = "white")
+#' Corp_Dist
+#' 
+#' @export
+
 Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(aes(TweetSentimentScore)) +
@@ -750,8 +772,33 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
   return(TD_Corups_Distribution)
 }
 
-# TweetSentiScore Distribution by each Hashtag or Topic
-# For HT_Topic select:  "hashtag" or "topic"
+#' @title Twitter Hashtag or Topic Distribution
+#'
+#' @description Determines the scores distribution by hashtag or topic for Twitter data.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' @param binwidth The width of the bins.  Default is 1.
+#' @param color The user selected color to highlight the bins.
+#' @param fill The interior color of the bins.
+#' 
+#' @return A facet wrap ggplot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "hashtag") 
+#' Dist <- Distribution(DataFrameTidyScores = score_data,
+#'                      HT_Topic = "hashtag",
+#'                      binwidth = 1,
+#'                      color = "black", 
+#'                      fill = "white")
+#' Dist
+#' 
+#' @export
+
 Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
   if(HT_Topic == "hashtag") {
     TD_HT_Distribution <- DataFrameTidyScores %>% 
@@ -778,8 +825,35 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 
 # Visualizations ----------------------------------------------------------
 
-# Box Plot select between hashtag or topic
-# For HT_Topic select:  "hashtag" or "topic"
+#' @title Twitter Data Box Plot
+#'
+#' @description Displays the distribution scores of either hashtag or topic Twitter data.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @return A ggplot box plot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "hashtag") 
+#' ht_box <- Boxplot(DataFrameTidyScores = score_data,
+#'                   HT_Topic = "hashtag")
+#' ht_box
+#'                
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "topic") 
+#' topic_box <- Boxplot(DataFrameTidyScores = score_data,
+#'                      HT_Topic = "topic") 
+#' topic_box                    
+#' 
+#' @export
+
 BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_BoxPlot <- DataFrameTidyScores %>% 
@@ -804,8 +878,35 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
   }
 }
 
-# Violin Plot
-# For HT_Topic select:  "hashtag" or "topic"
+#' @title Twitter Data Violin Plot
+#'
+#' @description Displays the distribution scores of either hashtag or topic Twitter data.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @return A ggplot violin plot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag") 
+#' ht_violin <- ViolinPlot(DataFrameTidyScores = score_data,
+#'                         HT_Topic = "hashtag")
+#' ht_violin
+#'                
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "topic") 
+#' topic_violin <- ViolinPlot(DataFrameTidyScores = score_data,
+#'                            HT_Topic = "topic") 
+#' topic_violin                    
+#' 
+#' @export
+
 ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_ViolinPlot <- DataFrameTidyScores %>% 
@@ -830,8 +931,35 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
   }
 }
 
-# Sentiment Timescale facet wrap
-# For HT_Topic select:  "hashtag" or "topic"
+#' @title Twitter Data Timeseries Plot.
+#'
+#' @description Displays the Twitter data sentiment scores through time.  The sentiment scores by hashtag or topic are summed per day and plotted to show the change in sentiment through time.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @return A ggplot plot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag") 
+#' ht_time <- TimeScale(DataFrameTidyScores = score_data,
+#'                      HT_Topic = "hashtag")
+#' ht_time
+#'                
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "topic") 
+#' topic_time <- TimeScale(DataFrameTidyScores = score_data,
+#'                         HT_Topic = "topic") 
+#' topic_time                    
+#' 
+#' @export
+
 TimeScale <- function(DataFrameTidyScores, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_TimeScale <- DataFrameTidyScores %>% 
@@ -866,8 +994,35 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
   }
 }
 
-# World Map of Tweets by hashtag
-# For HT_Topic select:  "hashtag" or "topic"
+#' @title Twitter Data Worldmap Plot.
+#'
+#' @description Displays the location of a tweet across the globe by hashtag or topic.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @return A ggplot plot.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag") 
+#' ht_map <- WorldMap(DataFrameTidyScores = score_data,
+#'                    HT_Topic = "hashtag")
+#' ht_map
+#'                
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "topic") 
+#' topic_map <- WorldMap(DataFrameTidyScores = score_data,
+#'                       HT_Topic = "topic") 
+#' topic_map                    
+#' 
+#' @export
+
 WorldMap <- function(DataFrame, HT_Topic) {
   if(HT_Topic == "hashtag") {
     TD_HT_WorldMap <- ggplot2::map_data("world") %>% 
