@@ -1,0 +1,96 @@
+---
+title: "SAoTD Vignette"
+author: "Evan Munson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SAoTD Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEnconding{UTF-8}
+---
+
+# Sentiment Analysis of Twitter Data (SAoTD)
+
+## Twitter Introduction
+
+Recent years have witnessed the rapid growth of social media platforms in which users can publish their individual thoughts and opinions (e.g., Facebook, Twitter, Google+ and several blogs).  The rise in popularity of social media has changed the world wide web from a static repository to a dynamic forum for anyone to voice their opinion across the globe.  This new dimension of _User Generated Content_ opens up a new and dynamic source of insight to individuals, organizations and governments.
+
+Social network sites or platforms, are defined as web-based services that allow individuals to:
+
+* Construct a public or semi-public profile within a bounded system.
+* Articulate a list of other users with whom they share a connection.
+* View and traverse their list of connections and those made by others within the system.
+
+The nature and nomenclature of these connections may vary from site to site.
+
+This package, `SAoTD` is focused on utilizing Twitter data due to its widespread global acceptance.  Harvested data, analyzed for sentiment can provide powerful insight into a population.  This insight can assist organizations, by letting them better understand their target population.  This package will allow a useer to acquire data using the Public Twitter Application Programming Interface (API), to obtain tweets.
+
+once users have a [Twitter](https://twitter.com/) account and a 
+
+The `SAoTD` package is broken down into five different phases:
+
+* Acquire
+* Explore
+* Topic Analysis
+* Sentiment Calculation
+* Visualization
+
+## Acquire
+
+To explore the data manipulation functions of `SAoTD` we will use the built in dataset `SAoTD::raw_tweets`.
+
+However is you want to acquire your own tweets, you will first have to:
+
+1. Create a [twitter](https://twitter.com/) account or sign into existing account.
+
+2. Use your twitter login, to sign into [Twitter Developers](https://dev.twitter.com/apps/)
+
+3. Navigate to My Applications.
+
+4. Fill out the new application form.
+    + You will be asked to provide a website.  
+    + You can input your twitter account website.  
+    + For example:  https://twitter.com/yourusername
+
+5. Create access token.
+    + Record twitter access keys and tokens
+    
+With these steps complete you now have access to the twitter API.
+
+To acquire your own dataset of tweets you can use the `SAoTD::Acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://dev.twitter.com/apps/) page.
+
+```{r eval=FALSE}
+consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
+consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
+
+Acquire(consumer_key = consumer_key, 
+        consumer_secret = consumer_secret,
+        access_token = access_token, 
+        access_secret = access_secret,
+        HT = hashtags,
+        num_tweets = 10,
+        file_name = "test_tweets.RData",
+        distinct = TRUE)
+         
+load("test_tweets.RData")
+View(raw_tweets)
+```
+
+## Explore
+
+Once Twitter data has bee acquired the exploration phase can begin.
+
+```{r}
+library(SAoTD)
+library(knitr)
+raw_tweets
+data <- raw_tweets
+tidy_data <- Tidy(DataFrame = data)
+
+tidy_data %>% 
+  head()
+```

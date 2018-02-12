@@ -22,12 +22,13 @@ library(widyr)
 Bing <- as.data.frame(get_sentiments("bing")) %>% 
   plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
 
-# Acquire Tweets ----------------------------------------------------------
+
+# Acquire -----------------------------------------------------------------
 
 #' @title Acquire Twitter Tweets
 #'
 #' @description Function will enable a user to access the twitter API throught the 
-#' [Twitter Application Management](https://apps.twitter.com/) site.
+#' [Twitter Developers Account](https://dev.twitter.com/) site.
 #' Once a user has a twitter developers account and has recieved their individual consumer key, 
 #' consumer secret key, access token, and access secret key and acquire tweets they can 
 #' acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
@@ -56,7 +57,7 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #'         access_secret = access_secret, 
 #'         HT = hashtags, 
 #'         num_tweets = 10, 
-#'         file_name = "test_tweets.RData"
+#'         file_name = "test_tweets.RData",
 #'         distinct = TRUE)
 #'         
 #' load("test_tweets.RData")
@@ -88,7 +89,8 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
     
 }
 
-# Tidy and Scores ---------------------------------------------------------
+
+# Explore -----------------------------------------------------------------
 
 #' @title Tidy Twitter Data
 #'
@@ -122,53 +124,6 @@ Tidy <- function(DataFrame) {
   return(TD_Tidy)
 }
 
-#' @title Score Tidy Twitter Data
-#'
-#' @description Function to Calculate Sentiment Scores that will account for sentiment by hashtag or topic.
-#'
-#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
-#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
-#' 
-#' @return A Scored DataFrame.
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' score_data
-#' 
-#' @export
-
-Scores <- function(DataFrameTidy, HT_Topic) {
-  if(HT_Topic == "hashtag") {
-    TD_Hashtag_Scores <- DataFrameTidy %>% 
-      dplyr::inner_join(Bing, by = "Token") %>% 
-      dplyr::mutate(method = "Bing") %>% 
-      dplyr::group_by(text, method, hashtag, created, key, Sentiment) %>% 
-      dplyr::count(method, hashtag, created, key, Sentiment) %>%  
-      tidyr::spread(Sentiment, n, fill = 0) %>% 
-      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
-      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
-                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
-      dplyr::mutate(date = lubridate::as_date(created))
-    return(TD_Hashtag_Scores)
-  } else {
-    TD_Topic_Scores <- DataFrameTidy %>% 
-      dplyr::inner_join(Bing, by = "Token") %>% 
-      dplyr::mutate(method = "Bing") %>% 
-      dplyr::group_by(text, method, Topic, created, key, Sentiment) %>% 
-      dplyr::count(method, Topic, created, key, Sentiment) %>%  
-      tidyr::spread(Sentiment, n, fill = 0) %>% 
-      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
-      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
-                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
-      dplyr::mutate(date = lubridate::as_date(created))
-    return(TD_Topic_Scores)
-  }
-}
-
 #' @title Merge Terms
 #'
 #' @description Function to merge terms within a dataframe and prevent redundancy in the analysis.  
@@ -200,319 +155,6 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
            ignore.case = TRUE)   
   }
   DataFrame <- DataFrame
-}
-
-# LDA ---------------------------------------------------------------------
-
-#' @title Number Topics
-#'
-#' @description Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-#' Uses the `ldatuning` package and outputs an ldatuning plot.
-#'
-#' @param DataFrame DataFrame of Twitter Data.
-#' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
-#' @param min_clusters Lower range for the number of clusters.
-#' @param max_clusters Upper range for the number of clusters.
-#' @param skip Integer; The number of clusters to skip between entries.
-#' @param set_seed Seed for reproducable results.
-#' 
-#' @return A Tidy DataFrame.
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' LDA_Topic_Plot <- Number.Topics(DataFrame = data,
-#'                                 num_cores = 2L,
-#'                                 min_clusters = 2,
-#'                                 max_clusters = 12, 
-#'                                 skip = 2,
-#'                                 set_seed = 1234)
-#'
-#' LDA_Topic_Plot 
-#' 
-#' @export
-
-Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
-  lda_prep <- DataFrame %>% 
-    dplyr::mutate(text = base::iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
-    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
-    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
-    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
-    dplyr::group_by(key) %>%
-    tidytext::unnest_tokens(word, text) %>% 
-    dplyr::anti_join(stop_words) %>% 
-    dplyr::count(key, word, sort = TRUE) %>% 
-    tidytext::cast_dtm(key, word, n) # create DTM
-
-  # Compute Values
-  values <- ldatuning::FindTopicsNumber(lda_prep, 
-                                        topics = seq(from = min_clusters, to = max_clusters, by = skip),
-                                        metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
-                                        method = "Gibbs",
-                                        mc.cores = num_cores,
-                                        verbose = TRUE)
-  
-  # Plot
-  columns <- base::subset(values, select = 2:ncol(values))
-  values <- base::data.frame(values["topics"], base::apply(columns, 2, function(column) {scales::rescale(column, to = c(0, 1), from = range(column))}))
-  values <- reshape2::melt(values, id.vars = "topics", na.rm = TRUE)
-  values$group <- values$variable %in% c("Griffiths2004", "Deveaud2014")
-  values$group <- base::factor(values$group, levels = c(FALSE, TRUE), labels = c("minimize", "maximize"))
-  p <- ggplot(values, aes_string(x = "topics", y = "value", group = "variable"))
-  p <- p + geom_line()
-  p <- p + geom_point(aes_string(shape = "variable"), size = 3)
-  p <- p + guides(size = FALSE, shape = guide_legend(title = "metrics:"))
-  p <- p + scale_x_continuous(breaks = values$topics)
-  p <- p + labs(x = "number of topics", y = NULL)
-  p <- p + facet_grid(group ~ .)
-  p <- p + theme_bw() %+replace% theme(panel.grid.major.y = element_blank(), 
-                                       panel.grid.minor.y = element_blank(), 
-                                       panel.grid.major.x = element_line(colour = "grey70"), 
-                                       panel.grid.minor.x = element_blank(), 
-                                       legend.key = element_blank(), 
-                                       strip.text.y = element_text(angle = 90))
-}
-
-#' @title Tweet Topics
-#'
-#' @description Determines the Latent topics within a dataframe by using Latent Dirichlet Allocation (LDA) model parameters.  
-#' Uses the `ldatuning` package and outputs an ldatuning plot.  
-#' Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
-#'
-#' @param DataFrame DataFrame of Twitter Data.
-#' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
-#' @param min_clusters Lower range for the number of clusters.
-#' @param max_clusters Upper range for the number of clusters.
-#' @param skip Integer; The number of clusters to skip between entries.
-#' @param set_seed Seed for reproducable results.
-#' 
-#' @return Returns LDA topics.
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' LDA_data <- Tweet.Topics(DataFrame = data,
-#'                          clusters = 8,
-#'                          method = "Gibbs",
-#'                          set_seed = 1234,
-#'                          num_terms = 10)
-#'
-#' LDA_data
-#' 
-#' @export
-
-Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
-  lda_prep <- DataFrame %>% 
-    dplyr::mutate(text = iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
-    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
-    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
-    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
-    dplyr::group_by(key) %>%
-    tidytext::unnest_tokens(word, text) %>% 
-    dplyr::anti_join(stop_words) %>% 
-    dplyr::count(key, word, sort = TRUE) %>% 
-    tidytext::cast_dtm(key, word, n)
-  
-  # Run LDA using Gibbs sampling
-  ldaout <- topicmodels::LDA(lda_prep, k = clusters, method = method, control = list(seed = set_seed))
-  
-  ldaout_topics <- as.matrix(topicmodels::topics(ldaout))
-  
-  ldaout_terms <- as.matrix(topicmodels::terms(ldaout, num_terms))
-  
-  # probabilities associated with each topic assignment
-  topicProbabilities <- as.data.frame(ldaout@gamma)
-  data.topics <- topics(ldaout, 1)
-  data.terms <- as.data.frame(terms(ldaout, num_terms), stringsAsFactors = FALSE)
-  print(data.terms)
-  View(data.terms)
-  
-  # Creates a dataframe to store the Lesson Number and the most likely topic
-  tweettopics.df <- as.data.frame(data.topics)
-  tweettopics.df <- dplyr::transmute(tweettopics.df, LessonId = rownames(tweettopics.df), Topic = data.topics)
-  tweettopics.df$ArticleNo <- as.character(tweettopics.df$LessonId)
-  
-  # Clean up and rename coluns to match previous dataframes
-  tweettopics <- tweettopics.df %>% 
-    dplyr::select(c("ArticleNo", "Topic")) %>% 
-    plyr::rename(c("ArticleNo" = "key"))
-  
-  # Join original twitter data frame with tweet topics
-  Tweet.Topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
-  
-  return(Tweet.Topics)
-}
-
-# Min / Max Scores --------------------------------------------------------
-
-#' @title Twitter Data Minimum Scores
-#'
-#' @description Determines the minimum scores for either the entire dataset or the minimum scores associated with a hashtag or topic analysis.
-#'
-#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
-#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
-#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
-#' 
-#' @return A Tidy DataFrame.
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "hashtag")
-#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag")
-#'                             
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag",
-#'                          HT_Topic_Selection = "icecream")
-#' 
-#' @export
-
-Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
-  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
-    TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(TweetSentimentScore) %>% 
-      head()
-    return(TD_HT_noSel_Min_Scores)
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
-    TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
-      dplyr::arrange(TweetSentimentScore) %>% 
-      head()
-    return(TD_HT_Sel_Min_Scores)
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
-    TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(TweetSentimentScore) %>% 
-      head()
-    return(TD_Topic_noSel_Min_Scores)
-  } else {
-    TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
-      dplyr::arrange(TweetSentimentScore) %>% 
-      head()
-    return(TD_Topic_Sel_Min_Scores)
-  }
-}
-
-#' @title Twitter Data Maximum Scores
-#'
-#' @description Determines the Maximum scores for either the entire dataset or the Maximum scores associated with a hashtag or topic analysis.
-#'
-#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
-#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
-#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
-#' 
-#' @return A Tidy DataFrame.
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
-#'                         HT_Topic = "hashtag")
-#'                             
-#' data <- twitter_data
-#' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag",
-#'                          HT_Topic_Selection = "icecream")
-#' 
-#' @export
-
-Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
-  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
-    TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(-TweetSentimentScore) %>% 
-      head()
-    return(TD_HT_noSel_Max_Scores)
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
-    TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
-      dplyr::arrange(-TweetSentimentScore) %>% 
-      head()
-    return(TD_HT_Sel_Max_Scores)
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
-    TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(-TweetSentimentScore) %>% 
-      head()
-    return(TD_Topic_noSel_Max_Scores)
-  } else {
-    TD_Topic_Sel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
-      dplyr::arrange(-TweetSentimentScore) %>% 
-      head()
-    return(TD_Topic_Sel_Max_Scores)
-  }
-}
-
-# Word Grams --------------------------------------------------------------
-
-#' @title Twitter Positive and Negative Words
-#'
-#' @description Determines and displays the most positive and negative words within the twitter data.
-#' 
-#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
-#' @param num_words Desired number of words to be returned.
-#' @param filterword Word or words to be removed
-#' 
-#' @return A ggplot
-#' 
-#' @examples 
-#' library(SAoTD)
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
-#'                        n = 10)
-#' posneg
-#'                           
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
-#'                        n = 10,
-#'                        filterword = "fail")
-#' posneg
-#'                           
-#' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
-#'                        n = 10,
-#'                        filterword = c("fail", "urgent")                           
-#' posneg
-#' 
-#' @export
-
-PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
-  TD_PosNeg_Words <- DataFrameTidy %>%  
-    dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
-    dplyr::filter(!(Token %in% filterword)) %>% 
-    dplyr::count(Token, Sentiment) %>%
-    dplyr::ungroup() %>% 
-    dplyr::group_by(Sentiment) %>%
-    dplyr::top_n(num_words, n) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(Token = reorder(Token, n)) %>%
-    ggplot2::ggplot(aes(Token, n, fill = Sentiment)) +
-    geom_col(show.legend = FALSE) +
-    facet_wrap(~Sentiment, scales = "free_y") +
-    labs(y = "Count",
-         x = NULL) +
-    ggtitle('Most common positive and negative words utilizing the Bing Lexicon') +
-    coord_flip()
-  return(TD_PosNeg_Words)
 }
 
 #' @title Twitter Uni-Grams
@@ -655,8 +297,6 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
     theme_void()
 }
 
-# Word Correlations -------------------------------------------------------
-
 #' @title Twitter Word Correlations
 #'
 #' @description The word correlation displays the mutual relationship between words.
@@ -734,7 +374,365 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
     theme_void()
 }
 
-# Sentiment Distributions -------------------------------------------------
+# Topic Analysis ----------------------------------------------------------
+
+#' @title Number Topics
+#'
+#' @description Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
+#' Uses the `ldatuning` package and outputs an ldatuning plot.
+#'
+#' @param DataFrame DataFrame of Twitter Data.
+#' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
+#' @param min_clusters Lower range for the number of clusters.
+#' @param max_clusters Upper range for the number of clusters.
+#' @param skip Integer; The number of clusters to skip between entries.
+#' @param set_seed Seed for reproducable results.
+#' 
+#' @return A Tidy DataFrame.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' LDA_Topic_Plot <- Number.Topics(DataFrame = data,
+#'                                 num_cores = 2L,
+#'                                 min_clusters = 2,
+#'                                 max_clusters = 12, 
+#'                                 skip = 2,
+#'                                 set_seed = 1234)
+#'
+#' LDA_Topic_Plot 
+#' 
+#' @export
+
+Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
+  lda_prep <- DataFrame %>% 
+    dplyr::mutate(text = base::iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
+    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
+    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
+    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
+    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
+    dplyr::group_by(key) %>%
+    tidytext::unnest_tokens(word, text) %>% 
+    dplyr::anti_join(stop_words) %>% 
+    dplyr::count(key, word, sort = TRUE) %>% 
+    tidytext::cast_dtm(key, word, n) # create DTM
+  
+  # Compute Values
+  values <- ldatuning::FindTopicsNumber(lda_prep, 
+                                        topics = seq(from = min_clusters, to = max_clusters, by = skip),
+                                        metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
+                                        method = "Gibbs",
+                                        mc.cores = num_cores,
+                                        verbose = TRUE)
+  
+  # Plot
+  columns <- base::subset(values, select = 2:ncol(values))
+  values <- base::data.frame(values["topics"], base::apply(columns, 2, function(column) {scales::rescale(column, to = c(0, 1), from = range(column))}))
+  values <- reshape2::melt(values, id.vars = "topics", na.rm = TRUE)
+  values$group <- values$variable %in% c("Griffiths2004", "Deveaud2014")
+  values$group <- base::factor(values$group, levels = c(FALSE, TRUE), labels = c("minimize", "maximize"))
+  p <- ggplot(values, aes_string(x = "topics", y = "value", group = "variable"))
+  p <- p + geom_line()
+  p <- p + geom_point(aes_string(shape = "variable"), size = 3)
+  p <- p + guides(size = FALSE, shape = guide_legend(title = "metrics:"))
+  p <- p + scale_x_continuous(breaks = values$topics)
+  p <- p + labs(x = "number of topics", y = NULL)
+  p <- p + facet_grid(group ~ .)
+  p <- p + theme_bw() %+replace% theme(panel.grid.major.y = element_blank(), 
+                                       panel.grid.minor.y = element_blank(), 
+                                       panel.grid.major.x = element_line(colour = "grey70"), 
+                                       panel.grid.minor.x = element_blank(), 
+                                       legend.key = element_blank(), 
+                                       strip.text.y = element_text(angle = 90))
+}
+
+#' @title Tweet Topics
+#'
+#' @description Determines the Latent topics within a dataframe by using Latent Dirichlet Allocation (LDA) model parameters.  
+#' Uses the `ldatuning` package and outputs an ldatuning plot.  
+#' Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
+#'
+#' @param DataFrame DataFrame of Twitter Data.
+#' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
+#' @param min_clusters Lower range for the number of clusters.
+#' @param max_clusters Upper range for the number of clusters.
+#' @param skip Integer; The number of clusters to skip between entries.
+#' @param set_seed Seed for reproducable results.
+#' 
+#' @return Returns LDA topics.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' LDA_data <- Tweet.Topics(DataFrame = data,
+#'                          clusters = 8,
+#'                          method = "Gibbs",
+#'                          set_seed = 1234,
+#'                          num_terms = 10)
+#'
+#' LDA_data
+#' 
+#' @export
+
+Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
+  lda_prep <- DataFrame %>% 
+    dplyr::mutate(text = iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
+    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
+    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
+    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
+    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
+    dplyr::group_by(key) %>%
+    tidytext::unnest_tokens(word, text) %>% 
+    dplyr::anti_join(stop_words) %>% 
+    dplyr::count(key, word, sort = TRUE) %>% 
+    tidytext::cast_dtm(key, word, n)
+  
+  # Run LDA using Gibbs sampling
+  ldaout <- topicmodels::LDA(lda_prep, k = clusters, method = method, control = list(seed = set_seed))
+  
+  ldaout_topics <- as.matrix(topicmodels::topics(ldaout))
+  
+  ldaout_terms <- as.matrix(topicmodels::terms(ldaout, num_terms))
+  
+  # probabilities associated with each topic assignment
+  topicProbabilities <- as.data.frame(ldaout@gamma)
+  data.topics <- topics(ldaout, 1)
+  data.terms <- as.data.frame(terms(ldaout, num_terms), stringsAsFactors = FALSE)
+  print(data.terms)
+  View(data.terms)
+  
+  # Creates a dataframe to store the Lesson Number and the most likely topic
+  tweettopics.df <- as.data.frame(data.topics)
+  tweettopics.df <- dplyr::transmute(tweettopics.df, LessonId = rownames(tweettopics.df), Topic = data.topics)
+  tweettopics.df$ArticleNo <- as.character(tweettopics.df$LessonId)
+  
+  # Clean up and rename coluns to match previous dataframes
+  tweettopics <- tweettopics.df %>% 
+    dplyr::select(c("ArticleNo", "Topic")) %>% 
+    plyr::rename(c("ArticleNo" = "key"))
+  
+  # Join original twitter data frame with tweet topics
+  Tweet.Topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
+  
+  return(Tweet.Topics)
+}
+
+# Sentiment Calculation ---------------------------------------------------
+
+#' @title Score Tidy Twitter Data
+#'
+#' @description Function to Calculate Sentiment Scores that will account for sentiment by hashtag or topic.
+#'
+#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
+#' 
+#' @return A Scored DataFrame.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' score_data
+#' 
+#' @export
+
+Scores <- function(DataFrameTidy, HT_Topic) {
+  if(HT_Topic == "hashtag") {
+    TD_Hashtag_Scores <- DataFrameTidy %>% 
+      dplyr::inner_join(Bing, by = "Token") %>% 
+      dplyr::mutate(method = "Bing") %>% 
+      dplyr::group_by(text, method, hashtag, created, key, Sentiment) %>% 
+      dplyr::count(method, hashtag, created, key, Sentiment) %>%  
+      tidyr::spread(Sentiment, n, fill = 0) %>% 
+      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
+      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
+                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
+      dplyr::mutate(date = lubridate::as_date(created))
+    return(TD_Hashtag_Scores)
+  } else {
+    TD_Topic_Scores <- DataFrameTidy %>% 
+      dplyr::inner_join(Bing, by = "Token") %>% 
+      dplyr::mutate(method = "Bing") %>% 
+      dplyr::group_by(text, method, Topic, created, key, Sentiment) %>% 
+      dplyr::count(method, Topic, created, key, Sentiment) %>%  
+      tidyr::spread(Sentiment, n, fill = 0) %>% 
+      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
+      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
+                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
+      dplyr::mutate(date = lubridate::as_date(created))
+    return(TD_Topic_Scores)
+  }
+}
+
+#' @title Twitter Positive and Negative Words
+#'
+#' @description Determines and displays the most positive and negative words within the twitter data.
+#' 
+#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
+#' @param num_words Desired number of words to be returned.
+#' @param filterword Word or words to be removed
+#' 
+#' @return A ggplot
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10)
+#' posneg
+#'                           
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10,
+#'                        filterword = "fail")
+#' posneg
+#'                           
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#'                        n = 10,
+#'                        filterword = c("fail", "urgent")                           
+#' posneg
+#' 
+#' @export
+
+PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
+  TD_PosNeg_Words <- DataFrameTidy %>%  
+    dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
+    dplyr::filter(!(Token %in% filterword)) %>% 
+    dplyr::count(Token, Sentiment) %>%
+    dplyr::ungroup() %>% 
+    dplyr::group_by(Sentiment) %>%
+    dplyr::top_n(num_words, n) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(Token = reorder(Token, n)) %>%
+    ggplot2::ggplot(aes(Token, n, fill = Sentiment)) +
+    geom_col(show.legend = FALSE) +
+    facet_wrap(~Sentiment, scales = "free_y") +
+    labs(y = "Count",
+         x = NULL) +
+    ggtitle('Most common positive and negative words utilizing the Bing Lexicon') +
+    coord_flip()
+  return(TD_PosNeg_Words)
+}
+
+#' @title Twitter Data Minimum Scores
+#'
+#' @description Determines the minimum scores for either the entire dataset or the minimum scores associated with a hashtag or topic analysis.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
+#' 
+#' @return A Tidy DataFrame.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                     HT_Topic = "hashtag")
+#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag")
+#'                             
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag",
+#'                          HT_Topic_Selection = "icecream")
+#' 
+#' @export
+
+Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
+  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
+    TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
+      head()
+    return(TD_HT_noSel_Min_Scores)
+  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
+    TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>% 
+      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
+      head()
+    return(TD_HT_Sel_Min_Scores)
+  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
+    TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
+      head()
+    return(TD_Topic_noSel_Min_Scores)
+  } else {
+    TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>% 
+      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
+      head()
+    return(TD_Topic_Sel_Min_Scores)
+  }
+}
+
+#' @title Twitter Data Maximum Scores
+#'
+#' @description Determines the Maximum scores for either the entire dataset or the Maximum scores associated with a hashtag or topic analysis.
+#'
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
+#' 
+#' @return A Tidy DataFrame.
+#' 
+#' @examples 
+#' library(SAoTD)
+#' data <- raw_tweets
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
+#'                         HT_Topic = "hashtag")
+#'                             
+#' data <- twitter_data
+#' tidy_data <- Tidy(DataFrame = data)
+#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#'                      HT_Topic = "hashtag")
+#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
+#'                          HT_Topic = "hashtag",
+#'                          HT_Topic_Selection = "icecream")
+#' 
+#' @export
+
+Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
+  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
+    TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
+      dplyr::arrange(-TweetSentimentScore) %>% 
+      head()
+    return(TD_HT_noSel_Max_Scores)
+  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
+    TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>% 
+      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
+      dplyr::arrange(-TweetSentimentScore) %>% 
+      head()
+    return(TD_HT_Sel_Max_Scores)
+  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
+    TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
+      dplyr::arrange(-TweetSentimentScore) %>% 
+      head()
+    return(TD_Topic_noSel_Max_Scores)
+  } else {
+    TD_Topic_Sel_Max_Scores <- DataFrameTidyScores %>% 
+      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
+      dplyr::arrange(-TweetSentimentScore) %>% 
+      head()
+    return(TD_Topic_Sel_Max_Scores)
+  }
+}
+
+# Visualization -----------------------------------------------------------
 
 #' @title Twitter Corpus Distribution
 #'
@@ -822,8 +820,6 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
     return(TD_Topic_Distribution)
   }
 }
-
-# Visualizations ----------------------------------------------------------
 
 #' @title Twitter Data Box Plot
 #'

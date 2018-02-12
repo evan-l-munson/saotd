@@ -27,7 +27,7 @@ A DataFrame.
 }
 \description{
 Function will enable a user to access the twitter API throught the 
-[Twitter Application Management](https://apps.twitter.com/) site.
+[Twitter Developers Account](https://dev.twitter.com/) site.
 Once a user has a twitter developers account and has recieved their individual consumer key, 
 consumer secret key, access token, and access secret key and acquire tweets they can 
 acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
@@ -46,7 +46,7 @@ Acquire(consumer_key = consumer_key,
         access_secret = access_secret, 
         HT = hashtags, 
         num_tweets = 10, 
-        file_name = "test_tweets.RData"
+        file_name = "test_tweets.RData",
         distinct = TRUE)
         
 load("test_tweets.RData")
