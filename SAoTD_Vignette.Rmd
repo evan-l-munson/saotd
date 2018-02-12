@@ -35,6 +35,16 @@ The `SAoTD` package is broken down into five different phases:
 * Sentiment Calculation
 * Visualization
 
+## Packages
+
+```{r warning=FALSE, message=FALSE}
+library(SAoTD)
+library(tidyverse)
+library(tidytext)
+library(kableExtra)
+library(utils)
+```
+
 ## Acquire
 
 To explore the data manipulation functions of `SAoTD` we will use the built in dataset `SAoTD::raw_tweets`.
@@ -82,15 +92,16 @@ View(raw_tweets)
 
 ## Explore
 
-Once Twitter data has bee acquired the exploration phase can begin.
+Once Twitter data has bee acquired the exploration phase can begin by tidying the twitter data. The first tweet in the dataframe is `data$text[1]`, and when it is cleaned and tidy'd it becomes:
 
 ```{r}
-library(SAoTD)
-library(knitr)
-raw_tweets
+data("raw_tweets")
 data <- raw_tweets
-tidy_data <- Tidy(DataFrame = data)
+tidy_data <- SAoTD::Tidy(DataFrame = data)
 
 tidy_data %>% 
-  head()
+  dplyr::select(Token) %>% 
+  utils::head() %>% 
+  knitr::kable("html")
 ```
+
