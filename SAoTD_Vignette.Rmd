@@ -108,3 +108,54 @@ TD_Tidy$Token[11:20] %>%
 ```
 
 The cleaning process removes:  “@”, “#” and "RT" symbols, Weblinks, Punctuation, Emojis, and Stop Words like (”the”, “of”, etc.).
+
+We will now investigate Uni-Grams, Bi-Grams and Tri-Grams.
+
+```{r message=FALSE}
+SAoTD::Unigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Uni-Grams")
+```
+
+```{r message=FALSE}
+SAoTD::Bigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Bi-Grams")
+```
+
+```{r message=FALSE}
+SAoTD::Trigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Tri-Grams")
+```
+
+Now that we have the Uni-Grams we can see that kitten, kittens, kitty, cat, and cats all are refereing to cats and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniquess in the data.
+
+```{r message=FALSE, message=FALSE}
+TD_Merge <- Merge.Terms(DataFrame = TD, 
+                        term = c("kitten", 
+                                 "kittens",
+                                 "kitty",
+                                 "kittys",
+                                 "cat", 
+                                 "cats"), 
+                        term_replacement = "cat")
+```
+
+```{r message=FALSE}
+SAoTD::Unigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Uni-Grams")
+```
+
+```{r message=FALSE}
+SAoTD::Bigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Bi-Grams")
+```
+
+```{r message=FALSE}
+SAoTD::Trigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Tri-Grams")
+```
