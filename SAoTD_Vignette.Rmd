@@ -131,16 +131,15 @@ SAoTD::Trigram(DataFrame = TD) %>%
 
 Now that we have the Uni-Grams we can see that kitten, kittens, kitty, cat, and cats all are refereing to cats and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniquess in the data.
 
-```{r message=FALSE, message=FALSE}
-TD_Merge <- Merge.Terms(DataFrame = TD, 
-                        term = c("kitten", 
-                                 "kittens",
-                                 "kitty",
-                                 "kittys",
-                                 "cat", 
-                                 "cats"), 
-                        term_replacement = "cat")
+```{r message=FALSE, message=FALSE, error=FALSE}
+TD_Merge <- Merge.Terms(DataFrame = TD, term = "kitten", term_replacement = "cat")
+TD_Merge <- Merge.Terms(DataFrame = TD_Merge, term = "kittens", term_replacement = "cat")
+TD_Merge <- Merge.Terms(DataFrame = TD_Merge, term = "kitty", term_replacement = "cat")
+TD_Merge <- Merge.Terms(DataFrame = TD_Merge, term = "kittys", term_replacement = "cat")
+TD_Merge <- Merge.Terms(DataFrame = TD_Merge, term = "cats", term_replacement = "cat")
 ```
+
+Now that the terms have been merged, the new N-Grams are re-computed.
 
 ```{r message=FALSE}
 SAoTD::Unigram(DataFrame = TD_Merge) %>% 
