@@ -284,7 +284,7 @@ Trigram <- function(DataFrame) {
 
 Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
   TD_Bigram_Network <- BiGramDataFrame %>% 
-    dplyr::filter(n >= number) %>% 
+    dplyr::filter(n > number) %>% 
     igraph::graph_from_data_frame()
   
   set.seed(set_seed)

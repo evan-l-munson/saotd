@@ -157,13 +157,17 @@ SAoTD::Trigram(DataFrame = TD_Merge) %>%
 
 Now we can look at Bi-Gram Networks.
 
-<!-- # ```{r} -->
-<!-- # TD_Bigrams <- SAoTD::Bigram(DataFrame = TD_Merge) -->
-<!-- #  -->
-<!-- # SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigrams,  -->
-<!-- #                       number = 75, layout = "fr", edge_color = "blue", node_color = "black", node_size = 3,  -->
-<!-- #                       set_seed = 1234) -->
-<!-- # ``` -->
+```{r}
+TD_Bigrams <- SAoTD::Bigram(DataFrame = TD_Merge)
+
+SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigrams,
+                      number = 75, 
+                      layout = "fr", 
+                      edge_color = "blue", 
+                      node_color = "black", 
+                      node_size = 3,
+                      set_seed = 1234)
+```
 
 Additionally we can observe the Correlation Network.
 
