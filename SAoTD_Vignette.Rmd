@@ -154,3 +154,31 @@ SAoTD::Trigram(DataFrame = TD_Merge) %>%
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Tri-Grams")
 ```
+
+Now we can look at Bi-Gram Networks.
+
+<!-- # ```{r} -->
+<!-- # TD_Bigrams <- SAoTD::Bigram(DataFrame = TD_Merge) -->
+<!-- #  -->
+<!-- # SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigrams,  -->
+<!-- #                       number = 75, layout = "fr", edge_color = "blue", node_color = "black", node_size = 3,  -->
+<!-- #                       set_seed = 1234) -->
+<!-- # ``` -->
+
+Additionally we can observe the Correlation Network.
+
+```{r fig.align='center'}
+TD_Corr <- SAoTD::Word.Corr(DataFrameTidy = TD_Tidy, number = 200, sort = TRUE)
+
+SAoTD::Word.Corr.Plot(WordCorr = TD_Corr, 
+                      Correlation = .1, 
+                      layout = "fr", 
+                      edge_color = "blue", 
+                      node_color = "black", 
+                      node_size = 1)
+```
+
+
+
+
+

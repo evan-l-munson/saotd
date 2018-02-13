@@ -290,9 +290,9 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
   set.seed(set_seed)
   
   ggraph::ggraph(TD_Bigram_Network, layout = layout) +
-    geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE, end_cap = circle(.07, 'inches')) +
-    geom_node_point(colour = node_color, size = node_size) +
-    geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
+    ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE, end_cap = ggraph::circle(.07, 'inches')) +
+    ggraph::geom_node_point(colour = node_color, size = node_size) +
+    ggraph::geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
     ggtitle("Bi-Gram Network") +
     theme_void()
 }
@@ -365,11 +365,11 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
   
   WordCorr %>%
     filter(correlation > Correlation) %>%
-    graph_from_data_frame() %>%
+    igraph::graph_from_data_frame() %>%
     ggraph::ggraph(layout = layout) +
-    geom_edge_link(aes(edge_alpha = correlation, edge_width = correlation), edge_colour = edge_color, show.legend = TRUE) +
-    geom_node_point(colour = node_color, size = node_size) +
-    geom_node_text(aes(label = name), repel = TRUE) +
+    ggraph::geom_edge_link(aes(edge_alpha = correlation, edge_width = correlation), edge_colour = edge_color, show.legend = TRUE) +
+    ggraph::geom_node_point(colour = node_color, size = node_size) +
+    ggraph::geom_node_text(aes(label = name), repel = TRUE) +
     ggtitle("Word Correlation Network") +
     theme_void()
 }
