@@ -828,12 +828,8 @@ kitten
 </tr>
 </tbody>
 </table>
-<p>Now that we have the Uni-Grams we can see that kitten, kittens, kitty, cat, and cats all are refereing to cats and may be good set of words to merge into a single term. Additionally, pet and pets could also be merged to observe more uniquess in the data.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD, <span class="dt">term =</span> <span class="st">&quot;kitten&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;cat&quot;</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD_Merge, <span class="dt">term =</span> <span class="st">&quot;kittens&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;cat&quot;</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD_Merge, <span class="dt">term =</span> <span class="st">&quot;kitty&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;cat&quot;</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD_Merge, <span class="dt">term =</span> <span class="st">&quot;kittys&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;cat&quot;</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD_Merge, <span class="dt">term =</span> <span class="st">&quot;cats&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;cat&quot;</span>)</a></code></pre></div>
+<p>Now that we have the Uni-Grams we can see that ice and cream are refereing to ice cream and may be good set of words to merge into a single term. Additionally, pet and pets could also be merged to observe more uniquess in the data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TD_Merge &lt;-<span class="st"> </span><span class="kw">Merge.Terms</span>(<span class="dt">DataFrame =</span> TD, <span class="dt">term =</span> <span class="st">&quot;ice cream&quot;</span>, <span class="dt">term_replacement =</span> <span class="st">&quot;icecream&quot;</span>)</a></code></pre></div>
 <p>Now that the terms have been merged, the new N-Grams are re-computed.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">SAoTD<span class="op">::</span><span class="kw">Unigram</span>(<span class="dt">DataFrame =</span> TD_Merge) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -855,10 +851,18 @@ n
 <tbody>
 <tr>
 <td style="text-align:left;">
-cat
+icecream
 </td>
 <td style="text-align:right;">
-2373
+1136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kitten
+</td>
+<td style="text-align:right;">
+957
 </td>
 </tr>
 <tr>
@@ -887,14 +891,6 @@ random
 </tr>
 <tr>
 <td style="text-align:left;">
-icecream
-</td>
-<td style="text-align:right;">
-812
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 airline
 </td>
 <td style="text-align:right;">
@@ -919,18 +915,18 @@ hiring
 </tr>
 <tr>
 <td style="text-align:left;">
-cream
+cat
 </td>
 <td style="text-align:right;">
-460
+490
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-ice
+cats
 </td>
 <td style="text-align:right;">
-363
+347
 </td>
 </tr>
 </tbody>
@@ -958,28 +954,6 @@ n
 <tbody>
 <tr>
 <td style="text-align:left;">
-cat
-</td>
-<td style="text-align:left;">
-cat
-</td>
-<td style="text-align:right;">
-1057
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ice
-</td>
-<td style="text-align:left;">
-cream
-</td>
-<td style="text-align:right;">
-324
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 hiring
 </td>
 <td style="text-align:left;">
@@ -991,13 +965,57 @@ careerarc
 </tr>
 <tr>
 <td style="text-align:left;">
+kitten
+</td>
+<td style="text-align:left;">
+kitty
+</td>
+<td style="text-align:right;">
+250
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cats
+</td>
+<td style="text-align:left;">
 cat
+</td>
+<td style="text-align:right;">
+194
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kittens
+</td>
+<td style="text-align:left;">
+kitten
+</td>
+<td style="text-align:right;">
+181
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cat
+</td>
+<td style="text-align:left;">
+kittens
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kitty
 </td>
 <td style="text-align:left;">
 pets
 </td>
 <td style="text-align:right;">
-196
+175
 </td>
 </tr>
 <tr>
@@ -1093,7 +1111,7 @@ tux
 tux
 </td>
 <td style="text-align:left;">
-cat
+kitten
 </td>
 <td style="text-align:right;">
 154
@@ -1130,32 +1148,60 @@ n
 cat
 </td>
 <td style="text-align:left;">
-cat
+kittens
 </td>
 <td style="text-align:left;">
-cat
+kitten
 </td>
 <td style="text-align:right;">
-652
+177
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-cat
+cats
 </td>
 <td style="text-align:left;">
 cat
+</td>
+<td style="text-align:left;">
+kittens
+</td>
+<td style="text-align:right;">
+177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kittens
+</td>
+<td style="text-align:left;">
+kitten
+</td>
+<td style="text-align:left;">
+kitty
+</td>
+<td style="text-align:right;">
+176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kitten
+</td>
+<td style="text-align:left;">
+kitty
 </td>
 <td style="text-align:left;">
 pets
 </td>
 <td style="text-align:right;">
-178
+175
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-cat
+kitty
 </td>
 <td style="text-align:left;">
 pets
@@ -1231,38 +1277,10 @@ terrific
 tux
 </td>
 <td style="text-align:left;">
-cat
+kitten
 </td>
 <td style="text-align:right;">
 154
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-pet
-</td>
-<td style="text-align:left;">
-meow
-</td>
-<td style="text-align:left;">
-moe
-</td>
-<td style="text-align:right;">
-151
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-meow
-</td>
-<td style="text-align:left;">
-moe
-</td>
-<td style="text-align:left;">
-cutecat
-</td>
-<td style="text-align:right;">
-117
 </td>
 </tr>
 </tbody>
