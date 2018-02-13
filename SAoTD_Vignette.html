@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evan Munson" />
 
-<meta name="date" content="2018-02-12" />
+<meta name="date" content="2018-02-13" />
 
 <title>SAoTD Vignette</title>
 
@@ -280,7 +280,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">SAoTD Vignette</h1>
 <h4 class="author"><em>Evan Munson</em></h4>
-<h4 class="date"><em>2018-02-12</em></h4>
+<h4 class="date"><em>2018-02-13</em></h4>
 
 
 
@@ -350,46 +350,64 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb2-10" data-line-number="10">        <span class="dt">access_token =</span> access_token, </a>
 <a class="sourceLine" id="cb2-11" data-line-number="11">        <span class="dt">access_secret =</span> access_secret,</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12">        <span class="dt">HT =</span> hashtags,</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">        <span class="dt">num_tweets =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">        <span class="dt">num_tweets =</span> <span class="dv">1000</span>,</a>
 <a class="sourceLine" id="cb2-14" data-line-number="14">        <span class="dt">file_name =</span> <span class="st">&quot;test_tweets.RData&quot;</span>,</a>
 <a class="sourceLine" id="cb2-15" data-line-number="15">        <span class="dt">distinct =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb2-16" data-line-number="16">         </a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw">load</span>(<span class="st">&quot;test_tweets.RData&quot;</span>)</a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw">View</span>(raw_tweets)</a></code></pre></div>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw">load</span>(<span class="st">&quot;test_tweets.RData&quot;</span>)</a></code></pre></div>
 </div>
 <div id="explore" class="section level2">
 <h2>Explore</h2>
-<p>Once Twitter data has bee acquired the exploration phase can begin by tidying the twitter data. The first tweet in the dataframe is <code>data$text[1]</code>, <code>2+2</code> and when it is cleaned and tidy’d it becomes:</p>
+<p>You can acquire your own data or use the dataset included with the package. We will be using the included data <code>raw_tweets</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;raw_tweets&quot;</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">data &lt;-<span class="st"> </span>raw_tweets</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">tidy_data &lt;-<span class="st"> </span>SAoTD<span class="op">::</span><span class="kw">Tidy</span>(<span class="dt">DataFrame =</span> data)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">tidy_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Token) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span>utils<span class="op">::</span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="st">&quot;html&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" data-line-number="2">TD &lt;-<span class="st"> </span>raw_tweets</a></code></pre></div>
+<p>The second tweet of the dataset is: <strong>Check out the latest opening at CO-OP Financial Services. <a href="https://t.co/jFkf2MVWKj" class="uri">https://t.co/jFkf2MVWKj</a> #IT #RanchoCucamonga, CA #Job #Jobs #Hiring #CareerArc</strong>, and when it is cleaned and tidy’d it becomes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">TD_Tidy &lt;-<span class="st"> </span>SAoTD<span class="op">::</span><span class="kw">Tidy</span>(<span class="dt">DataFrame =</span> TD)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">TD_Tidy<span class="op">$</span>Token[<span class="dv">11</span><span class="op">:</span><span class="dv">20</span>] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="st">&quot;html&quot;</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr>
 <th style="text-align:left;">
-Token
+x
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-recruiters
+check
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-refuse
+coop
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-apply
+financial
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+services
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ranchocucamonga
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ca
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+job
 </td>
 </tr>
 <tr>
@@ -399,16 +417,17 @@ jobs
 </tr>
 <tr>
 <td style="text-align:left;">
-include
+hiring
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-buzz
+careerarc
 </td>
 </tr>
 </tbody>
 </table>
+<p>The cleaning process removes: “@”, “#” and “RT” symbols, Weblinks, Punctuation, Emojis, and Stop Words like (”the”, “of”, etc.).</p>
 </div>
 </div>
 

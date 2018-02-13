@@ -82,26 +82,29 @@ Acquire(consumer_key = consumer_key,
         access_token = access_token, 
         access_secret = access_secret,
         HT = hashtags,
-        num_tweets = 10,
+        num_tweets = 1000,
         file_name = "test_tweets.RData",
         distinct = TRUE)
          
 load("test_tweets.RData")
-View(raw_tweets)
 ```
 
 ## Explore
 
-Once Twitter data has bee acquired the exploration phase can begin by tidying the twitter data. The first tweet in the dataframe is `data$text[1]`, and when it is cleaned and tidy'd it becomes:
+You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.
 
 ```{r}
 data("raw_tweets")
-data <- raw_tweets
-tidy_data <- SAoTD::Tidy(DataFrame = data)
+TD <- raw_tweets
+```
 
-tidy_data %>% 
-  dplyr::select(Token) %>% 
-  utils::head() %>% 
+The second tweet of the dataset is:  __`r TD$text[2]`__, and when it is cleaned and tidy'd it becomes:
+
+```{r}
+TD_Tidy <- SAoTD::Tidy(DataFrame = TD)
+
+TD_Tidy$Token[11:20] %>% 
   knitr::kable("html")
 ```
 
+The cleaning process removes:  “@”, “#” and "RT" symbols, Weblinks, Punctuation, Emojis, and Stop Words like (”the”, “of”, etc.).
