@@ -196,11 +196,13 @@ SAoTD::Number.Topics(DataFrame = TD,
 The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  Remeber that the twitter data was acquired by selecting seven different hashtags `r hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")`.  We could easily see that in this case selecting 7 topics could be a correct number of topics.  However if we knew that the data contained 5 topics we could continue the analysis.  
 
 ```{r fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE}
-SAoTD::Tweet.Topics(DataFrame = TD, 
-                    clusters = 5, 
-                    method = "Gibbs", 
-                    set_seed = 1234, 
-                    num_terms = 10)
+TD_Topics <- SAoTD::Tweet.Topics(DataFrame = TD, 
+                                 clusters = 5, 
+                                 method = "Gibbs", 
+                                 set_seed = 1234, 
+                                 num_terms = 10)
+TD_Topics %>% 
+  knitr::kable("html", caption = "Twitter data Topics")
 ```
 
 
