@@ -1,7 +1,7 @@
 Sentiment Analysis of Twitter Data
 ================
 CPT Evan L. Munson
-05 February 2018
+14 February 2018
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 

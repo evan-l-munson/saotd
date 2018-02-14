@@ -32,7 +32,7 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' Once a user has a twitter developers account and has recieved their individual consumer key, 
 #' consumer secret key, access token, and access secret key and acquire tweets they can 
 #' acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
-#'
+
 #' @param consumer_key Twitter Application management consumer key.
 #' @param consumer_secret Twitter Application management consumer secret key.
 #' @param access_token Twitter Application management access token.
@@ -40,6 +40,10 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' @param HT A single hashtag or a list of hashtags the user has specified.
 #' @param file_name User desired output .RData file name.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.
+#' 
+#' @import twitteR
+#' @import dplyr 
+#' @import purrr
 #' 
 #' @return A DataFrame.
 #' 
@@ -97,6 +101,11 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' @description Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual tweet.
 #'
 #' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @import plyr
+#' @import dplyr
+#' @import stringr
+#' @import tidytext
 #' 
 #' @return A Tidy DataFrame.
 #' 
@@ -163,6 +172,10 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
+#' @import dplyr
+#' @import tidytext
+#' @import stringr
+#' 
 #' @return A tribble.
 #' 
 #' @examples 
@@ -192,6 +205,11 @@ Unigram <- function(DataFrame){
 #' @description Determines and displays the text Bi-Grams within the Twitter data in sequence from the most used to the least used.  A Bi-Gram is a combination of two consecutive words.
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @import dplyr
+#' @import tidytext
+#' @import stringr
+#' @import tidyr
 #' 
 #' @return A tribble.
 #' 
@@ -224,6 +242,11 @@ Bigram <- function(DataFrame){
 #' @description Determines and displays the text Tri-Grams within the Twitter data in sequence from the most used to the least used.  A Tri-Gram is a combination of three consecutive words.
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
+#' 
+#' @import dplyr 
+#' @import tidytext
+#' @import stringr 
+#' @import tidyr 
 #' 
 #' @return A tribble.
 #' 
@@ -264,6 +287,11 @@ Trigram <- function(DataFrame) {
 #' @param node_size User desired node size.
 #' @param set_seed Seed for reproducable results.
 #' 
+#' @import dplyr
+#' @import igraph
+#' @import ggraph 
+#' @import ggplot2
+#' 
 #' @return A ggraph plot.
 #' 
 #' @examples 
@@ -293,7 +321,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
     ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE, end_cap = ggraph::circle(.07, 'inches')) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
     ggraph::geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
-    ggtitle("Bi-Gram Network") +
+    ggplot2::ggtitle("Bi-Gram Network") +
     theme_void()
 }
 
@@ -304,6 +332,9 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' @param BiGramDataFrame DataFrame of Bi-Grams.
 #' @param number The number of word instances to be included.
 #' @param sort Rank order the results from most to least correlated.
+#' 
+#' @import dplyr
+#' @import widyr
 #' 
 #' @return A tribble
 #' 
@@ -339,6 +370,11 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' @param node_size User desired node size.
 #' @param set_seed Seed for reproducable results.
 #' 
+#' @import dplyr
+#' @import igraph 
+#' @import ggraph
+#' @import ggplot2
+#' 
 #' @return A tribble
 #' 
 #' @examples 
@@ -370,7 +406,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
     ggraph::geom_edge_link(aes(edge_alpha = correlation, edge_width = correlation), edge_colour = edge_color, show.legend = TRUE) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
     ggraph::geom_node_text(aes(label = name), repel = TRUE) +
-    ggtitle("Word Correlation Network") +
+    ggplot2::ggtitle("Word Correlation Network") +
     theme_void()
 }
 
@@ -387,6 +423,14 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @param max_clusters Upper range for the number of clusters.
 #' @param skip Integer; The number of clusters to skip between entries.
 #' @param set_seed Seed for reproducable results.
+#' 
+#' @import dplyr
+#' @import stringr 
+#' @import tidytext 
+#' @import ldatuning 
+#' @import scales
+#' @import reshape2 
+#' @import ggplot2
 #' 
 #' @return A Tidy DataFrame.
 #' 
@@ -432,7 +476,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
   values <- reshape2::melt(values, id.vars = "topics", na.rm = TRUE)
   values$group <- values$variable %in% c("Griffiths2004", "Deveaud2014")
   values$group <- base::factor(values$group, levels = c(FALSE, TRUE), labels = c("minimize", "maximize"))
-  p <- ggplot(values, aes_string(x = "topics", y = "value", group = "variable"))
+  p <- ggplot2::ggplot(values, aes_string(x = "topics", y = "value", group = "variable"))
   p <- p + geom_line()
   p <- p + geom_point(aes_string(shape = "variable"), size = 3)
   p <- p + guides(size = FALSE, shape = guide_legend(title = "metrics:"))
@@ -460,6 +504,12 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @param skip Integer; The number of clusters to skip between entries.
 #' @param set_seed Seed for reproducable results.
 #' 
+#' @import plyr
+#' @import dplyr 
+#' @import stringr 
+#' @import tidytext
+#' @import topicmodels
+#' 
 #' @return Returns LDA topics.
 #' 
 #' @examples 
@@ -477,7 +527,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 
 Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
   lda_prep <- DataFrame %>% 
-    dplyr::mutate(text = iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
+    dplyr::mutate(text = base::iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
     dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% # Remove punctuation
     dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
@@ -498,7 +548,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
   
   # probabilities associated with each topic assignment
   topicProbabilities <- as.data.frame(ldaout@gamma)
-  data.topics <- topics(ldaout, 1)
+  data.topics <- topicmodels::topics(ldaout, 1)
   data.terms <- as.data.frame(terms(ldaout, num_terms), stringsAsFactors = FALSE)
   print(data.terms)
   View(data.terms)
@@ -527,6 +577,9 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #'
 #' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
+#' 
+#' @import dplyr
+#' @import tidyr
 #' 
 #' @return A Scored DataFrame.
 #' 
@@ -575,6 +628,9 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
 #' @param num_words Desired number of words to be returned.
 #' @param filterword Word or words to be removed
+#' 
+#' @import dplyr
+#' @import ggplot2
 #' 
 #' @return A ggplot
 #' 
@@ -630,6 +686,8 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
+#' @import dplyr
+#' 
 #' @return A Tidy DataFrame.
 #' 
 #' @examples 
@@ -684,6 +742,8 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
+#' 
+#' @import dplyr
 #' 
 #' @return A Tidy DataFrame.
 #' 
@@ -743,6 +803,8 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' @param color The user selected color to highlight the bins.
 #' @param fill The interior color of the bins.
 #' 
+#' @import ggplot2
+#' 
 #' @return A ggplot.
 #' 
 #' @examples 
@@ -779,6 +841,8 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' @param binwidth The width of the bins.  Default is 1.
 #' @param color The user selected color to highlight the bins.
 #' @param fill The interior color of the bins.
+#' 
+#' @import ggplot2
 #' 
 #' @return A facet wrap ggplot.
 #' 
@@ -827,6 +891,8 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #'
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @import ggplot2
 #' 
 #' @return A ggplot box plot.
 #' 
@@ -881,6 +947,8 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
+#' @import ggplot2
+#' 
 #' @return A ggplot violin plot.
 #' 
 #' @examples 
@@ -933,6 +1001,9 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #'
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @import dplyr
+#' @import ggplot2
 #' 
 #' @return A ggplot plot.
 #' 
@@ -996,6 +1067,8 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #'
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
+#' 
+#' @import ggplot2
 #' 
 #' @return A ggplot plot.
 #' 
