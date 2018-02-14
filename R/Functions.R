@@ -1,21 +1,4 @@
 
-# Packages ----------------------------------------------------------------
-
-library(data.table)
-library(readxl)
-#library(utils)
-library(twitteR)
-library(httr)
-library(readr)
-library(plyr)
-library(tidyverse)
-library(tidytext)
-library(lubridate)
-library(topicmodels)
-library(ggraph)
-library(igraph)
-library(ldatuning)
-library(widyr)
 
 # Bing Lexicon ------------------------------------------------------------
 
@@ -43,6 +26,7 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' 
 #' @import twitteR
 #' @import dplyr 
+#' @importFrom dplyr mutate
 #' @import purrr
 #' 
 #' @return A DataFrame.
@@ -103,7 +87,9 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
 #' @import plyr
+#' @importFrom plyr rename
 #' @import dplyr
+#' @importFrom dplyr mutate
 #' @import stringr
 #' @import tidytext
 #' 
@@ -173,6 +159,8 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
 #' @import dplyr
+#' @importFrom dplyr count
+#' @importFrom dplyr mutate
 #' @import tidytext
 #' @import stringr
 #' 
@@ -207,6 +195,7 @@ Unigram <- function(DataFrame){
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
 #' @import dplyr
+#' @importFrom dplyr mutate
 #' @import tidytext
 #' @import stringr
 #' @import tidyr
@@ -244,6 +233,7 @@ Bigram <- function(DataFrame){
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
 #' @import dplyr 
+#' @importFrom dplyr mutate
 #' @import tidytext
 #' @import stringr 
 #' @import tidyr 
@@ -425,6 +415,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @param set_seed Seed for reproducable results.
 #' 
 #' @import dplyr
+#' @importFrom dplyr mutate
 #' @import stringr 
 #' @import tidytext 
 #' @import ldatuning 
@@ -489,6 +480,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
                                        panel.grid.minor.x = element_blank(), 
                                        legend.key = element_blank(), 
                                        strip.text.y = element_text(angle = 90))
+  return(p)
 }
 
 #' @title Tweet Topics
@@ -505,7 +497,9 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @param set_seed Seed for reproducable results.
 #' 
 #' @import plyr
+#' @importFrom plyr rename
 #' @import dplyr 
+#' @importFrom dplyr mutate
 #' @import stringr 
 #' @import tidytext
 #' @import topicmodels
@@ -579,6 +573,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
 #' 
 #' @import dplyr
+#' @importFrom dplyr mutate
 #' @import tidyr
 #' 
 #' @return A Scored DataFrame.
@@ -630,6 +625,7 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #' @param filterword Word or words to be removed
 #' 
 #' @import dplyr
+#' @importFrom dplyr mutate
 #' @import ggplot2
 #' 
 #' @return A ggplot
@@ -1003,6 +999,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
 #' @import dplyr
+#' @importFrom dplyr summarize
 #' @import ggplot2
 #' 
 #' @return A ggplot plot.
