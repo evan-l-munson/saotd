@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 .httr-oauth
+hidden/
+src/*.so
+src/*.o
+src/*.dll
