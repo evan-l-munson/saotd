@@ -157,11 +157,11 @@ SAoTD::Trigram(DataFrame = TD_Merge) %>%
 
 Now we can look at Bi-Gram Networks.
 
-```{r}
+```{r fig.align='center', warning=FALSE}
 TD_Bigrams <- SAoTD::Bigram(DataFrame = TD_Merge)
 
 SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigrams,
-                      number = 75, 
+                      number = 100, 
                       layout = "fr", 
                       edge_color = "blue", 
                       node_color = "black", 
