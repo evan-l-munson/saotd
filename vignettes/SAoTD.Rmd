@@ -1,11 +1,10 @@
 ---
 title: "SAoTD"
-author: "Evan Munson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  \VignetteIndexEntry{SAoTD}
-  \VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{SAoTD}
+  %\VignetteEngine{knitr::rmarkdown}
   \VignetteEnconding{UTF-8}
 ---
 
