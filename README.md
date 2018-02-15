@@ -1,7 +1,7 @@
 Sentiment Analysis of Twitter Data
 ================
 CPT Evan L. Munson
-14 February 2018
+15 February 2018
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
@@ -35,7 +35,7 @@ complete
   - *TD.Acquire: Access Twitter API and gather tweets.*
   - *TD.Tidy: Tidy acquired tweets.*
   - *TD.Scores: Calculates sentiment scores of tidy data using the Bing
-    Lexicon.*)
+    Lexicon.*
   - *Merge.Terms: Function received from Capt Jeff Smith, that will
     merge terms and is used to reduce redundancy.*
   - *Number.Topics: Produces an Latent Dirichlet Allocation (LDA) tuning

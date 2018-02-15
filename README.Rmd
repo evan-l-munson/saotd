@@ -26,7 +26,7 @@ _This analytic is an in initial forray into sentiment analysis. This analytic wi
 
 * _TD.Acquire: Access Twitter API and gather tweets._
 * _TD.Tidy: Tidy acquired tweets._
-* _TD.Scores: Calculates sentiment scores of tidy data using the Bing Lexicon._)
+* _TD.Scores: Calculates sentiment scores of tidy data using the Bing Lexicon._
 * _Merge.Terms: Function received from Capt Jeff Smith, that will merge terms and is used to reduce redundancy._
 * _Number.Topics: Produces an Latent Dirichlet Allocation (LDA) tuning graph that will assist a user determining how many latent topics are within their twitter data._
 * _Tweet.Topics: Determines the contents of the latent topics within the twitter data._

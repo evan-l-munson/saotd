@@ -1,12 +1,12 @@
 ---
-title: "SAoTD Vignette"
+title: "SAoTD"
 author: "Evan Munson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SAoTD Vignette}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEnconding{UTF-8}
+  \VignetteIndexEntry{SAoTD}
+  \VignetteEngine{knitr::rmarkdown}
+  \VignetteEnconding{UTF-8}
 ---
 
 # Sentiment Analysis of Twitter Data (SAoTD)
