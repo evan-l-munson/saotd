@@ -23,9 +23,7 @@ Social network sites or platforms, are defined as web-based services that allow 
 
 The nature and nomenclature of these connections may vary from site to site.
 
-This package, `SAoTD` is focused on utilizing Twitter data due to its widespread global acceptance.  Harvested data, analyzed for sentiment can provide powerful insight into a population.  This insight can assist organizations, by letting them better understand their target population.  This package will allow a useer to acquire data using the Public Twitter Application Programming Interface (API), to obtain tweets.
-
-once users have a [Twitter](https://twitter.com/) account and a 
+This package, `SAoTD` is focused on utilizing Twitter data due to its widespread global acceptance.  Harvested data, analyzed for sentiment can provide powerful insight into a population.  This insight can assist organizations, by letting them better understand their target population.  This package will allow a user to acquire data using the Public Twitter Application Programming Interface (API), to obtain tweets.
 
 The `SAoTD` package is broken down into five different phases:
 
@@ -129,7 +127,7 @@ SAoTD::Trigram(DataFrame = TD) %>%
   knitr::kable("html", caption = "Twitter data Tri-Grams")
 ```
 
-Now that we have the Uni-Grams we can see that ice and cream are refereing to ice cream and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniquess in the data.
+Now that we have the Uni-Grams we can see that ice and cream are referring to ice cream and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
 
 ```{r message=FALSE, message=FALSE, error=FALSE}
 TD_Merge <- Merge.Terms(DataFrame = TD, term = "ice cream", term_replacement = "icecream")
@@ -182,9 +180,58 @@ SAoTD::Word.Corr.Plot(WordCorr = TD_Corr,
                       node_size = 1)
 ```
 
-If we were interested in condcuting a topic analysis on the tweets we would then determine the number of latent topics within the tweet data.
+## Sentiment Calculation
 
-```{r fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE}
+Now that the data has been explored we will need to compute the Sentiment Scores for the hashtags.
+
+```{r}
+TD_Scores <- SAoTD::Scores(DataFrameTidy = TD_Tidy, 
+                           HT_Topic = "hashtag")
+```
+
+
+With the scores computed we can then observe the positive and negative words within the dataset.
+
+```{r fig.align='center'}
+SAoTD::PosNeg.Words(DataFrameTidy = TD_Tidy, 
+                    num_words = 10)
+```
+
+As an example we can see that the negative term "fail" is dwarfing all other responses.  If we would like to remove "fail" we can easily do it.
+
+```{r fig.align='center'}
+SAoTD::PosNeg.Words(DataFrameTidy = TD_Tidy, 
+                    num_words = 10, 
+                    filterword = "fail")
+```
+
+We can see the most positive tweets hashtags within the the data set.
+
+```{r}
+SAoTD::Max.Scores(DataFrameTidyScores = TD_Scores,
+                  HT_Topic = "hashtag")
+```
+
+We can also see the most negative hashtag tweets within the data set.
+
+```{r}
+SAoTD::Min.Scores(DataFrameTidyScores = TD_Scores, 
+                  HT_Topic = "hashtag")
+```
+
+Furthermore if we wanted to observe the most positive or negative hashtag scores associated with a specific hashtag we could also do that.
+
+```{r}
+SAoTD::Max.Scores(DataFrameTidyScores = TD_Scores, 
+                  HT_Topic = "hashtag", 
+                  HT_Topic_Seletion = "kitten")
+```
+
+## Topic Analysis
+
+If we were interested in conducting a topic analysis on the tweets we would then determine the number of latent topics within the tweet data.
+
+```{r fig.align='center', warning=FALSE, message=FALSE, results="hide"}
 SAoTD::Number.Topics(DataFrame = TD, 
                      num_cores = 2L, 
                      min_clusters = 2, 
@@ -193,16 +240,172 @@ SAoTD::Number.Topics(DataFrame = TD,
                      set_seed = 1234)
 ```
 
-The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  Remeber that the twitter data was acquired by selecting seven different hashtags `r hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")`.  We could easily see that in this case selecting 7 topics could be a correct number of topics.  However if we knew that the data contained 5 topics we could continue the analysis.  
+The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  Remember that the twitter data was acquired by selecting seven different hashtags `r hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")`.  We could easily see that in this case selecting 7 topics could be a correct number of topics.  However if we knew that the data contained 5 topics we could continue the analysis.  
 
-```{r fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE}
+```{r fig.align='center', warning=FALSE, message=FALSE, results='asis'}
 TD_Topics <- SAoTD::Tweet.Topics(DataFrame = TD, 
                                  clusters = 5, 
                                  method = "Gibbs", 
                                  set_seed = 1234, 
                                  num_terms = 10)
-TD_Topics %>% 
-  knitr::kable("html", caption = "Twitter data Topics")
 ```
 
+In a markdown product the topics table does not print clearly, unlike when it is printed in the console.  However the words associated with each topic can be observed in the below table.
 
+|Number   | Topic 1     | Topic 2  | Topic 3  | Topic 4 | Topic 5       |
+|:-------:|:-----------:|:--------:|:--------:|:-------:|:-------------:|
+|1        |airline      |friday    |job       |kitten   |random         |
+|2        |cream        |icecream  |hiring    |cat      |fail           |
+|3        |icecream     |amp       |careerarc |cats     |jasmine        |
+|4        |ice          |happy     |jobs      |kitty    |save           |
+|5        |aviation     |chocolate |husbae    |kittens  |month          |
+|6        |dont         |delicious |click     |pet      |gentle         |
+|7        |travel       |weekend   |apply     |pets     |terrific       |
+|8        |airport      |food      |location  |cute     |tux            |
+|9        |medical      |day       |fit       |meow     |brendaperrott  |
+|10       |dohaconstant |follow    |recommend |time     |chance         |
+
+One of the challenges of using a topic model is selecting the correct number of topics.  As we can see in the above chart.  We went from 7 hashtags to 5 different topics.  By reducing the number of topics from 7 to 5 it appears that some of the topics relating to #icecream were rolled into Topics 1 and 2.  Additionally it appears that some of the discussion relating to #random and #kitten were combined within Topics 4 and 5.  
+
+While this may not be the best example to use, we will continue the topic modeling example.  We would first want to rename the topics into something that would make sense.  In this case Topic 1 could be travel, Topic 2 could be recreation, Topic 3 could be hiring, Topic 4 could be cats, and Topic 5 could be random.  These topics were chosen by observing the words associated with each topic.  This selection could be different depending on experience and a deeper understanding of the topics.
+
+We would then want to rename the topics in the dataframe
+
+```{r}
+TD_Topics <- TD_Topics %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "travel")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "recreation")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^3$", "hiring")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^4$", "cats")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^5$", "random"))
+```
+
+Next we would want to tidy and then score the new topic dataset.
+
+```{r}
+TD_Topics_Tidy <- SAoTD::Tidy(DataFrame = TD_Topics)
+TD_Topics_Scores <- SAoTD::Scores(DataFrameTidy = TD_Topics_Tidy, 
+                                  HT_Topic = "topic")
+```
+
+We can see the most positive topic tweets within the data set.
+
+```{r}
+SAoTD::Max.Scores(DataFrameTidyScores = TD_Topics_Scores,
+                  HT_Topic = "topic")
+```
+
+We can also see the most negative topics tweets within the data set.
+
+```{r}
+SAoTD::Min.Scores(DataFrameTidyScores = TD_Topics_Scores, 
+                  HT_Topic = "topic")
+```
+
+Furthermore if we wanted to observe the most positive or negative scores associated with a specific topic we could also do that.
+
+```{r}
+SAoTD::Max.Scores(DataFrameTidyScores = TD_Topics_Scores, 
+                  HT_Topic = "topic", 
+                  HT_Topic_Seletion = "cats")
+```
+
+## Visualizations
+
+### Hashtags
+
+Now we will begin visualizing the hashtag data.  The distribution of the sentiment scores can be found in the below plot.
+
+```{r fig.align='center'}
+SAoTD::Corups.Distribution(DataFrameTidyScores = TD_Scores, 
+                           binwidth = 1, 
+                           color = "black", 
+                           fill = "white")
+```
+
+Additionally if we wanted to see the score distributions per each hashtag, we can find it below.
+
+```{r fig.align='center'}
+SAoTD::Distribution(DataFrameTidyScores = TD_Scores, 
+                    HT_Topic = "hashtag", 
+                    binwidth = 1, 
+                    color = "black", 
+                    fill = "white")
+```
+
+We can also observe the hashtag distributions as a Box plot.
+
+```{r fig.align='center'}
+SAoTD::BoxPlot(DataFrameTidyScores = TD_Scores, 
+               HT_Topic = "hashtag")
+```
+
+Also as a Violin plot.  The chevrons in each violin plot denote the median of the data and provide a quick reference point to see if a hashtag is generally positive or negative.  For example the "random" hashtag has a generally negative sentiment, where as the "kitten" hashtags has a generally positive sentiment.
+
+```{r fig.align='center'}
+SAoTD::ViolinPlot(DataFrameTidyScores = TD_Scores,
+                  HT_Topic = "hashtag")
+```
+
+One of the more interesting ways to visualize the Twitter data is to observe the change in sentiment over time.  This dataset was acquired on a single day and therefore some of the hashtags did not overlap days.  However some did and we can see the change in sentiment scores through time.
+
+```{r fig.align='center', warning=FALSE, message=FALSE}
+SAoTD::TimeScale(DataFrameTidyScores = TD_Scores, 
+                 HT_Topic = "hashtag")
+```
+
+Finally if a Twitter user has not disabled georeferencing data the location of the tweet can be observed.  However in many cases this may not be very insightful because of the lack of data.
+
+```{r fig.align='center', warning=FALSE, message=FALSE}
+SAoTD::WorldMap(DataFrame = TD, 
+                HT_Topic = "hashtag")
+```
+
+### Topics
+
+Now we will begin visualizing the topic data.  The distribution of the sentiment scores can be found in the below plot.
+
+```{r fig.align='center'}
+SAoTD::Corups.Distribution(DataFrameTidyScores = TD_Topics_Scores, 
+                           binwidth = 1, 
+                           color = "black", 
+                           fill = "white")
+```
+
+Additionally if we wanted to see the score distributions per each topic, we can find it below.
+
+```{r fig.align='center'}
+SAoTD::Distribution(DataFrameTidyScores = TD_Topics_Scores, 
+                    HT_Topic = "topic", 
+                    binwidth = 1, 
+                    color = "black", 
+                    fill = "white")
+```
+
+We can also observe the topic distributions as a Box plot.
+
+```{r fig.align='center'}
+SAoTD::BoxPlot(DataFrameTidyScores = TD_Topics_Scores, 
+               HT_Topic = "topic")
+```
+
+Also as a Violin plot.  The chevrons in each violin plot denote the median of the data and provide a quick reference point to see if a hashtag is generally positive or negative.  For example the "random" hashtag has a generally negative sentiment, where as the "kitten" hashtags has a generally positive sentiment.
+
+```{r fig.align='center'}
+SAoTD::ViolinPlot(DataFrameTidyScores = TD_Topics_Scores,
+                  HT_Topic = "topic")
+```
+
+One of the more interesting ways to visualize the Twitter data is to observe the change in sentiment over time.  This dataset was acquired on a single day and therefore some of the hashtags did not overlap days.  However some did and we can see the change in sentiment scores through time.
+
+```{r fig.align='center', warning=FALSE, message=FALSE}
+SAoTD::TimeScale(DataFrameTidyScores = TD_Topics_Scores, 
+                 HT_Topic = "topic")
+```
+
+Finally if a Twitter user has not disabled georeferencing data the location of the tweet can be observed.  However in many cases this may not be very insightful because of the lack of data.
+
+```{r fig.align='center', warning=FALSE, message=FALSE}
+SAoTD::WorldMap(DataFrame = TD_Topics, 
+                HT_Topic = "topic")
+```
