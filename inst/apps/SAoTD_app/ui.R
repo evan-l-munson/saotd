@@ -35,7 +35,7 @@ ui <- shiny::shinyUI(
                                                                                             'Vermilion' = "#D55E00", 
                                                                                             'Reddish Purple' = "#CC79A7")),
                                                           shiny::sliderInput(inputId = "node_size",
-                                                                             label = "Node Siz e:",
+                                                                             label = "Node Size:",
                                                                              min = 0.5, 
                                                                              max = 5, 
                                                                              ticks = 1,
