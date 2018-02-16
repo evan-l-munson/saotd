@@ -21,6 +21,7 @@ Bing <- as.data.frame(get_sentiments("bing")) %>%
 #' @param access_token Twitter Application management access token.
 #' @param access_secret Twitter Application management access secret key.
 #' @param HT A single hashtag or a list of hashtags the user has specified.
+#' @param num_tweets Number of tweets to be acquired per each hashtag.
 #' @param file_name User desired output .RData file name.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.
 #' 
