@@ -20,7 +20,7 @@ server <- function(input, output, session) {
                           layout = input$layout, 
                           edge_color = input$edge_color, 
                           node_color = input$node_color, 
-                          node_size = input$node_color, 
+                          node_size = input$node_size, 
                           set_seed = input$set_seed)
     
   })

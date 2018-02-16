@@ -7,7 +7,7 @@ library(dplyr)
 
 # Load the dataset from the choroplethrMaps package
 
-data('raw_tweets')
+data("raw_tweets")
 TD <- raw_tweets
 
 # Work Common to both hashtag and topic analysis
