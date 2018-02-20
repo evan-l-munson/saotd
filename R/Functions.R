@@ -311,12 +311,43 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
   set.seed(set_seed)
   
   ggraph::ggraph(TD_Bigram_Network, layout = layout) +
-    ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE, end_cap = ggraph::circle(.07, 'inches')) +
+    ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
-    ggraph::geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
+    ggraph::geom_node_text(aes(label = name), repel = TRUE) +
     ggplot2::ggtitle("Bi-Gram Network") +
     theme_void()
 }
+
+# ##### WTH
+# 
+# TD_Bigram_Network <- TD_Bigram %>% 
+#   dplyr::filter(n > 100) %>% 
+#   igraph::graph_from_data_frame()
+# 
+# set.seed(set_seed)
+# 
+# ggraph::ggraph(TD_Bigram_Network, layout = layout) +
+#   ggraph::geom_edge_link(aes(edge_width = n), edge_alpha = n, edge_colour = edge_color, show.legend = TRUE, end_cap = circle(.07, 'inches')) +
+#   ggraph::geom_node_point(colour = node_color, size = node_size) +
+#   ggraph::geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
+#   ggplot2::ggtitle("Bi-Gram Network") +
+#   theme_void()
+# 
+# library(ggraph)
+# TD_Bigram_Network %>% 
+#   
+#   
+#   ggraph(layout = "fr") +
+#   geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "black", show.legend = TRUE) +
+#   geom_node_point(color = "blue", size = 5) +
+#   geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
+#   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
+#   ggplot2::ggtitle("Bi-Gram Network") +
+#   theme_void()
+
+
+
+
 
 #' @title Twitter Word Correlations
 #'

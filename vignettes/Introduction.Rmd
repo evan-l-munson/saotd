@@ -158,7 +158,7 @@ Now we can look at Bi-Gram Networks.
 TD_Bigrams <- SAoTD::Bigram(DataFrame = TD_Merge)
 
 SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigrams,
-                      number = 100, 
+                      number = 90, 
                       layout = "fr", 
                       edge_color = "blue", 
                       node_color = "black", 
