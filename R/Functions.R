@@ -310,44 +310,14 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
   
   set.seed(set_seed)
   
-  ggraph::ggraph(TD_Bigram_Network, layout = layout) +
+  TD_Bigram_Network %>% 
+    ggraph::ggraph(layout = layout) +
     ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
     ggraph::geom_node_text(aes(label = name), repel = TRUE) +
     ggplot2::ggtitle("Bi-Gram Network") +
     theme_void()
 }
-
-# ##### WTH
-# 
-# TD_Bigram_Network <- TD_Bigram %>% 
-#   dplyr::filter(n > 100) %>% 
-#   igraph::graph_from_data_frame()
-# 
-# set.seed(set_seed)
-# 
-# ggraph::ggraph(TD_Bigram_Network, layout = layout) +
-#   ggraph::geom_edge_link(aes(edge_width = n), edge_alpha = n, edge_colour = edge_color, show.legend = TRUE, end_cap = circle(.07, 'inches')) +
-#   ggraph::geom_node_point(colour = node_color, size = node_size) +
-#   ggraph::geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
-#   ggplot2::ggtitle("Bi-Gram Network") +
-#   theme_void()
-# 
-# library(ggraph)
-# TD_Bigram_Network %>% 
-#   
-#   
-#   ggraph(layout = "fr") +
-#   geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "black", show.legend = TRUE) +
-#   geom_node_point(color = "blue", size = 5) +
-#   geom_node_text(aes(label = name), vjust = 1, hjust = 1, repel = TRUE) +
-#   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
-#   ggplot2::ggtitle("Bi-Gram Network") +
-#   theme_void()
-
-
-
-
 
 #' @title Twitter Word Correlations
 #'
@@ -549,6 +519,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @importFrom plyr rename
 #' @importFrom tidytext cast_dtm
 #' @importFrom topicmodels topics
+#' @importFrom topicmodels terms
 #' 
 #' @return Returns LDA topics.
 #' 
@@ -589,7 +560,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
   # probabilities associated with each topic assignment
   topicProbabilities <- as.data.frame(ldaout@gamma)
   data.topics <- topicmodels::topics(ldaout, 1)
-  data.terms <- as.data.frame(terms(ldaout, num_terms), stringsAsFactors = FALSE)
+  data.terms <- as.data.frame(topicmodels::terms(ldaout, num_terms), stringsAsFactors = FALSE)
   print(data.terms)
   View(data.terms)
   
@@ -638,6 +609,9 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @export
 
 Scores <- function(DataFrameTidy, HT_Topic) {
+  
+data("Bing")
+  
   if(HT_Topic == "hashtag") {
     TD_Hashtag_Scores <- DataFrameTidy %>% 
       dplyr::inner_join(Bing, by = "Token") %>% 
