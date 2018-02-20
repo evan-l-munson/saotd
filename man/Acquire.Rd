@@ -18,6 +18,8 @@ Acquire(consumer_key, consumer_secret, access_token, access_secret, HT,
 
 \item{HT}{A single hashtag or a list of hashtags the user has specified.}
 
+\item{num_tweets}{Number of tweets to be acquired per each hashtag.}
+
 \item{file_name}{User desired output .RData file name.}
 
 \item{distinct}{Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.}
