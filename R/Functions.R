@@ -600,7 +600,7 @@ data("Bing")
       dplyr::mutate("TweetSentimentScore" = positive - negative) %>% 
       dplyr::mutate("TweetSentiment" = ifelse("TweetSentimentScore" == 0, "neutral",
                                             ifelse("TweetSentimentScore" > 0, "positive", "negative"))) %>% 
-      dplyr::mutate(date = lubridate::as_date(created))
+      dplyr::mutate(date = lubridate::as_date(created))g
     return(TD_Topic_Scores)
   }
 }
