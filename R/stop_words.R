@@ -11,4 +11,4 @@
 #'  \item{word}{List of stop words.}
 #'  }
 #'
-"Bing"
+"stop_words"

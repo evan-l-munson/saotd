@@ -53,6 +53,5 @@ Acquire(consumer_key = consumer_key,
         
 load("test_tweets.RData")
 
-View(raw_tweets)
 
 }
