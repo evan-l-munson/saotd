@@ -10,15 +10,13 @@ Tweet.Topics(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 \arguments{
 \item{DataFrame}{DataFrame of Twitter Data.}
 
+\item{clusters}{The number of latent clusters.}
+
+\item{method}{method = "Gibbs"}
+
 \item{set_seed}{Seed for reproducable results.}
 
-\item{num_cores}{The number of CPU cores to processes models simultaneously (2L for dual core processor).}
-
-\item{min_clusters}{Lower range for the number of clusters.}
-
-\item{max_clusters}{Upper range for the number of clusters.}
-
-\item{skip}{Integer; The number of clusters to skip between entries.}
+\item{num_terms}{The desired number of terms to be returned for each topic.}
 }
 \value{
 Returns LDA topics.

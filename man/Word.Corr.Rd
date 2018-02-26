@@ -7,11 +7,11 @@
 Word.Corr(DataFrameTidy, number, sort = TRUE)
 }
 \arguments{
+\item{DataFrameTidy}{DataFrame of Twitter Data that has been tidy'd.}
+
 \item{number}{The number of word instances to be included.}
 
 \item{sort}{Rank order the results from most to least correlated.}
-
-\item{BiGramDataFrame}{DataFrame of Bi-Grams.}
 }
 \value{
 A tribble

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Functions.R
 \name{Word.Corr.Plot}
 \alias{Word.Corr.Plot}
-\title{Twitter Word Correlations}
+\title{Twitter Word Correlations Plot}
 \usage{
 Word.Corr.Plot(WordCorr, Correlation = 0.15, layout = "fr",
   edge_color = "royalblue", node_color = "black", node_size = 2,
@@ -22,11 +22,9 @@ Word.Corr.Plot(WordCorr, Correlation = 0.15, layout = "fr",
 \item{node_size}{User desired node size.}
 
 \item{set_seed}{Seed for reproducable results.}
-
-\item{sort}{Rank order the results from most to least correlated.}
 }
 \value{
-A tribble
+An igraph plot
 }
 \description{
 The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.

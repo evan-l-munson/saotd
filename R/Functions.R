@@ -50,6 +50,8 @@
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
+  `%>%` <- dplyr::`%>%`
+  
   twitteR::setup_twitter_oauth(consumer_key, 
                                consumer_secret, 
                                access_token, 
@@ -308,7 +310,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #'
 #' @description The word correlation displays the mutual relationship between words.
 #' 
-#' @param BiGramDataFrame DataFrame of Bi-Grams.
+#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
 #' @param number The number of word instances to be included.
 #' @param sort Rank order the results from most to least correlated.
 #' 
@@ -336,13 +338,12 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
     widyr::pairwise_cor(Token, key, sort = sort)
 }
 
-#' @title Twitter Word Correlations
+#' @title Twitter Word Correlations Plot
 #'
 #' @description The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.
 #' 
 #' @param WordCorr DataFrame of Word Correlations.
 #' @param Correlation Minimum level of correlation to be displayed.
-#' @param sort Rank order the results from most to least correlated.
 #' @param layout Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"
 #' @param edge_color User desired edge color.
 #' @param node_color User desired node color.
@@ -354,7 +355,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' @importFrom ggraph ggraph geom_edge_link geom_node_point geom_node_text
 #' @import ggplot2
 #' 
-#' @return A tribble
+#' @return An igraph plot
 #' 
 #' @examples 
 #' library(SAoTD)
@@ -478,11 +479,10 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
 #'
 #' @param DataFrame DataFrame of Twitter Data.
-#' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
-#' @param min_clusters Lower range for the number of clusters.
-#' @param max_clusters Upper range for the number of clusters.
-#' @param skip Integer; The number of clusters to skip between entries.
+#' @param clusters The number of latent clusters.
+#' @param method method = "Gibbs"
 #' @param set_seed Seed for reproducable results.
+#' @param num_terms The desired number of terms to be returned for each topic.
 #' 
 #' @importFrom dplyr mutate group_by anti_join inner_join count select transmute
 #' @importFrom stringr str_replace_all
@@ -584,10 +584,10 @@ data("Bing")
       dplyr::mutate(method = "Bing") %>% 
       dplyr::group_by(text, method, hashtag, created, key, Sentiment) %>% 
       dplyr::count(method, hashtag, created, key, Sentiment) %>%  
-      tidyr::spread("Sentiment", "n", fill = 0) %>% 
-      dplyr::mutate("TweetSentimentScore" = positive - negative) %>% 
-      dplyr::mutate("TweetSentiment" = ifelse("TweetSentimentScore" == 0, "neutral",
-                                            ifelse("TweetSentimentScore" > 0, "positive", "negative"))) %>% 
+      tidyr::spread(Sentiment, n, fill = 0) %>% 
+      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
+      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
+                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
       dplyr::mutate(date = lubridate::as_date(created))
     return(TD_Hashtag_Scores)
   } else {
@@ -596,10 +596,10 @@ data("Bing")
       dplyr::mutate(method = "Bing") %>% 
       dplyr::group_by(text, method, Topic, created, key, Sentiment) %>% 
       dplyr::count(method, Topic, created, key, Sentiment) %>%  
-      tidyr::spread("Sentiment", "n", fill = 0) %>% 
-      dplyr::mutate("TweetSentimentScore" = positive - negative) %>% 
-      dplyr::mutate("TweetSentiment" = ifelse("TweetSentimentScore" == 0, "neutral",
-                                            ifelse("TweetSentimentScore" > 0, "positive", "negative"))) %>% 
+      tidyr::spread(Sentiment, n, fill = 0) %>% 
+      dplyr::mutate(TweetSentimentScore = positive - negative) %>% 
+      dplyr::mutate(TweetSentiment = ifelse(TweetSentimentScore == 0, "neutral",
+                                            ifelse(TweetSentimentScore > 0, "positive", "negative"))) %>% 
       dplyr::mutate(date = lubridate::as_date(created))
     return(TD_Topic_Scores)
   }
@@ -671,6 +671,7 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
 #' @importFrom dplyr arrange filter
+#' @importFrom plyr desc
 #' @importFrom utils head
 #' 
 #' @return A Tidy DataFrame.
@@ -694,27 +695,27 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' 
 #' @export
 
-Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
-  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
+Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+  if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange("TweetSentimentScore") %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_noSel_Min_Scores)
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
+  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
     TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
-      dplyr::arrange("TweetSentimentScore") %>% 
+      dplyr::filter(hashtag == HT_Topic_Selection) %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_Sel_Min_Scores)
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
+  } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange("TweetSentimentScore") %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_noSel_Min_Scores)
   } else {
     TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
-      dplyr::arrange("TweetSentimentScore") %>% 
+      dplyr::filter(Topic == HT_Topic_Selection) %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_Sel_Min_Scores)
   }
@@ -729,6 +730,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
 #' @importFrom dplyr arrange filter
+#' @importFrom plyr desc
 #' @importFrom utils head
 #' 
 #' @return A Tidy DataFrame.
@@ -752,27 +754,27 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' 
 #' @export
 
-Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) {
-  if(HT_Topic == "hashtag" & is.null(HT_Topic_Seletion)) {
+Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+  if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(-"TweetSentimentScore") %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_noSel_Max_Scores)
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Seletion)) {
-    TD_HT_Sel_Max_Scores <- "DataFrameTidyScores" %>% 
-      dplyr::filter(hashtag == HT_Topic_Seletion) %>% 
-      dplyr::arrange(-TweetSentimentScore) %>% 
+  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
+    TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>% 
+      dplyr::filter(hashtag == HT_Topic_Selection) %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_Sel_Max_Scores)
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Seletion)) {
+  } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(-"TweetSentimentScore") %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_noSel_Max_Scores)
   } else {
     TD_Topic_Sel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(Topic == HT_Topic_Seletion) %>% 
-      dplyr::arrange(-"TweetSentimentScore") %>% 
+      dplyr::filter(Topic == HT_Topic_Selection) %>% 
+      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_Sel_Max_Scores)
   }
@@ -808,9 +810,10 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL) 
 #' @export
 
 Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
+ # `%>%` <- dplyr::`%>%`
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(aes("TweetSentimentScore")) +
-    geom_histogram(binwidth = binwidth, colour = color, fill = fill) +
+    geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
     theme(legend.position = "none") +
     ggtitle("Sentiment Score Distribution") +
     xlab('Sentiment') +
@@ -850,8 +853,8 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
   if(HT_Topic == "hashtag") {
     TD_HT_Distribution <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes(TweetSentimentScore)) +
-      geom_histogram(binwidth = binwidth, colour = color, fill = fill) +
+      ggplot2::ggplot(aes("TweetSentimentScore")) +
+      geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
       facet_wrap(~hashtag, ncol = 2) +
       theme(legend.position = "none") +
       ggtitle("Sentiment Score Distribution Across all #Hashtags") +
@@ -860,8 +863,8 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
     return(TD_HT_Distribution)
   } else {
     TD_Topic_Distribution <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes(TweetSentimentScore)) +
-      geom_histogram(binwidth = binwidth, colour = color, fill = fill) +
+      ggplot2::ggplot(aes("TweetSentimentScore")) +
+      geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
       facet_wrap(~Topic, ncol = 2) +
       theme(legend.position = "none") +
       ggtitle("Sentiment Score Distribution Across all Topics") +
@@ -1051,7 +1054,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #'
 #' @description Displays the location of a tweet across the globe by hashtag or topic.
 #'
-#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
+#' @param DataFrame DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
 #' @import ggplot2

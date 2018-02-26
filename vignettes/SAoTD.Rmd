@@ -36,9 +36,10 @@ The `SAoTD` package is broken down into five different phases:
 
 ```{r warning=FALSE, message=FALSE}
 library(SAoTD)
-library(tidyverse)
 library(tidytext)
-library(kableExtra)
+library(dplyr)
+library(stringr)
+library(knitr)
 library(utils)
 ```
 
@@ -224,7 +225,7 @@ Furthermore if we wanted to observe the most positive or negative hashtag scores
 ```{r}
 SAoTD::Max.Scores(DataFrameTidyScores = TD_Scores, 
                   HT_Topic = "hashtag", 
-                  HT_Topic_Seletion = "kitten")
+                  HT_Topic_Selection = "kitten")
 ```
 
 ## Topic Analysis
@@ -307,7 +308,7 @@ Furthermore if we wanted to observe the most positive or negative scores associa
 ```{r}
 SAoTD::Max.Scores(DataFrameTidyScores = TD_Topics_Scores, 
                   HT_Topic = "topic", 
-                  HT_Topic_Seletion = "cats")
+                  HT_Topic_Selection = "cats")
 ```
 
 ## Visualizations

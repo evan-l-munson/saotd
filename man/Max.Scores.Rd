@@ -4,7 +4,7 @@
 \alias{Max.Scores}
 \title{Twitter Data Maximum Scores}
 \usage{
-Max.Scores(DataFrameTidyScores, HT_Topic, HT_Topic_Seletion = NULL)
+Max.Scores(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 }
 \arguments{
 \item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}

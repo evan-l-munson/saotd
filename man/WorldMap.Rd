@@ -7,9 +7,9 @@
 WorldMap(DataFrame, HT_Topic)
 }
 \arguments{
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
+\item{DataFrame}{DataFrame of Twitter Data that has been tidy'd and scored.}
 
-\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
 }
 \value{
 A ggplot plot.
