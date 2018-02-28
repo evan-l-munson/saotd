@@ -50,8 +50,6 @@
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
-  `%>%` <- dplyr::`%>%`
-  
   twitteR::setup_twitter_oauth(consumer_key, 
                                consumer_secret, 
                                access_token, 
@@ -82,7 +80,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #'
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
-#' @importFrom dplyr mutate filter
+#' @importFrom dplyr mutate filter quo
 #' @importFrom stringr str_replace_all
 #' @importFrom tidytext unnest_tokens
 #' @importFrom plyr rename
@@ -98,6 +96,11 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' @export
 
 Tidy <- function(DataFrame) {
+  
+  text <- dplyr::quo(text)
+  cleantext <- dplyr::quo(cleantext)
+  word <- dplyr::quo(word)
+
   reg_words <- "([^A-Za-z_\\d#@']|'(?![A-Za-z_\\d#@]))"
   
   TD_Tidy <- DataFrame %>%
@@ -152,9 +155,9 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
-#' @importFrom dplyr count mutate filter
+#' @importFrom dplyr count mutate filter quo
 #' @importFrom stringr str_replace_all
-#' @importFrom tidytext unnest_tokens
+#' @importFrom tidytext unnest_tokens 
 #' 
 #' @return A tribble.
 #' 
@@ -167,6 +170,7 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' @export
 
 Unigram <- function(DataFrame){
+  
   TD_Unigram <- DataFrame %>% 
     dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
     dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -186,10 +190,10 @@ Unigram <- function(DataFrame){
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
-#' @importFrom dplyr count mutate filter
+#' @importFrom dplyr count mutate filter quo
 #' @importFrom stringr str_replace_all
 #' @importFrom tidyr separate
-#' @importFrom tidytext unnest_tokens
+#' @importFrom tidytext unnest_tokens 
 #' 
 #' @return A tribble.
 #' 
@@ -202,6 +206,7 @@ Unigram <- function(DataFrame){
 #' @export
 
 Bigram <- function(DataFrame){
+  
   TD_Bigram <- DataFrame %>% 
     dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
     dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -223,10 +228,10 @@ Bigram <- function(DataFrame){
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
-#' @importFrom dplyr count mutate filter
+#' @importFrom dplyr count mutate filter quo
 #' @importFrom stringr str_replace_all
 #' @importFrom tidyr separate
-#' @importFrom tidytext unnest_tokens
+#' @importFrom tidytext unnest_tokens 
 #' 
 #' @return A tribble.
 #' 
@@ -239,6 +244,7 @@ Bigram <- function(DataFrame){
 #' @export
 
 Trigram <- function(DataFrame) {
+  
   TD_Trigram <- DataFrame %>% 
     dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
     dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
@@ -314,7 +320,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' @param number The number of word instances to be included.
 #' @param sort Rank order the results from most to least correlated.
 #' 
-#' @importFrom dplyr group_by filter
+#' @importFrom dplyr group_by filter quo
 #' @importFrom widyr pairwise_cor
 #' 
 #' @return A tribble
@@ -332,6 +338,11 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' @export
 
 Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
+  
+  Token <- dplyr::quo(Token)
+  n <- dplyr::quo(n)
+  key <- dplyr::quo(key)
+  
   TD_Word_Correlation <- DataFrameTidy %>%
     dplyr::group_by(Token) %>%
     dplyr::filter(n() >= number) %>%
@@ -350,7 +361,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' @param node_size User desired node size.
 #' @param set_seed Seed for reproducable results.
 #' 
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter quo
 #' @importFrom igraph graph_from_data_frame
 #' @importFrom ggraph ggraph geom_edge_link geom_node_point geom_node_text
 #' @import ggplot2
@@ -377,6 +388,10 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' @export
 
 Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
+  
+  correlation <- dplyr::quo(correlation)
+  name <- dplyr::quo(name)
+  
   set.seed(set_seed)
   
   WordCorr %>%
@@ -404,9 +419,9 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @param skip Integer; The number of clusters to skip between entries.
 #' @param set_seed Seed for reproducable results.
 #' 
-#' @importFrom dplyr mutate group_by count anti_join
+#' @importFrom dplyr mutate group_by count anti_join quo
 #' @importFrom stringr str_replace_all
-#' @importFrom tidytext unnest_tokens cast_dtm
+#' @importFrom tidytext unnest_tokens cast_dtm 
 #' @importFrom ldatuning FindTopicsNumber
 #' @importFrom scales rescale
 #' @importFrom reshape2 melt
@@ -429,6 +444,12 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @export
 
 Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
+  
+  text <- dplyr::quo(text)
+  key <- dplyr::quo(key)
+  word <- dplyr::quo(word)
+  n <- dplyr::quo(n)
+
   lda_prep <- DataFrame %>% 
     dplyr::mutate(text = base::iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
@@ -484,10 +505,10 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @param set_seed Seed for reproducable results.
 #' @param num_terms The desired number of terms to be returned for each topic.
 #' 
-#' @importFrom dplyr mutate group_by anti_join inner_join count select transmute
+#' @importFrom dplyr mutate group_by anti_join inner_join count select transmute quo
 #' @importFrom stringr str_replace_all
 #' @importFrom plyr rename
-#' @importFrom tidytext cast_dtm
+#' @importFrom tidytext cast_dtm 
 #' @importFrom topicmodels topics terms
 #' 
 #' @return Returns LDA topics.
@@ -506,6 +527,12 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @export
 
 Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
+  
+  text <- dplyr::quo(text)
+  key <- dplyr::quo(key)
+  word <- dplyr::quo(word)
+  n <- dplyr::quo(n)
+  
   lda_prep <- DataFrame %>% 
     dplyr::mutate(text = base::iconv(DataFrame$text, "latin1", "ASCII", sub="")) %>% 
     dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% # Remove hashtag
@@ -558,7 +585,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
 #' 
-#' @importFrom dplyr mutate inner_join group_by count
+#' @importFrom dplyr mutate inner_join group_by count quo
 #' @importFrom tidyr spread
 #' @importFrom lubridate as_date
 #' 
@@ -575,6 +602,18 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @export
 
 Scores <- function(DataFrameTidy, HT_Topic) {
+  
+  text <- dplyr::quo(text)
+  method <- dplyr::quo(method)
+  hashtag <- dplyr::quo(hashtag)
+  created <- dplyr::quo(created)
+  key <- dplyr::quo(key)
+  Sentiment <- dplyr::quo(Sentiment)
+  n <- dplyr::quo(n)
+  positive <- dplyr::quo(positive)
+  negative <- dplyr::quo(negative)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  Topic <- dplyr::quo(Topic)
   
 data("Bing")
   
@@ -613,7 +652,7 @@ data("Bing")
 #' @param num_words Desired number of words to be returned.
 #' @param filterword Word or words to be removed
 #' 
-#' @importFrom dplyr mutate inner_join group_by count filter ungroup top_n
+#' @importFrom dplyr mutate inner_join group_by count filter ungroup top_n quo
 #' @import ggplot2
 #' 
 #' @return A ggplot
@@ -643,6 +682,11 @@ data("Bing")
 #' @export
 
 PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
+  
+  Token <- dplyr::quo(Token)
+  Sentiment <- dplyr::quo(Sentiment)
+  n <- dplyr::quo(n)
+  
   TD_PosNeg_Words <- DataFrameTidy %>%  
     dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
     dplyr::filter(!(Token %in% filterword)) %>% 
@@ -670,7 +714,7 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
-#' @importFrom dplyr arrange filter
+#' @importFrom dplyr arrange filter quo
 #' @importFrom plyr desc
 #' @importFrom utils head
 #' 
@@ -696,6 +740,11 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @export
 
 Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+  
+  hashtag <- dplyr::quo(hashtag)
+  Topic <- dplyr::quo(Topic)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
       dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
@@ -729,7 +778,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
-#' @importFrom dplyr arrange filter
+#' @importFrom dplyr arrange filter quo
 #' @importFrom plyr desc
 #' @importFrom utils head
 #' 
@@ -755,6 +804,11 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @export
 
 Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+  
+  hashtag <- dplyr::quo(hashtag)
+  Topic <- dplyr::quo(Topic)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
@@ -937,6 +991,8 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
 #' @import ggplot2
+#' @importFrom dplyr quo
+#' @importFrom stats median
 #' 
 #' @return A ggplot violin plot.
 #' 
@@ -961,11 +1017,16 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @export
 
 ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
+  
+  hashtag <- dplyr::quo(hashtag)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  Topic <- dplyr::quo(Topic)
+  
   if(HT_Topic == "hashtag") {
     TD_HT_ViolinPlot <- DataFrameTidyScores %>% 
       ggplot2:: ggplot(aes(hashtag, TweetSentimentScore)) +
       geom_violin(scale = "area") +
-      stat_summary(fun.y = median, geom = "point", shape = 23, size = 2) +
+      stat_summary(fun.y = stats::median, geom = "point", shape = 23, size = 2) +
       ggtitle("Sentiment Scores Across each #Hashtag") +
       xlab('#Hashtag') +
       ylab('Sentiment') +
@@ -975,7 +1036,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
     TD_Topic_ViolinPlot <- DataFrameTidyScores %>% 
       ggplot2:: ggplot(aes(Topic, TweetSentimentScore)) +
       geom_violin(scale = "area") +
-      stat_summary(fun.y = median, geom = "point", shape = 23, size = 2) +
+      stat_summary(fun.y = stats::median, geom = "point", shape = 23, size = 2) +
       ggtitle("Sentiment Scores Across each Topic") +
       xlab('Topic') +
       ylab('Sentiment') +
@@ -991,7 +1052,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
-#' @importFrom dplyr summarize group_by
+#' @importFrom dplyr summarize group_by quo
 #' @import ggplot2
 #' 
 #' @return A ggplot plot.
@@ -1017,6 +1078,12 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @export
 
 TimeScale <- function(DataFrameTidyScores, HT_Topic) {
+  
+  hashtag <- dplyr::quo(hashtag)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  DayScore <- dplyr::quo(DayScore)
+  Topic <- dplyr::quo(Topic)
+  
   if(HT_Topic == "hashtag") {
     TD_HT_TimeScale <- DataFrameTidyScores %>% 
       dplyr::group_by(hashtag, date) %>% 
@@ -1058,6 +1125,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
 #' @import ggplot2
+#' @importFrom dplyr quo
 #' 
 #' @return A ggplot plot.
 #' 
@@ -1082,6 +1150,15 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' @export
 
 WorldMap <- function(DataFrame, HT_Topic) {
+  
+  long <- dplyr::quo(long)
+  lat <- dplyr::quo(lat)
+  group <- dplyr::quo(group)
+  longitude <- dplyr::quo(longitude)
+  latitude <- dplyr::quo(latitude)
+  hashtag <- dplyr::quo(hashtag)
+  Topic <- dplyr::quo(Topic)
+
   if(HT_Topic == "hashtag") {
     TD_HT_WorldMap <- ggplot2::map_data("world") %>% 
       ggplot2::ggplot() + 
