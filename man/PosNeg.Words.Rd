@@ -38,7 +38,7 @@ data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
                        n = 10,
-                       filterword = c("fail", "urgent")                           
+                       filterword = c("fail", "urgent"))            
 posneg
 
 }

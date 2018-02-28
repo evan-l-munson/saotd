@@ -21,7 +21,7 @@
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.
 #' 
 #' @importFrom twitteR setup_twitter_oauth twListToDF searchTwitter
-#' @importFrom dplyr mutate distinct
+#' @importFrom dplyr mutate distinct quo
 #' @importFrom purrr map_df
 #' 
 #' @return A DataFrame.
@@ -50,9 +50,15 @@
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
-  twitteR::setup_twitter_oauth(consumer_key, 
-                               consumer_secret, 
-                               access_token, 
+  options(httr_oauth_cache = TRUE)
+  
+  screenName <- dplyr::quo(screenName)
+  created <- dplyr::quo(created)
+  key <- dplyr::quo(key)
+  
+  twitteR::setup_twitter_oauth(consumer_key,
+                               consumer_secret,
+                               access_token,
                                access_secret)
   
   twitter_data <- list()
@@ -64,8 +70,8 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
   }
   
   raw_tweets <- purrr::map_df(twitter_data, rbind) %>% 
-    dplyr::mutate(key = paste(~screenName, ~created)) %>% 
-    dplyr::distinct(~key, .keep_all = distinct)
+    dplyr::mutate(key = paste(screenName, created)) %>% 
+    dplyr::distinct(key, .keep_all = distinct)
   
     save(raw_tweets, file = file_name)
     
@@ -111,7 +117,7 @@ Tidy <- function(DataFrame) {
     dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "[:punct:]", "")) %>% 
     dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
     tidytext::unnest_tokens(output = word, input = cleantext, token = "words", drop = TRUE) %>% 
-    dplyr::filter(!word %in% stop_words$word) %>% 
+    dplyr::filter(!word %in% tidytext::stop_words$word) %>% 
     plyr::rename(c("word" = "Token"))
   return(TD_Tidy)
 }
@@ -179,7 +185,7 @@ Unigram <- function(DataFrame){
     dplyr::mutate("text" = stringr::str_replace_all("text", "[:punct:]", "")) %>% 
     dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
     tidytext::unnest_tokens("word", "text") %>%  
-    dplyr::filter(!"word" %in% c(stop_words$word, '[0-9]+')) %>% 
+    dplyr::filter(!"word" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
     dplyr::count("word", sort = TRUE)
   return(TD_Unigram)
 }
@@ -216,8 +222,8 @@ Bigram <- function(DataFrame){
     dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
     tidytext::unnest_tokens("bigram", "text", token = "ngrams", n = 2) %>%  
     tidyr::separate("bigram", c("word1", "word2"), sep = " ") %>% 
-    dplyr::filter(!"word1" %in% c(stop_words$word, '[0-9]+')) %>% 
-    dplyr::filter(!"word2" %in% c(stop_words$word, '[0-9]+')) %>%
+    dplyr::filter(!"word1" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
+    dplyr::filter(!"word2" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
     dplyr::count("word1", "word2", sort = TRUE)
   return(TD_Bigram)
 }
@@ -254,9 +260,9 @@ Trigram <- function(DataFrame) {
     dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
     tidytext::unnest_tokens("trigram", "text", token = "ngrams", n=3) %>%  
     tidyr::separate("trigram", c("word1", "word2", "word3"), sep = " ") %>% 
-    dplyr::filter(!"word1" %in% c(stop_words$word, '[0-9]+')) %>% 
-    dplyr::filter(!"word2" %in% c(stop_words$word, '[0-9]+')) %>%
-    dplyr::filter(!"word3" %in% c(stop_words$word, '[0-9]+')) %>%
+    dplyr::filter(!"word1" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
+    dplyr::filter(!"word2" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
+    dplyr::filter(!"word3" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
     dplyr::count("word1", "word2", "word3", sort = TRUE)
   return(TD_Trigram)
 }
@@ -289,7 +295,7 @@ Trigram <- function(DataFrame) {
 #'                                     layout = "fr",
 #'                                     edge_color = "royalblue",
 #'                                     node_color = "black",
-#'                                     node_size = 3
+#'                                     node_size = 3,
 #'                                     set_seed = 1234)
 #'
 #' TD_Bigram_Network
@@ -459,7 +465,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
     dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
     dplyr::group_by(key) %>%
     tidytext::unnest_tokens(word, text) %>% 
-    dplyr::anti_join(stop_words) %>% 
+    dplyr::anti_join(tidytext::stop_words) %>% 
     dplyr::count(key, word, sort = TRUE) %>% 
     tidytext::cast_dtm(key, word, n) # create DTM
   
@@ -542,7 +548,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
     dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>%  # Remove links
     dplyr::group_by(key) %>%
     tidytext::unnest_tokens(word, text) %>% 
-    dplyr::anti_join(stop_words) %>% 
+    dplyr::anti_join(tidytext::stop_words) %>% 
     dplyr::count(key, word, sort = TRUE) %>% 
     tidytext::cast_dtm(key, word, n)
   
@@ -586,8 +592,10 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic"
 #' 
 #' @importFrom dplyr mutate inner_join group_by count quo
+#' @importFrom plyr rename
 #' @importFrom tidyr spread
 #' @importFrom lubridate as_date
+#' @importFrom tidytext get_sentiments
 #' 
 #' @return A Scored DataFrame.
 #' 
@@ -615,7 +623,10 @@ Scores <- function(DataFrameTidy, HT_Topic) {
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
   
-data("Bing")
+#data("Bing")
+  
+  Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
+    plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
   
   if(HT_Topic == "hashtag") {
     TD_Hashtag_Scores <- DataFrameTidy %>% 
@@ -653,6 +664,9 @@ data("Bing")
 #' @param filterword Word or words to be removed
 #' 
 #' @importFrom dplyr mutate inner_join group_by count filter ungroup top_n quo
+#' @importFrom plyr rename
+#' @importFrom tidytext get_sentiments
+#' @importFrom stats reorder
 #' @import ggplot2
 #' 
 #' @return A ggplot
@@ -676,7 +690,7 @@ data("Bing")
 #' tidy_data <- Tidy(DataFrame = data)
 #' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
 #'                        n = 10,
-#'                        filterword = c("fail", "urgent")                           
+#'                        filterword = c("fail", "urgent"))            
 #' posneg
 #' 
 #' @export
@@ -687,15 +701,18 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
   Sentiment <- dplyr::quo(Sentiment)
   n <- dplyr::quo(n)
   
+  Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
+    plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
+  
   TD_PosNeg_Words <- DataFrameTidy %>%  
-    dplyr::inner_join(eval(as.name("Bing")), by = "Token") %>% 
+    dplyr::inner_join(Bing, by = "Token") %>% 
     dplyr::filter(!(Token %in% filterword)) %>% 
     dplyr::count(Token, Sentiment) %>%
     dplyr::ungroup() %>% 
     dplyr::group_by(Sentiment) %>%
     dplyr::top_n(num_words, n) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(Token = reorder(Token, n)) %>%
+    dplyr::mutate(Token = stats::reorder(Token, n)) %>%
     ggplot2::ggplot(aes(Token, n, fill = Sentiment)) +
     geom_col(show.legend = FALSE) +
     facet_wrap(~Sentiment, scales = "free_y") +
@@ -864,7 +881,6 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @export
 
 Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
- # `%>%` <- dplyr::`%>%`
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(aes("TweetSentimentScore")) +
     geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +

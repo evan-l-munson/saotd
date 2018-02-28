@@ -38,7 +38,7 @@ TD_Bigram_Network <- Bigram.Network(BiGramDataFrame = TD_Bigram,
                                     layout = "fr",
                                     edge_color = "royalblue",
                                     node_color = "black",
-                                    node_size = 3
+                                    node_size = 3,
                                     set_seed = 1234)
 
 TD_Bigram_Network
