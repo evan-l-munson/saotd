@@ -77,7 +77,6 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
     
 }
 
-
 # Explore -----------------------------------------------------------------
 
 #' @title Tidy Twitter Data
