@@ -45,12 +45,9 @@
 #'         
 #' load("test_tweets.RData")
 #' 
-#' 
 #' @export
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
-  
-  options(httr_oauth_cache = TRUE)
   
   screenName <- dplyr::quo(screenName)
   created <- dplyr::quo(created)
@@ -60,6 +57,9 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
                                consumer_secret,
                                access_token,
                                access_secret)
+  
+  options("httr_oauth_cache")
+  options(httr_oauth_cache = TRUE)
   
   twitter_data <- list()
   for (i in HT) {
@@ -176,16 +176,19 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 
 Unigram <- function(DataFrame){
   
+  text <- dplyr::quo(text)
+  word <- dplyr::quo(word)
+  
   TD_Unigram <- DataFrame %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "#", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[:punct:]", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens("word", "text") %>%  
-    dplyr::filter(!"word" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
-    dplyr::count("word", sort = TRUE)
+    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
+    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
+    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
+    tidytext::unnest_tokens(word, text) %>%  
+    dplyr::filter(!word %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
+    dplyr::count(word, sort = TRUE)
   return(TD_Unigram)
 }
 
@@ -212,18 +215,24 @@ Unigram <- function(DataFrame){
 
 Bigram <- function(DataFrame){
   
+  text <- dplyr::quo(text)
+  word <- dplyr::quo(word)
+  bigram <- dplyr::quo(bigram)
+  word1 <- dplyr::quo(word1)
+  word2 <- dplyr::quo(word2)
+  
   TD_Bigram <- DataFrame %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "#", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[:punct:]", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens("bigram", "text", token = "ngrams", n = 2) %>%  
-    tidyr::separate("bigram", c("word1", "word2"), sep = " ") %>% 
-    dplyr::filter(!"word1" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
-    dplyr::filter(!"word2" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
-    dplyr::count("word1", "word2", sort = TRUE)
+    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
+    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
+    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
+    tidytext::unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%  
+    tidyr::separate(bigram, c("word1", "word2"), sep = " ") %>% 
+    dplyr::filter(!word1 %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
+    dplyr::filter(!word2 %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
+    dplyr::count(word1, word2, sort = TRUE)
   return(TD_Bigram)
 }
 
@@ -250,19 +259,26 @@ Bigram <- function(DataFrame){
 
 Trigram <- function(DataFrame) {
   
+  text <- dplyr::quo(text)
+  word <- dplyr::quo(word)
+  trigram <- dplyr::quo(trigram)
+  word1 <- dplyr::quo(word1)
+  word2 <- dplyr::quo(word2)
+  word3 <- dplyr::quo(word3)
+  
   TD_Trigram <- DataFrame %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "RT", "")) %>% # Remove retweet note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate("text" = stringr::str_replace_all("text", "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "#", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[:punct:]", "")) %>% 
-    dplyr::mutate("text" = stringr::str_replace_all("text", "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens("trigram", "text", token = "ngrams", n=3) %>%  
-    tidyr::separate("trigram", c("word1", "word2", "word3"), sep = " ") %>% 
-    dplyr::filter(!"word1" %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
-    dplyr::filter(!"word2" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
-    dplyr::filter(!"word3" %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
-    dplyr::count("word1", "word2", "word3", sort = TRUE)
+    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
+    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
+    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% 
+    dplyr::mutate(text = stringr::str_replace_all(text, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
+    tidytext::unnest_tokens(trigram, text, token = "ngrams", n=3) %>%  
+    tidyr::separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% 
+    dplyr::filter(!word1 %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
+    dplyr::filter(!word2 %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
+    dplyr::filter(!word3 %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
+    dplyr::count(word1, word2, word3, sort = TRUE)
   return(TD_Trigram)
 }
 
@@ -717,6 +733,7 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
     facet_wrap(~Sentiment, scales = "free_y") +
     labs(y = "Count",
          x = NULL) +
+    theme_bw() +
     ggtitle('Most common positive and negative words utilizing the Bing Lexicon') +
     coord_flip()
   return(TD_PosNeg_Words)
@@ -731,7 +748,6 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
 #' @importFrom dplyr arrange filter quo
-#' @importFrom plyr desc
 #' @importFrom utils head
 #' 
 #' @return A Tidy DataFrame.
@@ -763,24 +779,24 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
   
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
       utils::head()
     return(TD_HT_noSel_Min_Scores)
   } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
     TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>% 
       dplyr::filter(hashtag == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
       utils::head()
     return(TD_HT_Sel_Min_Scores)
   } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
       utils::head()
     return(TD_Topic_noSel_Min_Scores)
   } else {
     TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>% 
       dplyr::filter(Topic == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(TweetSentimentScore) %>% 
       utils::head()
     return(TD_Topic_Sel_Min_Scores)
   }
@@ -794,8 +810,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
 #' 
-#' @importFrom dplyr arrange filter quo
-#' @importFrom plyr desc
+#' @importFrom dplyr arrange filter desc quo
 #' @importFrom utils head
 #' 
 #' @return A Tidy DataFrame.
@@ -827,24 +842,24 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
   
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_noSel_Max_Scores)
   } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
     TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::filter(hashtag == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_HT_Sel_Max_Scores)
   } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_noSel_Max_Scores)
   } else {
     TD_Topic_Sel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::filter(Topic == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     return(TD_Topic_Sel_Max_Scores)
   }
@@ -861,6 +876,7 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @param color The user selected color to highlight the bins.
 #' @param fill The interior color of the bins.
 #' 
+#' @importFrom dplyr quo
 #' @import ggplot2
 #' 
 #' @return A ggplot.
@@ -880,13 +896,17 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' @export
 
 Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
+  
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  
   TD_Corups_Distribution <- DataFrameTidyScores %>% 
-    ggplot2::ggplot(aes("TweetSentimentScore")) +
+    ggplot2::ggplot(aes(TweetSentimentScore)) +
     geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
     theme(legend.position = "none") +
     ggtitle("Sentiment Score Distribution") +
     xlab('Sentiment') +
-    ylab('Count')
+    ylab('Count') +
+    theme_bw()
   return(TD_Corups_Distribution)
 }
 
@@ -920,25 +940,30 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' @export
 
 Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
+  
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  
   if(HT_Topic == "hashtag") {
     TD_HT_Distribution <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes("TweetSentimentScore")) +
+      ggplot2::ggplot(aes(TweetSentimentScore)) +
       geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
       facet_wrap(~hashtag, ncol = 2) +
       theme(legend.position = "none") +
       ggtitle("Sentiment Score Distribution Across all #Hashtags") +
       xlab('Sentiment') +
-      ylab('Count')
+      ylab('Count') +
+      theme_bw()
     return(TD_HT_Distribution)
   } else {
     TD_Topic_Distribution <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes("TweetSentimentScore")) +
+      ggplot2::ggplot(aes(TweetSentimentScore)) +
       geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
       facet_wrap(~Topic, ncol = 2) +
       theme(legend.position = "none") +
       ggtitle("Sentiment Score Distribution Across all Topics") +
       xlab('Sentiment') +
-      ylab('Count')
+      ylab('Count') +
+      theme_bw()
     return(TD_Topic_Distribution)
   }
 }
@@ -950,6 +975,7 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
+#' @importFrom dplyr quo
 #' @import ggplot2
 #' 
 #' @return A ggplot box plot.
@@ -975,24 +1001,31 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' @export
 
 BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
+  
+  hashtag <- dplyr::quo(hashtag)
+  Topic <- dplyr::quo(Topic)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  
   if(HT_Topic == "hashtag") {
     TD_HT_BoxPlot <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes("hashtag", "TweetSentimentScore")) +
+      ggplot2::ggplot(aes(hashtag, TweetSentimentScore)) +
       ggplot2::geom_boxplot() +
       theme(legend.position = "none") +
       ggtitle("Sentiment Scores Across each #Hashtag") +
       xlab('#Hashtag') +
       ylab('Sentiment') +
+      theme_bw() +
       coord_flip()
     return(TD_HT_BoxPlot)
   } else {
     TD_Topic_BoxPlot <- DataFrameTidyScores %>% 
-      ggplot2::ggplot(aes("Topic", "TweetSentimentScore")) +
+      ggplot2::ggplot(aes(Topic, TweetSentimentScore)) +
       ggplot2::geom_boxplot() +
       theme(legend.position = "none") +
       ggtitle("Sentiment Scores Across each Topic") +
       xlab('Topic') +
       ylab('Sentiment') +
+      theme_bw() +
       coord_flip()
     return(TD_Topic_BoxPlot)
   }
@@ -1045,6 +1078,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
       ggtitle("Sentiment Scores Across each #Hashtag") +
       xlab('#Hashtag') +
       ylab('Sentiment') +
+      theme_bw() +
       coord_flip()
     return(TD_HT_ViolinPlot)
   } else{
@@ -1055,6 +1089,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
       ggtitle("Sentiment Scores Across each Topic") +
       xlab('Topic') +
       ylab('Sentiment') +
+      theme_bw() +
       coord_flip()
     return(TD_Topic_ViolinPlot)
   }
