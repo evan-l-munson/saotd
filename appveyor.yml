@@ -74,4 +74,4 @@ artifacts:
 
   - path: '\*_*.zip'
 
-name: Bits
+    name: Bits
