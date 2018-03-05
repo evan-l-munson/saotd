@@ -56,11 +56,11 @@ _Basic understanding of twitter and social media._
 
 1.3.D If your analytic implements known statistical methods, specified them.
 
-_Distributions, bi-modal distributions_
+_Distributions, bi-modal distributions, Latent Dirichlet Allocation (LDA)_
 
 1.3.E If your analytic builds on existing statistical methods or R packages, specify them
 
-_Tidyverse, LDATuning, Topicmodel_
+_Tidyverse, LDATuning, Topicmodel, Tidyverse_
 
 1.4 How will end-users access your analytic data product?
 

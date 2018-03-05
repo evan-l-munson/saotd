@@ -294,7 +294,7 @@ Trigram <- function(DataFrame) {
 #' @param node_size User desired node size.
 #' @param set_seed Seed for reproducable results.
 #' 
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter quo
 #' @importFrom igraph graph_from_data_frame
 #' @importFrom ggraph ggraph geom_edge_link geom_node_point geom_node_text
 #' @import ggplot2
@@ -318,20 +318,48 @@ Trigram <- function(DataFrame) {
 #' @export
 
 Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
+  
+  n <- dplyr::quo(n)
+  name <- dplyr::quo(name)
+  
   TD_Bigram_Network <- BiGramDataFrame %>% 
-    dplyr::filter("n" > number) %>% 
+    dplyr::filter(n > number) %>% 
     igraph::graph_from_data_frame()
   
   set.seed(set_seed)
   
   TD_Bigram_Network %>% 
     ggraph::ggraph(layout = layout) +
-    ggraph::geom_edge_link(aes(edge_alpha = "n", edge_width = "n"), edge_colour = edge_color, show.legend = TRUE) +
+    ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
-    ggraph::geom_node_text(aes(label = "name"), repel = TRUE) +
+    ggraph::geom_node_text(aes(label = name), repel = TRUE) +
     ggplot2::ggtitle("Bi-Gram Network") +
     theme_void()
 }
+
+# BGDF <- SAoTD::Bigram(DataFrame = TD)
+# 
+# TD_Bigram_Network <- BGDF %>% 
+#   dplyr::filter(n > 100) %>% 
+#   igraph::graph_from_data_frame()
+# 
+# set.seed(1234)
+# 
+# TD_Bigram_Network %>% 
+#   ggraph::ggraph(layout = "fr") +
+#   ggraph::geom_edge_link(aes(edge_alpha = "n", edge_width = "n"), edge_colour = "royalblue", show.legend = TRUE) +
+#   ggraph::geom_node_point(colour = "black", size = 3) +
+#   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
+#   ggplot2::ggtitle("Bi-Gram Network") +
+#   theme_void()
+
+
+
+
+
+
+
+
 
 #' @title Twitter Word Correlations
 #'
@@ -530,7 +558,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' @importFrom stringr str_replace_all
 #' @importFrom plyr rename
 #' @importFrom tidytext cast_dtm 
-#' @importFrom topicmodels topics terms
+#' @importFrom topicmodels LDA topics terms
 #' 
 #' @return Returns LDA topics.
 #' 
