@@ -337,32 +337,6 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
     theme_void()
 }
 
-# library(ggplot2)
-# library(ggraph)
-# 
-# BGDF <- SAoTD::Bigram(DataFrame = TD)
-# 
-# TD_Bigram_Network <- BGDF %>%
-#   dplyr::filter(n > 100) %>%
-#   igraph::graph_from_data_frame()
-# 
-# set.seed(1234)
-# 
-# TD_Bigram_Network %>%
-#   ggraph::ggraph(layout = "fr") +
-#   geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "royalblue", show.legend = TRUE) +
-#   geom_node_point(color = "black", size = 3) +
-#   geom_node_text(aes(label = name), repel = TRUE) +
-#   ggtitle("Bi-Gram Network") +
-#   theme_void()
-
-
-
-
-
-
-
-
 #' @title Twitter Word Correlations
 #'
 #' @description The word correlation displays the mutual relationship between words.
