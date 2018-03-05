@@ -7,6 +7,8 @@ CPT Evan L. Munson
 
 [![Build
 Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
 
 # Analytic Data Product Information
 
@@ -89,12 +91,13 @@ have to use your analytic
 1.3.D If your analytic implements known statistical methods, specified
 them.
 
-*Distributions, bi-modal distributions*
+*Distributions, bi-modal distributions, Latent Dirichlet Allocation
+(LDA)*
 
 1.3.E If your analytic builds on existing statistical methods or R
 packages, specify them
 
-*Tidyverse, LDATuning, Topicmodel*
+*Tidyverse, LDATuning, Topicmodel, Tidyverse*
 
 1.4 How will end-users access your analytic data product?
 
