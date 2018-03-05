@@ -296,7 +296,7 @@ Trigram <- function(DataFrame) {
 #' 
 #' @importFrom dplyr filter quo
 #' @importFrom igraph graph_from_data_frame
-#' @importFrom ggraph ggraph geom_edge_link geom_node_point geom_node_text
+#' @importFrom ggraph ggraph
 #' @import ggplot2
 #'   
 #' @return A ggraph plot.
@@ -330,29 +330,31 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
   
   TD_Bigram_Network %>% 
     ggraph::ggraph(layout = layout) +
-    ggraph::geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE) +
-    ggraph::geom_node_point(colour = node_color, size = node_size) +
-    ggraph::geom_node_text(aes(label = name), repel = TRUE) +
-    ggplot2::ggtitle("Bi-Gram Network") +
+    geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = edge_color, show.legend = TRUE) +
+    geom_node_point(colour = node_color, size = node_size) +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    ggtitle("Bi-Gram Network") +
     theme_void()
 }
 
+# library(ggplot2)
+# library(ggraph)
+# 
 # BGDF <- SAoTD::Bigram(DataFrame = TD)
 # 
-# TD_Bigram_Network <- BGDF %>% 
-#   dplyr::filter(n > 100) %>% 
+# TD_Bigram_Network <- BGDF %>%
+#   dplyr::filter(n > 100) %>%
 #   igraph::graph_from_data_frame()
 # 
 # set.seed(1234)
 # 
-# TD_Bigram_Network %>% 
+# TD_Bigram_Network %>%
 #   ggraph::ggraph(layout = "fr") +
-#   ggraph::geom_edge_link(aes(edge_alpha = "n", edge_width = "n"), edge_colour = "royalblue", show.legend = TRUE) +
-#   ggraph::geom_node_point(colour = "black", size = 3) +
-#   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
-#   ggplot2::ggtitle("Bi-Gram Network") +
+#   geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "royalblue", show.legend = TRUE) +
+#   geom_node_point(color = "black", size = 3) +
+#   geom_node_text(aes(label = name), repel = TRUE) +
+#   ggtitle("Bi-Gram Network") +
 #   theme_void()
-
 
 
 
