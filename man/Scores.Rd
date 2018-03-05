@@ -18,11 +18,12 @@ A Scored DataFrame.
 Function to Calculate Sentiment Scores that will account for sentiment by hashtag or topic.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 
                      HT_Topic = "hashtag")
 score_data
-
+}
 }

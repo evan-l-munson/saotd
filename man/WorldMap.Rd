@@ -18,6 +18,7 @@ A ggplot plot.
 Displays the location of a tweet across the globe by hashtag or topic.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -34,5 +35,5 @@ score_data <- Scores(DataFrameTidy = tidy_data,
 topic_map <- WorldMap(DataFrameTidyScores = score_data,
                       HT_Topic = "topic") 
 topic_map                    
-
+}
 }

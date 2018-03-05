@@ -18,6 +18,7 @@ A ggplot plot.
 Displays the Twitter data sentiment scores through time.  The sentiment scores by hashtag or topic are summed per day and plotted to show the change in sentiment through time.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -34,5 +35,5 @@ score_data <- Scores(DataFrameTidy = tidy_data,
 topic_time <- TimeScale(DataFrameTidyScores = score_data,
                         HT_Topic = "topic") 
 topic_time                    
-
+}
 }

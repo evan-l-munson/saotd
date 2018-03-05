@@ -23,6 +23,7 @@ A ggplot.
 Determines the scores distribution for the entire Twitter data corpus.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -33,5 +34,5 @@ Corp_Dist <- Corpus.Distribution(DataFrameTidyScores = score_data,
                                  color = "black", 
                                  fill = "white")
 Corp_Dist
-
+}
 }

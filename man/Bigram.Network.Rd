@@ -30,6 +30,7 @@ A ggraph plot.
 Displays the Bi-Gram Network.  Bi-Gram networks builds on computed Bi-Grams.  Bi-Gram networks serve as a visualization tool that displays the relationships between the words simultaneously as opposed to a tabular display of Bi-Gram words.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 TD_Bigram <- Bigram(DataFrame = data)
@@ -42,5 +43,5 @@ TD_Bigram_Network <- Bigram.Network(BiGramDataFrame = TD_Bigram,
                                     set_seed = 1234)
 
 TD_Bigram_Network
-                          
+}
 }

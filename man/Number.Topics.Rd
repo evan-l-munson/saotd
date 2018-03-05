@@ -28,6 +28,7 @@ Determines the optimal number of Latent topics within a dataframe by tuning the 
 Uses the `ldatuning` package and outputs an ldatuning plot.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 LDA_Topic_Plot <- Number.Topics(DataFrame = data,
@@ -38,5 +39,5 @@ LDA_Topic_Plot <- Number.Topics(DataFrame = data,
                                 set_seed = 1234)
 
 LDA_Topic_Plot 
-
+}
 }

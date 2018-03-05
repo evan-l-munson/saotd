@@ -20,6 +20,7 @@ A tribble
 The word correlation displays the mutual relationship between words.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -28,5 +29,5 @@ TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data,
                           sort = TRUE)
 
 TD_Word_Corr
-                          
+}                    
 }

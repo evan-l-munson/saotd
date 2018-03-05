@@ -16,9 +16,10 @@ A Tidy DataFrame.
 Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual tweet.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 tidy_data
-
+}
 }

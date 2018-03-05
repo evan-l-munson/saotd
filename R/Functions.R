@@ -26,7 +26,7 @@
 #' 
 #' @return A DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 #' consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 #' access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -44,7 +44,7 @@
 #'         distinct = TRUE)
 #'         
 #' load("test_tweets.RData")
-#' 
+#' }
 #' @export
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
@@ -92,12 +92,12 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' 
 #' @return A Tidy DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
 #' tidy_data
-#' 
+#' }
 #' @export
 
 Tidy <- function(DataFrame) {
@@ -134,14 +134,14 @@ Tidy <- function(DataFrame) {
 #' 
 #' @return A Tidy DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' data <- Merge.Terms(DataFrame = data, 
 #'                     term = "ice cream", 
 #'                     term_replacement = "ice_cream")
 #' data 
-#' 
+#' }
 #' @export
 
 Merge.Terms <- function(DataFrame, term, term_replacement){
@@ -166,12 +166,12 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' 
 #' @return A tribble.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' TD_Unigram <- Unigram(DataFrame = data)
 #' TD_Unigram
-#'                           
+#' }             
 #' @export
 
 Unigram <- function(DataFrame){
@@ -205,12 +205,12 @@ Unigram <- function(DataFrame){
 #' 
 #' @return A tribble.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' TD_Bigram <- Bigram(DataFrame = data)
 #' TD_Bigram
-#'                           
+#' }                
 #' @export
 
 Bigram <- function(DataFrame){
@@ -249,12 +249,12 @@ Bigram <- function(DataFrame){
 #' 
 #' @return A tribble.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' TD_Trigram <- Trigram(DataFrame = data)
 #' TD_Trigram
-#'                           
+#' }
 #' @export
 
 Trigram <- function(DataFrame) {
@@ -301,7 +301,7 @@ Trigram <- function(DataFrame) {
 #'   
 #' @return A ggraph plot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' TD_Bigram <- Bigram(DataFrame = data)
@@ -314,7 +314,7 @@ Trigram <- function(DataFrame) {
 #'                                     set_seed = 1234)
 #'
 #' TD_Bigram_Network
-#'                           
+#' }
 #' @export
 
 Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
@@ -346,7 +346,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' 
 #' @return A tribble
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -355,7 +355,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #'                           sort = TRUE)
 #'
 #' TD_Word_Corr
-#'                           
+#' }                    
 #' @export
 
 Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
@@ -389,7 +389,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' 
 #' @return An igraph plot
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -405,7 +405,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #'                                        set_seed = 1234)
 #'
 #' TD_Word_Corr_Network
-#'                           
+#' }
 #' @export
 
 Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
@@ -450,7 +450,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' 
 #' @return A Tidy DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' LDA_Topic_Plot <- Number.Topics(DataFrame = data,
@@ -461,7 +461,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #'                                 set_seed = 1234)
 #'
 #' LDA_Topic_Plot 
-#' 
+#' }
 #' @export
 
 Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
@@ -534,7 +534,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' 
 #' @return Returns LDA topics.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' LDA_data <- Tweet.Topics(DataFrame = data,
@@ -544,7 +544,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #'                          num_terms = 10)
 #'
 #' LDA_data
-#' 
+#' }
 #' @export
 
 Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
@@ -614,14 +614,14 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' 
 #' @return A Scored DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
 #' score_data <- Scores(DataFrameTidy = tidy_data, 
 #'                      HT_Topic = "hashtag")
 #' score_data
-#' 
+#' }
 #' @export
 
 Scores <- function(DataFrameTidy, HT_Topic) {
@@ -686,7 +686,7 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #' 
 #' @return A ggplot
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -707,7 +707,7 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #'                        n = 10,
 #'                        filterword = c("fail", "urgent"))            
 #' posneg
-#' 
+#' }
 #' @export
 
 PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
@@ -752,7 +752,7 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' 
 #' @return A Tidy DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -768,7 +768,7 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
 #'                          HT_Topic = "hashtag",
 #'                          HT_Topic_Selection = "icecream")
-#' 
+#' }
 #' @export
 
 Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
@@ -815,7 +815,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' 
 #' @return A Tidy DataFrame.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -831,7 +831,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
 #'                          HT_Topic = "hashtag",
 #'                          HT_Topic_Selection = "icecream")
-#' 
+#' }
 #' @export
 
 Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
@@ -881,7 +881,7 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' 
 #' @return A ggplot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -892,7 +892,7 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #'                                  color = "black", 
 #'                                  fill = "white")
 #' Corp_Dist
-#' 
+#' }
 #' @export
 
 Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
@@ -924,7 +924,7 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' 
 #' @return A facet wrap ggplot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -936,7 +936,7 @@ Corups.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #'                      color = "black", 
 #'                      fill = "white")
 #' Dist
-#' 
+#' }
 #' @export
 
 Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
@@ -980,7 +980,7 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' 
 #' @return A ggplot box plot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -997,7 +997,7 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' topic_box <- Boxplot(DataFrameTidyScores = score_data,
 #'                      HT_Topic = "topic") 
 #' topic_box                    
-#' 
+#' }
 #' @export
 
 BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
@@ -1044,7 +1044,7 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' 
 #' @return A ggplot violin plot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -1061,7 +1061,7 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' topic_violin <- ViolinPlot(DataFrameTidyScores = score_data,
 #'                            HT_Topic = "topic") 
 #' topic_violin                    
-#' 
+#' }
 #' @export
 
 ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
@@ -1107,7 +1107,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' 
 #' @return A ggplot plot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -1124,7 +1124,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' topic_time <- TimeScale(DataFrameTidyScores = score_data,
 #'                         HT_Topic = "topic") 
 #' topic_time                    
-#' 
+#' }
 #' @export
 
 TimeScale <- function(DataFrameTidyScores, HT_Topic) {
@@ -1179,7 +1179,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' 
 #' @return A ggplot plot.
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' library(SAoTD)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -1196,7 +1196,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' topic_map <- WorldMap(DataFrameTidyScores = score_data,
 #'                       HT_Topic = "topic") 
 #' topic_map                    
-#' 
+#' }
 #' @export
 
 WorldMap <- function(DataFrame, HT_Topic) {

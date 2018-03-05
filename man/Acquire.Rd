@@ -35,6 +35,7 @@ consumer secret key, access token, and access secret key and acquire tweets they
 acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
 }
 \examples{
+\dontrun{
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -52,5 +53,5 @@ Acquire(consumer_key = consumer_key,
         distinct = TRUE)
         
 load("test_tweets.RData")
-
+}
 }

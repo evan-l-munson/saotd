@@ -20,6 +20,7 @@ A Tidy DataFrame.
 Determines the Maximum scores for either the entire dataset or the Maximum scores associated with a hashtag or topic analysis.
 }
 \examples{
+\dontrun{
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -35,5 +36,5 @@ score_data <- Scores(DataFrameTidy = tidy_data,
 min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
                          HT_Topic = "hashtag",
                          HT_Topic_Selection = "icecream")
-
+}
 }
