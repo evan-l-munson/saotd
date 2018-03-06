@@ -1,6 +1,6 @@
 
 language: r
-cache: packages
+cache: false
 
 #r_packages:
 #  - covr

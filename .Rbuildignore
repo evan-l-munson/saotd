@@ -4,3 +4,4 @@
 README.Rmd
 Proposal_Chart.png
 ^\.travis\.yml$
+^\.appveyor\.yml$
