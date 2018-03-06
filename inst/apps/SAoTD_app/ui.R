@@ -4,6 +4,8 @@ ui <- shiny::shinyUI(
   shiny::navbarPage(title = 'SAoTD', 
                     theme = shinythemes::shinytheme('simplex'),
                     
+                    ##############
+                    
                     shiny::tabPanel(title = "Correlation Network", fluid = TRUE,
                                     shiny::sidebarPanel(width = 3,
                                                         shiny::sliderInput(inputId = "Correlation",
@@ -48,7 +50,7 @@ ui <- shiny::shinyUI(
                                                          shiny::tabPanel(title = 'Word Correlation Network',
                                                                          plotOutput(outputId = "TD_Corr_Plot"))))),
                 
-
+                    ##############
 
                   shiny::tabPanel(title = "Bi-Gram Network", fluid = TRUE,
                                   shiny::sidebarLayout(
@@ -91,7 +93,8 @@ ui <- shiny::shinyUI(
                                     shiny::mainPanel(width = 9,
                                                      shiny::tabsetPanel(
                                                        shiny::tabPanel(title = 'Bi-Gram Network',
-                                                                       plotOutput(outputId = "TD_Bigram_Plot")))))),
+                                                                       shiny::plotOutput(outputId = "TD_Bigram_Plot")))))),
+                  ##############
                   
                   shiny::tabPanel(title = "Violin Plot", fluid = TRUE,
                                   shiny::sidebarLayout(
@@ -103,9 +106,57 @@ ui <- shiny::shinyUI(
                                     shiny::mainPanel(width = 9,
                                                      shiny::tabsetPanel(
                                                        shiny::tabPanel(title = 'Violin Plot',
-                                                                       plotOutput(outputID = "TD_Violin_Plot"))))))))
+                                                                       shiny::plotOutput(outputId = "TD_Violin_Plot")))))),
+                  
+                  ##############
+                  
+                  shiny::tabPanel(title = "Box Plot", fluid = TRUE,
+                                  shiny::sidebarLayout(
+                                    shiny::sidebarPanel(width = 3, 
+                                                        shiny::selectInput(inputId = "HT_Topic",
+                                                                           label = "Select if data is determined by Hashtag or Topic",
+                                                                           choices = list('Hashtag' = "hashtag",
+                                                                                          'Topic' = "topic"))),
+                                    shiny::mainPanel(width = 9,
+                                                     shiny::tabsetPanel(
+                                                       shiny::tabPanel(title = 'Box Plot',
+                                                                       shiny::plotOutput(outputId = "TD_Box_Plot")))))),
+                  
+                  ##############
+                  
+                  shiny::tabPanel(title = "TimeScale", fluid = TRUE,
+                                  shiny::sidebarLayout(
+                                    shiny::sidebarPanel(width = 3, 
+                                                        shiny::selectInput(inputId = "HT_Topic",
+                                                                           label = "Select if data is determined by Hashtag or Topic",
+                                                                           choices = list('Hashtag' = "hashtag",
+                                                                                          'Topic' = "topic"))),
+                                    shiny::mainPanel(width = 9,
+                                                     shiny::tabsetPanel(
+                                                       shiny::tabPanel(title = 'TimeScale',
+                                                                       shiny::plotOutput(outputId = "TD_TimeScale")))))),
+                  
+                  ##############
+                  
+                  shiny::tabPanel(title = "Positive and Negative Words", fluid = TRUE,
+                                  shiny::sidebarLayout(
+                                    shiny::sidebarPanel(width = 3, 
+                                                        shiny::numericInput(inputId = "num_words",
+                                                                            label = "Number of Words to be displayed",
+                                                                            value = 10,
+                                                                            min = 1, 
+                                                                            max = 50, 
+                                                                            step = 1),
+                                                        shiny::textInput(inputId = "filterword", 
+                                                                         label = "Word to be filtered out", 
+                                                                         value = NULL)),
+                                    shiny::mainPanel(width = 9,
+                                                     shiny::tabsetPanel(
+                                                       shiny::tabPanel(title = 'Positive and Negative Words',
+                                                                       shiny::plotOutput(outputId = "TD_PosNeg"))))))))
+                  
 
-                      
+
 
 
 

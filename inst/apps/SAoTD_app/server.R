@@ -31,9 +31,30 @@ server <- function(input, output, session) {
                       HT_Topic = input$HT_Topic)
     
   })
-}
+  
+  output$TD_Box_Plot <- renderPlot({
     
+    SAoTD::BoxPlot(DataFrameTidyScores = TD_Scores,
+                   HT_Topic = input$HT_Topic)
+    
+  })
+  
+  output$TD_TimeScale <- renderPlot({
+    
+    SAoTD::TimeScale(DataFrameTidyScores = TD_Scores,
+                     HT_Topic = input$HT_Topic)
+    
+  })
+  
+  output$TD_PosNeg <- renderPlot({
+    
+    SAoTD::PosNeg.Words(DataFrameTidy = TD_Tidy, 
+                        num_words = input$num_words, 
+                        filterword = input$filterword)
 
-
+    
+  })
+}
+  
     
     
