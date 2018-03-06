@@ -5,3 +5,6 @@ README.Rmd
 Proposal_Chart.png
 ^\.travis\.yml$
 ^\.appveyor\.yml$
+^.*\.o$
+^.*\.dll$
+^.*\.so$
