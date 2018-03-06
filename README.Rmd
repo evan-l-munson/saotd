@@ -10,6 +10,7 @@ keep_md: yes
 
 [![Build Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
+[![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
 
 # Analytic Data Product Information
 

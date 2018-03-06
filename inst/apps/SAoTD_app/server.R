@@ -24,6 +24,13 @@ server <- function(input, output, session) {
                           set_seed = input$set_seed)
     
   })
+  
+  output$TD_Violin_Plot <- renderPlot({
+    
+    SAoTD::ViolinPlot(DataFrameTidyScores = TD_Scores,
+                      HT_Topic = input$HT_Topic)
+    
+  })
 }
     
 

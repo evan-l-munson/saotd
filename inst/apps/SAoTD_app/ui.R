@@ -91,8 +91,21 @@ ui <- shiny::shinyUI(
                                     shiny::mainPanel(width = 9,
                                                      shiny::tabsetPanel(
                                                        shiny::tabPanel(title = 'Bi-Gram Network',
-                                                                       plotOutput(outputId = "TD_Bigram_Plot"))))))))
-                        
+                                                                       plotOutput(outputId = "TD_Bigram_Plot")))))),
+                  
+                  shiny::tabPanel(title = "Violin Plot", fluid = TRUE,
+                                  shiny::sidebarLayout(
+                                    shiny::sidebarPanel(width = 3, 
+                                                        shiny::selectInput(inputId = "HT_Topic",
+                                                                           label = "Select if data is determined by Hashtag or Topic",
+                                                                           choices = list('Hashtag' = "hashtag",
+                                                                                           'Topic' = "topic"))),
+                                    shiny::mainPanel(width = 9,
+                                                     shiny::tabsetPanel(
+                                                       shiny::tabPanel(title = 'Violin Plot',
+                                                                       plotOutput(outputID = "TD_Violin_Plot"))))))))
+
+                      
 
 
 
