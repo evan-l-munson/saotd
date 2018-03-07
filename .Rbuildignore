@@ -1,10 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.httr-oauth$
-README.Rmd
 Proposal_Chart.png
-^\.travis\.yml$
-^\.appveyor\.yml$
 ^.*\.o$
 ^.*\.dll$
 ^.*\.so$
