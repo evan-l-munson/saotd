@@ -10,7 +10,7 @@ language: R
 
 cache: packages
 
-sudo: required
+sudo: false
 
 install:
   - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels"))'
