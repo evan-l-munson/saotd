@@ -6,7 +6,8 @@ language: r
 #  - release
 #  - devel 
 
-#sudo: required
+sudo: required
+
 cache: packages
 
 install:
