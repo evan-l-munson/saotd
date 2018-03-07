@@ -10,7 +10,7 @@ language: r
 cache: packages
 
 install:
-  - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels", "knitr"))'
+  - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels"))'
   
 #before_install:
 #  - sudo apt-get install libgmp3-dev
