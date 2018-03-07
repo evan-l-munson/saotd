@@ -7,7 +7,6 @@ language: R
 #  - devel 
 
 
-
 cache: packages
 
 sudo: false
