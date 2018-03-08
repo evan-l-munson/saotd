@@ -20,6 +20,9 @@ install:
 #  
 r_packages:
   - covr
+  - ldatuning
+  - topicmodels
+  - ggraph
 
 after_success:
 - Rscript -e 'library(covr); codecov()'
