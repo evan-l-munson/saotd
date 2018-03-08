@@ -12,7 +12,8 @@ cache: packages
 sudo: false
 
 install:
-  - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels", "knitr"))'
+  - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels", "knitr", "tidytext", "twitteR", "purrr", "tidyr", "widyr", "lubridate", "shiny", "httr", "base64enc"))'
+  
   
 #before_install:
 #  - sudo apt-get install libgmp3-dev
