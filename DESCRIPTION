@@ -7,7 +7,29 @@ Author: Evan L. Munson
 Maintainer: Evan L. Munson <evan.l.munson@email.com>
 Description: This analytic is an in initial forray into sentiment analysis.  This analytic will allow a user to access the Twitter API (once they create their own developer account), ingest tweets of their interest, clean / tidy data, perform topic modeling if interested, compute sentiment scores utilizing the Bing Lexicon, and output visualizations.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.14), plyr, dplyr, stringr, tidytext, twitteR, purrr, tidyr, igraph, widyr, ggplot2, scales, reshape2, lubridate, utils, shiny, stats, magrittr, httr, base64enc, ldatuning, topicmodels, ggraph
+Imports: Rcpp (>= 0.12.14), 
+    plyr, 
+    dplyr, 
+    stringr, 
+    tidytext, 
+    twitteR, 
+    purrr, 
+    tidyr, 
+    igraph, 
+    widyr, 
+    ggplot2, 
+    scales, 
+    reshape2, 
+    lubridate, 
+    utils, 
+    shiny, 
+    stats, 
+    magrittr, 
+    httr, 
+    base64enc, 
+    ldatuning, 
+    topicmodels, 
+    ggraph
 LinkingTo: Rcpp
 RoxygenNote: 6.0.1
 Suggests: testthat,
