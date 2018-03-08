@@ -9,7 +9,7 @@ language: R
 
 cache: packages
 
-sudo: false
+#sudo: false
 
 install:
   - R -e 'install.packages(c("ggraph", "ldatuning", "topicmodels", "knitr", "tidytext", "twitteR", "purrr", "tidyr", "widyr", "lubridate", "shiny", "httr", "base64enc"))'
