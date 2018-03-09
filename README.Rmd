@@ -13,7 +13,7 @@ keep_md: yes
 [![CircleCI](https://circleci.com/gh/evan-l-munson/SAoTD.svg?style=svg)](https://circleci.com/gh/evan-l-munson/SAoTD)
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
 
-# Analytic Data Product Information
+# Analytic Data Product Information  
 
 1.1 Provide a short name (either a single word or an acronym) for the analytic you plan to develop.
 
