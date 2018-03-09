@@ -25,7 +25,7 @@ A Tidy DataFrame.
 }
 \description{
 Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-Uses the `ldatuning` package and outputs an ldatuning plot.
+Uses the `ldatuning` package and outputs an ldatuning plot.  __This process can be time consuming depending on the size of the input dataframe.  For example the built in `raw_tweets` dataset is just shy of 7000 tweets and is evaluated in ~1 minutes with a 3.1 GHz, Dual Core processor.  A different dataset with ~150,000 tweets took nearly 20-30 minutes.__
 }
 \examples{
 \dontrun{
