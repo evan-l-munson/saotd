@@ -432,6 +432,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 
 # Topic Analysis ----------------------------------------------------------
 
+
 #' @title Number Topics
 #'
 #' @description Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  

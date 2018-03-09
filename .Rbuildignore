@@ -7,3 +7,4 @@ Proposal_Chart.png
 ^.*\.o$
 ^.*\.dll$
 ^.*\.so$
+^.*\.RData$
