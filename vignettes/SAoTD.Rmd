@@ -5,7 +5,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SAoTD}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEnconding{UTF-8}
+  %\VignetteEncoding{UTF-8}
 ---
 
 # Sentiment Analysis of Twitter Data (SAoTD)
@@ -159,10 +159,10 @@ SAoTD::Trigram(DataFrame = TD_Merge) %>%
 <!-- TD_Bigram <- SAoTD::Bigram(DataFrame = TD_Merge) -->
 
 <!-- SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigram, -->
-<!--                       number = 90,  -->
-<!--                       layout = "fr",  -->
-<!--                       edge_color = "blue",  -->
-<!--                       node_color = "black",  -->
+<!--                       number = 90, -->
+<!--                       layout = "fr", -->
+<!--                       edge_color = "blue", -->
+<!--                       node_color = "black", -->
 <!--                       node_size = 3, -->
 <!--                       set_seed = 1234) -->
 <!-- ``` -->

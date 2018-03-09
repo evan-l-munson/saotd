@@ -3,7 +3,7 @@
 
 # Acquire -----------------------------------------------------------------
 
-#' @title Acquire Twitter Tweets
+#' @title Acquire Twitter Tweets  
 #'
 #' @description Function will enable a user to access the twitter API throught the 
 #' [Twitter Developers Account](https://dev.twitter.com/) site.
@@ -435,7 +435,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @title Number Topics
 #'
 #' @description Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-#' Uses the `ldatuning` package and outputs an ldatuning plot.
+#' Uses the `ldatuning` package and outputs an ldatuning plot.  __This process can be time consuming depending ont he size of the input dataframe.  For example the built in `raw_tweets` dataset is just shy of 7000 tweets and is evaluated in ~2 minutes.  A different dataset with ~150,000 tweets took nearly 20-30 minutes.__
 #'
 #' @param DataFrame DataFrame of Twitter Data.
 #' @param num_cores The number of CPU cores to processes models simultaneously (2L for dual core processor).
@@ -517,6 +517,11 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
                                        strip.text.y = element_text(angle = 90))
   return(p)
 }
+
+start <- Sys.time()
+SAoTD::Number.Topics(DataFrame = TD, num_cores = 2L, min_clusters = 1, max_clusters = 12, skip = 1, set_seed = 1234)
+end <- Sys.time()
+end - start
 
 #' @title Tweet Topics
 #'
