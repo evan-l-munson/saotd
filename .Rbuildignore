@@ -3,7 +3,6 @@
 ^\.httr-oauth$
 ^\.travis\.yml$
 ^\.circleci
-appveyor\.yml$
 Proposal_Chart.png
 ^.*\.o$
 ^.*\.dll$
