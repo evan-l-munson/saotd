@@ -4,7 +4,7 @@
 
 # Download script file from GitHub
 
-init:
+init:  
 
   ps: |
         $ErrorActionPreference = "Stop"
