@@ -9,3 +9,4 @@ Proposal_Chart.png
 ^.*\.dll$
 ^.*\.so$
 ^.*\.RData$
+^appveyor\.yml$
