@@ -4,7 +4,9 @@ language: R
 sudo: false
 cache: packages
 
-r_github_packages:
-  - cran/ldatuning
-  - cran/topicmodels
-  - cran/ggraph
+r_packages:
+  - covr
+  - widyr
+  
+after_success:
+  - Rscript -e 'covr::codecov(coverage = covr::package_coverage(line_exclusions = list("R/compat_lazyeval.R")))'
