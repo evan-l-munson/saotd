@@ -4,6 +4,7 @@
 ^\.travis\.yml$
 ^\.circleci
 Proposal_Chart.png
+README.Rmd
 ^.*\.o$
 ^.*\.dll$
 ^.*\.so$
