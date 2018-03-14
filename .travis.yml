@@ -4,6 +4,9 @@ language: R
 #sudo: false
 cache: packages
 
+install:
+- R -e 'devtools::install_deps(dep = T)'
+
 #r_packages:
 #  - covr
 #  - widyr
