@@ -9,6 +9,8 @@ addons:
     packages:
       - libgsl0-dev # for topicmodels
       - libudunits2-dev # for ggraph
+      - curl # for ldatuning?
+      - libcurl4-openssl-dev # for ldatuning?
 
 after_success:
 - Rscript -e 'covr::codecov()'
