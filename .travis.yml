@@ -8,5 +8,8 @@ r_packages:
   - covr
   - widyr
   
+r_github_packages:
+  - hadley/devtools@efa894ffa
+  
 after_success:
   - Rscript -e 'covr::codecov(coverage = covr::package_coverage(line_exclusions = list("R/compat_lazyeval.R")))'

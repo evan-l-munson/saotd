@@ -18,6 +18,7 @@ Imports: Rcpp (>= 0.12.14),
     tidyr, 
     igraph, 
     ggplot2, 
+    ggraph,
     scales, 
     reshape2, 
     lubridate, 
@@ -28,9 +29,7 @@ Imports: Rcpp (>= 0.12.14),
     httr, 
     base64enc, 
     ldatuning, 
-    topicmodels,
-    ggraph,
-    ggforce
+    topicmodels
 LinkingTo: Rcpp
 RoxygenNote: 6.0.1
 Suggests: testthat,
