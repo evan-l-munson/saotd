@@ -1,15 +1,15 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
+#sudo: false
 cache: packages
 
-r_packages:
-  - covr
-  - widyr
+#r_packages:
+#  - covr
+#  - widyr
   
-r_github_packages:
-  - hadley/devtools@efa894ffa
+#r_github_packages:
+#  - hadley/devtools@efa894ffa
   
-after_success:
-  - Rscript -e 'covr::codecov(coverage = covr::package_coverage(line_exclusions = list("R/compat_lazyeval.R")))'
+#after_success:
+#  - Rscript -e 'covr::codecov(coverage = covr::package_coverage(line_exclusions = list("R/compat_lazyeval.R")))'
