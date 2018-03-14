@@ -16,7 +16,7 @@ addons:
 
 r_binary_packages:
  - topicmodels
- - rmpfr
+ - Rmpfr
 
 after_success:
 - Rscript -e 'covr::codecov()'
