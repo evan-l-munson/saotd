@@ -12,12 +12,14 @@ Imports: Rcpp (>= 0.12.14),
     dplyr, 
     widyr,
     stringr, 
+    stringi,
     tidytext, 
     twitteR, 
     purrr, 
     tidyr, 
     igraph, 
     ggplot2, 
+    ggraph,
     scales, 
     reshape2, 
     lubridate, 
@@ -28,12 +30,11 @@ Imports: Rcpp (>= 0.12.14),
     httr, 
     base64enc, 
     ldatuning, 
-    topicmodels, 
-    ggraph
+    topicmodels
 LinkingTo: Rcpp
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,
     rmarkdown
-Depends: R (>= 3.1)
+Depends: R (>= 3.3.0)
 VignetteBuilder: knitr

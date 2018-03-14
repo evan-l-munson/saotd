@@ -4,9 +4,12 @@ language: R
 sudo: false
 cache: packages
 
-r_packages:
-  - covr
-  - widyr
-  
+addons:
+  apt:
+    packages:
+      - libgsl0-dev # for topicmodels
+      - libudunits2-dev # for ggraph
+      - libcurl4-openssl-dev # for ldatuning?
+
 after_success:
-  - Rscript -e 'covr::codecov(coverage = covr::package_coverage(line_exclusions = list("R/compat_lazyeval.R")))'
+- Rscript -e 'covr::codecov()'
