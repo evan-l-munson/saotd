@@ -1,0 +1,30 @@
+---
+title: "Uhorchak_Review"
+author: "Nicholas Uhorchak"
+date: "March 14, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Accuracy
+
+- Results are accurate.  Using the vignette commands provides an easy to follow set of instructions to replicate the work necessary to analyze twitter data
+- Results are clearly understood and there is not an issue understanding the work done.
+
+## Compilation
+
+- The analytic worked properly.  There were no issues with install and initialization
+- Small error encountered with bi-gram network code.  98% of the overall code did not have issue.
+
+## Ease of Use
+
+- Although initially confusing, the provided package documentation and supporting vignette provide excellent reference to thoroughly understand this product.
+- All plots provide excellent and relevant information to understand the problem.
+
+## Comments
+Overall - Outstanding (48/50)
+
+This analytic provides an excellent platform for those who wish to analyze twitter data.  Although continued use requires API access, the provided dataset is a good first start to understand the process by which one can do such analysis.
