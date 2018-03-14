@@ -4,12 +4,19 @@ language: R
 sudo: false
 cache: packages
 
+before_install:
+ - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
+ 
 addons:
   apt:
     packages:
       - libgsl0-dev # for topicmodels
       - libudunits2-dev # for ggraph
       - libcurl4-openssl-dev # for ldatuning?
+
+r_binary_packages:
+ - topicmodels
+ - rmpfr
 
 after_success:
 - Rscript -e 'covr::codecov()'
