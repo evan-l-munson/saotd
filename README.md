@@ -1,7 +1,7 @@
 Sentiment Analysis of Twitter Data
 ================
 CPT Evan L. Munson
-09 March 2018
+15 March 2018
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
@@ -11,6 +11,9 @@ Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://tr
 Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
 [![CircleCI](https://circleci.com/gh/evan-l-munson/SAoTD.svg?style=svg)](https://circleci.com/gh/evan-l-munson/SAoTD)
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
+[![minimal R
+version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
+[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/ropensci/hydroscoper)
 
 # Analytic Data Product Information
 
