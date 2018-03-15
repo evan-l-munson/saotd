@@ -13,13 +13,14 @@ Tidy(DataFrame)
 A Tidy DataFrame.
 }
 \description{
-Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual tweet.
+Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual tweet.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 tidy_data
 }
+
 }

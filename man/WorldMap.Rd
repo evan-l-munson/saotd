@@ -18,21 +18,30 @@ A ggplot plot.
 Displays the location of a tweet across the globe by hashtag or topic.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- Scores(DataFrameTidy = tidy_data, 
-                     HT_Topic = "hashtag") 
-ht_map <- WorldMap(DataFrameTidyScores = score_data,
+ht_map <- WorldMap(DataFrame = tidy_data,
                    HT_Topic = "hashtag")
 ht_map
                
 data <- raw_tweets
-tidy_data <- Tidy(DataFrame = data)
-score_data <- Scores(DataFrameTidy = tidy_data, 
-                     HT_Topic = "topic") 
-topic_map <- WorldMap(DataFrameTidyScores = score_data,
+TD_Topics <- SAoTD::Tweet.Topics(DataFrame = data, 
+                                   clusters = 5, 
+                                     method = "Gibbs", 
+                                   set_seed = 1234, 
+                                  num_terms = 10)
+
+TD_Topics <- TD_Topics \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "travel")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "recreation")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^3$", "hiring")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^4$", "cats")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^5$", "random"))             
+                                         
+tidy_data <- Tidy(DataFrame = TD_Topics)
+topic_map <- WorldMap(DataFrame = tidy_data,
                       HT_Topic = "topic") 
 topic_map                    
 }

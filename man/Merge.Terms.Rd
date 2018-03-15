@@ -23,7 +23,7 @@ President Trump, The U.S. President, POTUS, Trump, President Donald Trump, Donal
 While each entry is different, they all refer to the same individual.  Using Merge Terms will allow all be converted into a single term.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 data <- Merge.Terms(DataFrame = data, 

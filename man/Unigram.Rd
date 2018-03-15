@@ -16,10 +16,10 @@ A tribble.
 Determines and displays the text Uni-Grams within the Twitter data in sequence from the most used to the least used.  A Uni-Gram is a single word.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 TD_Unigram <- Unigram(DataFrame = data)
 TD_Unigram
-}             
+ }                        
 }

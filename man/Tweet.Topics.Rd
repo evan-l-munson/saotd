@@ -27,7 +27,7 @@ Uses the `ldatuning` package and outputs an ldatuning plot.
 Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 LDA_data <- Tweet.Topics(DataFrame = data,

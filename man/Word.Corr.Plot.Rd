@@ -30,7 +30,7 @@ An igraph plot
 The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
@@ -46,5 +46,5 @@ TD_Word_Corr_Network <- Word.Corr.Plot(WordCorr = TD_Word_Corr,
                                        set_seed = 1234)
 
 TD_Word_Corr_Network
-}
+  }                        
 }

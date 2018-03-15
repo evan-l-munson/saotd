@@ -18,7 +18,7 @@ A Scored DataFrame.
 Function to Calculate Sentiment Scores that will account for sentiment by hashtag or topic.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

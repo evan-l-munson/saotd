@@ -18,21 +18,34 @@ A ggplot box plot.
 Displays the distribution scores of either hashtag or topic Twitter data.
 }
 \examples{
-\dontrun{
+\dontrun{ 
 library(SAoTD)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 
                     HT_Topic = "hashtag") 
-ht_box <- Boxplot(DataFrameTidyScores = score_data,
+ht_box <- BoxPlot(DataFrameTidyScores = score_data,
                   HT_Topic = "hashtag")
 ht_box
-               
+
 data <- raw_tweets
-tidy_data <- Tidy(DataFrame = data)
+TD_Topics <- SAoTD::Tweet.Topics(DataFrame = data, 
+                                   clusters = 5, 
+                                     method = "Gibbs", 
+                                   set_seed = 1234, 
+                                  num_terms = 10)
+
+TD_Topics <- TD_Topics \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "travel")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "recreation")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^3$", "hiring")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^4$", "cats")) \%>\% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^5$", "random"))             
+                                         
+tidy_data <- Tidy(DataFrame = TD_Topics)
 score_data <- Scores(DataFrameTidy = tidy_data, 
                     HT_Topic = "topic") 
-topic_box <- Boxplot(DataFrameTidyScores = score_data,
+topic_box <- BoxPlot(DataFrameTidyScores = score_data,
                      HT_Topic = "topic") 
 topic_box                    
 }
