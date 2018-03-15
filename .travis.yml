@@ -1,22 +1,27 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
+sudo: required
 cache: packages
 
-before_install:
- - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
- 
 addons:
   apt:
     packages:
       - libgsl0-dev # for topicmodels
       - libudunits2-dev # for ggraph
-      - libcurl4-openssl-dev # for ldatuning?
 
-r_binary_packages:
- - topicmodels
- - Rmpfr
+warnings_are_errors: true
 
 after_success:
 - Rscript -e 'covr::codecov()'
+
+before_install:
+ - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
+
+apt_packages:
+ - curl
+ - libcurl4-openssl-dev
+
+r_binary_packages:
+ - topicmodels
+ - rmpfr
