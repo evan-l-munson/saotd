@@ -12,9 +12,6 @@ addons:
 
 warnings_are_errors: true
 
-after_success:
-- Rscript -e 'covr::codecov()'
-
 before_install:
  - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
 
@@ -25,3 +22,9 @@ apt_packages:
 r_binary_packages:
  - topicmodels
  - rmpfr
+ 
+r_packages:
+ - covr
+
+after_success:
+ - Rscript -e 'covr::codecov()'
