@@ -8,8 +8,7 @@
 #' @description Function will enable a user to access the twitter API throught the 
 #' [Twitter Developers Account](https://dev.twitter.com/) site.
 #' Once a user has a twitter developers account and has recieved their individual consumer key, 
-#' consumer secret key, access token, and access secret key and acquire tweets they can 
-#' acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
+#' consumer secret key, access token, and access secret they can acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
 
 #' @param consumer_key Twitter Application management consumer key.
 #' @param consumer_secret Twitter Application management consumer secret key.
@@ -81,7 +80,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 
 #' @title Tidy Twitter Data
 #'
-#' @description Function to Tidy Twitter Data and remove all emoticons whilie maintaiing actual tweet.
+#' @description Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual tweet.
 #'
 #' @param DataFrame DataFrame of Twitter Data.
 #' 

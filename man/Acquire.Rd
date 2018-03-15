@@ -31,8 +31,7 @@ A DataFrame.
 Function will enable a user to access the twitter API throught the 
 [Twitter Developers Account](https://dev.twitter.com/) site.
 Once a user has a twitter developers account and has recieved their individual consumer key, 
-consumer secret key, access token, and access secret key and acquire tweets they can 
-acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
+consumer secret key, access token, and access secret they can acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
 }
 \examples{
 \dontrun{

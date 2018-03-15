@@ -1,7 +1,5 @@
-Sentiment Analysis of Twitter Data
+Sentiment Analysis of Twitter Data (SAoTD)
 ================
-CPT Evan L. Munson
-15 March 2018
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
@@ -13,114 +11,140 @@ Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?b
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/ropensci/hydroscoper)
+[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
 
-# Analytic Data Product Information
+`SAoTD` is an R interface to the Twitter API and can be used to acquire
+tweets based on user selected \#hashtags. The package will clean and
+tidy the Twitter data, determine the latent topics within the tweets
+utilizing Latent Dirichlet Allocation (LDA), determine a sentiment score
+using the Bing lexicon dictionary and output visualizations.
 
-1.1 Provide a short name (either a single word or an acronym) for the
-analytic you plan to develop.
+## Installation
 
-*SAoTD aka: Sentiment Analysis of Twitter Data*
+You can install the development version from GitHub with:
 
-1.2 Provide a brief title (1-2 sentences) describing – at the
-50,000-foot level – what your analytic does. Your title should be short
-and to the point, but should also be clear to an end user.
+``` r
+install.packages("devtools")
+devtools::install_github('evan-l-munson/SAoTD')
+```
 
-*This analytic is an in initial forray into sentiment analysis. This
-analytic will allow a user to access the Twitter API (once they create
-their own developer account), ingest tweets of their interest, clean /
-tidy data, perform topic modeling in interested, compute sentiment
-scores utilizing the Bing Lexicon, and output visualizations.*
+## Using SAoTD
 
-1.3 Provide a description (2-3 paragraphs) of why this analytic data
-product will be useful for an end-user. This description should address
-the following points (where applicable).
+The functions that are provided by `SAoTD` are broken down into five
+different categories: Acquire, Explore, Topic Analysis, Sentiment
+Calculation, and Visualizations.
 
-1.3.A Describe each of the features that your analytic will perform when
-complete
+  - Acquire
+    
+      - `Acquire` allows a user to acquire tweets of their choosing by
+        accessing the Twitter API. In order to do this the user needs to
+        have a [Twitter](https://twitter.com) account. Additionally once
+        the user has an account they will then need to sign up for a
+        [Twitter Developers](https://dev.twitter.com/) account. Once a
+        user has a twitter developers account and has received their
+        individual consumer key, consumer secret key, access token, and
+        access secret key, they can acquire tweets based on a list of
+        hashtags and a requested number of entries per hashtag.
 
-  - *TD.Acquire: Access Twitter API and gather tweets.*
-  - *TD.Tidy: Tidy acquired tweets.*
-  - *TD.Scores: Calculates sentiment scores of tidy data using the Bing
-    Lexicon.*
-  - *Merge.Terms: Function received from Capt Jeff Smith, that will
-    merge terms and is used to reduce redundancy.*
-  - *Number.Topics: Produces an Latent Dirichlet Allocation (LDA) tuning
-    graph that will assist a user determining how many latent topics are
-    within their twitter data.*
-  - *Tweet.Topics: Determines the contents of the latent topics within
-    the twitter data.*
-  - \-TD.Min.Scores: Two part function. Will output dataframe with the
-    most negative scored tweets in the entire dataframe. Secondarily,
-    the function can also be used to find the most negative tweets
-    associated with a user defined \#hashtags or topics.\_
-  - *TD.Max.Scores: Two part function. Will output dataframe with the
-    most positive scored tweets in the entire dataframe. Secondarily,
-    the function can also be used to find the most positive tweets
-    associated with a user defined \#hashtags or topics.*
-  - *TD.PosNeg.Words: Outputs a chart with the top ten, most positive
-    and negative words within the entire dataframe.*
-  - *TD.Unigram: Displays the most frequent Uni-grams within the
-    dataframe.*
-  - \-TD.Bigram: Displays the most frequent Bi-grams within the
-    dataframe.\_
-  - *TD.Trigram: Displays the most frequent Tri-grams within the
-    dataframe.*
-  - *TD.Bigram.Network: Outputs chart showing the Bi-gram interactions
-    between words within dataframe. Has multiple aesthetic options.*
-  - *TD.Word.Corr: Determines the correlations between all words within
-    the dataframe.*
-  - *TD.Word.Corr.Plot: Outputs chart showing the correlation between
-    words within dataframe. Has multiple aesthetic options.*
-  - *TD.Corups.Distribution: Chart with the overall sentiment
-    distribution across the entire dataframe / corpus.*
-  - *TD.Distribution: Facet wrap chart displaying a comparision between
-    the sentiemnt distributions for each \#hashtag or topic.*
-  - *TD.BoxPlot: Displays box plot for \#hashtag or topic data.*
-  - *TD.ViolinPlot: Displays violin plot for \#hashtag or topic data.*
-  - *TD.Timescale: Plot that displays the change in sentiemnt based
-    either on the \#hashtags or selected topics throught time.*
-  - *TD.WorldMap: Plots the geo-referenced location of tweets by
-    \#hashtag or tweet across the globe.*
+  - Explore
+    
+      - `Tidy` removes all emoticons, punctuation, weblinks, etc and
+        converts converts the data to a tidy structure.
+      - `Merge.Terms` merges terms within a dataframe and prevents
+        redundancy in the analysis.
+      - `Unigram` displays the text Uni-Grams within the Twitter data in
+        sequence from the most used to the least used. A Uni-Gram is a
+        single word.
+      - `Bigram` displays the text Bi-Grams within the Twitter data in
+        sequence from the most used to the least used. A Bi-Gram is a
+        combination of two consecutive words.
+      - `Trigram` displays the text Tri-Grams within the Twitter data in
+        sequence from the most used to the least used. A Tri-Gram is a
+        combination of three consecutive words.
+      - `Bigram.Network` Bi-Gram networks builds on computed Bi-Grams.
+        Bi-Gram networks serve as a visualization tool that displays the
+        relationships between the words simultaneously as opposed to a
+        tabular display of Bi-Gram words.
+      - `Word.Corr` displays the word correlation between words.
+      - `Word.Corr.Plot` displays the mutual relationship between words.
+        The correlation network shows higher correlations with a thicker
+        and darker edge color.
 
-1.3.B Describe the typical end-user for whom this analytic is being
-developed
+  - Topic Analysis
+    
+      - `Number.Topics` determines the optimal number of Latent topics
+        within a dataframe by tuning the Latent Dirichlet Allocation
+        (LDA) model parameters. Uses the `ldatuning` package and outputs
+        an ldatuning plot. **This process can be time consuming
+        depending on the size of the input dataframe. For example the
+        built in `raw_tweets` dataset is just shy of 7000 tweets and is
+        evaluated in ~1 minutes with a 3.1 GHz, Dual Core processor. A
+        different dataset on the same machine with ~150,000 tweets took
+        nearly 20-30 minutes.**
+      - `Tweet.Topics` determines the Latent topics within a dataframe
+        by using Latent Dirichlet Allocation (LDA) model parameters.
+        Uses the `ldatuning` package and outputs an ldatuning plot.
+        Prepares tweet text, creates DTM, conducts LDA, display data
+        terms associated with each topic.
 
-*This package is being developed for novice analysts.*
+  - Sentiment Calculation
+    
+      - `Scores` calculates the Sentiment Scores using the [Bing Lexicon
+        Dictionary](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)
+        that will account for sentiment by hashtag or topic.
+      - `PosNeg.Words` determines and displays the most positive and
+        negative words within the twitter data.
+      - `Min.Scores` determines the minimum scores for either the entire
+        dataset or the minimum scores associated with a hashtag or topic
+        analysis.
+      - `Max.Scores` determines the maximum scores for either the entire
+        dataset or the maximum scores associated with a hashtag or topic
+        analysis.
 
-1.3.C Describe any specific knowledge/skills/abilities an end-user must
-have to use your analytic
+  - Visualizations
+    
+      - `Corpus.Distribution` determines the scores distribution for the
+        entire Twitter data corpus.
+      - `Distribution` determines the scores distribution by hashtag or
+        topic for Twitter data.
+      - `Boxplot` displays the distribution scores of either hashtag or
+        topic Twitter data.
+      - `ViolinPlot` displays the distribution scores of either hashtag
+        or topic Twitter data.
+      - `TimeScale` displays how the Twitter data sentiment scores
+        through time.  
+      - `WorldMap` displays the location of a tweet across the globe by
+        hashtag or topic.
 
-*Basic understanding of twitter and social media.*
+## Example
 
-1.3.D If your analytic implements known statistical methods, specified
-them.
+For an example of how to use this package, find the vignette at:
 
-*Distributions, bi-modal distributions, Latent Dirichlet Allocation
-(LDA)*
+``` r
+library(SAoTD)
+utils::vignette("SAoTD")
+```
 
-1.3.E If your analytic builds on existing statistical methods or R
-packages, specify them
+## Meta
 
-*Tidyverse, LDATuning, Topicmodel, Tidyverse*
+  - Licence:
+    
+      - All code is licensed GL.
+      - All data is from public data sources.
 
-1.4 How will end-users access your analytic data product?
+  - Get citation information for `SAoTD` in R by running:
 
-*Package*
+<!-- end list -->
 
-1.5 Are there any security concerns that need to be addressed?
+``` r
+citation("SAoTD")
+```
 
-*No*
+## References
 
-1.6 Are there any appearance/design constraints that your analytic must
-adhere to?
-
-*Sponsor has requested a well built package they could expand into a
-Shiny app if desired.*
-
-# Delivery and schedule information
-
-2.1 Review the features you listed in Section 1.3.A. Construct a table
-with the following information
-
-![SAoTD Package Features](Proposal_Chart.png)
+  - [AFIT Data Science Lab](https://github.com/AFIT-R)
+  - [Tidyverse](https://www.tidyverse.org/)
+  - [Text Mining with
+    R](https://www.tidytextmining.com/)
+  - [ldatuning](https://github.com/nikita-moor/ldatuning)
+  - [topicmodels](https://cran.r-project.org/web/packages/topicmodels/index.html)
