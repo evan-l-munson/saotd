@@ -32,7 +32,7 @@ data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 
                     HT_Topic = "topic") 
-topic_box <- Boxplot(DataFrameTidyScores = score_data,
+topic_box <- BoxPlot(DataFrameTidyScores = score_data,
                      HT_Topic = "topic") 
 topic_box                    
 }

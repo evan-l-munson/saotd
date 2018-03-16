@@ -153,19 +153,19 @@ SAoTD::Trigram(DataFrame = TD_Merge) %>%
   knitr::kable("html", caption = "Twitter data Tri-Grams")
 ```
 
-<!-- Now we can look at Bi-Gram Networks. -->
+Now we can look at Bi-Gram Networks.
 
-<!-- ```{r fig.align='center'} -->
-<!-- TD_Bigram <- SAoTD::Bigram(DataFrame = TD_Merge) -->
+```{r fig.align='center'}
+TD_Bigram <- SAoTD::Bigram(DataFrame = TD_Merge)
 
-<!-- SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigram, -->
-<!--                       number = 90, -->
-<!--                       layout = "fr", -->
-<!--                       edge_color = "blue", -->
-<!--                       node_color = "black", -->
-<!--                       node_size = 3, -->
-<!--                       set_seed = 1234) -->
-<!-- ``` -->
+SAoTD::Bigram.Network(BiGramDataFrame = TD_Bigram,
+                      number = 90,
+                      layout = "fr",
+                      edge_color = "blue",
+                      node_color = "black",
+                      node_size = 3,
+                      set_seed = 1234)
+```
 
 Additionally we can observe the Correlation Network.
 
@@ -318,7 +318,7 @@ SAoTD::Max.Scores(DataFrameTidyScores = TD_Topics_Scores,
 Now we will begin visualizing the hashtag data.  The distribution of the sentiment scores can be found in the below plot.
 
 ```{r fig.align='center'}
-SAoTD::Corups.Distribution(DataFrameTidyScores = TD_Scores, 
+SAoTD::Corpus.Distribution(DataFrameTidyScores = TD_Scores, 
                            binwidth = 1, 
                            color = "black", 
                            fill = "white")
@@ -367,7 +367,7 @@ SAoTD::WorldMap(DataFrame = TD,
 Now we will begin visualizing the topic data.  The distribution of the sentiment scores can be found in the below plot.
 
 ```{r fig.align='center'}
-SAoTD::Corups.Distribution(DataFrameTidyScores = TD_Topics_Scores, 
+SAoTD::Corpus.Distribution(DataFrameTidyScores = TD_Topics_Scores, 
                            binwidth = 1, 
                            color = "black", 
                            fill = "white")
