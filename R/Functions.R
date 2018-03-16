@@ -1202,7 +1202,6 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
 #' 
 #' @import ggplot2
-#' @import maps
 #' @importFrom dplyr quo
 #' 
 #' @return A ggplot plot.
