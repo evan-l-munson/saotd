@@ -46,7 +46,7 @@
 #'         
 #' load("test_tweets.RData")
 #' }
-#' @export
+#' @export 
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
