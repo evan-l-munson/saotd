@@ -50,6 +50,25 @@
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
+  if(!is.character(consumer_key)) {
+    stop('consumer_key must be a character string.')
+  }
+  if(!is.character(consumer_secret)) {
+    stop('consumer_secret must be a character string.')
+  }
+  if(!is.character(access_token)) {
+    stop('access_token must be a character string.')
+  }
+  if(!is.character(access_secret)) {
+    stop('access_secret must be a character string.')
+  }
+  if(!is.character(HT)) {
+    stop('HT must be a character string.')
+  }
+  if(!is.numeric(num_tweets)) {
+    stop('num_tweets must be numeric.')
+  }
+  
   options("httr_oauth_cache")
   options(httr_oauth_cache = TRUE)
   
@@ -104,6 +123,10 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 
 Tidy <- function(DataFrame) {
   
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
+  
   text <- dplyr::quo(text)
   cleantext <- dplyr::quo(cleantext)
   word <- dplyr::quo(word)
@@ -148,6 +171,11 @@ Tidy <- function(DataFrame) {
 #' @export
 
 Merge.Terms <- function(DataFrame, term, term_replacement){
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
+  
   for(i in 1: length(DataFrame$text)){
     DataFrame[i, "text"] <- DataFrame[i, "text"] %>% 
       gsub(pattern = as.character(term),
@@ -179,6 +207,10 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' @export
 
 Unigram <- function(DataFrame){
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
   
   text <- dplyr::quo(text)
   word <- dplyr::quo(word)
@@ -219,6 +251,10 @@ Unigram <- function(DataFrame){
 #' @export
 
 Bigram <- function(DataFrame){
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
   
   text <- dplyr::quo(text)
   word <- dplyr::quo(word)
@@ -264,6 +300,10 @@ Bigram <- function(DataFrame){
 #' @export
 
 Trigram <- function(DataFrame) {
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
   
   text <- dplyr::quo(text)
   word <- dplyr::quo(word)
@@ -327,6 +367,16 @@ Trigram <- function(DataFrame) {
 
 Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
   
+  if(!is.data.frame(BiGramDataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("word1" %in% colnames(BiGramDataFrame)) & ("word2" %in% colnames(BiGramDataFrame)) & ("n" %in% colnames(BiGramDataFrame)))) {
+    stop('The data frame is not properly constructed.  The data frame must have three columns: word1, word2 and n.')
+  }
+  if(number <= 1) {
+    stop('Must choose number of Bi-Grams greater than 1.')
+  }
+  
   n <- dplyr::quo(n)
   name <- dplyr::quo(name)
   
@@ -373,6 +423,16 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 
 Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
   
+  if(!is.data.frame(DataFrameTidy)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("Token" %in% colnames(DataFrameTidy)) & ("key" %in% colnames(DataFrameTidy)))) {
+    stop('The data frame is not properly constructed.  The data frame must contain at minimum the columns: Token and key.')
+  }
+  if(number <= 1) {
+    stop('Must choose number of Correlation pairs greater than 1.')
+  }
+  
   Token <- dplyr::quo(Token)
   n <- dplyr::quo(n)
   key <- dplyr::quo(key)
@@ -381,6 +441,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
     dplyr::group_by(Token) %>%
     dplyr::filter(n() >= number) %>%
     widyr::pairwise_cor(Token, key, sort = sort)
+  return(TD_Word_Correlation)
 }
 
 #' @title Twitter Word Correlations Plot
@@ -424,6 +485,16 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 
 Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
   
+  if(!is.data.frame(WordCorr)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(Correlation <= 0) {
+    stop('A correlation value between 0 and 1 must be selected.')
+  }
+  if(Correlation > 1) {
+    stop('A correlation value between 0 and 1 must be selected.')
+  }
+  
   correlation <- dplyr::quo(correlation)
   name <- dplyr::quo(name)
   
@@ -437,7 +508,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
     ggraph::geom_node_point(colour = node_color, size = node_size) +
     ggraph::geom_node_text(ggplot2::aes(label = name), repel = TRUE) +
     ggplot2::ggtitle("Word Correlation Network") +
-    theme_void()
+    ggplot2::theme_void()
 }
 
 # Topic Analysis ----------------------------------------------------------
@@ -481,6 +552,10 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' @export
 
 Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
   
   text <- dplyr::quo(text)
   key <- dplyr::quo(key)
@@ -566,6 +641,13 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 
 Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
   
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!is.numeric(clusters)) {
+    stop('The input must be a numerical value.')
+  }
+  
   text <- dplyr::quo(text)
   key <- dplyr::quo(key)
   word <- dplyr::quo(word)
@@ -643,7 +725,14 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' @export
 
 Scores <- function(DataFrameTidy, HT_Topic) {
-  
+
+  if(!is.data.frame(DataFrameTidy)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
+
   text <- dplyr::quo(text)
   method <- dplyr::quo(method)
   hashtag <- dplyr::quo(hashtag)
@@ -731,6 +820,13 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 
 PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
   
+  if(!is.data.frame(DataFrameTidy)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!is.numeric(num_words)) {
+    stop('Enter a number.')
+  }
+  
   Token <- dplyr::quo(Token)
   Sentiment <- dplyr::quo(Sentiment)
   n <- dplyr::quo(n)
@@ -792,6 +888,13 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' @export
 
 Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+  
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
   
   hashtag <- dplyr::quo(hashtag)
   Topic <- dplyr::quo(Topic)
@@ -858,6 +961,13 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 
 Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
   
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
+  
   hashtag <- dplyr::quo(hashtag)
   Topic <- dplyr::quo(Topic)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
@@ -920,6 +1030,10 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 
 Corpus.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
   
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   
   TD_Corpus_Distribution <- DataFrameTidyScores %>% 
@@ -964,6 +1078,13 @@ Corpus.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' @export
 
 Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
+  
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
   
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   
@@ -1026,6 +1147,13 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' @export
 
 BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
+  
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
   
   hashtag <- dplyr::quo(hashtag)
   Topic <- dplyr::quo(Topic)
@@ -1092,6 +1220,13 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 
 ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
   
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
+  
   hashtag <- dplyr::quo(hashtag)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
@@ -1155,6 +1290,13 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' @export
 
 TimeScale <- function(DataFrameTidyScores, HT_Topic) {
+  
+  if(!is.data.frame(DataFrameTidyScores)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
   
   hashtag <- dplyr::quo(hashtag)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
@@ -1228,6 +1370,13 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' @export
 
 WorldMap <- function(DataFrame, HT_Topic) {
+  
+  if(!is.data.frame(DataFrame)) {
+    stop('The input for this function is a data frame.')
+  }
+  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+  }
   
   long <- dplyr::quo(long)
   lat <- dplyr::quo(lat)
