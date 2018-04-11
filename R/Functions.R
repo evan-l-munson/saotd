@@ -373,7 +373,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
   if(!(("word1" %in% colnames(BiGramDataFrame)) & ("word2" %in% colnames(BiGramDataFrame)) & ("n" %in% colnames(BiGramDataFrame)))) {
     stop('The data frame is not properly constructed.  The data frame must have three columns: word1, word2 and n.')
   }
-  if(number <= 1) {
+  if(number < 1) {
     stop('You must choose number of Bi-Grams greater than 1.')
   }
   
