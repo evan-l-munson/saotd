@@ -28,7 +28,7 @@ check_Topic <- "negative"
 test_that("The Scores function properly ingests data frame", {
   
   expect_error(object = SAoTD::Scores(DataFrameTidy = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::Scores(DataFrameTidy = test_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either \"hashtag\" for analysis using hashtags, or \"topic\" for analysis looking at topics.")
+  expect_error(object = SAoTD::Scores(DataFrameTidy = test_HT_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
   
 })
 

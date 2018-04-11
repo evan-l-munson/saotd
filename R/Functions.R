@@ -730,7 +730,7 @@ Scores <- function(DataFrameTidy, HT_Topic) {
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
 
   text <- dplyr::quo(text)
