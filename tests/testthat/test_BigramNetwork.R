@@ -7,7 +7,7 @@ test_text_df <- as.data.frame(x = text)
 
 test_bigram_df <- SAoTD::Bigram(DataFrame = test_text_df)
 
-inorrect_bigram_df <- dplyr::tribble(
+incorrect_bigram_df <- dplyr::tribble(
   ~word, ~word2, ~n,
   "data", "science", as.integer(2),
   "structure", "transform", as.integer(1),
@@ -21,6 +21,7 @@ test_that("The Bigram.Network function is working as properly", {
 
   expect_error(object = SAoTD::Bigram.Network(BiGramDataFrame = text), "The input for this function is a Bigram data frame.")
   expect_error(object = SAoTD::Bigram.Network(BiGramDataFrame = test_bigram_df, number = 0), "You must choose number of Bi-Grams greater than 1.")
+  expect_error(object = SAoTD::Bigram.Network(BiGramDataFrame = incorrect_bigram_df), "The data frame is not properly constructed.  The data frame must have three columns: word1, word2 and n.")
   
 })
 
