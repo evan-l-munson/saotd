@@ -486,7 +486,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
   
   if(!is.data.frame(WordCorr)) {
-    stop('The input for this function is a data frame.')
+    stop('The input for this function is a Correlation data frame.')
   }
   if(Correlation <= 0) {
     stop('A correlation value between 0 and 1 must be selected.')
