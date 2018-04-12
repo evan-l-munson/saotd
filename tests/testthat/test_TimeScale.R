@@ -11,7 +11,7 @@ test_HT_df <- dplyr::data_frame(
 test_HT_Tidy <- SAoTD::Tidy(DataFrame = test_HT_df)
 test_HT_Tidy_Scores <- SAoTD::Scores(DataFrameTidy = test_HT_Tidy, HT_Topic = "hashtag")
 
-p <- SAoTD::ViolinPlot(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "hashtag")
+p <- SAoTD::TimeScale(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "hashtag")
 
 # Data for topic 
 test_Topic_df <- dplyr::data_frame(
@@ -25,24 +25,24 @@ test_Topic_df <- dplyr::data_frame(
 test_Topic_Tidy_df <- SAoTD::Tidy(DataFrame = test_Topic_df)
 test_Topic_Tidy_Scores <- SAoTD::Scores(DataFrameTidy = test_Topic_Tidy_df, HT_Topic = "topic")
 
-t <- SAoTD::ViolinPlot(DataFrameTidyScores = test_Topic_Tidy_Scores, HT_Topic = "topic")
+t <- SAoTD::TimeScale(DataFrameTidyScores = test_Topic_Tidy_Scores, HT_Topic = "topic")
 
 # Tests
-test_that("The ViolinPlot function properly ingests data frame", {
+test_that("The TimeScale function properly ingests data frame", {
   
-  expect_error(object = SAoTD::ViolinPlot(DataFrameTidyScores = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::ViolinPlot(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
+  expect_error(object = SAoTD::TimeScale(DataFrameTidyScores = text), "The input for this function is a data frame.")
+  expect_error(object = SAoTD::TimeScale(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
   
 })
 
-test_that("The ViolinPlot plot retunrs ggplot object when using hashtags", {
+test_that("The TimeScale plot retunrs ggplot object when using hashtags", {
   
   expect_is(p, "ggplot")
   
 })
 
-test_that("The ViolinPlot plot retunrs ggplot object when using topics", {
+test_that("The TimeScale plot retunrs ggplot object when using topics", {
   
-  expect_is(p, "ggplot")
+  expect_is(t, "ggplot")
   
 })
