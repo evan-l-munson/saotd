@@ -1,4 +1,4 @@
-context("test_CorpusDistribution")
+context("test_Distribution")
 
 # Test Data
 
@@ -13,18 +13,19 @@ test_HT_df <- dplyr::data_frame(
 test_HT_Tidy <- SAoTD::Tidy(DataFrame = test_HT_df)
 test_HT_Tidy_Scores <- SAoTD::Scores(DataFrameTidy = test_HT_Tidy, HT_Topic = "hashtag")
 
-p <- SAoTD::Corpus.Distribution(DataFrameTidyScores = test_HT_Tidy_Scores)
+p <- SAoTD::Distribution(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "hashtag")
 
 # Tests
 test_that("The Corpus.Distribution function properly ingests data frame", {
-
-  expect_error(object = SAoTD::Corpus.Distribution(DataFrameTidyScores = text), "The input for this function is a data frame.")
-
+  
+  expect_error(object = SAoTD::Distribution(DataFrameTidyScores = text), "The input for this function is a data frame.")
+  expect_error(object = SAoTD::Distribution(DataFrameTidyScores = test_HT_Tidy_Scores, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
+  
+  
 })
 
 test_that("The Corpus.Distribution plot retunrs ggplot object", {
-
+  
   expect_is(p, "ggplot")
-
+  
 })
-
