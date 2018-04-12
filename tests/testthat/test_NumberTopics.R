@@ -1,0 +1,33 @@
+# Test Data
+test_df <- dplyr::data_frame(
+  text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!",
+           "cats are the best most amazing friends anyone could ask for",
+           "if you are looking for a job, come on down to the local Tire Exchange"),
+  hashtag = c("dog", "cat", "job"),
+  key = c("coolguy123", "crazycatperson1234", "tireworld876"))
+
+test_NumberTopics <- SAoTD::Number.Topics(DataFrame = test_df, 
+                                          num_cores = 1L, 
+                                          min_clusters = 2, 
+                                          max_clusters = 4, 
+                                          skip = 1, 
+                                          set_seed = 1234)
+
+# check_NumberTopics <- dplyr::data_frame(
+#   topics <- c(2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4,),
+#   variable <- c("Griffiths2004", "Griffiths2004", "Griffiths2004", "CaoJuan2009", "CaoJuan2009","CaoJuan2009")
+# )
+# x <- test_NumberTopics$data
+
+# Tests
+test_that("The Number.Topics function properly ingests data frame", {
+  
+  expect_error(object = SAoTD::Number.Topics(DataFrame = text), "The input for this function is a data frame.")
+ 
+})
+
+test_that("The Number.Topics plot retunrs ggplot object", {
+  
+  expect_is(test_NumberTopics, "ggplot")
+  
+})
