@@ -13,12 +13,6 @@ test_NumberTopics <- SAoTD::Number.Topics(DataFrame = test_df,
                                           skip = 1, 
                                           set_seed = 1234)
 
-# check_NumberTopics <- dplyr::data_frame(
-#   topics <- c(2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4,),
-#   variable <- c("Griffiths2004", "Griffiths2004", "Griffiths2004", "CaoJuan2009", "CaoJuan2009","CaoJuan2009")
-# )
-# x <- test_NumberTopics$data
-
 # Tests
 test_that("The Number.Topics function properly ingests data frame", {
   
