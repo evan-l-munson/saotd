@@ -25,12 +25,6 @@ test_that("The Tweet.Topics function properly accepts input items", {
   
 })
 
-test_that("The Number.Topics plot retunrs ggplot object", {
-  
-  expect_is(test_NumberTopics, "ggplot")
-  
-})
-
 test_that("The Tweet.Topics is being computed correctly", {
   
   expect_identical(test_TweetTopics, check_TweetTopics)
