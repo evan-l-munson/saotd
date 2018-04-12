@@ -893,7 +893,7 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   hashtag <- dplyr::quo(hashtag)
@@ -965,7 +965,7 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   hashtag <- dplyr::quo(hashtag)
@@ -1083,7 +1083,7 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
@@ -1152,7 +1152,7 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   hashtag <- dplyr::quo(hashtag)
@@ -1224,7 +1224,7 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   hashtag <- dplyr::quo(hashtag)
@@ -1295,7 +1295,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   hashtag <- dplyr::quo(hashtag)
@@ -1375,7 +1375,7 @@ WorldMap <- function(DataFrame, HT_Topic) {
     stop('The input for this function is a data frame.')
   }
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either "hashtag" for analysis using hashtags, or "topic" for analysis looking at topics.')
+    stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
   long <- dplyr::quo(long)

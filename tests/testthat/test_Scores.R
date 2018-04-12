@@ -13,7 +13,7 @@ test_HT <- test_HT_Scores_Tidy_df$TweetSentiment
 check_HT <- "positive"
 
 test_Topic_df <- dplyr::data_frame(
-  text = "I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
+  text = "I really love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
   Topic = "dog", 
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
