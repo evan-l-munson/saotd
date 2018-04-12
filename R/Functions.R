@@ -557,6 +557,8 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
     stop('The input for this function is a data frame.')
   }
   
+  set_seed
+  
   text <- dplyr::quo(text)
   key <- dplyr::quo(key)
   word <- dplyr::quo(word)
