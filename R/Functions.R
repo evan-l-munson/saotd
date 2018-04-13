@@ -69,7 +69,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
     stop('num_tweets must be numeric.')
   }
   
-  options("httr_oauth_cache")
+  # options("httr_oauth_cache")
   options(httr_oauth_cache = TRUE)
   
   screenName <- dplyr::quo(screenName)
