@@ -7,11 +7,12 @@ Sentiment Analysis of Twitter Data (SAoTD)
 Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
-[![CircleCI](https://circleci.com/gh/evan-l-munson/SAoTD.svg?style=svg)](https://circleci.com/gh/evan-l-munson/SAoTD)
+<!-- [![CircleCI](https://circleci.com/gh/evan-l-munson/SAoTD.svg?style=svg)](https://circleci.com/gh/evan-l-munson/SAoTD) -->
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--13-green.svg)](/commits/master)
 
 `SAoTD` is an R interface to the Twitter API and can be used to acquire
 tweets based on user selected \#hashtags. The package will clean and
