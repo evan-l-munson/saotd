@@ -11,7 +11,6 @@ Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?b
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--13-green.svg)](/commits/master)
 
 `SAoTD` is an R interface to the Twitter API and can be used to acquire
 tweets based on user selected \#hashtags. The package will clean and
