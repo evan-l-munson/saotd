@@ -50,26 +50,6 @@
 
 Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
-  # if(!is.character(consumer_key)) {
-  #   stop('consumer_key must be a character string.')
-  # }
-  # if(!is.character(consumer_secret)) {
-  #   stop('consumer_secret must be a character string.')
-  # }
-  # if(!is.character(access_token)) {
-  #   stop('access_token must be a character string.')
-  # }
-  # if(!is.character(access_secret)) {
-  #   stop('access_secret must be a character string.')
-  # }
-  # if(!is.character(HT)) {
-  #   stop('HT must be a character string.')
-  # }
-  # if(!is.numeric(num_tweets)) {
-  #   stop('num_tweets must be numeric.')
-  # }
-  
-  # options("httr_oauth_cache")
   options(httr_oauth_cache = TRUE)
   
   screenName <- dplyr::quo(screenName)
