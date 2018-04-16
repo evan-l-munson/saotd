@@ -9,4 +9,3 @@ README.Rmd
 ^.*\.so$
 ^.*\.RData$
 ^appveyor\.yml$
-^\tests\testthat\.httr-oauth$
