@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![DOI](https://zenodo.org/badge/117839390.svg)](https://zenodo.org/badge/latestdoi/117839390)
 [![Build Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)

@@ -3,6 +3,7 @@ Sentiment Analysis of Twitter Data (SAoTD)
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
+[![DOI](https://zenodo.org/badge/117839390.svg)](https://zenodo.org/badge/latestdoi/117839390)
 [![Build
 Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
 [![AppVeyor Build
