@@ -727,7 +727,6 @@ Scores <- function(DataFrameTidy, HT_Topic) {
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
   
-#data("Bing")
   
   Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
     plyr::rename(c("word" = "Token", "sentiment" = "Sentiment"))
