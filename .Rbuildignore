@@ -10,3 +10,5 @@ README.Rmd
 ^.*\.RData$
 ^appveyor\.yml$
 tests/testthat/.httr-oauth
+^paper.bib$
+^paper.md$
