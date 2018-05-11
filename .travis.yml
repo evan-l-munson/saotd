@@ -19,9 +19,9 @@ apt_packages:
  - curl # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
  - libcurl4-openssl-dev # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
 
-r_binary_packages:
- - topicmodels # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
- - rmpfr # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
+#r_binary_packages:
+# - topicmodels # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
+# - rmpfr # for ldatuning.  Insight from:  https://github.com/nikita-moor/ldatuning/blob/master/.travis.yml
  
 r_packages:
  - covr
