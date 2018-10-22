@@ -25,7 +25,7 @@ letting them better understand their target population. The knowledge
 gained can also enable governments to better understand a population so
 they can make more informed decisions for that population. During the
 course of this research, data was acquired through the Public Twitter
-Application Programming Interface (API), to obtain tweets as the
+Application Programming Interface (API), to obtain Tweets as the
 foundation of data and will build a methodology utilizing a topic
 modeling and lexicographical approach to analyze the sentiment and
 opinions of text in English to determine a general sentiment such as
@@ -35,10 +35,12 @@ people.
 
 ## Package
 
-The R package, `SAoTD` is an R interface to the Twitter API and can be
-used to acquire tweets based on user selected \#hashtags. The package
+The `SAoTD` package is an R interface to the Twitter API and can be used
+to acquire Tweets based on user selected \#hashtags and was developed
+utilizing a tidyverse approach. The package was designed to allow a user
+to conduct a complete analysis with the contained functions. The package
 will clean and tidy the Twitter data, determine the latent topics within
-the tweets utilizing Latent Dirichlet Allocation (LDA), determine a
+the Tweets utilizing Latent Dirichlet Allocation (LDA), determine a
 sentiment score using the Bing lexicon dictionary and output
 visualizations.
 
@@ -59,14 +61,14 @@ Calculation, and Visualizations.
 
   - Acquire
     
-      - `Acquire` allows a user to acquire tweets of their choosing by
+      - `Acquire` allows a user to acquire Tweets of their choosing by
         accessing the Twitter API. In order to do this the user needs to
         have a [Twitter](https://twitter.com) account. Additionally once
         the user has an account they will then need to sign up for a
         [Twitter Developers](https://dev.twitter.com/) account. Once a
-        user has a twitter developers account and has received their
+        user has a Twitter developers account and has received their
         individual consumer key, consumer secret key, access token, and
-        access secret key, they can acquire tweets based on a list of
+        access secret key, they can acquire Tweets based on a list of
         hashtags and a requested number of entries per hashtag.
 
   - Explore
@@ -98,12 +100,12 @@ Calculation, and Visualizations.
       - `Number.Topics` determines the optimal number of Latent topics
         within a dataframe by tuning the Latent Dirichlet Allocation
         (LDA) model parameters. Uses the `ldatuning` package and outputs
-        an ldatuning plot. **This process can be a time consuming
+        an ldatuning plot. **This process can be time consuming
         depending on the size of the dataframe.**
       - `Tweet.Topics` determines the Latent topics within a dataframe
         by using Latent Dirichlet Allocation (LDA) model parameters.
         Uses the `ldatuning` package and outputs an ldatuning plot.
-        Prepares tweet text, creates DTM, conducts LDA, display data
+        Prepares Tweet text, creates DTM, conducts LDA, display data
         terms associated with each topic.
 
   - Sentiment Calculation
@@ -112,7 +114,7 @@ Calculation, and Visualizations.
         Dictionary](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)
         that will account for sentiment by hashtag or topic.
       - `PosNeg.Words` determines and displays the most positive and
-        negative words within the twitter data.
+        negative words within the Twitter data.
       - `Min.Scores` determines the minimum scores for either the entire
         dataset or the minimum scores associated with a hashtag or topic
         analysis.
@@ -132,7 +134,7 @@ Calculation, and Visualizations.
         or topic Twitter data.
       - `TimeScale` displays how the Twitter data sentiment scores
         through time.  
-      - `WorldMap` displays the location of a tweet across the globe by
+      - `WorldMap` displays the location of a Tweet across the globe by
         hashtag or topic.
 
 ## Example
