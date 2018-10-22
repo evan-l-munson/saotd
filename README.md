@@ -11,13 +11,36 @@ Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?b
 [![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
 
-`SAoTD` is an R interface to the Twitter API and can be used to acquire
-tweets based on user selected \#hashtags. The package will clean and
-tidy the Twitter data, determine the latent topics within the tweets
-utilizing Latent Dirichlet Allocation (LDA), determine a sentiment score
-using the Bing lexicon dictionary and output visualizations.
+## Purpose
+
+This package is focused on utilizing Twitter data due to its widespread
+global acceptance. The rapid expansion and acceptance of social media
+has opened doors into opinions and perceptions that were never as
+accessible as they are with today’s prevalence of mobile technology.
+Harvested Twitter data, analyzed for opinions and sentiment can provide
+powerful insight into a population. This insight can assist companies by
+letting them better understand their target population. The knowledge
+gained can also enable governments to better understand a population so
+they can make more informed decisions for that population. During the
+course of this research, data was acquired through the Public Twitter
+Application Programming Interface (API), to obtain tweets as the
+foundation of data and will build a methodology utilizing a topic
+modeling and lexicographical approach to analyze the sentiment and
+opinions of text in English to determine a general sentiment such as
+positive or negative. The more people express themselves on social
+media, this application can be used to gauge the general feeling of
+people.
+
+## Package
+
+The R package, `SAoTD` is an R interface to the Twitter API and can be
+used to acquire tweets based on user selected \#hashtags. The package
+will clean and tidy the Twitter data, determine the latent topics within
+the tweets utilizing Latent Dirichlet Allocation (LDA), determine a
+sentiment score using the Bing lexicon dictionary and output
+visualizations.
 
 ## Installation
 
@@ -125,7 +148,7 @@ utils::vignette("SAoTD")
 
   - Licence:
     
-      - All code is licensed GL.
+      - All code is licensed GPL.
       - All data is from public data sources.
 
   - Get citation information for `SAoTD` in R by running:
@@ -135,6 +158,11 @@ utils::vignette("SAoTD")
 ``` r
 citation("SAoTD")
 ```
+
+## Getting help
+
+If you encounter a clear bug, please file a minimal reproducible example
+on [github](https://github.com/evan-l-munson/SAoTD/issues).
 
 ## References
 

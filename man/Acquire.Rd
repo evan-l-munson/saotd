@@ -18,21 +18,21 @@ Acquire(consumer_key, consumer_secret, access_token, access_secret, HT,
 
 \item{HT}{A single hashtag or a list of hashtags the user has specified.}
 
-\item{num_tweets}{Number of tweets to be acquired per each hashtag.}
+\item{num_tweets}{Number of Tweets to be acquired per each hashtag.}
 
 \item{file_name}{User desired output .RData file name.}
 
-\item{distinct}{Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.}
+\item{distinct}{Logical.  If distinct = TRUE, the function removes multiple Tweets that originate from the same Twitter id at the exact same time.}
 }
 \value{
 A DataFrame.
 }
 \description{
-Function will enable a user to access the twitter API throught the 
+Function will enable a user to access the Twitter API throught the 
 [Twitter Developers Account](https://dev.twitter.com/) site.
-Once a user has a twitter developers account and has recieved their individual consumer key, 
+Once a user has a Twitter developers account and has recieved their individual consumer key, 
 consumer secret key, access token, and access secret they can 
-acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
+acquire Tweets based on a list of hashtags and a requested number of entires per hashtag.
 }
 \examples{
 \dontrun{

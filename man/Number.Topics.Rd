@@ -4,8 +4,8 @@
 \alias{Number.Topics}
 \title{Number Topics}
 \usage{
-Number.Topics(DataFrame, num_cores, min_clusters = 2, max_clusters = 12,
-  skip = 2, set_seed = 1234)
+Number.Topics(DataFrame, num_cores, min_clusters = 2,
+  max_clusters = 12, skip = 2, set_seed = 1234)
 }
 \arguments{
 \item{DataFrame}{DataFrame of Twitter Data.}

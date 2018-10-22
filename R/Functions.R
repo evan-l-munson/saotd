@@ -5,20 +5,20 @@
 
 #' @title Acquire Twitter Tweets  
 #'
-#' @description Function will enable a user to access the twitter API throught the 
+#' @description Function will enable a user to access the Twitter API throught the 
 #' [Twitter Developers Account](https://dev.twitter.com/) site.
-#' Once a user has a twitter developers account and has recieved their individual consumer key, 
+#' Once a user has a Twitter developers account and has recieved their individual consumer key, 
 #' consumer secret key, access token, and access secret they can 
-#' acquire tweets based on a list of hashtags and a requested number of entires per hashtag.
+#' acquire Tweets based on a list of hashtags and a requested number of entires per hashtag.
 #' 
 #' @param consumer_key Twitter Application management consumer key.
 #' @param consumer_secret Twitter Application management consumer secret key.
 #' @param access_token Twitter Application management access token.
 #' @param access_secret Twitter Application management access secret key.
 #' @param HT A single hashtag or a list of hashtags the user has specified.
-#' @param num_tweets Number of tweets to be acquired per each hashtag.
+#' @param num_tweets Number of Tweets to be acquired per each hashtag.
 #' @param file_name User desired output .RData file name.
-#' @param distinct Logical.  If distinct = TRUE, the function removes multiple tweets that originate from the same twitter id at the exact same time.
+#' @param distinct Logical.  If distinct = TRUE, the function removes multiple Tweets that originate from the same Twitter id at the exact same time.
 #' 
 #' @importFrom twitteR setup_twitter_oauth twListToDF searchTwitter
 #' @importFrom dplyr mutate distinct quo
@@ -81,7 +81,7 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 
 #' @title Tidy Twitter Data
 #'
-#' @description Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual tweet.
+#' @description Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual Tweet.
 #'
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
@@ -591,7 +591,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #'
 #' @description Determines the Latent topics within a dataframe by using Latent Dirichlet Allocation (LDA) model parameters.  
 #' Uses the `ldatuning` package and outputs an ldatuning plot.  
-#' Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
+#' Prepares Tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
 #'
 #' @param DataFrame DataFrame of Twitter Data.
 #' @param clusters The number of latent clusters.
@@ -672,7 +672,7 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
     dplyr::select(c("ArticleNo", "Topic")) %>% 
     plyr::rename(c("ArticleNo" = "key"))
   
-  # Join original twitter data frame with tweet topics
+  # Join original Twitter data frame with Tweet topics
   Tweet.Topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
   
   return(Tweet.Topics)
@@ -1319,7 +1319,7 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 
 #' @title Twitter Data Worldmap Plot.
 #'
-#' @description Displays the location of a tweet across the globe by hashtag or topic.
+#' @description Displays the location of a Tweet across the globe by hashtag or topic.
 #'
 #' @param DataFrame DataFrame of Twitter Data that has been tidy'd and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".

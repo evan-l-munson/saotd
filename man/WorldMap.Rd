@@ -15,7 +15,7 @@ WorldMap(DataFrame, HT_Topic)
 A ggplot plot.
 }
 \description{
-Displays the location of a tweet across the globe by hashtag or topic.
+Displays the location of a Tweet across the globe by hashtag or topic.
 }
 \examples{
 \dontrun{

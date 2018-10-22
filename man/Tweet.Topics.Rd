@@ -24,7 +24,7 @@ Returns LDA topics.
 \description{
 Determines the Latent topics within a dataframe by using Latent Dirichlet Allocation (LDA) model parameters.  
 Uses the `ldatuning` package and outputs an ldatuning plot.  
-Prepares tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
+Prepares Tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
 }
 \examples{
 \dontrun{
