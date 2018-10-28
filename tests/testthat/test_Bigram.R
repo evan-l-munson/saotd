@@ -12,7 +12,7 @@ test_that("Bigrams are computed properly", {
     "youll", "learn", as.integer(1)
   )
   
-  expect_equal(SAoTD::Bigram(DataFrame = test_bigram_df), correct_bigram_df)
-  expect_error(object = SAoTD::Bigram(DataFrame = text), "The input for this function is a data frame.")
+  expect_equal(saotd::Bigram(DataFrame = test_bigram_df), correct_bigram_df)
+  expect_error(object = saotd::Bigram(DataFrame = text), "The input for this function is a data frame.")
   
 })

@@ -19,7 +19,7 @@ Displays the distribution scores of either hashtag or topic Twitter data.
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 

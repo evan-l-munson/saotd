@@ -28,7 +28,7 @@ Prepares Tweet text, creates DTM, conducts LDA, display data terms associated wi
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 LDA_data <- Tweet.Topics(DataFrame = data,
                          clusters = 8,

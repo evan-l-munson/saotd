@@ -2,12 +2,12 @@ year <- sub("-.*", "", meta$Date)
 note <- sprintf("R package version %s", meta$Version)
 
 bibentry(bibtype = "Manual",
-         title = "{SAoTD}: Sentiment Analysis of Twitter Data",
+         title = "{saotd}: Sentiment Analysis of Twitter Data",
          author = c(person("Evan L.", "Munson"),
                     person("Christopher M.", "Smith"),
                     person("Bradley C.", "Boehmke"),
                     person("Jason K.", "Freels")),
          year = year,
          note = note,
-         url = "https://github.com/evan-l-munson/SAoTD")
+         url = "https://github.com/evan-l-munson/saotd")
          

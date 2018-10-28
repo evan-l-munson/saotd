@@ -19,7 +19,7 @@ Displays the Twitter data sentiment scores through time.  The sentiment scores b
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 

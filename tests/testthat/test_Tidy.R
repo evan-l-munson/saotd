@@ -16,10 +16,10 @@ test_that("The Tidy function is working as properly", {
   )
 
   true <- true_Tidy_df$Token
-  test <- SAoTD::Tidy(DataFrame = test_Tidy_df)
+  test <- saotd::Tidy(DataFrame = test_Tidy_df)
   test <- test$Token
 
   expect_equal(test, true)
-  expect_error(object = SAoTD::Tidy(DataFrame = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Tidy(DataFrame = text), "The input for this function is a data frame.")
 
 })

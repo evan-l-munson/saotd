@@ -20,16 +20,16 @@ correct_WordCorr_df <- dplyr::tribble(
   "joyful", "annoyed", as.double(-1.000)
 )
 
-test_WordCorr_Tidy_df <- SAoTD::Tidy(DataFrame = test_WordCorr_df)
-test <- SAoTD::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 2) %>% 
+test_WordCorr_Tidy_df <- saotd::Tidy(DataFrame = test_WordCorr_df)
+test <- saotd::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 2) %>% 
   dplyr::mutate(correlation = round(x = correlation, digits = 3))
   
 # Tests
 test_that("Word Correlations has correct input dataframe", {
 
-  expect_error(object = SAoTD::Word.Corr(DataFrameTidy = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::Word.Corr(DataFrameTidy = correct_WordCorr_df), "The data frame is not properly constructed.  The data frame must contain at minimum the columns: Token and key.")
-  expect_error(object = SAoTD::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 1), "Must choose number of Correlation pairs greater than 1.")
+  expect_error(object = saotd::Word.Corr(DataFrameTidy = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Word.Corr(DataFrameTidy = correct_WordCorr_df), "The data frame is not properly constructed.  The data frame must contain at minimum the columns: Token and key.")
+  expect_error(object = saotd::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 1), "Must choose number of Correlation pairs greater than 1.")
 
 })
 

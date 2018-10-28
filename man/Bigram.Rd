@@ -17,7 +17,7 @@ Determines and displays the text Bi-Grams within the Twitter data in sequence fr
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 TD_Bigram <- Bigram(DataFrame = data)
 TD_Bigram

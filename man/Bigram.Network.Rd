@@ -31,7 +31,7 @@ Displays the Bi-Gram Network.  Bi-Gram networks builds on computed Bi-Grams.  Bi
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 TD_Bigram <- Bigram(DataFrame = data)
 TD_Bigram_Network <- Bigram.Network(BiGramDataFrame = TD_Bigram,

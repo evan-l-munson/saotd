@@ -21,7 +21,7 @@ The word correlation displays the mutual relationship between words.
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data, 

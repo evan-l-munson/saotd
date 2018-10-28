@@ -10,7 +10,7 @@ test_HT_df <- dplyr::data_frame(
   longitude = c(-117.5769895, -73.2928943),
   latitude = c(34.0778901, 40.8428759))
 
-p <- SAoTD::WorldMap(DataFrame = test_HT_df, HT_Topic = "hashtag")
+p <- saotd::WorldMap(DataFrame = test_HT_df, HT_Topic = "hashtag")
 
 # Data for topic 
 test_Topic_df <- dplyr::data_frame(
@@ -23,13 +23,13 @@ test_Topic_df <- dplyr::data_frame(
   longitude = c(-117.5769895, -73.2928943),
   latitude = c(34.0778901, 40.8428759))
 
-t <- SAoTD::WorldMap(DataFrame = test_Topic_df, HT_Topic = "topic")
+t <- saotd::WorldMap(DataFrame = test_Topic_df, HT_Topic = "topic")
 
 # Tests
 test_that("The WorldMap function properly ingests data frame", {
   
-  expect_error(object = SAoTD::WorldMap(DataFrame = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::WorldMap(DataFrame = test_HT_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
+  expect_error(object = saotd::WorldMap(DataFrame = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::WorldMap(DataFrame = test_HT_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
   
 })
 

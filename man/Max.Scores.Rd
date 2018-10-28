@@ -21,7 +21,7 @@ Determines the Maximum scores for either the entire dataset or the Maximum score
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 

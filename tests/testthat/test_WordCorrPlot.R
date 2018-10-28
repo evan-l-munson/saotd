@@ -20,19 +20,19 @@ incorrect_WordCorr_df <- dplyr::tribble(
   "joyful", "annoyed", as.double(-1.000)
 )
 
-test_WordCorr_Tidy_df <- SAoTD::Tidy(DataFrame = test_WordCorr_df)
-test <- SAoTD::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 2) %>%
+test_WordCorr_Tidy_df <- saotd::Tidy(DataFrame = test_WordCorr_df)
+test <- saotd::Word.Corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 2) %>%
   dplyr::mutate(correlation = round(x = correlation, digits = 3))
 
 
-p <- SAoTD::Word.Corr.Plot(WordCorr = test, Correlation = .1)
+p <- saotd::Word.Corr.Plot(WordCorr = test, Correlation = .1)
 
 # Tests
 test_that("The Bigram.Network function is working as properly", {
 
-  expect_error(object = SAoTD::Word.Corr.Plot(WordCorr = text), "The input for this function is a Correlation data frame.")
-  expect_error(object = SAoTD::Word.Corr.Plot(WordCorr = test, Correlation = 0), "A correlation value between 0 and 1 must be selected.")
-  expect_error(object = SAoTD::Word.Corr.Plot(WordCorr = test, Correlation = 1.1), "A correlation value between 0 and 1 must be selected.")
+  expect_error(object = saotd::Word.Corr.Plot(WordCorr = text), "The input for this function is a Correlation data frame.")
+  expect_error(object = saotd::Word.Corr.Plot(WordCorr = test, Correlation = 0), "A correlation value between 0 and 1 must be selected.")
+  expect_error(object = saotd::Word.Corr.Plot(WordCorr = test, Correlation = 1.1), "A correlation value between 0 and 1 must be selected.")
 
 })
 

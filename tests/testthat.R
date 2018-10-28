@@ -1,4 +1,4 @@
 library(testthat)
-library(SAoTD)
+library(saotd)
 
-test_check("SAoTD")
+test_check("saotd")

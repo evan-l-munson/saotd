@@ -10,15 +10,15 @@ test_HT_df <- dplyr::data_frame(
   created = lubridate::as_datetime(c('2018-02-09 17:56:30', '2018-02-10 18:46:10')),
   key = c("coolguy123", "crazycatperson1234"))
 
-test_HT_Tidy <- SAoTD::Tidy(DataFrame = test_HT_df)
-test_HT_Tidy_Scores <- SAoTD::Scores(DataFrameTidy = test_HT_Tidy, HT_Topic = "hashtag")
+test_HT_Tidy <- saotd::Tidy(DataFrame = test_HT_df)
+test_HT_Tidy_Scores <- saotd::Scores(DataFrameTidy = test_HT_Tidy, HT_Topic = "hashtag")
 
-p <- SAoTD::Corpus.Distribution(DataFrameTidyScores = test_HT_Tidy_Scores)
+p <- saotd::Corpus.Distribution(DataFrameTidyScores = test_HT_Tidy_Scores)
 
 # Tests
 test_that("The Corpus.Distribution function properly ingests data frame", {
 
-  expect_error(object = SAoTD::Corpus.Distribution(DataFrameTidyScores = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Corpus.Distribution(DataFrameTidyScores = text), "The input for this function is a data frame.")
 
 })
 

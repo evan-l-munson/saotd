@@ -6,8 +6,8 @@ test_HT_df <- dplyr::data_frame(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_HT_Tidy_df <- SAoTD::Tidy(DataFrame = test_HT_df)
-test_HT_Scores_Tidy_df <- SAoTD::Scores(DataFrameTidy = test_HT_Tidy_df, HT_Topic = "hashtag")
+test_HT_Tidy_df <- saotd::Tidy(DataFrame = test_HT_df)
+test_HT_Scores_Tidy_df <- saotd::Scores(DataFrameTidy = test_HT_Tidy_df, HT_Topic = "hashtag")
 test_HT <- test_HT_Scores_Tidy_df$TweetSentiment
 
 check_HT <- "positive"
@@ -18,8 +18,8 @@ test_Topic_df <- dplyr::data_frame(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_Topic_Tidy_df <- SAoTD::Tidy(DataFrame = test_Topic_df)
-test_Topic_Scores_Tidy_df <- SAoTD::Scores(DataFrameTidy = test_Topic_Tidy_df, HT_Topic = "topic")
+test_Topic_Tidy_df <- saotd::Tidy(DataFrame = test_Topic_df)
+test_Topic_Scores_Tidy_df <- saotd::Scores(DataFrameTidy = test_Topic_Tidy_df, HT_Topic = "topic")
 test_Topic <- test_Topic_Scores_Tidy_df$TweetSentiment
 
 check_Topic <- "negative"
@@ -27,8 +27,8 @@ check_Topic <- "negative"
 # Tests
 test_that("The Scores function properly ingests data frame", {
   
-  expect_error(object = SAoTD::Scores(DataFrameTidy = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::Scores(DataFrameTidy = test_HT_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
+  expect_error(object = saotd::Scores(DataFrameTidy = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Scores(DataFrameTidy = test_HT_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
   
 })
 

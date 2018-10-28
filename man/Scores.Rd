@@ -19,7 +19,7 @@ Function to Calculate Sentiment Scores that will account for sentiment by hashta
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 score_data <- Scores(DataFrameTidy = tidy_data, 

@@ -17,7 +17,7 @@ Determines and displays the text Tri-Grams within the Twitter data in sequence f
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 TD_Trigram <- Trigram(DataFrame = data)
 TD_Trigram

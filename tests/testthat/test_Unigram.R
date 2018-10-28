@@ -10,8 +10,8 @@ test_that("Unigrams are computed properly", {
     "love", as.integer(1)
   )
   
-  expect_equal(SAoTD::Unigram(DataFrame = test_unigram_df), correct_unigram_df)
-  expect_error(object = SAoTD::Unigram(DataFrame = text), "The input for this function is a data frame.")
+  expect_equal(saotd::Unigram(DataFrame = test_unigram_df), correct_unigram_df)
+  expect_error(object = saotd::Unigram(DataFrame = text), "The input for this function is a data frame.")
   
 })
 

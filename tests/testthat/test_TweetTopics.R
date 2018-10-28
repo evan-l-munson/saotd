@@ -6,7 +6,7 @@ test_df <- dplyr::data_frame(
   hashtag = c("dog", "cat", "job"),
   key = c("coolguy123", "crazycatperson1234", "tireworld876"))
 
-test_TweetTopics <- SAoTD::Tweet.Topics(DataFrame = test_df, clusters = 3, num_terms = 5)
+test_TweetTopics <- saotd::Tweet.Topics(DataFrame = test_df, clusters = 3, num_terms = 5)
 
 check_TweetTopics <- dplyr::data_frame(
   text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!",
@@ -20,8 +20,8 @@ check_TweetTopics <- dplyr::data_frame(
 # Tests
 test_that("The Tweet.Topics function properly accepts input items", {
   
-  expect_error(object = SAoTD::Tweet.Topics(DataFrame = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::Tweet.Topics(DataFrame = test_df, clusters = "two"), "The input must be a numerical value.")
+  expect_error(object = saotd::Tweet.Topics(DataFrame = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Tweet.Topics(DataFrame = test_df, clusters = "two"), "The input must be a numerical value.")
   
 })
 

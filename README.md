@@ -1,17 +1,17 @@
-Sentiment Analysis of Twitter Data (SAoTD)
+Sentiment Analysis of Twitter Data (saotd)
 ================
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
 [![DOI](https://zenodo.org/badge/117839390.svg)](https://zenodo.org/badge/latestdoi/117839390)
 [![Build
-Status](https://travis-ci.org/evan-l-munson/SAoTD.svg?branch=master)](https://travis-ci.org/evan-l-munson/SAoTD)
+Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://travis-ci.org/evan-l-munson/saotd)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/SAoTD?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/SAoTD)
-[![codecov](https://codecov.io/gh/evan-l-munson/SAoTD/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/SAoTD)
+Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/saotd)
+[![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/SAoTD)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
 
 ## Purpose
 
@@ -35,7 +35,7 @@ people.
 
 ## Package
 
-The `SAoTD` package is an R interface to the Twitter API and can be used
+The `saotd` package is an R interface to the Twitter API and can be used
 to acquire Tweets based on user selected \#hashtags and was developed
 utilizing a tidyverse approach. The package was designed to allow a user
 to conduct a complete analysis with the contained functions. The package
@@ -50,12 +50,12 @@ You can install the development version from GitHub with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github('evan-l-munson/SAoTD')
+devtools::install_github('evan-l-munson/saotd')
 ```
 
-## Using SAoTD
+## Using saotd
 
-The functions that are provided by `SAoTD` are broken down into five
+The functions that are provided by `saotd` are broken down into five
 different categories: Acquire, Explore, Topic Analysis, Sentiment
 Calculation, and Visualizations.
 
@@ -142,8 +142,8 @@ Calculation, and Visualizations.
 For an example of how to use this package, find the vignette at:
 
 ``` r
-library(SAoTD)
-utils::vignette("SAoTD")
+library(saotd)
+utils::vignette("saotd")
 ```
 
 ## Meta
@@ -153,18 +153,18 @@ utils::vignette("SAoTD")
       - All code is licensed GPL.
       - All data is from public data sources.
 
-  - Get citation information for `SAoTD` in R by running:
+  - Get citation information for `saotd` in R by running:
 
 <!-- end list -->
 
 ``` r
-citation("SAoTD")
+citation("saotd")
 ```
 
 ## Getting help
 
 If you encounter a clear bug, please file a minimal reproducible example
-on [github](https://github.com/evan-l-munson/SAoTD/issues).
+on [github](https://github.com/evan-l-munson/saotd/issues).
 
 ## References
 

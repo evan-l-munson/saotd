@@ -6,7 +6,7 @@ test_df <- dplyr::data_frame(
   hashtag = c("dog", "cat", "job"),
   key = c("coolguy123", "crazycatperson1234", "tireworld876"))
 
-test_NumberTopics <- SAoTD::Number.Topics(DataFrame = test_df, 
+test_NumberTopics <- saotd::Number.Topics(DataFrame = test_df, 
                                           num_cores = 1L, 
                                           min_clusters = 2, 
                                           max_clusters = 4, 
@@ -16,7 +16,7 @@ test_NumberTopics <- SAoTD::Number.Topics(DataFrame = test_df,
 # Tests
 test_that("The Number.Topics function properly ingests data frame", {
   
-  expect_error(object = SAoTD::Number.Topics(DataFrame = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Number.Topics(DataFrame = text), "The input for this function is a data frame.")
  
 })
 

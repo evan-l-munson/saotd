@@ -8,15 +8,15 @@ test_HT_df <- dplyr::data_frame(
   created = lubridate::as_datetime(c('2018-02-09 17:56:30', '2018-02-10 18:46:10')),
   key = c("coolguy123", "crazycatperson1234"))
 
-test_HT_Tidy_df <- SAoTD::Tidy(DataFrame = test_HT_df)
-test_HT_Scores_Tidy_df <- SAoTD::Scores(DataFrameTidy = test_HT_Tidy_df, HT_Topic = "hashtag")
-test_HT <- SAoTD::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "hashtag")
+test_HT_Tidy_df <- saotd::Tidy(DataFrame = test_HT_df)
+test_HT_Scores_Tidy_df <- saotd::Scores(DataFrameTidy = test_HT_Tidy_df, HT_Topic = "hashtag")
+test_HT <- saotd::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "hashtag")
 test_HT <- test_HT$TweetSentimentScore[1]
 
 check_HT <- 2
 
 # Data for hashtag with "HT_Topic_Selection"
-test_HT_selection <- SAoTD::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "hashtag", HT_Topic_Selection = "dog")
+test_HT_selection <- saotd::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "hashtag", HT_Topic_Selection = "dog")
 test_HT_selection <- test_HT_selection$TweetSentimentScore[1]
 
 check_HT_selection <- 2
@@ -29,15 +29,15 @@ test_Topic_df <- dplyr::data_frame(
   created = lubridate::as_datetime(c('2018-02-09 17:56:30', '2018-02-10 18:46:10')),
   key = c("coolguy123", "crazycatperson1234"))
 
-test_Topic_Tidy_df <- SAoTD::Tidy(DataFrame = test_Topic_df)
-test_Topic_Scores_Tidy_df <- SAoTD::Scores(DataFrameTidy = test_Topic_Tidy_df, HT_Topic = "topic")
-test_Topic <- SAoTD::Max.Scores(DataFrameTidyScores = test_Topic_Scores_Tidy_df, HT_Topic = "topic")
+test_Topic_Tidy_df <- saotd::Tidy(DataFrame = test_Topic_df)
+test_Topic_Scores_Tidy_df <- saotd::Scores(DataFrameTidy = test_Topic_Tidy_df, HT_Topic = "topic")
+test_Topic <- saotd::Max.Scores(DataFrameTidyScores = test_Topic_Scores_Tidy_df, HT_Topic = "topic")
 test_Topic <- test_Topic$TweetSentimentScore[1]
 
 check_Topic <- 2
 
 # Data for topic without "HT_Topic_Selection"
-test_Topic_selection <- SAoTD::Max.Scores(DataFrameTidyScores = test_Topic_Scores_Tidy_df, HT_Topic = "topic", HT_Topic_Selection = "dog")
+test_Topic_selection <- saotd::Max.Scores(DataFrameTidyScores = test_Topic_Scores_Tidy_df, HT_Topic = "topic", HT_Topic_Selection = "dog")
 test_Topic_selection <- test_Topic_selection$TweetSentimentScore[1]
 
 check_Topic_selection <- 2
@@ -45,8 +45,8 @@ check_Topic_selection <- 2
 # Tests
 test_that("The Max.Scores function properly ingests data frame", {
   
-  expect_error(object = SAoTD::Max.Scores(DataFrameTidyScores = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
+  expect_error(object = saotd::Max.Scores(DataFrameTidyScores = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Max.Scores(DataFrameTidyScores = test_HT_Scores_Tidy_df, HT_Topic = "HT"), "HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.")
   
 })
 

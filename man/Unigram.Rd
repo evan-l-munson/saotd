@@ -17,7 +17,7 @@ Determines and displays the text Uni-Grams within the Twitter data in sequence f
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 TD_Unigram <- Unigram(DataFrame = data)
 TD_Unigram

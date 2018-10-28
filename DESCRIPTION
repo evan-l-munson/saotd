@@ -1,4 +1,4 @@
-Package: SAoTD
+Package: saotd
 Type: Package
 Title: Sentiment Analysis of Twitter Data
 Version: 0.1.0

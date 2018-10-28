@@ -17,7 +17,7 @@ Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks wh
 }
 \examples{
 \dontrun{
-library(SAoTD)
+library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 tidy_data

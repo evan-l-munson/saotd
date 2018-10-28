@@ -13,11 +13,11 @@ test_that("Merge.Terms is being properly computed", {
   # It is easier to check a string than directly compare dataframes.
   check <- correct_MergeTerms_df$text[1]
 
-  test <- SAoTD::Merge.Terms(DataFrame = test_MergeTerms_df, term = "best friend", term_replacement = "BFF")
+  test <- saotd::Merge.Terms(DataFrame = test_MergeTerms_df, term = "best friend", term_replacement = "BFF")
   test <- test$text[1]
 
   expect_equal(test, check)
-  expect_error(object = SAoTD::Merge.Terms(DataFrame = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::Merge.Terms(DataFrame = text), "The input for this function is a data frame.")
 
 })
 

@@ -7,8 +7,8 @@ test_HT_df <- dplyr::data_frame(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_HT_Tidy_df <- SAoTD::Tidy(DataFrame = test_HT_df)
-test_HT_PosNeg <- SAoTD::PosNeg.Words(DataFrameTidy = test_HT_Tidy_df, num_words = 1)
+test_HT_Tidy_df <- saotd::Tidy(DataFrame = test_HT_df)
+test_HT_PosNeg <- saotd::PosNeg.Words(DataFrameTidy = test_HT_Tidy_df, num_words = 1)
 test_HT <- test_HT_PosNeg$data[2]
 
 check_HT <- dplyr::data_frame(
@@ -21,8 +21,8 @@ test_Topic_df <- dplyr::data_frame(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_Topic_Tidy_df <- SAoTD::Tidy(DataFrame = test_Topic_df)
-test_Topic_PosNeg <- SAoTD::PosNeg.Words(DataFrameTidy = test_Topic_Tidy_df, num_words = 1)
+test_Topic_Tidy_df <- saotd::Tidy(DataFrame = test_Topic_df)
+test_Topic_PosNeg <- saotd::PosNeg.Words(DataFrameTidy = test_Topic_Tidy_df, num_words = 1)
 test_Topic <- test_Topic_PosNeg$data[2]
 
 check_Topic <- dplyr::data_frame(
@@ -31,8 +31,8 @@ check_Topic <- dplyr::data_frame(
 # Tests
 test_that("The Scores function properly ingests data frame", {
   
-  expect_error(object = SAoTD::PosNeg.Words(DataFrameTidy = text), "The input for this function is a data frame.")
-  expect_error(object = SAoTD::PosNeg.Words(DataFrameTidy = test_HT_Tidy_df, num_words = "two"), "Enter a number.")
+  expect_error(object = saotd::PosNeg.Words(DataFrameTidy = text), "The input for this function is a data frame.")
+  expect_error(object = saotd::PosNeg.Words(DataFrameTidy = test_HT_Tidy_df, num_words = "two"), "Enter a number.")
   
 })
 
