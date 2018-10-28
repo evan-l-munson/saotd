@@ -25,6 +25,7 @@ apt_packages:
  
 r_packages:
  - covr
+ - Rmpfr
 
 after_success:
  - Rscript -e 'library(covr); codecov()'
