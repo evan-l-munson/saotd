@@ -35,7 +35,6 @@ Suggests: testthat,
     rmarkdown,
     httr,
     base64enc
-    Rmpfr
 Depends: R (>= 3.3.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
