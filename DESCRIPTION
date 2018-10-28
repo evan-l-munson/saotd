@@ -28,6 +28,7 @@ Imports: Rcpp (>= 0.12.14),
     magrittr, 
     ldatuning, 
     topicmodels
+    Rmpfr
 LinkingTo: Rcpp
 RoxygenNote: 6.1.0
 Suggests: testthat,
