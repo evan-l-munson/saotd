@@ -28,7 +28,6 @@ Imports: Rcpp (>= 0.12.14),
     magrittr, 
     ldatuning, 
     topicmodels
-    Rmpfr
 LinkingTo: Rcpp
 RoxygenNote: 6.1.0
 Suggests: testthat,
@@ -36,6 +35,7 @@ Suggests: testthat,
     rmarkdown,
     httr,
     base64enc
+    Rmpfr
 Depends: R (>= 3.3.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
