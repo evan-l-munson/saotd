@@ -19,7 +19,6 @@
 #' @param num_tweets Number of Tweets to be acquired per each hashtag.
 #' @param file_name User desired output .RData file name.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple Tweets that originate from the same Twitter id at the exact same time.
-#' 
 #' @importFrom twitteR setup_twitter_oauth twListToDF searchTwitter
 #' @importFrom dplyr mutate distinct quo
 #' @importFrom purrr map_df
