@@ -50,7 +50,7 @@ You can install the development version from GitHub with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github('evan-l-munson/saotd')
+devtools::install_github('evan-l-munson/saotd', build_vignettes = TRUE)
 ```
 
 ## Using saotd
