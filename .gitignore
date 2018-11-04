@@ -1,3 +1,4 @@
+inst/doc
 .Rproj.user
 .Rhistory
 .RData
@@ -8,3 +9,6 @@ src/*.so
 src/*.o
 src/*.dll
 tests/testthat/.httr-oauth
+
+*.html
+*.R
