@@ -1,7 +1,7 @@
 
 
 
-# Acquire -----------------------------------------------------------------
+# tweet_acquire -----------------------------------------------------------------
 
 #' @title Acquire Twitter Tweets  
 #'
@@ -34,7 +34,7 @@
 #' 
 #' hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
 #' 
-#' Acquire(consumer_key = consumer_key, 
+#' tweet_acquire(consumer_key = consumer_key, 
 #'         consumer_secret = consumer_secret, 
 #'         access_token = access_token, 
 #'         access_secret = access_secret, 
@@ -47,7 +47,7 @@
 #' }
 #' @export 
 
-Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
+tweet_acquire <- function(consumer_key, consumer_secret, access_token, access_secret, HT, num_tweets, file_name, distinct = TRUE) {
   
   options(httr_oauth_cache = TRUE)
   
@@ -95,12 +95,12 @@ Acquire <- function(consumer_key, consumer_secret, access_token, access_secret, 
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' tidy_data <- Tidy(DataFrame = data)
+#' tidy_data <- tweet_tidy(DataFrame = data)
 #' tidy_data
 #' }
 #' @export
 
-Tidy <- function(DataFrame) {
+tweet_tidy <- function(DataFrame) {
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -142,14 +142,14 @@ Tidy <- function(DataFrame) {
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' data <- Merge.Terms(DataFrame = data, 
+#' data <- merge_terms(DataFrame = data, 
 #'                     term = "ice cream", 
 #'                     term_replacement = "ice_cream")
 #' data 
 #' }
 #' @export
 
-Merge.Terms <- function(DataFrame, term, term_replacement){
+merge_terms <- function(DataFrame, term, term_replacement){
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -180,12 +180,12 @@ Merge.Terms <- function(DataFrame, term, term_replacement){
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' TD_Unigram <- Unigram(DataFrame = data)
+#' TD_Unigram <- unigram(DataFrame = data)
 #' TD_Unigram
 #' }             
 #' @export
 
-Unigram <- function(DataFrame){
+unigram <- function(DataFrame){
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -224,12 +224,12 @@ Unigram <- function(DataFrame){
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' TD_Bigram <- Bigram(DataFrame = data)
+#' TD_Bigram <- bigram(DataFrame = data)
 #' TD_Bigram
 #' }                
 #' @export
 
-Bigram <- function(DataFrame){
+bigram <- function(DataFrame){
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -273,12 +273,12 @@ Bigram <- function(DataFrame){
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' TD_Trigram <- Trigram(DataFrame = data)
+#' TD_Trigram <- trigram(DataFrame = data)
 #' TD_Trigram
 #' }
 #' @export
 
-Trigram <- function(DataFrame) {
+trigram <- function(DataFrame) {
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -331,8 +331,8 @@ Trigram <- function(DataFrame) {
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' TD_Bigram <- Bigram(DataFrame = data)
-#' TD_Bigram_Network <- Bigram.Network(BiGramDataFrame = TD_Bigram,
+#' TD_Bigram <- bigram(DataFrame = data)
+#' TD_Bigram_Network <- bigram_network(BiGramDataFrame = TD_Bigram,
 #'                                     number = 300,
 #'                                     layout = "fr",
 #'                                     edge_color = "royalblue",
@@ -344,7 +344,7 @@ Trigram <- function(DataFrame) {
 #' }
 #' @export
 
-Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
+bigram_network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 3,  set_seed = 1234) {
   
   if(!is.data.frame(BiGramDataFrame)) {
     stop('The input for this function is a Bigram data frame.')
@@ -392,7 +392,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data, 
+#' TD_Word_Corr <- word_corr(DataFrameTidy = tidy_data, 
 #'                           number = 500,
 #'                           sort = TRUE)
 #'
@@ -400,7 +400,7 @@ Bigram.Network <- function(BiGramDataFrame, number = 300, layout = "fr", edge_co
 #' }                    
 #' @export
 
-Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
+word_corr <- function(DataFrameTidy, number, sort = TRUE) {
   
   if(!is.data.frame(DataFrameTidy)) {
     stop('The input for this function is a data frame.')
@@ -447,10 +447,10 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' TD_Word_Corr <- Word.Corr(DataFrameTidy = tidy_data, 
+#' TD_Word_Corr <- word_corr(DataFrameTidy = tidy_data, 
 #'                           number = 500,
 #'                           sort = TRUE)
-#' TD_Word_Corr_Network <- Word.Corr.Plot(WordCorr = TD_Word_Corr,
+#' TD_Word_Corr_Network <- word_corr_network(WordCorr = TD_Word_Corr,
 #'                                        Correlation = 0.15,
 #'                                        layout = "fr",
 #'                                        edge_color = "royalblue",
@@ -462,7 +462,7 @@ Word.Corr <- function(DataFrameTidy, number, sort = TRUE) {
 #' }
 #' @export
 
-Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
+word_corr_network <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_color = "royalblue", node_color = "black", node_size = 2,  set_seed = 1234) {
   
   if(!is.data.frame(WordCorr)) {
     stop('The input for this function is a Correlation data frame.')
@@ -519,7 +519,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' LDA_Topic_Plot <- Number.Topics(DataFrame = data,
+#' LDA_Topic_Plot <- number_topics(DataFrame = data,
 #'                                 num_cores = 2L,
 #'                                 min_clusters = 2,
 #'                                 max_clusters = 12, 
@@ -530,7 +530,7 @@ Word.Corr.Plot <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_col
 #' }
 #' @export
 
-Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
+number_topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters = 12, skip = 2, set_seed = 1234) {
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -610,7 +610,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' LDA_data <- Tweet.Topics(DataFrame = data,
+#' LDA_data <- tweet_topics(DataFrame = data,
 #'                          clusters = 8,
 #'                          method = "Gibbs",
 #'                          set_seed = 1234,
@@ -620,7 +620,7 @@ Number.Topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
 #' }
 #' @export
 
-Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
+tweet_topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234, num_terms = 10) {
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
@@ -672,9 +672,9 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
     plyr::rename(c("ArticleNo" = "key"))
   
   # Join original Twitter data frame with Tweet topics
-  Tweet.Topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
+  tweet_topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
   
-  return(Tweet.Topics)
+  return(tweet_topics)
 }
 
 # Sentiment Calculation ---------------------------------------------------
@@ -699,13 +699,13 @@ Tweet.Topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag")
 #' score_data
 #' }
 #' @export
 
-Scores <- function(DataFrameTidy, HT_Topic) {
+tweet_scores <- function(DataFrameTidy, HT_Topic) {
 
   if(!is.data.frame(DataFrameTidy)) {
     stop('The input for this function is a data frame.')
@@ -778,27 +778,27 @@ Scores <- function(DataFrameTidy, HT_Topic) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#' posneg <- posneg_words(DataFrameTidy = tidy_data,
 #'                        n = 10)
 #' posneg
 #'                           
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#' posneg <- posneg_words(DataFrameTidy = tidy_data,
 #'                        n = 10,
 #'                        filterword = "fail")
 #' posneg
 #'                           
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' posneg <- PosNeg.Words(DataFrameTidy = tidy_data,
+#' posneg <- posneg_words(DataFrameTidy = tidy_data,
 #'                        n = 10,
 #'                        filterword = c("fail", "urgent"))            
 #' posneg
 #' }
 #' @export
 
-PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
+posneg_words <- function(DataFrameTidy, num_words, filterword = NULL) {
   
   if(!is.data.frame(DataFrameTidy)) {
     stop('The input for this function is a data frame.')
@@ -852,22 +852,22 @@ PosNeg.Words <- function(DataFrameTidy, num_words, filterword = NULL) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "hashtag")
-#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag")
+#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+#'                                HT_Topic = "hashtag")
 #'                             
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
 #'                      HT_Topic = "hashtag")
-#' min_scores <- Min.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag",
-#'                          HT_Topic_Selection = "icecream")
+#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+#'                                HT_Topic = "hashtag",
+#'                                HT_Topic_Selection = "icecream")
 #' }
 #' @export
 
-Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+tweet_min_scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -924,22 +924,22 @@ Min.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
-#'                         HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag")
+#' min_scores <- tweet_max_scores(DataFrameTidyScores = score_data, 
+#'                                HT_Topic = "hashtag")
 #'                             
 #' data <- twitter_data
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag")
-#' min_scores <- Max.Scores(DataFrameTidyScores = score_data, 
-#'                          HT_Topic = "hashtag",
-#'                          HT_Topic_Selection = "icecream")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag")
+#' min_scores <- tweet_max_scores(DataFrameTidyScores = score_data, 
+#'                                HT_Topic = "hashtag",
+#'                                HT_Topic_Selection = "icecream")
 #' }
 #' @export
 
-Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
+tweet_max_scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL) {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -998,17 +998,17 @@ Max.Scores <- function(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "hashtag") 
-#' Corp_Dist <- Corpus.Distribution(DataFrameTidyScores = score_data,
-#'                                  binwidth = 1,
-#'                                  color = "black", 
-#'                                  fill = "white")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' Corp_Dist <- tweet_corpus_distribution(DataFrameTidyScores = score_data,
+#'                                        binwidth = 1,
+#'                                        color = "black", 
+#'                                        fill = "white")
 #' Corp_Dist
 #' }
 #' @export
 
-Corpus.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
+tweet_corpus_distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -1046,9 +1046,9 @@ Corpus.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "hashtag") 
-#' Dist <- Distribution(DataFrameTidyScores = score_data,
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' Dist <- tweet_distribution(DataFrameTidyScores = score_data,
 #'                      HT_Topic = "hashtag",
 #'                      binwidth = 1,
 #'                      color = "black", 
@@ -1057,7 +1057,7 @@ Corpus.Distribution <- function(DataFrameTidyScores, binwidth = 1, color = "blac
 #' }
 #' @export
 
-Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
+tweet_distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "black", fill = "white") {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -1110,23 +1110,23 @@ Distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, color = "b
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "hashtag") 
-#' ht_box <- Boxplot(DataFrameTidyScores = score_data,
-#'                   HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' ht_box <- tweet_box(DataFrameTidyScores = score_data,
+#'                     HT_Topic = "hashtag")
 #' ht_box
 #'                
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                     HT_Topic = "topic") 
-#' topic_box <- BoxPlot(DataFrameTidyScores = score_data,
-#'                      HT_Topic = "topic") 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "topic") 
+#' topic_box <- tweet_box(DataFrameTidyScores = score_data,
+#'                        HT_Topic = "topic") 
 #' topic_box                    
 #' }
 #' @export
 
-BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
+tweet_box <- function(DataFrameTidyScores, HT_Topic) {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -1182,23 +1182,23 @@ BoxPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag") 
-#' ht_violin <- ViolinPlot(DataFrameTidyScores = score_data,
-#'                         HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' ht_violin <- tweet_violin(DataFrameTidyScores = score_data,
+#'                           HT_Topic = "hashtag")
 #' ht_violin
 #'                
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "topic") 
-#' topic_violin <- ViolinPlot(DataFrameTidyScores = score_data,
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
 #'                            HT_Topic = "topic") 
+#' topic_violin <- tweet_violin(DataFrameTidyScores = score_data,
+#'                              HT_Topic = "topic") 
 #' topic_violin                    
 #' }
 #' @export
 
-ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
+tweet_violin <- function(DataFrameTidyScores, HT_Topic) {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -1253,23 +1253,23 @@ ViolinPlot <- function(DataFrameTidyScores, HT_Topic) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag") 
-#' ht_time <- TimeScale(DataFrameTidyScores = score_data,
-#'                      HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' ht_time <- tweet_time(DataFrameTidyScores = score_data,
+#'                       HT_Topic = "hashtag")
 #' ht_time
 #'                
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "topic") 
-#' topic_time <- TimeScale(DataFrameTidyScores = score_data,
-#'                         HT_Topic = "topic") 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "topic") 
+#' topic_time <- tweet_time(DataFrameTidyScores = score_data,
+#'                          HT_Topic = "topic") 
 #' topic_time                    
 #' }
 #' @export
 
-TimeScale <- function(DataFrameTidyScores, HT_Topic) {
+tweet_time <- function(DataFrameTidyScores, HT_Topic) {
   
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
@@ -1334,23 +1334,23 @@ TimeScale <- function(DataFrameTidyScores, HT_Topic) {
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "hashtag") 
-#' ht_map <- WorldMap(DataFrameTidyScores = score_data,
-#'                    HT_Topic = "hashtag")
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "hashtag") 
+#' ht_map <- tweet_worldmap(DataFrameTidyScores = score_data,
+#'                          HT_Topic = "hashtag")
 #' ht_map
 #'                
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- Scores(DataFrameTidy = tidy_data, 
-#'                      HT_Topic = "topic") 
-#' topic_map <- WorldMap(DataFrameTidyScores = score_data,
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#'                            HT_Topic = "topic") 
+#' topic_map <- tweet_worldmap(DataFrameTidyScores = score_data,
 #'                       HT_Topic = "topic") 
 #' topic_map                    
 #' }
 #' @export
 
-WorldMap <- function(DataFrame, HT_Topic) {
+tweet_worldmap <- function(DataFrame, HT_Topic) {
   
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')

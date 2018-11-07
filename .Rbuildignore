@@ -12,3 +12,4 @@ README.Rmd
 tests/testthat/.httr-oauth
 ^paper.bib$
 ^paper.md$
+vignettes/.httr-oauth

@@ -61,48 +61,49 @@ Calculation, and Visualizations.
 
   - Acquire
     
-      - `Acquire` allows a user to acquire Tweets of their choosing by
-        accessing the Twitter API. In order to do this the user needs to
-        have a [Twitter](https://twitter.com) account. Additionally once
-        the user has an account they will then need to sign up for a
-        [Twitter Developers](https://dev.twitter.com/) account. Once a
-        user has a Twitter developers account and has received their
-        individual consumer key, consumer secret key, access token, and
-        access secret key, they can acquire Tweets based on a list of
-        hashtags and a requested number of entries per hashtag.
+      - `tweet_acquire` allows a user to acquire Tweets of their
+        choosing by accessing the Twitter API. In order to do this the
+        user needs to have a [Twitter](https://twitter.com) account.
+        Additionally once the user has an account they will then need to
+        sign up for a [Twitter Developers](https://dev.twitter.com/)
+        account. Once a user has a Twitter developers account and has
+        received their individual consumer key, consumer secret key,
+        access token, and access secret key, they can acquire Tweets
+        based on a list of hashtags and a requested number of entries
+        per hashtag.
 
   - Explore
     
-      - `Tidy` removes all emoticons, punctuation, weblinks, etc and
-        converts converts the data to a tidy structure.
-      - `Merge.Terms` merges terms within a dataframe and prevents
+      - `tweet_tidy` removes all emoticons, punctuation, weblinks, etc
+        and converts converts the data to a tidy structure.
+      - `merge_terms` merges terms within a dataframe and prevents
         redundancy in the analysis.
-      - `Unigram` displays the text Uni-Grams within the Twitter data in
+      - `unigram` displays the text Uni-Grams within the Twitter data in
         sequence from the most used to the least used. A Uni-Gram is a
         single word.
-      - `Bigram` displays the text Bi-Grams within the Twitter data in
+      - `bigram` displays the text Bi-Grams within the Twitter data in
         sequence from the most used to the least used. A Bi-Gram is a
         combination of two consecutive words.
-      - `Trigram` displays the text Tri-Grams within the Twitter data in
+      - `trigram` displays the text Tri-Grams within the Twitter data in
         sequence from the most used to the least used. A Tri-Gram is a
         combination of three consecutive words.
-      - `Bigram.Network` Bi-Gram networks builds on computed Bi-Grams.
+      - `bigram_network` Bi-Gram networks builds on computed Bi-Grams.
         Bi-Gram networks serve as a visualization tool that displays the
         relationships between the words simultaneously as opposed to a
         tabular display of Bi-Gram words.
-      - `Word.Corr` displays the word correlation between words.
-      - `Word.Corr.Plot` displays the mutual relationship between words.
-        The correlation network shows higher correlations with a thicker
-        and darker edge color.
+      - `word_corr` displays the word correlation between words.
+      - `word_corr_network` displays the mutual relationship between
+        words. The correlation network shows higher correlations with a
+        thicker and darker edge color.
 
   - Topic Analysis
     
-      - `Number.Topics` determines the optimal number of Latent topics
+      - `number_topics` determines the optimal number of Latent topics
         within a dataframe by tuning the Latent Dirichlet Allocation
         (LDA) model parameters. Uses the `ldatuning` package and outputs
         an ldatuning plot. **This process can be time consuming
         depending on the size of the dataframe.**
-      - `Tweet.Topics` determines the Latent topics within a dataframe
+      - `tweet_topics` determines the Latent topics within a dataframe
         by using Latent Dirichlet Allocation (LDA) model parameters.
         Uses the `ldatuning` package and outputs an ldatuning plot.
         Prepares Tweet text, creates DTM, conducts LDA, display data
@@ -110,32 +111,33 @@ Calculation, and Visualizations.
 
   - Sentiment Calculation
     
-      - `Scores` calculates the Sentiment Scores using the [Bing Lexicon
+      - `tweet_scores` calculates the Sentiment Scores using the [Bing
+        Lexicon
         Dictionary](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)
         that will account for sentiment by hashtag or topic.
-      - `PosNeg.Words` determines and displays the most positive and
+      - `posneg_words` determines and displays the most positive and
         negative words within the Twitter data.
-      - `Min.Scores` determines the minimum scores for either the entire
-        dataset or the minimum scores associated with a hashtag or topic
-        analysis.
-      - `Max.Scores` determines the maximum scores for either the entire
-        dataset or the maximum scores associated with a hashtag or topic
-        analysis.
+      - `tweet_min_scores` determines the minimum scores for either the
+        entire dataset or the minimum scores associated with a hashtag
+        or topic analysis.
+      - `tweet_max_scores` determines the maximum scores for either the
+        entire dataset or the maximum scores associated with a hashtag
+        or topic analysis.
 
   - Visualizations
     
-      - `Corpus.Distribution` determines the scores distribution for the
-        entire Twitter data corpus.
-      - `Distribution` determines the scores distribution by hashtag or
-        topic for Twitter data.
-      - `Boxplot` displays the distribution scores of either hashtag or
-        topic Twitter data.
-      - `ViolinPlot` displays the distribution scores of either hashtag
+      - `tweet_corpus_distribution` determines the scores distribution
+        for the entire Twitter data corpus.
+      - `tweet_distribution` determines the scores distribution by
+        hashtag or topic for Twitter data.
+      - `tweet_box` displays the distribution scores of either hashtag
         or topic Twitter data.
-      - `TimeScale` displays how the Twitter data sentiment scores
+      - `tweet_violin` displays the distribution scores of either
+        hashtag or topic Twitter data.
+      - `tweet_time` displays how the Twitter data sentiment scores
         through time.  
-      - `WorldMap` displays the location of a Tweet across the globe by
-        hashtag or topic.
+      - `tweet_worldmap` displays the location of a Tweet across the
+        globe by hashtag or topic.
 
 ## Example
 

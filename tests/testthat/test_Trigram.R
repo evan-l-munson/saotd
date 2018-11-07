@@ -14,7 +14,7 @@ test_that("Trigrams are computed properly", {
     "trigrams", "provide", "significant", as.integer(1)
   )
   
-  expect_equal(saotd::Trigram(DataFrame = test_trigram_df), correct_trigram_df)
-  expect_error(object = saotd::Trigram(DataFrame = text), "The input for this function is a data frame.")
+  expect_equal(saotd::trigram(DataFrame = test_trigram_df), correct_trigram_df)
+  expect_error(object = saotd::trigram(DataFrame = text), "The input for this function is a data frame.")
   
 })

@@ -1,4 +1,4 @@
-test_that("Unigrams are computed properly", {
+test_that("unigrams are computed properly", {
   
   text <- "I really love my dog, he is the best friend anyone could ever ask for!"
   test_unigram_df <- as.data.frame(x = text)
@@ -10,8 +10,8 @@ test_that("Unigrams are computed properly", {
     "love", as.integer(1)
   )
   
-  expect_equal(saotd::Unigram(DataFrame = test_unigram_df), correct_unigram_df)
-  expect_error(object = saotd::Unigram(DataFrame = text), "The input for this function is a data frame.")
+  expect_equal(saotd::unigram(DataFrame = test_unigram_df), correct_unigram_df)
+  expect_error(object = saotd::unigram(DataFrame = text), "The input for this function is a data frame.")
   
 })
 

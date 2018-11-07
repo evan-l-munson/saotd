@@ -1,4 +1,4 @@
-test_that("Bigrams are computed properly", {
+test_that("bigrams are computed properly", {
   
   text <- "This is the website for “R for Data Science”. 
   This book will teach you how to do data science with R: 
@@ -12,7 +12,7 @@ test_that("Bigrams are computed properly", {
     "youll", "learn", as.integer(1)
   )
   
-  expect_equal(saotd::Bigram(DataFrame = test_bigram_df), correct_bigram_df)
-  expect_error(object = saotd::Bigram(DataFrame = text), "The input for this function is a data frame.")
+  expect_equal(saotd::bigram(DataFrame = test_bigram_df), correct_bigram_df)
+  expect_error(object = saotd::bigram(DataFrame = text), "The input for this function is a data frame.")
   
 })
