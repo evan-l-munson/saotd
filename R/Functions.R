@@ -3,7 +3,7 @@
 
 # tweet_acquire -----------------------------------------------------------------
 
-#' @title Acquire Twitter Tweets  
+#' @title Acquire Twitter Tweets   
 #'
 #' @description Function will enable a user to access the Twitter API throught the 
 #' [Twitter Developers Account](https://dev.twitter.com/) site.
