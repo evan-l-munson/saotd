@@ -3,12 +3,11 @@ inst/doc
 .Rhistory
 .RData
 .Ruserdata
-.httr-oauth
+*.httr-oauth
 hidden/
 src/*.so
 src/*.o
 src/*.dll
-tests/testthat/.httr-oauth
 
 *.html
 *.R
