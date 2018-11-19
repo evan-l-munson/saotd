@@ -357,11 +357,6 @@ saotd::tweet_time(DataFrameTidyScores = TD_Scores,
 
 Finally if a Twitter user has not disabled georeferencing data the location of the tweet can be observed.  However in many cases this may not be very insightful because of the lack of data.
 
-```{r fig.align='center', warning=FALSE, message=FALSE}
-saotd::tweet_worldmap(DataFrame = TD, 
-                      HT_Topic = "hashtag")
-```
-
 ### Topics
 
 Now we will begin visualizing the topic data.  The distribution of the sentiment scores can be found in the below plot.
@@ -404,9 +399,4 @@ saotd::tweet_time(DataFrameTidyScores = TD_Topics_Scores,
                   HT_Topic = "topic")
 ```
 
-Finally if a Twitter user has not disabled georeferencing data the location of the tweet can be observed.  However in many cases this may not be very insightful because of the lack of data.
 
-```{r fig.align='center', warning=FALSE, message=FALSE}
-saotd::tweet_worldmap(DataFrame = TD_Topics, 
-                HT_Topic = "topic")
-```

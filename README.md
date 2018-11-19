@@ -3,6 +3,7 @@ Sentiment Analysis of Twitter Data (saotd)
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
+[![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086)
 [![DOI](https://zenodo.org/badge/117839390.svg)](https://zenodo.org/badge/latestdoi/117839390)
 [![Build
 Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://travis-ci.org/evan-l-munson/saotd)
