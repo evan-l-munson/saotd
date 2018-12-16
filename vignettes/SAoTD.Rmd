@@ -65,7 +65,7 @@ However is you want to acquire your own tweets, you will first have to:
     
 With these steps complete you now have access to the twitter API.
 
-To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://dev.twitter.com/apps/) page.
+To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://dev.twitter.com/apps/) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
 
 ```{r eval=FALSE}
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -89,7 +89,8 @@ load("test_tweets.RData")
 
 ## Explore
 
-You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.
+You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](https://www.kaggle.com/crowdflower/twitter-airline-sentimen) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
+
 
 ```{r}
 data("raw_tweets")
@@ -101,7 +102,7 @@ The second tweet of the dataset is:  __`r TD$text[2]`__, and when it is cleaned 
 ```{r}
 TD_Tidy <- saotd::tweet_tidy(DataFrame = TD)
 
-TD_Tidy$Token[11:20] %>% 
+TD_Tidy$Token[3:8] %>% 
   knitr::kable("html")
 ```
 
@@ -127,10 +128,10 @@ saotd::trigram(DataFrame = TD) %>%
   knitr::kable("html", caption = "Twitter data Tri-Grams")
 ```
 
-Now that we have the Uni-Grams we can see that ice and cream are referring to ice cream and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
+Now that we have the Uni-Grams we can see that cancelled and fligt are referring to cancelled flight and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
 
 ```{r message=FALSE, message=FALSE, error=FALSE}
-TD_Merge <- merge_terms(DataFrame = TD, term = "ice cream", term_replacement = "icecream")
+TD_Merge <- merge_terms(DataFrame = TD, term = "cancelled flight", term_replacement = "cancelled_flight")
 ```
 
 Now that the terms have been merged, the new N-Grams are re-computed.
@@ -241,7 +242,7 @@ saotd::number_topics(DataFrame = TD,
                      set_seed = 1234)
 ```
 
-The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  Remember that the twitter data was acquired by selecting seven different hashtags `r hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")`.  We could easily see that in this case selecting 7 topics could be a correct number of topics.  However if we knew that the data contained 5 topics we could continue the analysis.  
+The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  For this example we could select between 5 and 7 topics to categorize this data.  In this case 5 topics will be selected to continue the analysis.  
 
 ```{r fig.align='center', warning=FALSE, message=FALSE, results='asis'}
 TD_Topics <- saotd::tweet_topics(DataFrame = TD, 
@@ -253,32 +254,32 @@ TD_Topics <- saotd::tweet_topics(DataFrame = TD,
 
 In a markdown product the topics table does not print clearly, unlike when it is printed in the console.  However the words associated with each topic can be observed in the below table.
 
-|Number   | Topic 1     | Topic 2  | Topic 3  | Topic 4 | Topic 5       |
-|:-------:|:-----------:|:--------:|:--------:|:-------:|:-------------:|
-|1        |airline      |friday    |job       |kitten   |random         |
-|2        |cream        |icecream  |hiring    |cat      |fail           |
-|3        |icecream     |amp       |careerarc |cats     |jasmine        |
-|4        |ice          |happy     |jobs      |kitty    |save           |
-|5        |aviation     |chocolate |husbae    |kittens  |month          |
-|6        |dont         |delicious |click     |pet      |gentle         |
-|7        |travel       |weekend   |apply     |pets     |terrific       |
-|8        |airport      |food      |location  |cute     |tux            |
-|9        |medical      |day       |fit       |meow     |brendaperrott  |
-|10       |dohaconstant |follow    |recommend |time     |chance         |
+|Number   | Topic 1 | Topic 2  | Topic 3    | Topic 4      | Topic 5  |
+|:-------:|:-------:|:--------:|:----------:|:------------:|:--------:|
+|1        |united   |usairways |americanair |southwestair  |flight    |
+|2        |service  |time      |usairways   |jetblue       |cancelled |
+|3        |customer |plane     |amp         |im            |hours     |
+|4        |dont     |gate      |hold        |virginamerica |flights   |
+|5        |bag      |jetblue   |call        |guys          |2         |
+|6        |check    |hour      |phone       |fly           |delayed   |
+|7        |luggage  |waiting   |wait        |airline       |flightled |
+|8        |dm       |delay     |ive         |flying        |late      |
+|9        |lost     |people    |cange       |seat          |3         |
+|10       |worst    |minutes   |day         |love          |weather   |
 
-One of the challenges of using a topic model is selecting the correct number of topics.  As we can see in the above chart.  We went from 7 hashtags to 5 different topics.  By reducing the number of topics from 7 to 5 it appears that some of the topics relating to #icecream were rolled into Topics 1 and 2.  Additionally it appears that some of the discussion relating to #random and #kitten were combined within Topics 4 and 5.  
+One of the challenges of using a topic model is selecting the correct number of topics.  As we can see in the above chart.  We went from 6 hashtags to 5 different topics.
 
-While this may not be the best example to use, we will continue the topic modeling example.  We would first want to rename the topics into something that would make sense.  In this case Topic 1 could be travel, Topic 2 could be recreation, Topic 3 could be hiring, Topic 4 could be cats, and Topic 5 could be random.  These topics were chosen by observing the words associated with each topic.  This selection could be different depending on experience and a deeper understanding of the topics.
+While this may not be the best example to use, we will continue the topic modeling example.  We would first want to rename the topics into something that would make sense.  In this case Topic 1 could be luggage, Topic 2 could be delay, Topic 3 could be customer_service, Topic 4 could be enjoy, and Topic 5 could be delay  These topics were chosen by observing the words associated with each topic.  This selection could be different depending on experience and a deeper understanding of the topics.
 
 We would then want to rename the topics in the dataframe
 
 ```{r}
 TD_Topics <- TD_Topics %>% 
-  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "travel")) %>% 
-  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "recreation")) %>% 
-  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^3$", "hiring")) %>% 
-  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^4$", "cats")) %>% 
-  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^5$", "random"))
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "luggage")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "gate_delay")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^3$", "customer_service")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^4$", "enjoy")) %>% 
+  dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^5$", "other_delay"))
 ```
 
 Next we would want to tidy and then score the new topic dataset.
