@@ -1,5 +1,5 @@
-Meta
 doc
+Meta
 inst/doc
 .Rproj.user
 .Rhistory
@@ -10,4 +10,3 @@ hidden/
 src/*.so
 src/*.o
 src/*.dll
-*.html
