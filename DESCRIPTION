@@ -29,7 +29,7 @@ Imports: Rcpp (>= 0.12.14),
     ldatuning, 
     topicmodels
 LinkingTo: Rcpp
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests: testthat,
     knitr,
     rmarkdown,
