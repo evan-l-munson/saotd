@@ -2,7 +2,7 @@
 ^doc$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.httr-oauth$
+^.*\.httr-oauth$
 ^\.travis\.yml$
 ^\.circleci
 README.Rmd
@@ -14,4 +14,3 @@ README.Rmd
 tests/testthat/.httr-oauth
 ^paper.bib$
 ^paper.md$
-vignettes/.httr-oauth$
