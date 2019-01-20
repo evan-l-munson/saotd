@@ -5,7 +5,7 @@
 ^.*\.httr-oauth$
 ^\.travis\.yml$
 ^\.circleci
-README.Rmd
+^README.Rmd$
 ^.*\.o$
 ^.*\.dll$
 ^.*\.so$
