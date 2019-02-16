@@ -38,7 +38,7 @@ tweet_corpus_distribution <- function(DataFrameTidyScores, binwidth = 1, color =
   
   TD_Corpus_Distribution <- DataFrameTidyScores %>% 
     ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-    ggplot2::geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
+    ggplot2::geom_col(binwidth = binwidth, colour = color, fill = fill) +
     ggplot2::theme(legend.position = "none") +
     ggplot2::ggtitle("Sentiment Score Distribution") +
     ggplot2::xlab('Sentiment') +

@@ -39,11 +39,12 @@ tweet_distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, colo
   }
   
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  binwidth <- dplyr::quo(binwidth)
   
   if(HT_Topic == "hashtag") {
     TD_HT_Distribution <- DataFrameTidyScores %>% 
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-      ggplot2::geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
+      ggplot2::geom_col(binwidth = binwidth, colour = color, fill = fill) +
       ggplot2::facet_wrap(~hashtag, ncol = 2) +
       ggplot2::theme(legend.position = "none") +
       ggplot2::ggtitle("Sentiment Score Distribution Across all #Hashtags") +
@@ -54,7 +55,7 @@ tweet_distribution <- function(DataFrameTidyScores, HT_Topic, binwidth = 1, colo
   } else {
     TD_Topic_Distribution <- DataFrameTidyScores %>% 
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-      ggplot2::geom_histogram(stat = "count", binwidth = binwidth, colour = color, fill = fill) +
+      ggplot2::geom_col(binwidth = binwidth, colour = color, fill = fill) +
       ggplot2::facet_wrap(~Topic, ncol = 2) +
       ggplot2::theme(legend.position = "none") +
       ggplot2::ggtitle("Sentiment Score Distribution Across all Topics") +
