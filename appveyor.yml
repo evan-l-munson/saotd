@@ -14,7 +14,7 @@ install:
 # Adapt as necessary starting from here
 
 environment:
-  R_VERSION: release
+  R_VERSION: stable
   
 build_script:
 
