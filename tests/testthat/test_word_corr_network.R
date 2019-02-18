@@ -1,7 +1,7 @@
 
 # Test Data
 
-test_WordCorr_df <- dplyr::data_frame(
+test_WordCorr_df <- dplyr::tibble(
   text = c("I am happy and joyful",
            "I am sad and annoyed",
            "I am supremely happy and gratefully annoyed",
