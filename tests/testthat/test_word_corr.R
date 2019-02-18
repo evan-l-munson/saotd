@@ -24,6 +24,7 @@ correct_WordCorr_df <- dplyr::tribble(
 )
 
 test_WordCorr_Tidy_df <- saotd::tweet_tidy(DataFrame = test_WordCorr_df)
+
 test <- saotd::word_corr(DataFrameTidy = test_WordCorr_Tidy_df, number = 2) %>% 
   dplyr::mutate(correlation = round(x = correlation, digits = 3))
   

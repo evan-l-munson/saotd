@@ -87,5 +87,6 @@ tweet_topics <- function(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
   # Join original Twitter data frame with Tweet topics
   tweet_topics <- dplyr::inner_join(DataFrame, tweettopics, by = "key")
   
+  invisible()
   return(tweet_topics)
 }

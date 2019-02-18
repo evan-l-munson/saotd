@@ -89,5 +89,6 @@ number_topics <- function(DataFrame, num_cores, min_clusters = 2, max_clusters =
                                        panel.grid.minor.x = element_blank(), 
                                        legend.key = element_blank(), 
                                        strip.text.y = element_text(angle = 90))
+  invisible()
   return(p)
 }

@@ -42,5 +42,6 @@ test_that("The word_corr_network function is working as properly", {
 test_that("The word_corr_network retunrs ggplot object", {
 
   expect_is(p, "ggplot")
+  
 })
 

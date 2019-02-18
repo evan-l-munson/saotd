@@ -55,13 +55,18 @@ word_corr_network <- function(WordCorr, Correlation = 0.15, layout = "fr", edge_
   
   set.seed(set_seed)
   
-  WordCorr %>%
+ corr_network <- WordCorr %>%
     dplyr::filter(correlation > Correlation) %>%
     igraph::graph_from_data_frame() %>%
     ggraph::ggraph(layout = layout) +
-    ggraph::geom_edge_link(ggplot2::aes(edge_alpha = correlation, edge_width = correlation), edge_colour = edge_color, show.legend = TRUE) +
+    ggraph::geom_edge_link(ggplot2::aes(edge_alpha = correlation, 
+                                        edge_width = correlation), 
+                           edge_colour = edge_color, 
+                           show.legend = TRUE) +
     ggraph::geom_node_point(colour = node_color, size = node_size) +
     ggraph::geom_node_text(ggplot2::aes(label = name), repel = TRUE) +
     ggplot2::ggtitle("Word Correlation Network") +
     ggplot2::theme_void()
+  
+  return(corr_network)
 }
