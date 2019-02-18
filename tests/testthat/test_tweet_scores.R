@@ -1,3 +1,6 @@
+
+testthat::context("Compute Tweet Sentiment Scores")
+
 # Test Data
 
 test_HT_df <- dplyr::data_frame(

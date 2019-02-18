@@ -1,3 +1,6 @@
+
+testthat::context("Compute Tweet Positive and Negative Words")
+
 # Test Data
 
 test_HT_df <- dplyr::data_frame(

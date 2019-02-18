@@ -1,3 +1,6 @@
+
+testthat::context("Compute Tweet Minimum Sentiment Scores")
+
 # Test Data
 
 # Data for hashtag without "HT_Topic_Selection"
@@ -75,3 +78,4 @@ test_that("The tweet_min_scores function using topics and a topic selection prop
   expect_equal(test_Topic_selection, check_Topic_selection)
   
 })
+

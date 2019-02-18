@@ -1,4 +1,5 @@
-context("test_Distribution")
+
+testthat::context("Compute the Sentiment Tweet Distribution")
 
 # Test Data
 # Data for hashtag

@@ -1,3 +1,6 @@
+
+testthat::context("Compute the numer of Tweet Topics")
+
 # Test Data
 test_df <- dplyr::data_frame(
   text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!",

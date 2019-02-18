@@ -1,4 +1,6 @@
 
+testthat::context("Word Correlation")
+
 # Test Data
 
 test_WordCorr_df <- dplyr::tibble(

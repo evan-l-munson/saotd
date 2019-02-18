@@ -1,3 +1,6 @@
+
+testthat::context("Compute Tweet Maximum Sentiment Scores")
+
 # Test Data
 
 # Data for hashtag without "HT_Topic_Selection"

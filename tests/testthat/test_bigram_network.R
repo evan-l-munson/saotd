@@ -1,4 +1,5 @@
-testthat::context("BigramNetwork")
+
+testthat::context("Plot Bigram Network")
 
 # Test data
 

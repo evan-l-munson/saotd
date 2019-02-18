@@ -1,3 +1,6 @@
+
+testthat::context("Plot Tweets across the World")
+
 # Test Data
 # Data for hashtag
 test_HT_df <- dplyr::data_frame(

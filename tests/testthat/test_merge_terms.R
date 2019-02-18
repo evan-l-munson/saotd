@@ -1,3 +1,6 @@
+
+testthat::context("Merge Terms")
+
 test_that("Merge.Terms is being properly computed", {
 
   # Create text for test

@@ -1,5 +1,7 @@
-testthat::context("trigram")
 
+testthat::context("Compute Trigrams")
+
+# Test Data
 text <- "Trigrams provide significant awesome information pertaining to the world up down around them.  
 Awesome information, empowers the world to make everything better."
 test_trigram_df <- as.data.frame(x = text)

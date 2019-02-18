@@ -1,3 +1,6 @@
+
+testthat::context("Plot Tweet Score Over time Plot")
+
 # Test Data
 # Data for hashtag
 test_HT_df <- dplyr::data_frame(

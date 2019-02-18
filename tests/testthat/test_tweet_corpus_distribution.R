@@ -1,4 +1,5 @@
-context("test_CorpusDistribution")
+
+testthat::context("Plot Score Distribution")
 
 # Test Data
 
