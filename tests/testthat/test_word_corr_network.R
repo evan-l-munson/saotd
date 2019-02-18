@@ -1,4 +1,3 @@
-testthat::context("word_corr_network")
 
 # Test Data
 

@@ -1,4 +1,3 @@
-testthat::context("word_corr")
 
 # Test Data
 
