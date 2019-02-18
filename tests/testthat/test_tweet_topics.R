@@ -32,3 +32,4 @@ test_that("The tweet_topics is being computed correctly", {
   
   expect_identical(test_TweetTopics, check_TweetTopics)
 })
+
