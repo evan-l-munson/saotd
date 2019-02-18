@@ -320,7 +320,6 @@ Now we will begin visualizing the hashtag data.  The distribution of the sentime
 
 ```{r fig.align='center'}
 saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Scores, 
-                                 binwidth = 1, 
                                  color = "black", 
                                  fill = "white")
 ```
@@ -329,8 +328,8 @@ Additionally if we wanted to see the score distributions per each hashtag, we ca
 
 ```{r fig.align='center'}
 saotd::tweet_distribution(DataFrameTidyScores = TD_Scores, 
+                          binwidth = 1,
                           HT_Topic = "hashtag", 
-                          binwidth = 1, 
                           color = "black", 
                           fill = "white")
 ```
@@ -364,7 +363,6 @@ Now we will begin visualizing the topic data.  The distribution of the sentiment
 
 ```{r fig.align='center'}
 saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Topics_Scores, 
-                                 binwidth = 1, 
                                  color = "black", 
                                  fill = "white")
 ```
@@ -373,8 +371,8 @@ Additionally if we wanted to see the score distributions per each topic, we can 
 
 ```{r fig.align='center'}
 saotd::tweet_distribution(DataFrameTidyScores = TD_Topics_Scores, 
+                          binwidth = 1,
                           HT_Topic = "topic", 
-                          binwidth = 1, 
                           color = "black", 
                           fill = "white")
 ```

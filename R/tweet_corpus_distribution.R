@@ -8,7 +8,7 @@
 #' @param color The user selected color to highlight the bins.
 #' @param fill The interior color of the bins.
 #' 
-#' @importFrom dplyr quo
+#' @importFrom dplyr quo group_by count
 #' @import ggplot2
 #' 
 #' @return A ggplot.
@@ -35,10 +35,13 @@ tweet_corpus_distribution <- function(DataFrameTidyScores, binwidth = 1, color =
   }
   
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  n <- dplyr::quo(n)
   
   TD_Corpus_Distribution <- DataFrameTidyScores %>% 
-    ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-    ggplot2::geom_col(binwidth = binwidth, colour = color, fill = fill) +
+    dplyr::group_by(TweetSentimentScore) %>% 
+    dplyr::count() %>% 
+    ggplot2::ggplot(ggplot2::aes(x = TweetSentimentScore, y = n)) +
+    ggplot2::geom_col(colour = color, fill = fill) +
     ggplot2::theme(legend.position = "none") +
     ggplot2::ggtitle("Sentiment Score Distribution") +
     ggplot2::xlab('Sentiment') +
