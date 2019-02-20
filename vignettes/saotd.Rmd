@@ -309,7 +309,7 @@ Furthermore if we wanted to observe the most positive or negative scores associa
 ```{r}
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Topics_Scores, 
                         HT_Topic = "topic", 
-                        HT_Topic_Selection = "cats")
+                        HT_Topic_Selection = "United")
 ```
 
 ## Visualizations

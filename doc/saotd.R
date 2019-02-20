@@ -156,7 +156,7 @@ saotd::tweet_min_scores(DataFrameTidyScores = TD_Topics_Scores,
 ## ------------------------------------------------------------------------
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Topics_Scores, 
                         HT_Topic = "topic", 
-                        HT_Topic_Selection = "cats")
+                        HT_Topic_Selection = "United")
 
 ## ----fig.align='center'--------------------------------------------------
 saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Scores, 
