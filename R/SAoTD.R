@@ -12,7 +12,4 @@
 #'
 #' For additional information and a description on how to use the package, 
 #' please look at the package vignette: utils::vignette('saotd').
-#' 
-#' @useDynLib saotd, .registration = TRUE
-#' @importFrom Rcpp evalCpp
 NULL
