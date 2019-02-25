@@ -18,6 +18,6 @@
 data(raw_tweets)
 }
 \description{
-Dataset from a [Twitter US Airline Sentiment](https://www.kaggle.com/crowdflower/twitter-airline-sentimen) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America).
+Dataset from a [Twitter US Airline Sentiment](https://www.kaggle.com/crowdflower/twitter-airline-sentiment) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America).
 }
 \keyword{datasets}

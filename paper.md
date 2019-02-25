@@ -13,7 +13,7 @@ authors:
 - affiliation: 1
   name: Jason K. Freels
   orcid: 0000-0002-2415-0340
-date: "11 May 2018"
+date: "24 February 2019"
 output: pdf_document
 bibliography: paper.bib
 tags:

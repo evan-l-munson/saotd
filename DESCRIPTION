@@ -1,10 +1,28 @@
 Package: saotd
 Type: Package
 Title: Sentiment Analysis of Twitter Data
-Version: 0.1.0
+Version: 0.2.0
 Date: 2019-02-24
-Author: Evan L. Munson 
+Authors@R: c(
+    person("Evan", "Munson", 
+           email = "evan.l.munson@gmail.com", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9958-6800")),
+    person("Christopher", "Smith", 
+           email = "Cms3am@virginia.edu", 
+           role = c("aut"),
+           comment = c(ORCID = "0000-0002-8288-270X")),
+    person("Bradley", "Boehmke",
+           email = "bradleyboehmke@gmail.com",
+           role = c("aut"),
+           comment = c(ORCID = "0000-0002-3611-8516")),
+    person("Jason", "Freels",
+           email = "auburngrads@live.com",
+           role = c("aut"),
+           comment = c(ORCID = "0000-0002-2415-0340"))
+           )
 Maintainer: Evan L. Munson <evan.l.munson@gmail.com>
+BugReports: https://github.com/evan-l-munson/saotd
 Description: This analytic is an in initial foray into sentiment analysis.  This analytic will allow a user to access the Twitter API (once they create their own developer account), ingest tweets of their interest, clean / tidy data, perform topic modeling if interested, compute sentiment scores utilizing the Bing Lexicon, and output visualizations.
 License: GPL (>= 2)
 Imports: 

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/saotd)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
 
 ## Purpose
 
@@ -105,10 +105,14 @@ citation("saotd")
 
 If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/evan-l-munson/saotd/issues).
 
+## Contributing
+
+If you would like to contribute, please create a [Pull Request](https://github.com/evan-l-munson/saotd/pulls) and make appropriate applicable changes for review.
+
 ## References
 
 * [AFIT Data Science Lab](https://github.com/AFIT-R)
 * [Tidyverse](https://www.tidyverse.org/)
 * [Text Mining with R](https://www.tidytextmining.com/)
 * [ldatuning](https://github.com/nikita-moor/ldatuning)
-* [topicmodels](https://cran.r-project.org/web/packages/topicmodels/index.html)
+* [topicmodels](https://CRAN.R-project.org/package=topicmodels)

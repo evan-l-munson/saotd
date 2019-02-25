@@ -12,7 +12,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?b
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
 
 ## Purpose
 
@@ -168,6 +168,12 @@ citation("saotd")
 
 If you encounter a clear bug, please file a minimal reproducible example
 on [github](https://github.com/evan-l-munson/saotd/issues).
+
+## Contributing
+
+If you would like to contribute, please create a [Pull
+Request](https://github.com/evan-l-munson/saotd/pulls) and make
+appropriate applicable changes for review.
 
 ## References
 
