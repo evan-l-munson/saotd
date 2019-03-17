@@ -8,6 +8,10 @@ vignette: >
   %\VignetteEncoding{UTF-8} 
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Sentiment Analysis of Twitter Data (saotd)
 
 ## Twitter Introduction    
@@ -34,7 +38,7 @@ The `saotd` package is broken down into five different phases:
 
 ## Packages
 
-```{r warning=FALSE, message=FALSE}
+```{r packages, warning=FALSE, message=FALSE}
 library(saotd)
 library(tidytext)
 library(dplyr)
@@ -67,7 +71,7 @@ With these steps complete you now have access to the twitter API.
 
 To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://dev.twitter.com/apps/) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
 
-```{r eval=FALSE}
+```{r tweet_acquire, eval=FALSE}
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -92,14 +96,14 @@ load("test_tweets.RData")
 You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](https://www.kaggle.com/crowdflower/twitter-airline-sentiment) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
 
 
-```{r}
+```{r raw_tweets}
 data("raw_tweets")
 TD <- raw_tweets
 ```
 
 The second tweet of the dataset is:  __`r TD$text[2]`__, and when it is cleaned and tidy'd it becomes:
 
-```{r}
+```{r tidy}
 TD_Tidy <- saotd::tweet_tidy(DataFrame = TD)
 
 TD_Tidy$Token[3:8] %>% 
@@ -110,19 +114,19 @@ The cleaning process removes:  "@", "#" and "RT" symbols, Weblinks, Punctuation,
 
 We will now investigate Uni-Grams, Bi-Grams and Tri-Grams.
 
-```{r message=FALSE}
+```{r unigram, message=FALSE}
 saotd::unigram(DataFrame = TD) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Uni-Grams")
 ```
 
-```{r message=FALSE}
+```{r bigram, message=FALSE}
 saotd::bigram(DataFrame = TD) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Bi-Grams")
 ```
 
-```{r message=FALSE}
+```{r trigram, message=FALSE}
 saotd::trigram(DataFrame = TD) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Tri-Grams")
@@ -130,25 +134,25 @@ saotd::trigram(DataFrame = TD) %>%
 
 Now that we have the Uni-Grams we can see that cancelled and fligt are referring to cancelled flight and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
 
-```{r message=FALSE, message=FALSE, error=FALSE}
+```{r merge, message=FALSE, message=FALSE, error=FALSE}
 TD_Merge <- merge_terms(DataFrame = TD, term = "cancelled flight", term_replacement = "cancelled_flight")
 ```
 
 Now that the terms have been merged, the new N-Grams are re-computed.
 
-```{r message=FALSE}
+```{r merged_unigram, message=FALSE}
 saotd::unigram(DataFrame = TD_Merge) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Uni-Grams")
 ```
 
-```{r message=FALSE}
+```{r merged_bigram, message=FALSE}
 saotd::bigram(DataFrame = TD_Merge) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Bi-Grams")
 ```
 
-```{r message=FALSE}
+```{r merged_trigram, message=FALSE}
 saotd::trigram(DataFrame = TD_Merge) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Tri-Grams")
@@ -156,7 +160,7 @@ saotd::trigram(DataFrame = TD_Merge) %>%
 
 Now we can look at Bi-Gram Networks.
 
-```{r fig.align='center'}
+```{r bigram_network, fig.align='center'}
 TD_Bigram <- saotd::bigram(DataFrame = TD_Merge)
 
 saotd::bigram_network(BiGramDataFrame = TD_Bigram,
@@ -170,7 +174,7 @@ saotd::bigram_network(BiGramDataFrame = TD_Bigram,
 
 Additionally we can observe the Correlation Network.
 
-```{r fig.align='center'}
+```{r corr_network, fig.align='center'}
 TD_Corr <- saotd::word_corr(DataFrameTidy = TD_Tidy, 
                             number = 200, 
                             sort = TRUE)
@@ -187,21 +191,21 @@ saotd::word_corr_network(WordCorr = TD_Corr,
 
 Now that the data has been explored we will need to compute the Sentiment scores for the hashtags.
 
-```{r}
+```{r scores}
 TD_Scores <- saotd::tweet_scores(DataFrameTidy = TD_Tidy, 
                                  HT_Topic = "hashtag")
 ```
 
 With the scores computed we can then observe the positive and negative words within the dataset.
 
-```{r fig.align='center'}
+```{r posneg_words, fig.align='center'}
 saotd::posneg_words(DataFrameTidy = TD_Tidy, 
                     num_words = 10)
 ```
 
 As an example we can see that the negative term "fail" is dwarfing all other responses.  If we would like to remove "fail" we can easily do it.
 
-```{r fig.align='center'}
+```{r filtered_posneg_words, fig.align='center'}
 saotd::posneg_words(DataFrameTidy = TD_Tidy, 
                     num_words = 10, 
                     filterword = "fail")
@@ -209,21 +213,21 @@ saotd::posneg_words(DataFrameTidy = TD_Tidy,
 
 We can see the most positive tweets hashtags within the the data set.
 
-```{r}
+```{r max_scores}
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores,
                         HT_Topic = "hashtag")
 ```
 
 We can also see the most negative hashtag tweets within the data set.
 
-```{r}
+```{r min_scores}
 saotd::tweet_min_scores(DataFrameTidyScores = TD_Scores, 
                         HT_Topic = "hashtag")
 ```
 
 Furthermore if we wanted to observe the most positive or negative hashtag scores associated with a specific hashtag we could also do that.
 
-```{r}
+```{r filtered_max_scores}
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores, 
                         HT_Topic = "hashtag", 
                         HT_Topic_Selection = "kitten")
@@ -233,7 +237,7 @@ saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores,
 
 If we were interested in conducting a topic analysis on the tweets we would then determine the number of latent topics within the tweet data.
 
-```{r fig.align='center', warning=FALSE, message=FALSE, results="hide"}
+```{r number_topics_plot, fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE, cache.path='saotd_cache/'}
 saotd::number_topics(DataFrame = TD, 
                      num_cores = 2L, 
                      min_clusters = 2, 
@@ -244,7 +248,7 @@ saotd::number_topics(DataFrame = TD,
 
 The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  For this example we could select between 5 and 7 topics to categorize this data.  In this case 5 topics will be selected to continue the analysis.  
 
-```{r fig.align='center', warning=FALSE, message=FALSE, results='asis'}
+```{r topics, fig.align='center', warning=FALSE, message=FALSE, results='hide', cache=TRUE, cache.path='saotd_cache/'}
 TD_Topics <- saotd::tweet_topics(DataFrame = TD, 
                                  clusters = 5, 
                                  method = "Gibbs", 
@@ -273,7 +277,7 @@ While this may not be the best example to use, we will continue the topic modeli
 
 We would then want to rename the topics in the dataframe
 
-```{r}
+```{r rename_topics}
 TD_Topics <- TD_Topics %>% 
   dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^1$", "luggage")) %>% 
   dplyr::mutate(Topic = stringr::str_replace_all(Topic, "^2$", "gate_delay")) %>% 
@@ -284,7 +288,7 @@ TD_Topics <- TD_Topics %>%
 
 Next we would want to tidy and then score the new topic dataset.
 
-```{r}
+```{r topic_tidy}
 TD_Topics_Tidy <- saotd::tweet_tidy(DataFrame = TD_Topics)
 TD_Topics_Scores <- saotd::tweet_scores(DataFrameTidy = TD_Topics_Tidy, 
                                         HT_Topic = "topic")
@@ -292,21 +296,21 @@ TD_Topics_Scores <- saotd::tweet_scores(DataFrameTidy = TD_Topics_Tidy,
 
 We can see the most positive topic tweets within the data set.
 
-```{r}
+```{r topic_max_scores}
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Topics_Scores,
                         HT_Topic = "topic")
 ```
 
 We can also see the most negative topics tweets within the data set.
 
-```{r}
+```{r topic_min_scores}
 saotd::tweet_min_scores(DataFrameTidyScores = TD_Topics_Scores,  
                         HT_Topic = "topic")
 ```
 
 Furthermore if we wanted to observe the most positive or negative scores associated with a specific topic we could also do that.
 
-```{r}
+```{r topic_filtered_max_scores}
 saotd::tweet_max_scores(DataFrameTidyScores = TD_Topics_Scores, 
                         HT_Topic = "topic", 
                         HT_Topic_Selection = "United")
@@ -318,7 +322,7 @@ saotd::tweet_max_scores(DataFrameTidyScores = TD_Topics_Scores,
 
 Now we will begin visualizing the hashtag data.  The distribution of the sentiment scores can be found in the below plot.
 
-```{r fig.align='center'}
+```{r corpus_distribution, fig.align='center'}
 saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Scores, 
                                  color = "black", 
                                  fill = "white")
@@ -326,7 +330,7 @@ saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Scores,
 
 Additionally if we wanted to see the score distributions per each hashtag, we can find it below.
 
-```{r fig.align='center'}
+```{r tweet_distribution, fig.align='center'}
 saotd::tweet_distribution(DataFrameTidyScores = TD_Scores, 
                           binwidth = 1,
                           HT_Topic = "hashtag", 
@@ -336,21 +340,21 @@ saotd::tweet_distribution(DataFrameTidyScores = TD_Scores,
 
 We can also observe the hashtag distributions as a Box plot.
 
-```{r fig.align='center'}
+```{r box_plot, fig.align='center'}
 saotd::tweet_box(DataFrameTidyScores = TD_Scores, 
                  HT_Topic = "hashtag")
 ```
 
 Also as a Violin plot.  The chevrons in each violin plot denote the median of the data and provide a quick reference point to see if a hashtag is generally positive or negative.  For example the "random" hashtag has a generally negative sentiment, where as the "kitten" hashtags has a generally positive sentiment.
 
-```{r fig.align='center'}
+```{r violin_plot, fig.align='center'}
 saotd::tweet_violin(DataFrameTidyScores = TD_Scores,
                     HT_Topic = "hashtag")
 ```
 
 One of the more interesting ways to visualize the Twitter data is to observe the change in sentiment over time.  This dataset was acquired on a single day and therefore some of the hashtags did not overlap days.  However some did and we can see the change in sentiment scores through time.
 
-```{r fig.align='center', warning=FALSE, message=FALSE}
+```{r time_plot, fig.align='center', warning=FALSE, message=FALSE}
 saotd::tweet_time(DataFrameTidyScores = TD_Scores, 
                   HT_Topic = "hashtag")
 ```
@@ -361,7 +365,7 @@ Finally if a Twitter user has not disabled georeferencing data the location of t
 
 Now we will begin visualizing the topic data.  The distribution of the sentiment scores can be found in the below plot.
 
-```{r fig.align='center'}
+```{r topic_corpus_distribution, fig.align='center'}
 saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Topics_Scores, 
                                  color = "black", 
                                  fill = "white")
@@ -369,7 +373,7 @@ saotd::tweet_corpus_distribution(DataFrameTidyScores = TD_Topics_Scores,
 
 Additionally if we wanted to see the score distributions per each topic, we can find it below.
 
-```{r fig.align='center'}
+```{r topic_tweet_distribution, fig.align='center'}
 saotd::tweet_distribution(DataFrameTidyScores = TD_Topics_Scores, 
                           binwidth = 1,
                           HT_Topic = "topic", 
@@ -379,21 +383,21 @@ saotd::tweet_distribution(DataFrameTidyScores = TD_Topics_Scores,
 
 We can also observe the topic distributions as a Box plot.
 
-```{r fig.align='center'}
+```{r topic_box_plot, fig.align='center'}
 saotd::tweet_box(DataFrameTidyScores = TD_Topics_Scores, 
                  HT_Topic = "topic")
 ```
 
 Also as a Violin plot.  The chevrons in each violin plot denote the median of the data and provide a quick reference point to see if a hashtag is generally positive or negative.  For example the "random" hashtag has a generally negative sentiment, where as the "kitten" hashtags has a generally positive sentiment.
 
-```{r fig.align='center'}
+```{r topic_violin_plot, fig.align='center'}
 saotd::tweet_violin(DataFrameTidyScores = TD_Topics_Scores,
                     HT_Topic = "topic")
 ```
 
 One of the more interesting ways to visualize the Twitter data is to observe the change in sentiment over time.  This dataset was acquired on a single day and therefore some of the hashtags did not overlap days.  However some did and we can see the change in sentiment scores through time.
 
-```{r fig.align='center', warning=FALSE, message=FALSE}
+```{r topic_time, fig.align='center', warning=FALSE, message=FALSE}
 saotd::tweet_time(DataFrameTidyScores = TD_Topics_Scores, 
                   HT_Topic = "topic")
 ```
