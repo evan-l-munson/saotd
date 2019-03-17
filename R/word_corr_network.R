@@ -19,7 +19,7 @@
 #' @return An igraph plot
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)

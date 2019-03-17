@@ -24,7 +24,7 @@
 #' @return A DataFrame.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 #' consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 #' access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"

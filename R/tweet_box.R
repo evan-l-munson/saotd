@@ -12,7 +12,7 @@
 #' @return A ggplot box plot.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)

@@ -12,7 +12,7 @@
 #' @return A tribble.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(saotd)
 #' data <- raw_tweets
 #' TD_Unigram <- unigram(DataFrame = data)

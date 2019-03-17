@@ -20,7 +20,7 @@
 #' @return Returns LDA topics.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(saotd)
 #' data <- raw_tweets
 #' LDA_data <- tweet_topics(DataFrame = data,

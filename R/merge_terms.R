@@ -13,7 +13,7 @@
 #' @return A Tidy DataFrame.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(saotd)
 #' data <- raw_tweets
 #' data <- merge_terms(DataFrame = data, 
