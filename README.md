@@ -3,6 +3,7 @@ Sentiment Analysis of Twitter Data (saotd)
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
 [![Build
@@ -13,6 +14,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?b
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.2.0-orange.svg?style=flat-square)](https://github.com/evan-l-munson/saotd)
+<http://cranlogs.r-pkg.org/badges/saotd>
+<http://cranlogs.r-pkg.org/badges/grand-total/saotd>
 
 ## Purpose
 
