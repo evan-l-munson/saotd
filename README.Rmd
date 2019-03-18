@@ -45,7 +45,7 @@ The functions that are provided by `saotd` are broken down into five different c
 
 * Acquire
 
-  + `tweet_acquire` allows a user to acquire Tweets of their choosing by accessing the Twitter API.  In order to do this the user needs to have a [Twitter](https://twitter.com) account.  Additionally once the user has an account they will then need to sign up for a [Twitter Developers](https://dev.twitter.com/) account.  Once a user has a Twitter developers account and has received their individual consumer key, consumer secret key, access token, and access secret key, they can acquire Tweets based on a list of hashtags and a requested number of entries per hashtag.
+  + `tweet_acquire` allows a user to acquire Tweets of their choosing by accessing the Twitter API.  In order to do this the user needs to have a [Twitter](<https://twitter.com>) account.  Additionally once the user has an account they will then need to sign up for a [Twitter Developers](<https://dev.twitter.com/>) account.  Once a user has a Twitter developers account and has received their individual consumer key, consumer secret key, access token, and access secret key, they can acquire Tweets based on a list of hashtags and a requested number of entries per hashtag.
 
 * Explore
 
@@ -65,7 +65,7 @@ The functions that are provided by `saotd` are broken down into five different c
   
 * Sentiment Calculation
 
-  + `tweet_scores` calculates the Sentiment Scores using the [Bing Lexicon Dictionary](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html) that will account for sentiment by hashtag or topic.
+  + `tweet_scores` calculates the Sentiment Scores using the [Bing Lexicon Dictionary](<https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html>) that will account for sentiment by hashtag or topic.
   + `posneg_words` determines and displays the most positive and negative words within the Twitter data.
   + `tweet_min_scores` determines the minimum scores for either the entire dataset or the minimum scores associated with a hashtag or topic analysis.
   + `tweet_max_scores` determines the maximum scores for either the entire dataset or the maximum scores associated with a hashtag or topic analysis.
@@ -107,12 +107,12 @@ If you encounter a clear bug, please file a minimal reproducible example on [git
 
 ## Contributing
 
-If you would like to contribute, please create a [Pull Request](https://github.com/evan-l-munson/saotd/pulls) and make appropriate applicable changes for review.
+If you would like to contribute, please create a [Pull Request](<https://github.com/evan-l-munson/saotd/pulls>) and make appropriate applicable changes for review.
 
 ## References
 
-* [AFIT Data Science Lab](https://github.com/AFIT-R)
-* [Tidyverse](https://www.tidyverse.org/)
-* [Text Mining with R](https://www.tidytextmining.com/)
-* [ldatuning](https://github.com/nikita-moor/ldatuning)
-* [topicmodels](https://CRAN.R-project.org/package=topicmodels)
+* [AFIT Data Science Lab](<https://github.com/AFIT-R>)
+* [Tidyverse](<https://www.tidyverse.org/>)
+* [Text Mining with R](<https://www.tidytextmining.com/>)
+* [ldatuning](<https://CRAN.R-project.org/package=ldatuning>)
+* [topicmodels](<https://CRAN.R-project.org/package=topicmodels>)

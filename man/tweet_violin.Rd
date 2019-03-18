@@ -18,7 +18,7 @@ A ggplot violin plot.
 Displays the distribution scores of either hashtag or topic Twitter data.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

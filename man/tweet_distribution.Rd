@@ -25,7 +25,7 @@ A facet wrap ggplot.
 Determines the scores distribution by hashtag or topic for Twitter data.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

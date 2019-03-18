@@ -16,7 +16,7 @@ A Tidy DataFrame.
 Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual Tweet.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 tidy_data <- tweet_tidy(DataFrame = data)

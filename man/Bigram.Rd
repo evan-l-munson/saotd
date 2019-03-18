@@ -16,7 +16,7 @@ A tribble.
 Determines and displays the text Bi-Grams within the Twitter data in sequence from the most used to the least used.  A Bi-Gram is a combination of two consecutive words.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 TD_Bigram <- bigram(DataFrame = data)

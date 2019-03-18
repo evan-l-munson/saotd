@@ -180,5 +180,5 @@ appropriate applicable changes for review.
   - [AFIT Data Science Lab](https://github.com/AFIT-R)
   - [Tidyverse](https://www.tidyverse.org/)
   - [Text Mining with R](https://www.tidytextmining.com/)
-  - [ldatuning](https://github.com/nikita-moor/ldatuning)
+  - [ldatuning](https://CRAN.R-project.org/package=ldatuning)
   - [topicmodels](https://CRAN.R-project.org/package=topicmodels)

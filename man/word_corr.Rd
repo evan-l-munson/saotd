@@ -20,7 +20,7 @@ A tribble
 The word correlation displays the mutual relationship between words.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

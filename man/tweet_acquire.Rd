@@ -35,7 +35,7 @@ consumer secret key, access token, and access secret they can
 acquire Tweets based on a list of hashtags and a requested number of entires per hashtag.
 }
 \examples{
-\dontrun{
+\donttest{
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"

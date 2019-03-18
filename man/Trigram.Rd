@@ -16,7 +16,7 @@ A tribble.
 Determines and displays the text Tri-Grams within the Twitter data in sequence from the most used to the least used.  A Tri-Gram is a combination of three consecutive words.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 TD_Trigram <- trigram(DataFrame = data)

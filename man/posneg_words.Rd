@@ -20,7 +20,7 @@ A ggplot
 Determines and displays the most positive and negative words within the twitter data.
 }
 \examples{
-\dontrun{
+\donttest{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

@@ -53,9 +53,9 @@ To explore the data manipulation functions of `saotd` we will use the built in d
 
 However is you want to acquire your own tweets, you will first have to:
 
-1. Create a [twitter](https://twitter.com/) account or sign into existing account.
+1. Create a [twitter](<https://twitter.com/>) account or sign into existing account.
 
-2. Use your twitter login, to sign into [Twitter Developers](https://dev.twitter.com/apps/)
+2. Use your twitter login, to sign into [Twitter Developers](<https://dev.twitter.com/apps/>)
 
 3. Navigate to My Applications.
 
@@ -69,7 +69,7 @@ However is you want to acquire your own tweets, you will first have to:
     
 With these steps complete you now have access to the twitter API.
 
-To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://dev.twitter.com/apps/) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
+To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](<https://dev.twitter.com/apps/>) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
 
 ```{r tweet_acquire, eval=FALSE}
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -93,7 +93,7 @@ load("test_tweets.RData")
 
 ## Explore
 
-You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](https://www.kaggle.com/crowdflower/twitter-airline-sentiment) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
+You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](<https://www.kaggle.com/crowdflower/twitter-airline-sentiment>) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
 
 
 ```{r raw_tweets}
