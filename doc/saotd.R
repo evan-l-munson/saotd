@@ -30,7 +30,8 @@ library(utils)
 
 ## ----raw_tweets, cache=TRUE, cache.path='saotd_cache/'-------------------
 data("raw_tweets")
-TD <- raw_tweets
+TD <- raw_tweets %>% 
+  dplyr::sample_n(size = 5000)
 
 ## ----tidy, cache=TRUE, cache.path='saotd_cache/'-------------------------
 TD_Tidy <- saotd::tweet_tidy(DataFrame = TD)
@@ -75,7 +76,7 @@ saotd::trigram(DataFrame = TD_Merge) %>%
 TD_Bigram <- saotd::bigram(DataFrame = TD_Merge)
 
 saotd::bigram_network(BiGramDataFrame = TD_Bigram,
-                      number = 90,
+                      number = 30,
                       layout = "fr",
                       edge_color = "blue",
                       node_color = "black",
@@ -84,7 +85,7 @@ saotd::bigram_network(BiGramDataFrame = TD_Bigram,
 
 ## ----corr_network, fig.align='center', cache=TRUE, cache.path='saotd_cache/'----
 TD_Corr <- saotd::word_corr(DataFrameTidy = TD_Tidy, 
-                            number = 200, 
+                            number = 100, 
                             sort = TRUE)
 
 saotd::word_corr_network(WordCorr = TD_Corr, 
