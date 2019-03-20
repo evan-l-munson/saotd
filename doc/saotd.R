@@ -120,13 +120,13 @@ saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores,
                         HT_Topic = "hashtag", 
                         HT_Topic_Selection = "kitten")
 
-## ----number_topics_plot, fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE, cache.path='saotd_cache/'----
-saotd::number_topics(DataFrame = TD, 
-                     num_cores = 2L, 
-                     min_clusters = 2, 
-                     max_clusters = 12, 
-                     skip = 1, 
-                     set_seed = 1234)
+## ----number_topics_plot, eval=FALSE, fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE, cache.path='saotd_cache/'----
+#  saotd::number_topics(DataFrame = TD,
+#                       num_cores = 2L,
+#                       min_clusters = 2,
+#                       max_clusters = 12,
+#                       skip = 1,
+#                       set_seed = 1234)
 
 ## ----topics, fig.align='center', warning=FALSE, message=FALSE, results='hide', cache=TRUE, cache.path='saotd_cache/'----
 TD_Topics <- saotd::tweet_topics(DataFrame = TD, 

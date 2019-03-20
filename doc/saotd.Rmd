@@ -237,7 +237,7 @@ saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores,
 
 If we were interested in conducting a topic analysis on the tweets we would then determine the number of latent topics within the tweet data.
 
-```{r number_topics_plot, fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE, cache.path='saotd_cache/'}
+```{r number_topics_plot, eval=FALSE, fig.align='center', warning=FALSE, message=FALSE, results="hide", cache=TRUE, cache.path='saotd_cache/'}
 saotd::number_topics(DataFrame = TD, 
                      num_cores = 2L, 
                      min_clusters = 2, 
@@ -245,6 +245,8 @@ saotd::number_topics(DataFrame = TD,
                      skip = 1, 
                      set_seed = 1234)
 ```
+
+<img src="/Users/eklm/Documents/13_AFIT/08_saotd Package/vignettes/lda_topics.png" align="middle" height="450" width="750" margin="0 auto" />
 
 The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  For this example we could select between 5 and 7 topics to categorize this data.  In this case 5 topics will be selected to continue the analysis.  
 
@@ -400,6 +402,6 @@ One of the more interesting ways to visualize the Twitter data is to observe the
 ```{r topic_time, fig.align='center', warning=FALSE, message=FALSE, cache=TRUE, cache.path='saotd_cache/'}
 saotd::tweet_time(DataFrameTidyScores = TD_Topics_Scores, 
                   HT_Topic = "topic")
-```
+``` 
 
 

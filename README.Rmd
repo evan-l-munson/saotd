@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](http://cranlogs.r-pkg.org/badges/saotd)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/saotd)](http://cranlogs.r-pkg.org/badges/grand-total/saotd)
 
-
 ## Purpose
 
 This package is focused on utilizing Twitter data due to its widespread global acceptance.  The rapid expansion and acceptance of social media has opened doors into opinions and perceptions that were never as accessible as they are with today's prevalence of mobile technology.  Harvested Twitter data, analyzed for opinions and sentiment can provide powerful insight into a population.  This insight can assist companies by letting them better understand their target population.  The knowledge gained can also enable governments to better understand a population so they can make more informed decisions for that population.  During the course of this research, data was acquired through the Public Twitter Application Programming Interface (API), to obtain Tweets as the foundation of data and will build a methodology utilizing a topic modeling and lexicographical approach to analyze the sentiment and opinions of text in English to determine a general sentiment such as positive or negative.  The more people express themselves on social media, this application can be used to gauge the general feeling of people.
