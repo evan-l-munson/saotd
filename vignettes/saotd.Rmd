@@ -246,7 +246,12 @@ saotd::number_topics(DataFrame = TD,
                      set_seed = 1234)
 ```
 
-<img src="/Users/eklm/Documents/13_AFIT/08_saotd Package/vignettes/lda_topics.png" align="middle" height="450" width="750" margin="0 auto" />
+```{r lda_tuning_plot, echo=FALSE, out.width="100%"}
+knitr::include_graphics(path = "lda_topics.png")
+```
+
+
+<!-- <img src="~vignettes/lda_topics.png" align="middle" height="450" width="750" margin="0 auto" /> -->
 
 The number of topics plot shows that between 5 and 7 latent topics reside within the dataset.  For this example we could select between 5 and 7 topics to categorize this data.  In this case 5 topics will be selected to continue the analysis.  
 

@@ -128,6 +128,9 @@ saotd::tweet_max_scores(DataFrameTidyScores = TD_Scores,
 #                       skip = 1,
 #                       set_seed = 1234)
 
+## ----lda_tuning_plot, echo=FALSE, out.width="100%"-----------------------
+knitr::include_graphics(path = "lda_topics.png")
+
 ## ----topics, fig.align='center', warning=FALSE, message=FALSE, results='hide', cache=TRUE, cache.path='saotd_cache/'----
 TD_Topics <- saotd::tweet_topics(DataFrame = TD, 
                                  clusters = 5, 
