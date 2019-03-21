@@ -9,8 +9,6 @@ library(stringr)
 library(knitr)
 library(utils)
 
-<<<<<<< HEAD
-=======
 ## ----tweet_acquire, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'----
 #  consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 #  consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -97,7 +95,6 @@ saotd::word_corr_network(WordCorr = TD_Corr,
                          node_color = "black", 
                          node_size = 1)
 
->>>>>>> 0deee16a8910186f96fb0fb1bb161c667f5b99c0
 ## ----scores, cache=TRUE, cache.path='saotd_cache/'-----------------------
 TD_Scores <- saotd::tweet_scores(DataFrameTidy = TD_Tidy, 
                                  HT_Topic = "hashtag")

@@ -14,3 +14,5 @@
 tests/testthat/.httr-oauth
 ^paper.bib$
 ^paper.md$
+^packrat/
+^\.Rprofile$
