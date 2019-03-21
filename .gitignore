@@ -10,3 +10,4 @@ hidden/
 src/*.so
 src/*.o
 src/*.dll
+packrat/lib*/
