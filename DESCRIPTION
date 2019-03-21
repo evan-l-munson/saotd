@@ -2,22 +2,22 @@ Package: saotd
 Type: Package
 Title: Sentiment Analysis of Twitter Data
 Version: 0.2.0
-Date: 2019-03-18
+Date: 2019-03-21
 Authors@R: c(
     person("Evan", "Munson", 
-           email = "<evan.l.munson@gmail.com>", 
+           email = "evan.l.munson@gmail.com", 
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9958-6800")),
     person("Christopher", "Smith", 
-           email = "<Cms3am@virginia.edu>", 
+           email = "Cms3am@virginia.edu", 
            role = c("aut"),
            comment = c(ORCID = "0000-0002-8288-270X")),
     person("Bradley", "Boehmke",
-           email = "<bradleyboehmke@gmail.com>",
+           email = "bradleyboehmke@gmail.com",
            role = c("aut"),
            comment = c(ORCID = "0000-0002-3611-8516")),
     person("Jason", "Freels",
-           email = "<auburngrads@live.com>",
+           email = "auburngrads@live.com",
            role = c("aut"),
            comment = c(ORCID = "0000-0002-2415-0340"))
            )
