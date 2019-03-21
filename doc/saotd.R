@@ -9,6 +9,95 @@ library(stringr)
 library(knitr)
 library(utils)
 
+<<<<<<< HEAD
+=======
+## ----tweet_acquire, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'----
+#  consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
+#  consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#  access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#  access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#  
+#  hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
+#  
+#  tweet_acquire(consumer_key = consumer_key,
+#          consumer_secret = consumer_secret,
+#          access_token = access_token,
+#          access_secret = access_secret,
+#          HT = hashtags,
+#          num_tweets = 1000,
+#          file_name = "test_tweets.RData",
+#          distinct = TRUE)
+#  
+#  load("test_tweets.RData")
+
+## ----raw_tweets, cache=TRUE, cache.path='saotd_cache/'-------------------
+data("raw_tweets")
+TD <- raw_tweets %>% 
+  dplyr::sample_n(size = 5000)
+
+## ----tidy, cache=TRUE, cache.path='saotd_cache/'-------------------------
+TD_Tidy <- saotd::tweet_tidy(DataFrame = TD)
+
+TD_Tidy$Token[3:8] %>% 
+  knitr::kable("html")
+
+## ----unigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'-------
+saotd::unigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Uni-Grams")
+
+## ----bigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'--------
+saotd::bigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Bi-Grams")
+
+## ----trigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'-------
+saotd::trigram(DataFrame = TD) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Tri-Grams")
+
+## ----merge, message=FALSE, message=FALSE, error=FALSE, cache=TRUE, cache.path='saotd_cache/'----
+TD_Merge <- merge_terms(DataFrame = TD, term = "cancelled flight", term_replacement = "cancelled_flight")
+
+## ----merged_unigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'----
+saotd::unigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Uni-Grams")
+
+## ----merged_bigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'----
+saotd::bigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Bi-Grams")
+
+## ----merged_trigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'----
+saotd::trigram(DataFrame = TD_Merge) %>% 
+  dplyr::top_n(10) %>% 
+  knitr::kable("html", caption = "Twitter data Tri-Grams")
+
+## ----bigram_network, fig.align='center', cache=TRUE, cache.path='saotd_cache/'----
+TD_Bigram <- saotd::bigram(DataFrame = TD_Merge)
+
+saotd::bigram_network(BiGramDataFrame = TD_Bigram,
+                      number = 30,
+                      layout = "fr",
+                      edge_color = "blue",
+                      node_color = "black",
+                      node_size = 3,
+                      set_seed = 1234)
+
+## ----corr_network, fig.align='center', cache=TRUE, cache.path='saotd_cache/'----
+TD_Corr <- saotd::word_corr(DataFrameTidy = TD_Tidy, 
+                            number = 100, 
+                            sort = TRUE)
+
+saotd::word_corr_network(WordCorr = TD_Corr, 
+                         Correlation = .1, 
+                         layout = "fr", 
+                         edge_color = "blue", 
+                         node_color = "black", 
+                         node_size = 1)
+
+>>>>>>> 0deee16a8910186f96fb0fb1bb161c667f5b99c0
 ## ----scores, cache=TRUE, cache.path='saotd_cache/'-----------------------
 TD_Scores <- saotd::tweet_scores(DataFrameTidy = TD_Tidy, 
                                  HT_Topic = "hashtag")
