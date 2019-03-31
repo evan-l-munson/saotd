@@ -17,14 +17,16 @@ library(utils)
 #  
 #  hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
 #  
+#  test_tweets <- file.path(tempdir(), "test_tweets.RData")
+#  
 #  tweet_acquire(consumer_key = consumer_key,
-#          consumer_secret = consumer_secret,
-#          access_token = access_token,
-#          access_secret = access_secret,
-#          HT = hashtags,
-#          num_tweets = 1000,
-#          file_name = "test_tweets.RData",
-#          distinct = TRUE)
+#                consumer_secret = consumer_secret,
+#                access_token = access_token,
+#                access_secret = access_secret,
+#                HT = hashtags,
+#                num_tweets = 1000,
+#                file_name = test_tweets,
+#                distinct = TRUE)
 #  
 #  load("test_tweets.RData")
 

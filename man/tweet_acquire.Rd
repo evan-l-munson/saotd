@@ -41,16 +41,18 @@ consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
+test_tweets <- file.path(tempdir(), "test_tweets.RData")
+
 hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
 
 tweet_acquire(consumer_key = consumer_key, 
-        consumer_secret = consumer_secret, 
-        access_token = access_token, 
-        access_secret = access_secret, 
-        HT = hashtags, 
-        num_tweets = 10, 
-        file_name = "test_tweets.RData",
-        distinct = TRUE)
+              consumer_secret = consumer_secret, 
+              access_token = access_token, 
+              access_secret = access_secret, 
+              HT = hashtags, 
+              num_tweets = 10, 
+              file_name = test_tweets,
+              distinct = TRUE)
         
 load("test_tweets.RData")
 }
