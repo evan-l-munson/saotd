@@ -43,7 +43,7 @@
 #'               file_name = test_tweets,
 #'               distinct = TRUE)
 #'         
-#' load("test_tweets.RData")
+#' load(test_tweets)
 #' }
 #' @export 
 

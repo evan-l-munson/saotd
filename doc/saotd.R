@@ -28,7 +28,7 @@ library(utils)
 #                file_name = test_tweets,
 #                distinct = TRUE)
 #  
-#  load("test_tweets.RData")
+#  load("test_tweets")
 
 ## ----raw_tweets, cache=TRUE, cache.path='saotd_cache/'-------------------
 data("raw_tweets")
