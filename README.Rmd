@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/saotd)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.3.0-6666ff.svg)](https://cran.r-project.org/)
-[![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](http://cranlogs.r-pkg.org/badges/saotd)
-[![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/saotd)](http://cranlogs.r-pkg.org/badges/grand-total/saotd)
+[![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
 
 ## Purpose
 

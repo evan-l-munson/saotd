@@ -2,7 +2,7 @@ Package: saotd
 Type: Package
 Title: Sentiment Analysis of Twitter Data
 Version: 0.2.0
-Date: 2019-04-02
+Date: 2019-04-04
 Authors@R: c(
     person("Evan", "Munson", 
            email = "evan.l.munson@gmail.com", 
