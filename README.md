@@ -50,7 +50,13 @@ visualizations.
 
 ## Installation
 
-You can install the development version from GitHub with:
+You can install the CRAN version using:
+
+``` r
+install.packages("saotd")
+```
+
+You can install the development version from GitHub using:
 
 ``` r
 install.packages("devtools")
