@@ -9,11 +9,12 @@ Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://tr
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/saotd)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
-[![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
+
+[![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
 
 ## Purpose
 
