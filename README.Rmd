@@ -34,7 +34,13 @@ The `saotd` package is an R interface to the Twitter API and can be used to acqu
 
 ## Installation
 
-You can install the development version from GitHub with:
+You can install the CRAN version using:
+
+```{r cran_installation, eval=FALSE}
+install.packages("saotd")
+```
+
+You can install the development version from GitHub using:
 
 ```{r gh-installation, eval=FALSE}
 install.packages("devtools")
