@@ -4,9 +4,15 @@
 \alias{bigram_network}
 \title{Twitter Bi-Gram Network}
 \usage{
-bigram_network(BiGramDataFrame, number = 300, layout = "fr",
-  edge_color = "royalblue", node_color = "black", node_size = 3,
-  set_seed = 1234)
+bigram_network(
+  BiGramDataFrame,
+  number = 300,
+  layout = "fr",
+  edge_color = "royalblue",
+  node_color = "black",
+  node_size = 3,
+  set_seed = 1234
+)
 }
 \arguments{
 \item{BiGramDataFrame}{DataFrame of Bi-Grams.}

@@ -3,7 +3,6 @@
 \docType{package}
 \name{saotd}
 \alias{saotd}
-\alias{saotd-package}
 \title{Sentiment Analysis of Twitter Data}
 \description{
 This analytic is an in initial forray into sentiment analysis.  

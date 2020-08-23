@@ -4,8 +4,13 @@
 \alias{tweet_topics}
 \title{Tweet Topics}
 \usage{
-tweet_topics(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
-  num_terms = 10)
+tweet_topics(
+  DataFrame,
+  clusters,
+  method = "Gibbs",
+  set_seed = 1234,
+  num_terms = 10
+)
 }
 \arguments{
 \item{DataFrame}{DataFrame of Twitter Data.}

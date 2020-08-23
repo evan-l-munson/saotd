@@ -4,56 +4,72 @@
 \alias{tweet_acquire}
 \title{Acquire Twitter Tweets}
 \usage{
-tweet_acquire(consumer_key, consumer_secret, access_token, access_secret,
-  HT, num_tweets, file_name, distinct = TRUE)
+tweet_acquire(
+  twitter_app,
+  consumer_api_key,
+  consumer_api_secret_key,
+  access_token,
+  access_token_secret,
+  query,
+  num_tweets,
+  distinct = TRUE
+)
 }
 \arguments{
-\item{consumer_key}{Twitter Application management consumer key.}
+\item{twitter_app}{The name of user created Twitter Application.}
 
-\item{consumer_secret}{Twitter Application management consumer secret key.}
+\item{consumer_api_key}{Twitter Application management consumer API key.}
 
-\item{access_token}{Twitter Application management access token.}
+\item{consumer_api_secret_key}{Twitter Application management consumer API 
+secret key.  Application must have \code{Read and write} access level and
+\code{Callback URL} of \code{http://127.0.0.1:1410}.}
 
-\item{access_secret}{Twitter Application management access secret key.}
+\item{access_token}{Twitter Application management access token 
+(apps.twitter.com).}
 
-\item{HT}{A single hashtag or a list of hashtags the user has specified.}
+\item{query}{A single query or a list of queries the user has specified.
+Character string, not to exceed 500 characters.  To search for tweets 
+containing at least one of multiple possible terms, separate each search 
+term with spaces and "OR" (in caps).  For example, the search \code{q =
+"data science"} looks for tweets containing both "data" and "science" 
+located anywhere in the tweets and in any order.  When "OR" is entered 
+between search terms, \code{query = "data OR science"}, Twitter's REST API 
+should return any tweet that contains either "data" or "science."}
 
 \item{num_tweets}{Number of Tweets to be acquired per each hashtag.}
 
-\item{file_name}{User desired output .RData file name.}
+\item{distinct}{Logical.  If distinct = TRUE, the function removes multiple 
+Tweets that originate from the same Twitter id at the exact same time.}
 
-\item{distinct}{Logical.  If distinct = TRUE, the function removes multiple Tweets that originate from the same Twitter id at the exact same time.}
+\item{access_secret}{Twitter Application management access secret token 
+(apps.twitter.com).}
 }
 \value{
-A DataFrame.
+A DataFrame with tweets and meta data.
 }
 \description{
-Function will enable a user to access the Twitter API throught the 
-[Twitter Developers Account](https://dev.twitter.com/) site.
-Once a user has a Twitter developers account and has recieved their individual consumer key, 
-consumer secret key, access token, and access secret they can 
-acquire Tweets based on a list of hashtags and a requested number of entires per hashtag.
+Function will enable a user to access the Twitter API through 
+  the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a 
+  user has a Twitter developers account and has received their individual 
+  consumer key, consumer secret key, access token, and access secret they can 
+  acquire Tweets based on a list of hashtags and a requested number of 
+  entries per query.
 }
 \examples{
 \donttest{
-consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
-consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+twitter_app <- "super_app"
+consumer_api_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
+consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+access_token_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-test_tweets <- file.path(tempdir(), "test_tweets.RData")
-
-hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
-
-tweet_acquire(consumer_key = consumer_key, 
-              consumer_secret = consumer_secret, 
-              access_token = access_token, 
-              access_secret = access_secret, 
-              HT = hashtags, 
-              num_tweets = 10, 
-              file_name = test_tweets,
-              distinct = TRUE)
-        
-load(test_tweets)
+tweets <- tweet_acquire(witter_app = twitter_app,
+                        consumer_api_key = consumer_api_key,
+                        consumer_api_secret_key = consumer_api_secret_key,
+                        access_token = access_token,
+                        access_token_secret = access_token_secret,
+                        query = "#icecream",
+                        num_tweets = 1000,
+                        distinct = TRUE)
 }
 }

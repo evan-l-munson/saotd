@@ -31,7 +31,7 @@ Imports:
     widyr,
     stringr, 
     tidytext, 
-    twitteR, 
+    rtweet, 
     purrr, 
     tidyr, 
     igraph, 
@@ -46,7 +46,7 @@ Imports:
     magrittr, 
     ldatuning, 
     topicmodels
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Suggests: testthat,
     knitr,
     rmarkdown,

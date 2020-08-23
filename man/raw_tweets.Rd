@@ -4,7 +4,8 @@
 \name{raw_tweets}
 \alias{raw_tweets}
 \title{Twitter Data Set}
-\format{A \code{tribble} with 14,483 rows and 6 variables
+\format{
+A \code{tribble} with 14,483 rows and 6 variables
 
 \describe{
  \item{id}{ID of this status.}
@@ -13,7 +14,8 @@
  \item{text}{The text of the status.}
  \item{created}{When this status was created.}
  \item{key}{Unique key based on the tweets originators user id and the created date time group.}
- }}
+ }
+}
 \usage{
 data(raw_tweets)
 }

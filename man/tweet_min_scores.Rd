@@ -4,8 +4,7 @@
 \alias{tweet_min_scores}
 \title{Twitter Data Minimum Scores}
 \usage{
-tweet_min_scores(DataFrameTidyScores, HT_Topic,
-  HT_Topic_Selection = NULL)
+tweet_min_scores(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 }
 \arguments{
 \item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}

@@ -4,8 +4,13 @@
 \alias{tweet_distribution}
 \title{Twitter Hashtag or Topic Distribution}
 \usage{
-tweet_distribution(DataFrameTidyScores, HT_Topic, binwidth = 1,
-  color = "black", fill = "white")
+tweet_distribution(
+  DataFrameTidyScores,
+  HT_Topic,
+  binwidth = 1,
+  color = "black",
+  fill = "white"
+)
 }
 \arguments{
 \item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}

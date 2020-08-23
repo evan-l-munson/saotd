@@ -4,8 +4,12 @@
 \alias{tweet_corpus_distribution}
 \title{Twitter Corpus Distribution}
 \usage{
-tweet_corpus_distribution(DataFrameTidyScores, binwidth = 1,
-  color = "black", fill = "white")
+tweet_corpus_distribution(
+  DataFrameTidyScores,
+  binwidth = 1,
+  color = "black",
+  fill = "white"
+)
 }
 \arguments{
 \item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}

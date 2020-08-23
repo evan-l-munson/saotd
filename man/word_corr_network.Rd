@@ -4,9 +4,15 @@
 \alias{word_corr_network}
 \title{Twitter Word Correlations Plot}
 \usage{
-word_corr_network(WordCorr, Correlation = 0.15, layout = "fr",
-  edge_color = "royalblue", node_color = "black", node_size = 2,
-  set_seed = 1234)
+word_corr_network(
+  WordCorr,
+  Correlation = 0.15,
+  layout = "fr",
+  edge_color = "royalblue",
+  node_color = "black",
+  node_size = 2,
+  set_seed = 1234
+)
 }
 \arguments{
 \item{WordCorr}{DataFrame of Word Correlations.}
