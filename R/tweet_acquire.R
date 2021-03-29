@@ -63,7 +63,7 @@ tweet_acquire <- function(twitter_app,
                           num_tweets,
                           distinct = TRUE) {
   
-  screenName <- dplyr::quo(screen_name)
+  screenName <- dplyr::quo(screen_name)   
   created <- dplyr::quo(created_at)
   key <- dplyr::quo(key)
   
