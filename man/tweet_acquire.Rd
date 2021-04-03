@@ -63,7 +63,10 @@ consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-tweets <- tweet_acquire(witter_app = twitter_app,
+Or the Twitter API keys and tokens can be saved in an .Renviron file.  If 
+using a .Renviron the 
+
+tweets <- tweet_acquire(twitter_app = twitter_app,
                         consumer_api_key = consumer_api_key,
                         consumer_api_secret_key = consumer_api_secret_key,
                         access_token = access_token,
