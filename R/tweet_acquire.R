@@ -102,6 +102,8 @@ tweet_acquire <- function(twitter_app,
                                       n = num_tweets) %>%
     dplyr::mutate(key = paste(screen_name, created_at)) %>%
     dplyr::distinct(key, .keep_all = distinct) %>% 
-    dplyr::mutate(query = query)
+    dplyr::mutate(query = query)  
+  
+  
   
 }
