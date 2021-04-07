@@ -9,7 +9,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 # Sentiment Analysis of Twitter Data (saotd)
@@ -71,7 +71,7 @@ With these steps complete you now have access to the twitter API.
 
 To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](<https://dev.twitter.com/apps/>) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
 
-```{r tweet_acquire, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'}
+```{r tweet_acquire, echo=TRUE, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'}
 consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -81,16 +81,21 @@ hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#a
 
 test_tweets <- file.path(tempdir(), "test_tweets.RData")
 
-tweet_acquire(consumer_key = consumer_key,
-              consumer_secret = consumer_secret,
-              access_token = access_token, 
-              access_secret = access_secret,
-              HT = hashtags,
-              num_tweets = 1000,
-              file_name = test_tweets, 
-              distinct = TRUE)
+tweets <- saotd::tweet_acquire(
+  consumer_key = consumer_key,
+  consumer_secret = consumer_secret,
+  access_token = access_token, 
+  access_secret = access_secret,
+  HT = hashtags,
+  num_tweets = 1000,
+  file_name = test_tweets, 
+  distinct = TRUE)
          
 load("test_tweets")
+```
+
+```{r eval=FALSE, echo=TRUE}
+print("Don't run me")
 ```
 
 ## Explore
