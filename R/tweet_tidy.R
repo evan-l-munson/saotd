@@ -17,47 +17,70 @@
 #' @examples 
 #' \donttest{
 #' library(saotd)
+#' 
 #' data <- raw_tweets
 #' tidy_data <- tweet_tidy(DataFrame = data)
 #' tidy_data
+#' 
 #' }
 #' @export
 
 tweet_tidy <- function(DataFrame) {
   
+  # input checks
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
   }
   
+  # configure defusing operators for packages checking
   text <- dplyr::quo(text)
   cleantext <- dplyr::quo(cleantext)
   word <- dplyr::quo(word)
   
-  # reg_words <- "([^A-Za-z_\\d#@']|'(?![A-Za-z_\\d#@]))"
-  
-  retained_col <- c("user_id", 
-                    "status_id", 
-                    "created_at", 
-                    "screen_name", 
-                    "text", 
-                    "hashtags", 
-                    "location", 
-                    "key", 
-                    "query")
-  
+  # function main body
   TD_Tidy <- DataFrame %>%
-    dplyr::select(retained_col) %>% 
-    dplyr::mutate(cleantext = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
-    dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "#", "")) %>% 
-    dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "http", "")) %>% 
-    dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "RT", "")) %>% # Remove retweet note
-    dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "[:punct:]", "")) %>% 
-    dplyr::mutate(cleantext = stringr::str_replace_all(cleantext, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens(output = word, 
-                            input = cleantext, 
-                            token = "words", 
-                            drop = TRUE) %>% 
+    dplyr::select(c(user_id, 
+                  status_id, 
+                  created_at,
+                  screen_name, 
+                  text, 
+                  hashtags, 
+                  location, 
+                  key, 
+                  query)) %>% 
+    dplyr::mutate(
+      cleantext = stringr::str_replace_all(
+        string = text, 
+        pattern = "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", 
+        replacement = ""),
+      cleantext = stringr::str_replace_all(
+        string = cleantext, 
+        pattern = "#", 
+        replacement = ""),
+      cleantext = stringr::str_replace_all(
+        string = cleantext, 
+        pattern = "http", 
+        replacement = ""),
+      cleantext = stringr::str_replace_all(
+        string = cleantext, 
+        pattern = "RT", 
+        replacement = ""), # Remove retweet note
+      cleantext = stringr::str_replace_all(
+        string = cleantext, 
+        pattern = "[:punct:]", 
+        replacement = ""),
+      cleantext = stringr::str_replace_all(
+        string = cleantext, 
+        pattern = "[^[:alnum:]///' ]", 
+        replacement = "")) %>%  # Remove Emojis
+    tidytext::unnest_tokens(
+      output = word,
+      input = cleantext,
+      token = "words",
+      drop = TRUE) %>% 
     dplyr::filter(!word %in% tidytext::stop_words$word) %>% 
     dplyr::rename(Token = word)
-  # return(TD_Tidy)
+  
+  return(TD_Tidy)
+  
 }

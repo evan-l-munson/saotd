@@ -30,6 +30,7 @@
 #' @param num_tweets Number of Tweets to be acquired per each hashtag.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple 
 #'   Tweets that originate from the same Twitter id at the exact same time.
+#'   
 #' @importFrom rtweet create_token search_tweets
 #' @importFrom dplyr mutate distinct
 #' 
@@ -102,8 +103,6 @@ tweet_acquire <- function(twitter_app,
                                       n = num_tweets) %>%
     dplyr::mutate(key = paste(screen_name, created_at)) %>%
     dplyr::distinct(key, .keep_all = distinct) %>% 
-    dplyr::mutate(query = query)  
-  
-  
+    dplyr::mutate(query = query)
   
 }
