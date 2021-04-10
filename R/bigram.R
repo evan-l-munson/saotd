@@ -1,7 +1,9 @@
 
 #' @title Twitter Bi-Grams
 #'
-#' @description Determines and displays the text Bi-Grams within the Twitter data in sequence from the most used to the least used.  A Bi-Gram is a combination of two consecutive words.
+#' @description Determines and displays the text Bi-Grams within the Twitter 
+#'   data in sequence from the most used to the least used.  A Bi-Gram is a 
+#'   combination of two consecutive words.
 #' 
 #' @param DataFrame DataFrame of Twitter Data.
 #' 
@@ -10,7 +12,7 @@
 #' @importFrom tidyr separate
 #' @importFrom tidytext unnest_tokens 
 #' 
-#' @return A tribble.
+#' @return A tibble.
 #' 
 #' @examples 
 #' \donttest{
@@ -33,17 +35,42 @@ bigram <- function(DataFrame){
   word1 <- dplyr::quo(word1)
   word2 <- dplyr::quo(word2)
   
-  TD_Bigram <- DataFrame %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "RT", "")) %>% # Remove retweet note
-    dplyr::mutate(text = stringr::str_replace_all(text, "&amp", "")) %>% # Remove Accelerated Mobile Pages (AMP) note
-    dplyr::mutate(text = stringr::str_replace_all(text, "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", "")) %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "#", "")) %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "[:punct:]", "")) %>% 
-    dplyr::mutate(text = stringr::str_replace_all(text, "[^[:alnum:]///' ]", "")) %>%  # Remove Emojis
+  # web url
+  wu <- "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https"
+  
+  #function main body
+    TD_Bigram <- DataFrame %>% 
+    dplyr::mutate(
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = "RT", 
+        replacement = ""), # Remove retweet note
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = "&amp", 
+        replacement = ""), # Remove Accelerated Mobile Pages (AMP) note
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = wu, 
+        replacement = ""),
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = "#", 
+        replacement = ""),
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = "[:punct:]", 
+        replacement = ""),
+      text = stringr::str_replace_all(
+        string = text, 
+        pattern = "[^[:alnum:]///' ]", 
+        replacement = "")) %>%  # Remove Emojis
     tidytext::unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%  
     tidyr::separate(bigram, c("word1", "word2"), sep = " ") %>% 
     dplyr::filter(!word1 %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
     dplyr::filter(!word2 %in% c(tidytext::stop_words$word, '[0-9]+')) %>%
     dplyr::count(word1, word2, sort = TRUE)
+    
   return(TD_Bigram)
+    
 }

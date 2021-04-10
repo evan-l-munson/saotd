@@ -21,4 +21,10 @@ tidy_puppy <- saotd::tweet_tidy(DataFrame = puppies)
 # unigram -----------------------------------------------------------------
 
 uni_tweet <- saotd::unigram(DataFrame = puppies)
+saotd::unigram(DataFrame = test_unigram_df)
+
+
+# bigrams -----------------------------------------------------------------
+
+str(bi_tweet <- saotd::bigram(DataFrame = puppies))
 

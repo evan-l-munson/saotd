@@ -11,7 +11,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom tidytext unnest_tokens 
 #' 
-#' @return A tribble.
+#' @return A tibble.
 #' 
 #' @examples 
 #' \donttest{
@@ -31,6 +31,10 @@ unigram <- function(DataFrame){
   text <- dplyr::quo(text)
   word <- dplyr::quo(word)
   
+  # web url
+  wu <- "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https"
+  
+  #function main body
   TD_Unigram <- DataFrame %>% 
     dplyr::mutate(
       text = stringr::str_replace_all(
@@ -43,7 +47,7 @@ unigram <- function(DataFrame){
         replacement = ""), # Remove Accelerated Mobile Pages (AMP) note
       text = stringr::str_replace_all(
         string = text, 
-        pattern = "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", 
+        pattern = wu, 
         replacement = ""),
       text = stringr::str_replace_all(
         string = text, 

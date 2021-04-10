@@ -12,7 +12,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom tidytext unnest_tokens
 #' 
-#' @return A Tidy DataFrame.
+#' @return A Tidy tibble.
 #' 
 #' @examples 
 #' \donttest{
@@ -37,6 +37,9 @@ tweet_tidy <- function(DataFrame) {
   cleantext <- dplyr::quo(cleantext)
   word <- dplyr::quo(word)
   
+  # web url
+  wu <- "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https"
+  
   # function main body
   TD_Tidy <- DataFrame %>%
     dplyr::select(c(user_id, 
@@ -51,7 +54,7 @@ tweet_tidy <- function(DataFrame) {
     dplyr::mutate(
       cleantext = stringr::str_replace_all(
         string = text, 
-        pattern = "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https", 
+        pattern = wu, 
         replacement = ""),
       cleantext = stringr::str_replace_all(
         string = cleantext, 
