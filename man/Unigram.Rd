@@ -13,7 +13,9 @@ unigram(DataFrame)
 A tribble.
 }
 \description{
-Determines and displays the text Uni-Grams within the Twitter data in sequence from the most used to the least used.  A Uni-Gram is a single word.
+Determines and displays the text Uni-Grams within the Twitter 
+  data in sequence from the most used to the least used.  A Uni-Gram is a 
+  single word.
 }
 \examples{
 \donttest{

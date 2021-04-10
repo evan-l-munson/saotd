@@ -106,7 +106,8 @@ You can acquire your own data or use the dataset included with the package.  We 
 ```{r raw_tweets, cache=TRUE, cache.path='saotd_cache/'}
 data("raw_tweets")
 TD <- raw_tweets %>% 
-  dplyr::sample_n(size = 5000)
+  dplyr::sample_n(size = 5000, 
+                  replace = TRUE)
 ```
 
 The second tweet of the dataset is:  __`r TD$text[2]`__, and when it is cleaned and tidy'd it becomes:

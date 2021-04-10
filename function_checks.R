@@ -17,3 +17,8 @@ puppies <- saotd::tweet_acquire(
 
 tidy_puppy <- saotd::tweet_tidy(DataFrame = puppies)
 
+
+# unigram -----------------------------------------------------------------
+
+uni_tweet <- saotd::unigram(DataFrame = puppies)
+

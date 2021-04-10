@@ -21,8 +21,10 @@ Function to Tidy Twitter Data.  This function will remove a
 \examples{
 \donttest{
 library(saotd)
+
 data <- raw_tweets
 tidy_data <- tweet_tidy(DataFrame = data)
 tidy_data
+
 }
 }

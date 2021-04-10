@@ -63,16 +63,37 @@ consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-Or the Twitter API keys and tokens can be saved in an .Renviron file.  If 
-using a .Renviron the 
+tweets <- tweet_acquire(
+  twitter_app = "twitter_app",
+  consumer_api_key = consumer_api_key,
+  consumer_api_secret_key = consumer_api_secret_key,
+  access_token = access_token,
+  access_token_secret = access_token_secret,
+  query = "#icecream",
+  num_tweets = 100,
+  distinct = TRUE)
+                        
+Or the Twitter API keys and tokens can be saved as an .Renviron file in the 
+working directory.  If using a `.Renviron` file, the data should be saved like 
+the below example:
 
-tweets <- tweet_acquire(twitter_app = twitter_app,
-                        consumer_api_key = consumer_api_key,
-                        consumer_api_secret_key = consumer_api_secret_key,
-                        access_token = access_token,
-                        access_token_secret = access_token_secret,
-                        query = "#icecream",
-                        num_tweets = 1000,
-                        distinct = TRUE)
+consumer_api_key=XXXXXXXXXXXXXXXXXXXXXXXXX
+consumer_api_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+access_token=XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+access_token_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+The `tweet_acquire` function would access the keys and tokens using the 
+`Sys.getenv()` function and would appear like the below example:
+
+tweets <- tweet_acquire(
+  twitter_app = "twitter_app",
+  consumer_api_key = Sys.getenv('consumer_api_key'),
+  consumer_api_secret_key = Sys.getenv('consumer_api_secret_key'),
+  access_token = Sys.getenv('access_token'),
+  access_token_secret = Sys.getenv('access_token_secret'),
+  query = "#icecream",
+  num_tweets = 100,
+  distinct = TRUE)
+
 }
 }
