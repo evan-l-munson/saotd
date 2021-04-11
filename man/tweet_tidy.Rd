@@ -10,7 +10,7 @@ tweet_tidy(DataFrame)
 \item{DataFrame}{DataFrame of Twitter Data.}
 }
 \value{
-A Tidy DataFrame.
+A Tidy tibble.
 }
 \description{
 Function to Tidy Twitter Data.  This function will remove a 

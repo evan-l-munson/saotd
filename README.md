@@ -1,9 +1,7 @@
-Sentiment Analysis of Twitter Data (saotd)
-================
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
-# vip: Sentiment Analysis of Twitter Data <img src="man/hex_saotd.png" align="right" width="130" height="150" />
+# Sentiment Analysis of Twitter Data <img src="man/hex_saotd.png" align="right" width="150" height="150" />
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![Build

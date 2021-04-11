@@ -15,6 +15,7 @@ correct_bigram_df <- dplyr::tribble(
   "youll", "learn", as.integer(1)) %>% 
   as.data.frame()
 
+# tests
 testthat::test_that("bigrams are computed properly", {
   
   testthat::expect_equal(saotd::bigram(DataFrame = test_bigram_df), 

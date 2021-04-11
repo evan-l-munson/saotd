@@ -2,7 +2,6 @@
 testthat::context("Compute Unigrams")
 
 # Test Data
-
 text <- "I really love my dog, he is the best friend anyone could ever ask for!"
 test_unigram_df <- as.data.frame(x = text)
 
@@ -13,6 +12,7 @@ correct_unigram_df <- dplyr::tribble(
   "love", as.integer(1)) %>%
   as.data.frame()
 
+# tests
 testthat::test_that("unigrams are computed properly", {
   
   testthat::expect_equal(saotd::unigram(DataFrame = test_unigram_df), 

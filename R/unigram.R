@@ -24,6 +24,7 @@
 
 unigram <- function(DataFrame){
   
+  # input checking
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
   }
@@ -34,7 +35,7 @@ unigram <- function(DataFrame){
   # web url
   wu <- "https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;|&lt;|&gt;|RT|https"
   
-  #function main body
+  # function main body
   TD_Unigram <- DataFrame %>% 
     dplyr::mutate(
       text = stringr::str_replace_all(
@@ -61,7 +62,9 @@ unigram <- function(DataFrame){
         string = text, 
         pattern = "[^[:alnum:]///' ]", 
         replacement = "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens(word, text) %>%  
+    tidytext::unnest_tokens(
+      output = word, 
+      input = text) %>%  
     dplyr::filter(!word %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
     dplyr::count(word, sort = TRUE)
   

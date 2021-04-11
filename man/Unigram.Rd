@@ -10,7 +10,7 @@ unigram(DataFrame)
 \item{DataFrame}{DataFrame of Twitter Data.}
 }
 \value{
-A tribble.
+A tibble.
 }
 \description{
 Determines and displays the text Uni-Grams within the Twitter 

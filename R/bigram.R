@@ -25,6 +25,7 @@
 
 bigram <- function(DataFrame){
   
+  # input checking
   if(!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
   }
@@ -65,7 +66,11 @@ bigram <- function(DataFrame){
         string = text, 
         pattern = "[^[:alnum:]///' ]", 
         replacement = "")) %>%  # Remove Emojis
-    tidytext::unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%  
+    tidytext::unnest_tokens(
+      output = bigram, 
+      input = text, 
+      token = "ngrams", 
+      n = 2) %>%  
     tidyr::separate(bigram, c("word1", "word2"), sep = " ") %>% 
     dplyr::filter(!word1 %in% c(tidytext::stop_words$word, '[0-9]+')) %>% 
     dplyr::filter(!word2 %in% c(tidytext::stop_words$word, '[0-9]+')) %>%

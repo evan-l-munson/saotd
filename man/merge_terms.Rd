@@ -4,7 +4,7 @@
 \alias{merge_terms}
 \title{Merge Terms}
 \usage{
-merge_terms(DataFrame, term, term_replacement)
+merge_terms(DataFrame, term, term_replacement, ignore_case = TRUE)
 }
 \arguments{
 \item{DataFrame}{DataFrame of Twitter Data.}
@@ -12,15 +12,21 @@ merge_terms(DataFrame, term, term_replacement)
 \item{term}{Term selected for merging.}
 
 \item{term_replacement}{Desired replacement term.}
+
+\item{ignore_case}{True is the default setting and will ignore case 
+sensitivity of the selected terms.  Selecting FALSE will maintain 
+case sensitivity.}
 }
 \value{
 A Tidy DataFrame.
 }
 \description{
-Function to merge terms within a dataframe and prevent redundancy in the analysis.  
-For example many users may refer to the same entity in multiple different ways: 
-President Trump, The U.S. President, POTUS, Trump, President Donald Trump, Donald Trump, etc.  
-While each entry is different, they all refer to the same individual.  Using Merge Terms will allow all be converted into a single term.
+Function to merge terms within a dataframe and prevent 
+  redundancy in the analysis.  For example many users may refer to the same
+  entity in multiple different ways: President Trump, The U.S. President, 
+  POTUS, Trump, President Donald Trump, Donald Trump, etc.  While each entry 
+  is different, they all refer to the same individual.  Using Merge Terms 
+  will allow all be converted into a single term.
 }
 \examples{
 \donttest{

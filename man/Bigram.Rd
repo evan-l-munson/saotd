@@ -10,7 +10,7 @@ bigram(DataFrame)
 \item{DataFrame}{DataFrame of Twitter Data.}
 }
 \value{
-A tribble.
+A tibble.
 }
 \description{
 Determines and displays the text Bi-Grams within the Twitter 

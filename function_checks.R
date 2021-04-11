@@ -26,5 +26,33 @@ saotd::unigram(DataFrame = test_unigram_df)
 
 # bigrams -----------------------------------------------------------------
 
-str(bi_tweet <- saotd::bigram(DataFrame = puppies))
+bi_tweet <- saotd::bigram(DataFrame = puppies)
 
+
+# trigrams ----------------------------------------------------------------
+
+tri_tweets <- saotd::trigram(DataFrame = puppies)
+
+# merge terms -------------------------------------------------------------
+
+bad_puppies <- saotd::merge_terms(DataFrame = puppies, 
+                                  term = "puppies", 
+                                  term_replacement = "good_puppies")
+
+new_merge <- puppies %>% 
+  dplyr::mutate(text = stringr::str_replace(string = text, 
+                                                pattern = "puppies", 
+                                                replacement = "good_puppies"))
+
+new_merge_2 <- puppies %>% 
+  dplyr::mutate(text = gsub(x = text,
+                            pattern = "puppies", 
+                            replacement = "good_puppies", 
+                            ignore.case = TRUE))
+                
+  all.equal(bad_puppies, new_merge_2)
+  
+  
+
+  
+  
