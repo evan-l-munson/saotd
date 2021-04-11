@@ -15,7 +15,9 @@
 #'   sensitivity of the selected terms.  Selecting FALSE will maintain 
 #'   case sensitivity.
 #' 
-#' @return A Tidy DataFrame.
+#' @return A Tibble with user selected term replacement.
+#' 
+#' @importFrom dplyr mutate
 #' 
 #' @examples 
 #' \donttest{
