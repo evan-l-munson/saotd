@@ -14,7 +14,7 @@ word_corr(DataFrameTidy, number, sort = TRUE)
 \item{sort}{Rank order the results from most to least correlated.}
 }
 \value{
-A tribble
+A Tibble.
 }
 \description{
 The word correlation displays the mutual relationship between words.

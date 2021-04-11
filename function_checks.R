@@ -52,7 +52,70 @@ new_merge_2 <- puppies %>%
                 
   all.equal(bad_puppies, new_merge_2)
   
+
+# Bigram network ----------------------------------------------------------
+
+saotd::bigram_network(BiGramDataFrame = bi_tweet, number = 5)
+
+  Bigram_Network <- bi_tweet %>% 
+    dplyr::filter(n > 5) %>% 
+    igraph::graph_from_data_frame() %>% 
+    ggraph::ggraph(layout = "fr") +
+    ggraph::geom_edge_link(
+      ggplot2::aes(
+        edge_alpha = 1,
+        edge_width = scales::rescale(n, to=c(1,10))),
+      edge_colour = "royalblue",
+      show.legend = TRUE) +
+    ggraph::geom_node_point(
+      colour = "black", 
+      size = 3, show.legend = TRUE) +
+    ggraph::geom_node_text(
+      ggplot2::aes(label = name), 
+      repel = TRUE, show.legend = TRUE) +
+    ggplot2::ggtitle("Bi-Gram Network") 
+  
+  
+  BiGramDataFrame = bi_tweet
+  number = 5
+  layout = "fr"
+  edge_color = "green"
+  node_color = "black"
+  node_size = 3
+  set_seed = 1234
+
+  set.seed(set_seed)
+      
+  TD_Bigram_Network <- BiGramDataFrame %>% 
+    dplyr::filter(n > number) %>% 
+    igraph::graph_from_data_frame() %>% 
+    ggraph::ggraph(layout = layout) +
+    ggraph::geom_edge_link(
+      ggplot2::aes(
+        edge_alpha = 1,
+        edge_width = scales::rescale(n, to=c(1,10))),
+      edge_colour = "green",
+      show.legend = TRUE) +
+    ggraph::geom_node_point(
+      colour = node_color, 
+      size = node_size) +
+    ggraph::geom_node_text(
+      ggplot2::aes(label = name), 
+      repel = TRUE) +
+    ggplot2::ggtitle("Bi-Gram Network") +
+    ggplot2::theme_void()
+  TD_Bigram_Network
   
 
+# word corr ---------------------------------------------------------------
+
+  tidy_puppy %>%
+    dplyr::group_by(Token) %>%
+    dplyr::filter(dplyr::n() >= 10) %>%
+    widyr::pairwise_cor(Token, key, sort = TRUE)
   
   
+  
+corr_puppies <- saotd::word_corr(DataFrameTidy = tidy_puppy, 
+                                 number = 10, 
+                                 sort = TRUE)  

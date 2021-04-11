@@ -18,7 +18,7 @@ sensitivity of the selected terms.  Selecting FALSE will maintain
 case sensitivity.}
 }
 \value{
-A Tidy DataFrame.
+A Tibble with user selected term replacement.
 }
 \description{
 Function to merge terms within a dataframe and prevent 
