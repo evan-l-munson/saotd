@@ -19,7 +19,9 @@ word_corr_network(
 
 \item{Correlation}{Minimum level of correlation to be displayed.}
 
-\item{layout}{Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"}
+\item{layout}{Desired layout from the `ggraph` package.
+Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", 
+"mds", "randomly", "fr", "kk", "drl", "lgl"}
 
 \item{edge_color}{User desired edge color.}
 
@@ -27,13 +29,15 @@ word_corr_network(
 
 \item{node_size}{User desired node size.}
 
-\item{set_seed}{Seed for reproducable results.}
+\item{set_seed}{Seed for reproducible results.}
 }
 \value{
 An igraph plot
 }
 \description{
-The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.
+The word correlation network displays the mutual relationship 
+  between words.  The correlation network shows higher correlations with a 
+  thicker and darker edge color.
 }
 \examples{
 \donttest{

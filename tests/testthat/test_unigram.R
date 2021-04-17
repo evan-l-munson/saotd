@@ -5,7 +5,7 @@ testthat::context("Compute Unigrams")
 text <- "I really love my dog, he is the best friend anyone could ever ask for!"
 test_unigram_df <- as.data.frame(x = text)
 
-correct_unigram_df <- dplyr::tribble(
+correct_unigram_df <- tibble::tribble(
   ~word, ~n,
   "dog", as.integer(1),
   "friend", as.integer(1),

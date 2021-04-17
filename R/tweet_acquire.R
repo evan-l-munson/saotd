@@ -6,8 +6,8 @@
 #' @description Function will enable a user to access the Twitter API through 
 #'   the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a 
 #'   user has a Twitter developers account and has received their individual 
-#'   consumer key, consumer secret key, access token, and access secret they can 
-#'   acquire Tweets based on a list of hashtags and a requested number of 
+#'   consumer key, consumer secret key, access token, and access secret they 
+#'   can acquire Tweets based on a list of hashtags and a requested number of 
 #'   entries per query.
 #' 
 #' @param twitter_app The name of user created Twitter Application.

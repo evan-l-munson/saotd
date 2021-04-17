@@ -7,7 +7,7 @@ text2 <- "RT I want @coolguy24 to meet me for #icecream!!!! https://t.co/v4nta"
 # text <- c(text1, text2)
 # test_Tidy_df <- as.data.frame(text)
 
-test_Tidy_df <- dplyr::tribble(
+test_Tidy_df <- tibble::tribble(
   ~user_id, 
     ~status_id, 
     ~created_at, 
@@ -37,7 +37,7 @@ test_Tidy_df <- dplyr::tribble(
     as.character("#puppies")
 )
 
-true_Tidy_df <- dplyr::tribble(
+true_Tidy_df <- tibble::tribble(
   ~text, ~Token,
   text1, as.character("love"),
   text1, as.character("dog"),

@@ -50,7 +50,7 @@ as.character(098787),
   as.character("#kittie")
 )
 
-correct_WordCorr_df <- dplyr::tribble(
+correct_WordCorr_df <- tibble::tribble(
   ~item1, ~item2, ~correlation,
   "joyful", "happy", as.double(0.577), 
   "happy", "joyful", as.double(0.577), 

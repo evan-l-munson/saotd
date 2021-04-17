@@ -6,7 +6,7 @@ text <- "I really love my dog, he is the best friend anyone could ever ask for!"
 test_MergeTerms_df <- as.data.frame(x = text, stringsAsFactors = FALSE)
 
 # Function input is a dataframe, so format test as a data frame
-correct_MergeTerms_df <- dplyr::tribble(
+correct_MergeTerms_df <- tibble::tribble(
   ~text,
   "I really love my dog, he is the BFF anyone could ever ask for!")
 

@@ -8,7 +8,7 @@ everything better."
 test_trigram_df <- as.data.frame(x = text)
 
 
-correct_trigram_df <- dplyr::tribble(
+correct_trigram_df <- tibble::tribble(
   ~word1, ~word2, ~word3, ~n,
   "awesome", "information", "empowers", as.integer(1),
   "awesome", "information", "pertaining", as.integer(1),

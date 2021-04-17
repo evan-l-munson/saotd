@@ -9,7 +9,7 @@ test_text_df <- as.data.frame(x = text)
 
 test_bigram_df <- saotd::bigram(DataFrame = test_text_df)
 
-incorrect_bigram_df <- dplyr::tribble(
+incorrect_bigram_df <- tibble::tribble(
   ~word, ~word2, ~n,
   "data", "science", as.integer(2),
   "structure", "transform", as.integer(1),

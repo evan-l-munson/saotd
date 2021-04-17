@@ -8,7 +8,7 @@ You’ll learn how to get your data into R, get it into the most useful
 structure, transform it, visualise it and model it." 
 test_bigram_df <- as.data.frame(x = text)
 
-correct_bigram_df <- dplyr::tribble(
+correct_bigram_df <- tibble::tribble(
   ~word1, ~word2, ~n,
   "data", "science", as.integer(2),
   "structure", "transform", as.integer(1),
