@@ -17,7 +17,8 @@ word_corr(DataFrameTidy, number, sort = TRUE)
 A Tibble.
 }
 \description{
-The word correlation displays the mutual relationship between words.
+The word correlation displays the mutual relationship between 
+  words.
 }
 \examples{
 \donttest{
