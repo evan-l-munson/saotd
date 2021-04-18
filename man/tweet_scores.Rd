@@ -9,13 +9,15 @@ tweet_scores(DataFrameTidy, HT_Topic)
 \arguments{
 \item{DataFrameTidy}{DataFrame of Twitter Data that has been tidy'd.}
 
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic"}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
+data select:  "topic"}
 }
 \value{
 A Scored DataFrame.
 }
 \description{
-Function to Calculate Sentiment Scores that will account for sentiment by hashtag or topic.
+Function to Calculate Sentiment Scores that will account for 
+  sentiment by hashtag or topic.
 }
 \examples{
 \donttest{

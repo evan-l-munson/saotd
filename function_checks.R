@@ -75,3 +75,39 @@ corr_puppies <- saotd::word_corr(DataFrameTidy = tidy_puppy,
 # Word Corr Network -------------------------------------------------------
 
 saotd::word_corr_network(WordCorr = corr_puppies)
+
+# Score -------------------------------------------------------------------
+
+score_puppies <- saotd::tweet_scores(DataFrameTidy = tidy_puppy, 
+                                     HT_Topic = "hashtag")
+
+# Configure Bing dictionary
+Bing <- tidytext::get_sentiments(lexicon = "bing")
+
+# fix tweet scoring
+TD_Hashtag_Scores <- DataFrameTidy %>% 
+  dplyr::inner_join(y = tidytext::get_sentiments(lexicon = "bing"), 
+                    by = c("Token" = "word")) %>% 
+  dplyr::mutate(method = "Bing") %>% 
+  dplyr::group_by(text,
+                  method,
+                  hashtags,
+                  created_at,
+                  key,
+                  sentiment) %>% 
+  dplyr::count(method,
+               hashtags,
+               created_at,
+               key,
+               sentiment) %>%  
+  tidyr::spread(key = sentiment, 
+                value = n, 
+                fill = 0) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(
+    TweetSentimentScore = positive - negative,
+    TweetSentiment = dplyr::if_else(
+      TweetSentimentScore == 0, "neutral",
+      dplyr::if_else(
+        TweetSentimentScore > 0, "positive", "negative")),
+    date = lubridate::as_date(created_at))
