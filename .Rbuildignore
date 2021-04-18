@@ -16,4 +16,4 @@ tests/testthat/.httr-oauth
 ^paper.md$
 ^packrat/
 ^\.Rprofile$
-^\.Renviron
+^\.Renviron$

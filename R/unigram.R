@@ -5,7 +5,7 @@
 #'   data in sequence from the most used to the least used.  A Uni-Gram is a 
 #'   single word.
 #' 
-#' @param DataFrame DataFrame of Twitter Data.
+#' @param DataFrame Data Frame of Twitter Data.
 #' 
 #' @importFrom dplyr count mutate filter quo
 #' @importFrom stringr str_replace_all

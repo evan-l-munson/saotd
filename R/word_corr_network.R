@@ -5,7 +5,7 @@
 #'   between words.  The correlation network shows higher correlations with a 
 #'   thicker and darker edge color.
 #' 
-#' @param WordCorr DataFrame of Word Correlations.
+#' @param WordCorr Data Frame of Word Correlations.
 #' @param Correlation Minimum level of correlation to be displayed.
 #' @param layout Desired layout from the `ggraph` package.  
 #'   Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", 

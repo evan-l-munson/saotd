@@ -4,7 +4,7 @@
 #' @description The word correlation displays the mutual relationship between 
 #'   words.
 #' 
-#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
+#' @param DataFrameTidy Data Frame of Twitter Data that has been tidy'd.
 #' @param number The number of word instances to be included.
 #' @param sort Rank order the results from most to least correlated.
 #' 

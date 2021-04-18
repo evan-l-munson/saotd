@@ -34,7 +34,7 @@
 #' @importFrom rtweet create_token search_tweets
 #' @importFrom dplyr mutate distinct
 #' 
-#' @return A DataFrame with tweets and meta data.
+#' @return A Data Frame with tweets and meta data.
 #' 
 #' @examples 
 #' \donttest{

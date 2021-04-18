@@ -6,7 +6,7 @@
 #'   displays the relationships between the words simultaneously as opposed to 
 #'   a tabular display of Bi-Gram words.
 #' 
-#' @param BiGramDataFrame DataFrame of Bi-Grams.
+#' @param BiGramDataFrame Data Frame of Bi-Grams.
 #' @param number The minimum desired number of Bi-Gram occurrences to be 
 #'   displayed (number = 300, would display all Bi-Grams that have at least 
 #'   300 instances).  

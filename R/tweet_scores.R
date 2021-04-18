@@ -4,7 +4,7 @@
 #' @description Function to Calculate Sentiment Scores that will account for 
 #'   sentiment by hashtag or topic.
 #'
-#' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
+#' @param DataFrameTidy Data Frame of Twitter Data that has been tidy'd.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic 
 #'   data select:  "topic"
 #' 

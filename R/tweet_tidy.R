@@ -6,7 +6,7 @@
 #'   to determine the sentiment fo the tweets. This function will remove all 
 #'   emoticons, punctuation, weblinks while maintaining actual Tweet text.
 #'
-#' @param DataFrame DataFrame of Twitter Data.
+#' @param DataFrame Data Frame of Twitter Data.
 #' 
 #' @importFrom dplyr mutate filter quo rename select
 #' @importFrom stringr str_replace_all

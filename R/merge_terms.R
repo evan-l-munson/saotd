@@ -1,14 +1,14 @@
 
 #' @title Merge Terms
 #'
-#' @description Function to merge terms within a dataframe and prevent 
+#' @description Function to merge terms within a data frame and prevent 
 #'   redundancy in the analysis.  For example many users may refer to the same
 #'   entity in multiple different ways: President Trump, The U.S. President, 
 #'   POTUS, Trump, President Donald Trump, Donald Trump, etc.  While each entry 
 #'   is different, they all refer to the same individual.  Using Merge Terms 
 #'   will allow all be converted into a single term. 
 #'
-#' @param DataFrame DataFrame of Twitter Data.
+#' @param DataFrame Data Frame of Twitter Data.
 #' @param term Term selected for merging.
 #' @param term_replacement Desired replacement term.
 #' @param ignore_case True is the default setting and will ignore case 

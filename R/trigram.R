@@ -1,9 +1,11 @@
 
 #' @title Twitter Tri-Grams
 #'
-#' @description Determines and displays the text Tri-Grams within the Twitter data in sequence from the most used to the least used.  A Tri-Gram is a combination of three consecutive words.
+#' @description Determines and displays the text Tri-Grams within the Twitter 
+#'   data in sequence from the most used to the least used.  A Tri-Gram is a 
+#'   combination of three consecutive words.
 #' 
-#' @param DataFrame DataFrame of Twitter Data.
+#' @param DataFrame Data Frame of Twitter Data.
 #' 
 #' @importFrom dplyr count mutate filter quo
 #' @importFrom stringr str_replace_all

@@ -7,7 +7,7 @@
 tweet_tidy(DataFrame)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 }
 \value{
 A Tidy tibble.

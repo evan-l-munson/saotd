@@ -111,3 +111,8 @@ TD_Hashtag_Scores <- DataFrameTidy %>%
       dplyr::if_else(
         TweetSentimentScore > 0, "positive", "negative")),
     date = lubridate::as_date(created_at))
+
+
+# number topics -----------------------------------------------------------
+
+num_puppies <- saotd::number_topics(DataFrame = puppies, num_cores = 4)
