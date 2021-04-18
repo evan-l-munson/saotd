@@ -7,7 +7,7 @@
 merge_terms(DataFrame, term, term_replacement, ignore_case = TRUE)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 
 \item{term}{Term selected for merging.}
 
@@ -21,7 +21,7 @@ case sensitivity.}
 A Tibble with user selected term replacement.
 }
 \description{
-Function to merge terms within a dataframe and prevent 
+Function to merge terms within a data frame and prevent 
   redundancy in the analysis.  For example many users may refer to the same
   entity in multiple different ways: President Trump, The U.S. President, 
   POTUS, Trump, President Donald Trump, Donald Trump, etc.  While each entry 

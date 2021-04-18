@@ -116,3 +116,8 @@ TD_Hashtag_Scores <- DataFrameTidy %>%
 # number topics -----------------------------------------------------------
 
 num_puppies <- saotd::number_topics(DataFrame = puppies, num_cores = 4)
+
+
+# tweet topics ------------------------------------------------------------
+
+topics_puppies <- saotd::tweet_topics(DataFrame = puppies, clusters = 6)

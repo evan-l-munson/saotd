@@ -7,7 +7,7 @@
 word_corr(DataFrameTidy, number, sort = TRUE)
 }
 \arguments{
-\item{DataFrameTidy}{DataFrame of Twitter Data that has been tidy'd.}
+\item{DataFrameTidy}{Data Frame of Twitter Data that has been tidy'd.}
 
 \item{number}{The number of word instances to be included.}
 

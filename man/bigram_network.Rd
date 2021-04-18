@@ -15,7 +15,7 @@ bigram_network(
 )
 }
 \arguments{
-\item{BiGramDataFrame}{DataFrame of Bi-Grams.}
+\item{BiGramDataFrame}{Data Frame of Bi-Grams.}
 
 \item{number}{The minimum desired number of Bi-Gram occurrences to be 
 displayed (number = 300, would display all Bi-Grams that have at least 

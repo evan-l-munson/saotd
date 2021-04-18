@@ -7,7 +7,7 @@
 tweet_scores(DataFrameTidy, HT_Topic)
 }
 \arguments{
-\item{DataFrameTidy}{DataFrame of Twitter Data that has been tidy'd.}
+\item{DataFrameTidy}{Data Frame of Twitter Data that has been tidy'd.}
 
 \item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
 data select:  "topic"}

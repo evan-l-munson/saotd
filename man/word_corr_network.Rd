@@ -15,7 +15,7 @@ word_corr_network(
 )
 }
 \arguments{
-\item{WordCorr}{DataFrame of Word Correlations.}
+\item{WordCorr}{Data Frame of Word Correlations.}
 
 \item{Correlation}{Minimum level of correlation to be displayed.}
 

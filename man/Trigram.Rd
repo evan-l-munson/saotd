@@ -7,13 +7,15 @@
 trigram(DataFrame)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 }
 \value{
 A tribble.
 }
 \description{
-Determines and displays the text Tri-Grams within the Twitter data in sequence from the most used to the least used.  A Tri-Gram is a combination of three consecutive words.
+Determines and displays the text Tri-Grams within the Twitter 
+  data in sequence from the most used to the least used.  A Tri-Gram is a 
+  combination of three consecutive words.
 }
 \examples{
 \donttest{

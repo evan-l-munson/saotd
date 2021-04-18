@@ -45,7 +45,7 @@ Tweets that originate from the same Twitter id at the exact same time.}
 (apps.twitter.com).}
 }
 \value{
-A DataFrame with tweets and meta data.
+A Data Frame with tweets and meta data.
 }
 \description{
 Function will enable a user to access the Twitter API through 
