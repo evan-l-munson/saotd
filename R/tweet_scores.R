@@ -60,8 +60,9 @@ tweet_scores <- function(DataFrameTidy,
   if(HT_Topic == "hashtag") {
     
     TD_Hashtag_Scores <- DataFrameTidy %>% 
-      dplyr::inner_join(y = tidytext::get_sentiments(lexicon = "bing"), 
-                        by = c("Token" = "word")) %>% 
+      dplyr::inner_join(
+        y = tidytext::get_sentiments(lexicon = "bing"), 
+        by = c("Token" = "word")) %>% 
       dplyr::mutate(method = "Bing") %>% 
       dplyr::group_by(text,
                       method,
@@ -91,8 +92,9 @@ tweet_scores <- function(DataFrameTidy,
   } else {
     
     TD_Topic_Scores <- DataFrameTidy %>% 
-      dplyr::inner_join(y = tidytext::get_sentiments(lexicon = "bing"), 
-                        by = c("Token" = "word")) %>% 
+      dplyr::inner_join(
+        y = tidytext::get_sentiments(lexicon = "bing"), 
+        by = c("Token" = "word")) %>% 
       dplyr::mutate(method = "Bing") %>% 
       dplyr::group_by(text,
                       method,
