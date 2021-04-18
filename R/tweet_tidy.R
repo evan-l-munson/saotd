@@ -52,7 +52,7 @@ tweet_tidy <- function(DataFrame) {
                   key, 
                   query)) %>% 
     dplyr::mutate(
-      cleantext = stringr::str_replace_all(
+      cleantext = stringr::str_replace_all( 
         string = text, 
         pattern = wu, 
         replacement = ""),

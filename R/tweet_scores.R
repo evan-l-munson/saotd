@@ -33,9 +33,10 @@ tweet_scores <- function(DataFrameTidy,
   if(!is.data.frame(DataFrameTidy)) {
     stop('The input for this function is a data frame.')
   }
+  
   if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either hashtag for analysis 
-         using hashtags, or topic for analysis looking at topics.')
+    stop('HT_Topic requires an input of either "hashtag" for analysis 
+         using hashtags, or "topic" for analysis looking at topics.')
   }
   
   # configure defusing operators for packages checking
@@ -51,10 +52,10 @@ tweet_scores <- function(DataFrameTidy,
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
   
-  # Configure Bing dictionary
-  Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
-    dplyr::rename(c("Token" = "word",
-                    "Sentiment" = "sentiment"))
+  # # Configure Bing dictionary
+  # Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
+  #   dplyr::rename(c("Token" = "word",
+  #                   "Sentiment" = "sentiment"))
   
   # function main body
   if(HT_Topic == "hashtag") {
@@ -89,7 +90,7 @@ tweet_scores <- function(DataFrameTidy,
     
     return(TD_Hashtag_Scores)
     
-  } else {
+  } else if(HT_Topic == "topic") {
     
     TD_Topic_Scores <- DataFrameTidy %>% 
       dplyr::inner_join(
@@ -120,6 +121,10 @@ tweet_scores <- function(DataFrameTidy,
         date = lubridate::as_date(created_at))
 
     return(TD_Topic_Scores)
+    
+  } else {
+    
+    message("Input \"hashtag\" or \"topic\" in the HT_Topic varriable")
     
   }
   

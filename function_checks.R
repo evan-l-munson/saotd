@@ -76,43 +76,6 @@ corr_puppies <- saotd::word_corr(DataFrameTidy = tidy_puppy,
 
 saotd::word_corr_network(WordCorr = corr_puppies)
 
-# Score -------------------------------------------------------------------
-
-score_puppies <- saotd::tweet_scores(DataFrameTidy = tidy_puppy, 
-                                     HT_Topic = "hashtag")
-
-# Configure Bing dictionary
-Bing <- tidytext::get_sentiments(lexicon = "bing")
-
-# fix tweet scoring
-TD_Hashtag_Scores <- DataFrameTidy %>% 
-  dplyr::inner_join(y = tidytext::get_sentiments(lexicon = "bing"), 
-                    by = c("Token" = "word")) %>% 
-  dplyr::mutate(method = "Bing") %>% 
-  dplyr::group_by(text,
-                  method,
-                  hashtags,
-                  created_at,
-                  key,
-                  sentiment) %>% 
-  dplyr::count(method,
-               hashtags,
-               created_at,
-               key,
-               sentiment) %>%  
-  tidyr::spread(key = sentiment, 
-                value = n, 
-                fill = 0) %>% 
-  dplyr::ungroup() %>% 
-  dplyr::mutate(
-    TweetSentimentScore = positive - negative,
-    TweetSentiment = dplyr::if_else(
-      TweetSentimentScore == 0, "neutral",
-      dplyr::if_else(
-        TweetSentimentScore > 0, "positive", "negative")),
-    date = lubridate::as_date(created_at))
-
-
 # number topics -----------------------------------------------------------
 
 num_puppies <- saotd::number_topics(DataFrame = puppies, num_cores = 4)
@@ -120,4 +83,56 @@ num_puppies <- saotd::number_topics(DataFrame = puppies, num_cores = 4)
 
 # tweet topics ------------------------------------------------------------
 
-topics_puppies <- saotd::tweet_topics(DataFrame = puppies, clusters = 6)
+topics_puppies <- saotd::tweet_topics(DataFrame = puppies, clusters = 5)
+
+
+# Score -------------------------------------------------------------------
+
+score_puppies_ht <- saotd::tweet_scores(DataFrameTidy = tidy_puppy, 
+                                        HT_Topic = "hashtag")
+
+tidy_topics <- saotd::tweet_tidy(DataFrame = topics_puppies)
+
+score_puppies_topic <- saotd::tweet_scores(DataFrameTidy = tidy_topics, 
+                                           HT_Topic = "topic")
+
+# Notes
+# need to rethink tweet_tidy and if I should select the columns I am
+#   selecting these columns greatly reduces the data frame, but it causes
+#   unexpected problems later by deselecting topic
+
+
+
+
+# Configure Bing dictionary
+# Bing <- tidytext::get_sentiments(lexicon = "bing")
+
+# fix tweet scoring
+# TD_Hashtag_Scores <- DataFrameTidy %>% 
+#   dplyr::inner_join(y = tidytext::get_sentiments(lexicon = "bing"), 
+#                     by = c("Token" = "word")) %>% 
+#   dplyr::mutate(method = "Bing") %>% 
+#   dplyr::group_by(text,
+#                   method,
+#                   hashtags,
+#                   created_at,
+#                   key,
+#                   sentiment) %>% 
+#   dplyr::count(method,
+#                hashtags,
+#                created_at,
+#                key,
+#                sentiment) %>%  
+#   tidyr::spread(key = sentiment, 
+#                 value = n, 
+#                 fill = 0) %>% 
+#   dplyr::ungroup() %>% 
+#   dplyr::mutate(
+#     TweetSentimentScore = positive - negative,
+#     TweetSentiment = dplyr::if_else(
+#       TweetSentimentScore == 0, "neutral",
+#       dplyr::if_else(
+#         TweetSentimentScore > 0, "positive", "negative")),
+#     date = lubridate::as_date(created_at))
+
+
