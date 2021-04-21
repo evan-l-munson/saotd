@@ -12,6 +12,7 @@ tweet_acquire(
   access_token_secret,
   query,
   num_tweets,
+  reduced_tweets = TRUE,
   distinct = TRUE
 )
 }
@@ -37,6 +38,11 @@ between search terms, \code{query = "data OR science"}, Twitter's REST API
 should return any tweet that contains either "data" or "science."}
 
 \item{num_tweets}{Number of Tweets to be acquired per each hashtag.}
+
+\item{reduced_tweets}{Logical.  If reduced_tweets = TRUE, the data frame 
+returned to the user will be significantly reduced specifically for use in 
+the `saotd` package.  If reduced_tweets = FALSE, the full results from the 
+Twitter API will be returned.}
 
 \item{distinct}{Logical.  If distinct = TRUE, the function removes multiple 
 Tweets that originate from the same Twitter id at the exact same time.}

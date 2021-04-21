@@ -28,6 +28,10 @@
 #'   between search terms, \code{query = "data OR science"}, Twitter's REST API 
 #'   should return any tweet that contains either "data" or "science."
 #' @param num_tweets Number of Tweets to be acquired per each hashtag.
+#' @param reduced_tweets Logical.  If reduced_tweets = TRUE, the data frame 
+#'   returned to the user will be significantly reduced specifically for use in 
+#'   the `saotd` package.  If reduced_tweets = FALSE, the full results from the 
+#'   Twitter API will be returned.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple 
 #'   Tweets that originate from the same Twitter id at the exact same time.
 #'   
@@ -86,6 +90,7 @@ tweet_acquire <- function(twitter_app,
                           access_token_secret,
                           query,
                           num_tweets,
+                          reduced_tweets = TRUE,
                           distinct = TRUE) {
   
   ## authenticate via web browser
@@ -98,11 +103,39 @@ tweet_acquire <- function(twitter_app,
   )
   
   # pull and format tweets
-  raw_tweets <- rtweet::search_tweets(token = user_token,
-                                      q = query,
-                                      n = num_tweets) %>%
-    dplyr::mutate(key = paste(screen_name, created_at)) %>%
-    dplyr::distinct(key, .keep_all = distinct) %>% 
-    dplyr::mutate(query = query)
+  raw_tweets <- 
+    rtweet::search_tweets(
+      token = user_token,
+      q = query,
+      n = num_tweets) %>%
+    dplyr::mutate(
+      key = paste(screen_name, created_at),
+      query = query) %>%
+    dplyr::distinct(key, .keep_all = distinct)
+  
+  if(reduced_tweets == TRUE) {
+    
+    reduced <- raw_tweets %>% 
+      dplyr::select(user_id, 
+                    status_id, 
+                    created_at,
+                    screen_name, 
+                    text, 
+                    hashtags, 
+                    location, 
+                    key, 
+                    query)
+    
+    return(reduced)
+    
+  } else if (reduced_tweets == FALSE) {
+    
+    return(raw_tweets)
+    
+  } else {
+    
+    message("Please make a selection for 'reduced_tweets") 
+    
+  }
   
 }

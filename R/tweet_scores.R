@@ -90,7 +90,7 @@ tweet_scores <- function(DataFrameTidy,
     
     return(TD_Hashtag_Scores)
     
-  } else if(HT_Topic == "topic") {
+  } else if (HT_Topic == "topic") {
     
     TD_Topic_Scores <- DataFrameTidy %>% 
       dplyr::inner_join(

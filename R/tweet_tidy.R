@@ -8,7 +8,7 @@
 #'
 #' @param DataFrame Data Frame of Twitter Data.
 #' 
-#' @importFrom dplyr mutate filter quo rename select
+#' @importFrom dplyr mutate filter quo rename
 #' @importFrom stringr str_replace_all
 #' @importFrom tidytext unnest_tokens
 #' 
@@ -42,15 +42,6 @@ tweet_tidy <- function(DataFrame) {
   
   # function main body
   TD_Tidy <- DataFrame %>%
-    dplyr::select(c(user_id, 
-                  status_id, 
-                  created_at,
-                  screen_name, 
-                  text, 
-                  hashtags, 
-                  location, 
-                  key, 
-                  query)) %>% 
     dplyr::mutate(
       cleantext = stringr::str_replace_all( 
         string = text, 

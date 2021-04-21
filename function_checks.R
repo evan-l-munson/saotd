@@ -9,7 +9,8 @@ puppies <- saotd::tweet_acquire(
               access_token = Sys.getenv('access_token'), 
               access_token_secret = Sys.getenv('access_token_secret'), 
               query = "#puppies", 
-              num_tweets = 100, 
+              num_tweets = 100,
+              reduced_tweets = TRUE,
               distinct = TRUE)
 
 
@@ -21,36 +22,24 @@ tidy_puppy <- saotd::tweet_tidy(DataFrame = puppies)
 # unigram -----------------------------------------------------------------
 
 uni_tweet <- saotd::unigram(DataFrame = puppies)
-saotd::unigram(DataFrame = test_unigram_df)
-
+uni_tweet
 
 # bigrams -----------------------------------------------------------------
 
 bi_tweet <- saotd::bigram(DataFrame = puppies)
-
+bi_tweet
 
 # trigrams ----------------------------------------------------------------
 
 tri_tweets <- saotd::trigram(DataFrame = puppies)
+tri_tweets
 
 # merge terms -------------------------------------------------------------
 
 bad_puppies <- saotd::merge_terms(DataFrame = puppies, 
                                   term = "puppies", 
-                                  term_replacement = "good_puppies")
+                                  term_replacement = "bad_puppies")
 
-new_merge <- puppies %>% 
-  dplyr::mutate(text = stringr::str_replace(string = text, 
-                                                pattern = "puppies", 
-                                                replacement = "good_puppies"))
-
-new_merge_2 <- puppies %>% 
-  dplyr::mutate(text = gsub(x = text,
-                            pattern = "puppies", 
-                            replacement = "good_puppies", 
-                            ignore.case = TRUE))
-                
-  all.equal(bad_puppies, new_merge_2)
   
 
 # Bigram network ----------------------------------------------------------
