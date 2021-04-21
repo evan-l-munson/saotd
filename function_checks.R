@@ -77,13 +77,16 @@ topics_puppies <- saotd::tweet_topics(DataFrame = puppies, clusters = 5)
 
 # Score -------------------------------------------------------------------
 
-score_puppies_ht <- saotd::tweet_scores(DataFrameTidy = tidy_puppy, 
-                                        HT_Topic = "hashtag")
+score_puppies_ht <- saotd::tweet_scores(
+  DataFrameTidy = tidy_puppy, 
+  HT_Topic = "hashtag")
 
-tidy_topics <- saotd::tweet_tidy(DataFrame = topics_puppies)
+tidy_topics <- saotd::tweet_tidy(
+  DataFrame = topics_puppies)
 
-score_puppies_topic <- saotd::tweet_scores(DataFrameTidy = tidy_topics, 
-                                           HT_Topic = "topic")
+score_puppies_topic <- saotd::tweet_scores(
+  DataFrameTidy = tidy_topics, 
+  HT_Topic = "topic")
 
 # Notes
 # need to rethink tweet_tidy and if I should select the columns I am

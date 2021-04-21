@@ -52,11 +52,6 @@ tweet_scores <- function(DataFrameTidy,
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
   
-  # # Configure Bing dictionary
-  # Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
-  #   dplyr::rename(c("Token" = "word",
-  #                   "Sentiment" = "sentiment"))
-  
   # function main body
   if(HT_Topic == "hashtag") {
     
