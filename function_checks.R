@@ -99,7 +99,7 @@ min_score_HT
 
 # unnest list
 # https://stackoverflow.com/questions/52286482/function-to-extract-all-list-elements-from-a-dataframe-column-into-individual-co
-
+# https://stackoverflow.com/questions/44832059/r-how-to-extract-a-list-from-a-dataframe
 
 test_max <- score_puppies_ht[4] %>% 
   tidyr::separate(hashtags, into = c("ht1", "ht2", "ht3"), convert = TRUE)
