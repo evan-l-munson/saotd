@@ -87,3 +87,28 @@ tidy_topics <- saotd::tweet_tidy(
 score_puppies_topic <- saotd::tweet_scores(
   DataFrameTidy = tidy_topics, 
   HT_Topic = "topic")
+
+
+# Max Score ---------------------------------------------------------------
+
+min_score_HT <- 
+  saotd::tweet_max_scores(
+    DataFrameTidyScores = score_puppies_ht,
+    HT_Topic = "hashtag")
+min_score_HT
+
+# unnest list
+# https://stackoverflow.com/questions/52286482/function-to-extract-all-list-elements-from-a-dataframe-column-into-individual-co
+
+
+test_max <- score_puppies_ht[4] %>% 
+  tidyr::separate(hashtags, into = c("ht1", "ht2", "ht3"), convert = TRUE)
+
+
+
+min_score_HT_sel <- 
+  saotd::tweet_max_scores(
+    DataFrameTidyScores = score_puppies_ht,
+    HT_Topic = "hashtag",
+    HT_Topic_Selection = "#puppy")
+min_score_HT_sel
