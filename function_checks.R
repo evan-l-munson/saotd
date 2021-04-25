@@ -106,13 +106,17 @@ min_score_HT
 search_chr <- "puppies"
 
 test_puppy <- score_puppies_ht %>% 
-  tidyr::unnest(cols = hashtags) %>% 
+  tidyr::unnest(cols = hashtags, keep_empty = FALSE) %>% 
   dplyr::filter(hashtags == search_chr)
 
 
-# min_score_HT_sel <- 
-#   saotd::tweet_max_scores(
-#     DataFrameTidyScores = score_puppies_ht,
-#     HT_Topic = "hashtag",
-#     HT_Topic_Selection = "#puppy")
-# min_score_HT_sel
+min_score_HT_sel <-
+  saotd::tweet_max_scores(
+    DataFrameTidyScores = score_puppies_ht,
+    HT_Topic = "hashtag",
+    HT_Topic_Selection = "puppy")
+min_score_HT_sel
+
+
+
+

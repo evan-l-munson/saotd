@@ -11,8 +11,8 @@
 #' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will 
 #'   find min across entire data frame.
 #' 
-#' @importFrom dplyr arrange filter quo
-#' @importFrom plyr desc
+#' @importFrom dplyr arrange filter quo desc
+#' @importFrom tidyr unnest 
 #' @importFrom utils head
 #' 
 #' @return A Tibble.
@@ -52,11 +52,11 @@ tweet_max_scores <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  hashtag <- dplyr::quo(hashtag)
-  Topic <- dplyr::quo(Topic)
-  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
-  # HT_Topic_Selection <- dplyr::quo(HT_Topic_Selection)
-  
+  # hashtag <- rlang::enquo(hashtag)
+  Topic <- rlang::enquo(Topic)
+  TweetSentimentScore <- rlang::enquo(TweetSentimentScore)
+  HT_Topic_Selection <- rlang::enquo(HT_Topic_Selection)
+
   # function main body
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     
@@ -68,9 +68,10 @@ tweet_max_scores <- function(DataFrameTidyScores,
     
   } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
     
-    TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(hashtag == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+    TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>%
+      tidyr::unnest(cols = {{hashtag}}, keep_empty = FALSE) %>% 
+      dplyr::filter(hashtag == {{HT_Topic_Selection}}) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     
     return(TD_HT_Sel_Max_Scores)
@@ -78,7 +79,7 @@ tweet_max_scores <- function(DataFrameTidyScores,
   } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     
     TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     
     return(TD_Topic_noSel_Max_Scores)
