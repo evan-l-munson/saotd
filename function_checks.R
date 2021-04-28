@@ -101,15 +101,6 @@ min_score_HT
 # https://stackoverflow.com/questions/52286482/function-to-extract-all-list-elements-from-a-dataframe-column-into-individual-co
 # https://stackoverflow.com/questions/44832059/r-how-to-extract-a-list-from-a-dataframe
 
-
-# this should assit in fixing max/min scores
-search_chr <- "puppies"
-
-test_puppy <- score_puppies_ht %>% 
-  tidyr::unnest(cols = hashtags, keep_empty = FALSE) %>% 
-  dplyr::filter(hashtags == search_chr)
-
-
 min_score_HT_sel <-
   saotd::tweet_max_scores(
     DataFrameTidyScores = score_puppies_ht,
@@ -117,6 +108,13 @@ min_score_HT_sel <-
     HT_Topic_Selection = "puppy")
 min_score_HT_sel
 
+min_score_topic <- saotd::tweet_max_scores(
+  DataFrameTidyScores = score_puppies_topic, 
+  HT_Topic = "topic")
+min_score_topic
 
-
-
+min_score_topic_sel <- saotd::tweet_max_scores(
+  DataFrameTidyScores = score_puppies_topic, 
+  HT_Topic = "topic", 
+  HT_Topic_Selection = 4)
+min_score_topic_sel

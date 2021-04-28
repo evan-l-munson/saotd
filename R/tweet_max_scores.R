@@ -52,31 +52,33 @@ tweet_max_scores <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  # hashtag <- rlang::enquo(hashtag)
-  Topic <- rlang::enquo(Topic)
-  TweetSentimentScore <- rlang::enquo(TweetSentimentScore)
-  HT_Topic_Selection <- rlang::enquo(HT_Topic_Selection)
+  # hashtag <- rlang::sym(hashtag)
+  # topic <- rlang::sym(topic)
+  # TweetSentimentScore <- rlang::sym(TweetSentimentScore)
+  # HT_Topic_Selection <- rlang::sym(HT_Topic_Selection)
 
   # function main body
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
     
     TD_HT_noSel_Max_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     
     return(TD_HT_noSel_Max_Scores)
     
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
+  } else if (HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
     
     TD_HT_Sel_Max_Scores <- DataFrameTidyScores %>%
-      tidyr::unnest(cols = {{hashtag}}, keep_empty = FALSE) %>% 
-      dplyr::filter(hashtag == {{HT_Topic_Selection}}) %>% 
+      tidyr::unnest(
+        cols = hashtags, 
+        keep_empty = FALSE) %>% 
+      dplyr::filter(hashtags == HT_Topic_Selection) %>% 
       dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     
     return(TD_HT_Sel_Max_Scores)
     
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
+  } else if (HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
     
     TD_Topic_noSel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
@@ -88,7 +90,7 @@ tweet_max_scores <- function(DataFrameTidyScores,
     
     TD_Topic_Sel_Max_Scores <- DataFrameTidyScores %>% 
       dplyr::filter(Topic == HT_Topic_Selection) %>% 
-      dplyr::arrange(plyr::desc(TweetSentimentScore)) %>% 
+      dplyr::arrange(dplyr::desc(TweetSentimentScore)) %>% 
       utils::head()
     
     return(TD_Topic_Sel_Max_Scores)
