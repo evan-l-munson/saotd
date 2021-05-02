@@ -149,3 +149,13 @@ min_score_topic_sel <- saotd::tweet_min_scores(
   HT_Topic = "topic", 
   HT_Topic_Selection = 4)
 min_score_topic_sel
+
+
+# posneg_words ------------------------------------------------------------
+
+pos_neg <- saotd::posneg_words(
+  DataFrameTidy = tidy_puppy, 
+  num_words = 6, 
+  # filterword = "illegal"
+  )
+pos_neg
