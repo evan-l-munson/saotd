@@ -159,3 +159,9 @@ pos_neg <- saotd::posneg_words(
   # filterword = "illegal"
   )
 pos_neg
+
+
+# Tweet Corpus Dist -------------------------------------------------------
+
+corp_dist <- saotd::tweet_corpus_distribution(DataFrameTidyScores = score_puppies)
+corp_dist
