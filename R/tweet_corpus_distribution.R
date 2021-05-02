@@ -31,7 +31,7 @@
 tweet_corpus_distribution <- function(DataFrameTidyScores, 
                                       binwidth = 1,
                                       color = "black",
-                                      fill = "black") {
+                                      fill = "grey") {
   
   # input checks
   if(!is.data.frame(DataFrameTidyScores)) {

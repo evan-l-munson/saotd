@@ -8,7 +8,7 @@ tweet_corpus_distribution(
   DataFrameTidyScores,
   binwidth = 1,
   color = "black",
-  fill = "black"
+  fill = "grey"
 )
 }
 \arguments{

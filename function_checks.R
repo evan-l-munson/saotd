@@ -165,3 +165,46 @@ pos_neg
 
 corp_dist <- saotd::tweet_corpus_distribution(DataFrameTidyScores = score_puppies)
 corp_dist
+
+
+# tweet distributions -----------------------------------------------------
+
+bin_width = 10
+color = "black"
+fill = "grey"
+
+xxx <- score_puppies_ht %>%
+  tidyr::unnest(
+    cols = hashtags, 
+    keep_empty = FALSE) %>% 
+  dplyr::group_by(hashtags, TweetSentimentScore) %>% 
+  dplyr::count() %>% 
+  dplyr::filter(!is.na(hashtags)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::slice_max(n, n = 2) %>% 
+  ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
+  ggplot2::geom_histogram(
+    stat = "count", 
+    bin = bin_width, 
+    colour = color, 
+    fill = fill) +
+  ggplot2::facet_wrap(~hashtags, ncol = 2) +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ggtitle("Sentiment Score Distribution Across all #Hashtags") +
+  ggplot2::xlab('Sentiment') +
+  ggplot2::ylab('Count') +
+  ggplot2::theme_bw()
+
+
+tweet_dist_ht <- 
+  saotd::tweet_distribution(
+    DataFrameTidyScores = score_puppies_ht, 
+    HT_Topic = "hashtag")
+tweet_dist_ht
+
+tweet_dist_topic <- 
+  saotd::tweet_distribution(
+    DataFrameTidyScores = score_puppies_topic,
+    bin_width = 5,
+    HT_Topic = "topic")
+tweet_dist_topic
