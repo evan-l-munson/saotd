@@ -208,3 +208,16 @@ tweet_dist_topic <-
     bin_width = 5,
     HT_Topic = "topic")
 tweet_dist_topic
+
+
+# tweet_box ---------------------------------------------------------------
+
+box <- saotd::tweet_box(
+  DataFrameTidyScores = score_puppies_topic, 
+  HT_Topic = "topic")
+box
+
+score_puppies_topic %>% 
+  dplyr::mutate(Topic = as.character(Topic)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = Topic, y = TweetSentimentScore)) +
+  ggplot2::geom_boxplot()
