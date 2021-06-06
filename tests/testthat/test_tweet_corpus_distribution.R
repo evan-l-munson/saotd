@@ -20,9 +20,8 @@ test_HT_Tidy_Scores <-
     DataFrameTidy = test_HT_Tidy, 
     HT_Topic = "hashtag")
 
-p <- 
-  saotd::tweet_corpus_distribution(
-    DataFrameTidyScores = test_HT_Tidy_Scores)
+p <- saotd::tweet_corpus_distribution(
+  DataFrameTidyScores = test_HT_Tidy_Scores)
 
 # Tests
 testthat::test_that("The tweet_corpus_distribution function properly ingests data frame", {
