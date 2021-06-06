@@ -17,7 +17,7 @@ test_HT_Tidy <-
 
 test_HT_Tidy_Scores <- 
   saotd::tweet_scores(
-    DataFrameTidy = test_HT_Tidy, 
+    DataFrameTidy = test_HT_Tidy,
     HT_Topic = "hashtag")
 
 p <- saotd::tweet_corpus_distribution(
