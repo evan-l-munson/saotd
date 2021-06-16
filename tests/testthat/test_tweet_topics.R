@@ -32,11 +32,13 @@ check_TweetTopics <- tibble::tribble(
 # Tests
 testthat::test_that("The tweet_topics function properly accepts input items", {
   
-  testthat::expect_error(object = saotd::tweet_topics(DataFrame = text), 
-                         "The input for this function is a data frame.")
+  testthat::expect_error(
+    object = saotd::tweet_topics(DataFrame = text), 
+    "The input for this function is a data frame.")
   
-  testthat::expect_error(object = saotd::tweet_topics(DataFrame = test_df, 
-                                                      clusters = "two"), 
+  testthat::expect_error(
+    object = saotd::tweet_topics(DataFrame = test_df,
+                                 clusters = "two"), 
                          "The input must be a numerical value.")
   
 })

@@ -228,7 +228,8 @@ wth <- score_puppies_ht %>%
   tidyr::unnest(
     cols = hashtags, 
     keep_empty = FALSE) %>% 
-  dplyr::mutate(hashtags = tolower(hashtags)) %>% 
+  dplyr::mutate(
+    hashtags = tolower(hashtags)) %>% 
   dplyr::group_by(hashtags) %>% 
   dplyr::count()
 

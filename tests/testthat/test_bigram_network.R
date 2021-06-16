@@ -22,16 +22,20 @@ p <- saotd::bigram_network(BiGramDataFrame = test_bigram_df,
 # Tests
 testthat::test_that("The bigram_network function is working as properly", {
 
-  testthat::expect_error(object = saotd::bigram_network(
-    BiGramDataFrame = text), 
+  testthat::expect_error(
+    object = saotd::bigram_network(
+      BiGramDataFrame = text), 
                "The input for this function is a Bigram data frame.")
   
-  testthat::expect_error(object = saotd::bigram_network(BiGramDataFrame = test_bigram_df, 
-                                              number = 0),
+  testthat::expect_error(
+    object = saotd::bigram_network(
+      BiGramDataFrame = test_bigram_df, 
+      number = 0),
     "You must choose number of Bi-Grams greater than 1.")
   
-  testthat::expect_error(object = saotd::bigram_network(
-    BiGramDataFrame = incorrect_bigram_df), 
+  testthat::expect_error(
+    object = saotd::bigram_network(
+      BiGramDataFrame = incorrect_bigram_df), 
     'The data frame is not properly constructed.  
          The data frame must have three columns: word1, word2 and n.')
   

@@ -3,7 +3,7 @@ testthat::context("Plot Score Distribution")
 
 # Test Data
 
-test_HT_df <- dplyr::data_frame(
+test_HT_df <- dplyr::tibble(
   text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!
            I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
            "cats are the best most amazing friends anyone could ask for "),

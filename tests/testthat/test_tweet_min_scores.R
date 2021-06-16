@@ -4,7 +4,7 @@ testthat::context("Compute Tweet Minimum Sentiment Scores")
 # Test Data
 
 # Data for hashtag without "HT_Topic_Selection"
-test_HT_df <- dplyr::data_frame(
+test_HT_df <- dplyr::tibble(
   text = c("I really love and hate my dog, he is the best most amazing friend 
            anyone could ever ask for!  I really hate my love to hate on my 
            stupid dog, he is the worst friend anyone could ever ask for!",

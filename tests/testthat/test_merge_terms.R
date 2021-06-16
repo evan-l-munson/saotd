@@ -13,9 +13,10 @@ correct_MergeTerms_df <- tibble::tribble(
 # It is easier to check a string than directly compare dataframes.
 check <- correct_MergeTerms_df$text[1]
 
-test <- saotd::merge_terms(DataFrame = test_MergeTerms_df, 
-                           term = "best friend", 
-                           term_replacement = "BFF")
+test <- saotd::merge_terms(
+  DataFrame = test_MergeTerms_df, 
+  term = "best friend", 
+  term_replacement = "BFF")
 test <- test$text[1]
 
 # tests

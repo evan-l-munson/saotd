@@ -2,7 +2,7 @@
 testthat::context("Compute Tweet Positive and Negative Words")
 
 # Test Data
-test_HT_df <- dplyr::data_frame(
+test_HT_df <- dplyr::tibble(
   text = "I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!  
   I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
   hashtag = "dog", 
@@ -13,10 +13,10 @@ test_HT_Tidy_df <- saotd::tweet_tidy(DataFrame = test_HT_df)
 test_HT_PosNeg <- saotd::posneg_words(DataFrameTidy = test_HT_Tidy_df, num_words = 1)
 test_HT <- test_HT_PosNeg$data[2]
 
-check_HT <- dplyr::data_frame(
+check_HT <- dplyr::tibble(
   sentiment = as.character(c("negative", "positive")))
 
-test_Topic_df <- dplyr::data_frame(
+test_Topic_df <- dplyr::tibble(
   text = "I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!  
   I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
   Topic = "dog", 

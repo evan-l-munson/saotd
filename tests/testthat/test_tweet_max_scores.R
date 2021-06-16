@@ -4,7 +4,7 @@ testthat::context("Compute Tweet Maximum Sentiment Scores")
 # Test Data
 
 # Data for hashtag without "HT_Topic_Selection"
-test_HT_df <- dplyr::data_frame(
+test_HT_df <- dplyr::tibble(
   text = c("I really love my dog, he is the best most amazing friend anyone 
            could ever ask for!",
            "cats are the best most amazing friends anyone could ask for except 
