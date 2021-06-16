@@ -163,7 +163,8 @@ pos_neg
 
 # Tweet Corpus Dist -------------------------------------------------------
 
-corp_dist <- saotd::tweet_corpus_distribution(DataFrameTidyScores = score_puppies)
+corp_dist <- saotd::tweet_corpus_distribution(
+  DataFrameTidyScores = score_puppies)
 corp_dist
 
 
@@ -212,12 +213,39 @@ tweet_dist_topic
 
 # tweet_box ---------------------------------------------------------------
 
-box <- saotd::tweet_box(
+# works for topics
+box_topic <- saotd::tweet_box(
   DataFrameTidyScores = score_puppies_topic, 
   HT_Topic = "topic")
-box
+box_topic
 
-score_puppies_topic %>% 
-  dplyr::mutate(Topic = as.character(Topic)) %>% 
-  ggplot2::ggplot(ggplot2::aes(x = Topic, y = TweetSentimentScore)) +
-  ggplot2::geom_boxplot()
+box_ht <- saotd::tweet_box(
+  DataFrameTidyScores = score_puppies_ht, 
+  HT_Topic = "hashtag")
+box_ht
+
+wth <- score_puppies_ht %>% 
+  tidyr::unnest(
+    cols = hashtags, 
+    keep_empty = FALSE) %>% 
+  dplyr::mutate(hashtags = tolower(hashtags)) %>% 
+  dplyr::group_by(hashtags) %>% 
+  dplyr::count()
+
+
+
+box_hashtag <- score_puppies_ht %>% 
+  tidyr::unnest(
+    cols = hashtags, 
+    keep_empty = FALSE) %>% 
+  dplyr::mutate(
+    hashtags = tolower(hashtags)) %>% 
+  ggplot2::ggplot(ggplot2::aes(hashtags, TweetSentimentScore)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ggtitle("Sentiment Scores Across each #Hashtag") +
+  ggplot2::xlab('#Hashtag') +
+  ggplot2::ylab('Sentiment') +
+  ggplot2::theme_bw() +
+  ggplot2::coord_flip()
+box_hashtag

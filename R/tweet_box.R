@@ -11,6 +11,7 @@
 #' 
 #' @importFrom dplyr quo mutate
 #' @import ggplot2
+#' @importFrom tidyr unnest
 #' 
 #' @return A ggplot box plot.
 #' 
@@ -57,6 +58,11 @@ tweet_box <- function(DataFrameTidyScores,
   if(HT_Topic == "hashtag") {
     
     TD_HT_BoxPlot <- DataFrameTidyScores %>% 
+      tidyr::unnest(
+        cols = hashtags, 
+        keep_empty = FALSE) %>% 
+      dplyr::mutate(
+        hashtags = tolower(hashtags)) %>% 
       ggplot2::ggplot(ggplot2::aes(hashtags, TweetSentimentScore)) +
       ggplot2::geom_boxplot() +
       theme(legend.position = "none") +
