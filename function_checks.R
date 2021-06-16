@@ -234,19 +234,14 @@ wth <- score_puppies_ht %>%
   dplyr::count()
 
 
+# tweet_violin ------------------------------------------------------------
 
-box_hashtag <- score_puppies_ht %>% 
-  tidyr::unnest(
-    cols = hashtags, 
-    keep_empty = FALSE) %>% 
-  dplyr::mutate(
-    hashtags = tolower(hashtags)) %>% 
-  ggplot2::ggplot(ggplot2::aes(hashtags, TweetSentimentScore)) +
-  ggplot2::geom_boxplot() +
-  ggplot2::theme(legend.position = "none") +
-  ggplot2::ggtitle("Sentiment Scores Across each #Hashtag") +
-  ggplot2::xlab('#Hashtag') +
-  ggplot2::ylab('Sentiment') +
-  ggplot2::theme_bw() +
-  ggplot2::coord_flip()
-box_hashtag
+v_ht <- saotd::tweet_violin(
+  DataFrameTidyScores = score_puppies_ht, 
+  HT_Topic = "hashtag")
+v_ht
+
+v_topic <- saotd::tweet_violin(
+  DataFrameTidyScores = score_puppies_topic, 
+  HT_Topic = "topic")
+v_topic
