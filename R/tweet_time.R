@@ -32,8 +32,10 @@
 #' }
 #' @export
 
-tweet_time <- function(DataFrameTidyScores, HT_Topic) {
+tweet_time <- function(DataFrameTidyScores, 
+                       HT_Topic) {
   
+  # input checking
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
   }
@@ -41,16 +43,24 @@ tweet_time <- function(DataFrameTidyScores, HT_Topic) {
     stop('HT_Topic requires an input of either hashtag for analysis using hashtags, or topic for analysis looking at topics.')
   }
   
+  # configure defusing operators for packages checking
   hashtag <- dplyr::quo(hashtag)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   DayScore <- dplyr::quo(DayScore)
   Topic <- dplyr::quo(Topic)
   
+  # function main body
   if(HT_Topic == "hashtag") {
+    
     TD_HT_TimeScale <- DataFrameTidyScores %>% 
       dplyr::group_by(hashtag, date) %>% 
-      dplyr::summarise(DayScore = sum(TweetSentimentScore)) %>% 
-      ggplot2::ggplot(ggplot2::aes(x = factor(date), y = DayScore, colour = hashtag)) + 
+      dplyr::summarise(
+        DayScore = sum(TweetSentimentScore)) %>% 
+      ggplot2::ggplot(
+        ggplot2::aes(
+          x = factor(date), 
+          y = DayScore, 
+          colour = hashtag)) + 
       ggplot2::geom_point() +
       ggplot2::geom_path(ggplot2::aes(group=1)) +
       ggplot2::geom_hline(yintercept = 0, color = "black") +
@@ -60,8 +70,11 @@ tweet_time <- function(DataFrameTidyScores, HT_Topic) {
       ggplot2::xlab('Day') +
       ggplot2::ylab('Daily Sentiment Score') +
       ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
     return(TD_HT_TimeScale)
+    
   } else {
+    
     TD_Topic_TimeScale <- DataFrameTidyScores %>% 
       dplyr::group_by(Topic, date) %>% 
       dplyr::summarise(DayScore = sum(TweetSentimentScore)) %>% 
@@ -75,6 +88,7 @@ tweet_time <- function(DataFrameTidyScores, HT_Topic) {
       ggplot2::xlab('Day') +
       ggplot2::ylab('Daily Sentiment Score') +
       ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
     return(TD_Topic_TimeScale)
   }
 }
