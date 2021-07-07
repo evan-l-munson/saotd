@@ -30,6 +30,7 @@ trigram <- function(DataFrame) {
     stop('The input for this function is a data frame.')
   }
   
+  # configure defusing operators for packages checking
   text <- dplyr::quo(text)
   word <- dplyr::quo(word)
   trigram <- dplyr::quo(trigram)
