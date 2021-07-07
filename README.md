@@ -5,7 +5,7 @@
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![Build
-Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://travis-ci.org/evan-l-munson/saotd)
+Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://travis-ci.com/evan-l-munson/saotd)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/evan-l-munson/saotd?branch=master&svg=true)](https://ci.appveyor.com/project/evan-l-munson/saotd)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
