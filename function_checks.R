@@ -49,10 +49,10 @@ saotd::bigram_network(BiGramDataFrame = bi_tweet, number = 5)
 
 # word corr ---------------------------------------------------------------
 
-  tidy_puppy %>%
-    dplyr::group_by(Token) %>%
-    dplyr::filter(dplyr::n() >= 10) %>%
-    widyr::pairwise_cor(Token, key, sort = TRUE)
+  # tidy_puppy %>%
+  #   dplyr::group_by(Token) %>%
+  #   dplyr::filter(dplyr::n() >= 10) %>%
+  #   widyr::pairwise_cor(Token, key, sort = TRUE)
   
   
   
@@ -64,6 +64,30 @@ corr_puppies <- saotd::word_corr(DataFrameTidy = tidy_puppy,
 # Word Corr Network -------------------------------------------------------
 
 saotd::word_corr_network(WordCorr = corr_puppies)
+
+# Correlation = 0.15
+# layout = "fr"
+# edge_color = "royalblue"
+# node_color = "black"
+# node_size = 2
+# set_seed = 1234
+# 
+# corr_puppies %>%
+#   dplyr::filter(correlation > Correlation) %>%
+#   igraph::graph_from_data_frame() %>%
+#   ggraph::ggraph(layout = layout) +
+#   ggraph::geom_edge_link(
+#     ggplot2::aes(
+#       edge_alpha = Correlation, 
+#       edge_width = Correlation),
+#     edge_colour = edge_color,
+#     show.legend = TRUE) +
+#   ggraph::geom_node_point(colour = node_color, 
+#                           size = node_size) +
+#   ggraph::geom_node_text(ggplot2::aes(label = name), 
+#                          repel = TRUE) +
+#   ggplot2::ggtitle("Word Correlation Network") +
+#   ggplot2::theme_void()
 
 # number topics -----------------------------------------------------------
 
