@@ -137,7 +137,7 @@ number_topics <- function(DataFrame,
     ggplot2::geom_point(aes_string(shape = "variable"), 
                         size = 3) +
     ggplot2::guides(
-      size = FALSE, 
+      size = "none", 
       shape = guide_legend(title = "metrics:")) +
     ggplot2::scale_x_continuous(breaks = values$topics) +
     ggplot2::labs(x = "number of topics", 
