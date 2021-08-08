@@ -278,7 +278,14 @@ time_topic <- saotd::tweet_time(
   HT_Topic = "topic")
 time_topic
 
-ht_sel <- c("dog", "puppy", "cat")
+# test null in a filter
+
+xxx <- score_puppies_topic %>% 
+  dplyr::filter(Topic == Topic)
+
+
+
+# ht_sel <- c("dog", "puppy", "cat")
 time_ht <- saotd::tweet_time(
   DataFrameTidyScores = score_puppies_ht, 
   HT_Topic = "hashtag")

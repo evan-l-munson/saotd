@@ -53,18 +53,23 @@ tweet_time <- function(DataFrameTidyScores,
   if(HT_Topic == "hashtag") {
     
     TD_HT_TimeScale <- DataFrameTidyScores %>% 
-      dplyr::group_by(hashtag, date) %>% 
+      tidyr::unnest(
+        cols = hashtags, 
+        keep_empty = FALSE) %>% 
+      dplyr::mutate(
+        hashtags = tolower(hashtags)) %>% 
+      dplyr::group_by(hashtags, date) %>% 
       dplyr::summarise(
         DayScore = sum(TweetSentimentScore)) %>% 
       ggplot2::ggplot(
         ggplot2::aes(
           x = factor(date), 
           y = DayScore, 
-          colour = hashtag)) + 
+          colour = hashtags)) + 
       ggplot2::geom_point() +
       ggplot2::geom_path(ggplot2::aes(group=1)) +
       ggplot2::geom_hline(yintercept = 0, color = "black") +
-      ggplot2::facet_wrap(~hashtag, ncol = 2, scales = "free_y") +
+      ggplot2::facet_wrap(~hashtags, ncol = 2, scales = "free_y") +
       ggplot2::theme(legend.position = "none") +
       ggplot2::ggtitle("Sentiment Scores Across all #Hashtags") +
       ggplot2::xlab('Day') +
@@ -80,7 +85,11 @@ tweet_time <- function(DataFrameTidyScores,
       dplyr::group_by(Topic, date) %>% 
       dplyr::summarise(
         DayScore = sum(TweetSentimentScore)) %>% 
-      ggplot2::ggplot(ggplot2::aes(x = factor(date), y = DayScore, colour = Topic)) + 
+      ggplot2::ggplot(
+        ggplot2::aes(
+          x = factor(date), 
+          y = DayScore, 
+          colour = Topic)) + 
       ggplot2::geom_point() +
       ggplot2::geom_path(ggplot2::aes(group=1)) +
       ggplot2::geom_hline(yintercept = 0, color = "black") +
@@ -94,5 +103,7 @@ tweet_time <- function(DataFrameTidyScores,
         axis.text.x = element_text(angle = 45, hjust = 1))
     
     return(TD_Topic_TimeScale)
+    
   }
+  
 }
