@@ -9,8 +9,11 @@ test_HT_df <- dplyr::tibble(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_HT_Tidy_df <- saotd::tweet_tidy(DataFrame = test_HT_df)
-test_HT_PosNeg <- saotd::posneg_words(DataFrameTidy = test_HT_Tidy_df, num_words = 1)
+test_HT_Tidy_df <- saotd::tweet_tidy(
+  DataFrame = test_HT_df)
+test_HT_PosNeg <- saotd::posneg_words(
+  DataFrameTidy = test_HT_Tidy_df, 
+  num_words = 1)
 test_HT <- test_HT_PosNeg$data[2]
 
 check_HT <- dplyr::tibble(
@@ -23,11 +26,14 @@ test_Topic_df <- dplyr::tibble(
   created = lubridate::as_datetime('2018-02-09 17:56:30'),
   key = "coolguy123")
 
-test_Topic_Tidy_df <- saotd::tweet_tidy(DataFrame = test_Topic_df)
-test_Topic_PosNeg <- saotd::posneg_words(DataFrameTidy = test_Topic_Tidy_df, num_words = 1)
+test_Topic_Tidy_df <- saotd::tweet_tidy(
+  DataFrame = test_Topic_df)
+test_Topic_PosNeg <- saotd::posneg_words(
+  DataFrameTidy = test_Topic_Tidy_df, 
+  num_words = 1)
 test_Topic <- test_Topic_PosNeg$data[2]
 
-check_Topic <- dplyr::data_frame(
+check_Topic <- dplyr::tibble(
   sentiment = as.character(c("negative", "positive")))
 
 # Tests
