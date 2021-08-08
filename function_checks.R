@@ -300,40 +300,48 @@ time_ht
 
 
 
-hashtag_selection <- c("dog", "puppy", "cat")
+# hashtag_selection <- c("dog", "puppy", "cat")
+# 
+# xxx <- ddd %>% 
+#   tidyr::unnest(
+#     cols = hashtags, 
+#     keep_empty = FALSE) %>% 
+#   dplyr::group_by(hashtags, date) %>% 
+#   dplyr::summarise(
+#     DayScore = sum(TweetSentimentScore)) %>% 
+#   dplyr::filter(
+#     hashtags %in% hashtag_selection) %>% 
+#   ggplot2::ggplot(
+#     ggplot2::aes(
+#       x = factor(date), 
+#       y = DayScore, 
+#       colour = hashtags)) + 
+#   ggplot2::geom_point() +
+#   ggplot2::geom_path(ggplot2::aes(group=1)) +
+#   ggplot2::geom_hline(yintercept = 0, color = "black") +
+#   ggplot2::facet_wrap(~hashtags, ncol = 2, scales = "free_y") +
+#   ggplot2::theme_bw() +
+#   ggplot2::theme(legend.position = "none") +
+#   ggplot2::ggtitle("Sentiment Scores Across all #Hashtags") +
+#   ggplot2::xlab('Day') +
+#   ggplot2::ylab('Daily Sentiment Score') +
+#   ggplot2::theme(
+#     axis.text.x = element_text(angle = 45, hjust = 1))
+# xxx
+# 
+# aaa <- score_puppies_ht
+# bbb <- score_puppies_ht %>% 
+#   dplyr::mutate(date = date + 1)
+# ccc <- score_puppies_ht %>% 
+#   dplyr::mutate(date = date + 5)
+# ddd <- rbind(aaa, bbb, ccc)
 
-xxx <- ddd %>% 
-  tidyr::unnest(
-    cols = hashtags, 
-    keep_empty = FALSE) %>% 
-  dplyr::group_by(hashtags, date) %>% 
-  dplyr::summarise(
-    DayScore = sum(TweetSentimentScore)) %>% 
-  dplyr::filter(
-    hashtags %in% hashtag_selection) %>% 
-  ggplot2::ggplot(
-    ggplot2::aes(
-      x = factor(date), 
-      y = DayScore, 
-      colour = hashtags)) + 
-  ggplot2::geom_point() +
-  ggplot2::geom_path(ggplot2::aes(group=1)) +
-  ggplot2::geom_hline(yintercept = 0, color = "black") +
-  ggplot2::facet_wrap(~hashtags, ncol = 2, scales = "free_y") +
-  ggplot2::theme_bw() +
-  ggplot2::theme(legend.position = "none") +
-  ggplot2::ggtitle("Sentiment Scores Across all #Hashtags") +
-  ggplot2::xlab('Day') +
-  ggplot2::ylab('Daily Sentiment Score') +
-  ggplot2::theme(
-    axis.text.x = element_text(angle = 45, hjust = 1))
-xxx
+
+# tweet_worldmap ----------------------------------------------------------
 
 
 
-aaa <- score_puppies_ht
-bbb <- score_puppies_ht %>% 
-  dplyr::mutate(date = date + 1)
-ccc <- score_puppies_ht %>% 
-  dplyr::mutate(date = date + 5)
-ddd <- rbind(aaa, bbb, ccc)
+
+
+
+
