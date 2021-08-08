@@ -8,7 +8,7 @@ test_HT_df <- dplyr::tibble(
            I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
            "cats are the best most amazing friends anyone could ask for "),
   hashtags = c("dog", "cat"),
-  created_at= lubridate::as_datetime(c('2018-02-09 17:56:30', '2018-02-10 18:46:10')),
+  created_at = lubridate::as_datetime(c('2018-02-09 17:56:30', '2018-02-10 18:46:10')),
   key = c("coolguy123", "crazycatperson1234"))
 
 test_HT_Tidy <- saotd::tweet_tidy(
