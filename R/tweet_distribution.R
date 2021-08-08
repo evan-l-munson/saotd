@@ -59,9 +59,9 @@ tweet_distribution <- function(DataFrameTidyScores,
         cols = hashtags, 
         keep_empty = FALSE) %>% 
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-      ggplot2::geom_histogram(
+      ggplot2::geom_bar(
         stat = "count", 
-        binwidth = bin_width, 
+        # binwidth = bin_width, 
         colour = color, 
         fill = fill) +
       ggplot2::facet_wrap(~hashtags, ncol = 2) +
@@ -77,9 +77,9 @@ tweet_distribution <- function(DataFrameTidyScores,
     
     TD_Topic_Distribution <- DataFrameTidyScores %>% 
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
-      ggplot2::geom_histogram(
+      ggplot2::geom_bar(
         stat = "count",
-        binwidth = bin_width,
+        # binwidth = bin_width,
         colour = color,
         fill = fill) +
       ggplot2::facet_wrap(~Topic, ncol = 2) +

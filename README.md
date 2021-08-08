@@ -145,8 +145,9 @@ Calculation, and Visualizations.
         hashtag or topic Twitter data.
     -   `tweet_time` displays how the Twitter data sentiment scores
         through time.  
-    -   `tweet_worldmap` displays the location of a Tweet across the
-        globe by hashtag or topic.
+    -   `tweet_worldmap` function is not longer exported, as the Twitter data 
+        does not contain lattitude and longitude values.displays the location of 
+        a Tweet across the globe by hashtag or topic.
 
 ## Example
 

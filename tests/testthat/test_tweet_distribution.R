@@ -40,7 +40,6 @@ t <- saotd::tweet_distribution(
   DataFrameTidyScores = test_Topic_Tidy_Scores, 
   HT_Topic = "topic")
 
-
 # Tests
 testthat::test_that("The tweet_distribution function properly ingests data frame", {
   

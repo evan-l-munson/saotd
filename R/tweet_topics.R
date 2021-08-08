@@ -12,9 +12,8 @@
 #' @param set_seed Seed for reproducible results.
 #' @param num_terms The desired number of terms to be returned for each topic.
 #' 
-#' @importFrom dplyr mutate group_by anti_join inner_join count select transmute quo
+#' @importFrom dplyr mutate group_by anti_join inner_join count select transmute quo rename
 #' @importFrom stringr str_replace_all
-#' @importFrom plyr rename
 #' @importFrom tidytext cast_dtm 
 #' @importFrom topicmodels LDA topics terms
 #' 
@@ -124,7 +123,7 @@ tweet_topics <- function(DataFrame,
   # Clean up and rename columns to match previous data frames
   tweettopics <- tweettopics.df %>% 
     dplyr::select(c("ArticleNo", "Topic")) %>% 
-    plyr::rename(c("ArticleNo" = "key"))
+    dplyr::rename(c("key" ="ArticleNo"))
   
   # Join original Twitter data frame with Tweet topics
   tweet_topics <- dplyr::inner_join(
