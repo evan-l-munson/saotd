@@ -31,7 +31,7 @@
 #'                       HT_Topic = "topic") 
 #' topic_map                    
 #' }
-#' @noRd
+#' @keywords internal
 
 tweet_worldmap <- function(DataFrame, HT_Topic) {
   

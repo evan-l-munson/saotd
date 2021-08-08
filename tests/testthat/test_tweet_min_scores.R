@@ -44,7 +44,7 @@ test_HT_selection <- test_HT_selection$TweetSentimentScore[1]
 check_HT_selection <- -2
 
 # Data for topic without "HT_Topic_Selection"
-test_Topic_df <- dplyr::data_frame(
+test_Topic_df <- dplyr::tibble(
   text = c("I really love and hate my dog, he is the best most amazing friend 
            anyone could ever ask for!  
            I really hate my love to hate on my stupid dog, he is the worst 
