@@ -51,6 +51,10 @@ word_corr <- function(DataFrameTidy,
   key <- dplyr::quo(key)
   
   # function main body
+  # suppress Warning message:
+  #   `tbl_df()` was deprecated in dplyr 1.0.0.
+  #   Please use `tibble::as_tibble()` instead.
+  #   Currently `widyr` v0.1.3 has not accounted for the `dplyr` v1.0.0 update.
   TD_Word_Correlation <- DataFrameTidy %>%
     dplyr::group_by(Token) %>%
     dplyr::filter(dplyr::n() >= number) %>%

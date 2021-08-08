@@ -1,4 +1,3 @@
-
 #' @title Twitter Positive and Negative Words
 #'
 #' @description Determines and displays the most positive and negative words 
@@ -57,17 +56,12 @@ posneg_words <- function(DataFrameTidy,
   Token <- dplyr::quo(Token)
   Sentiment <- dplyr::quo(Sentiment)
   n <- dplyr::quo(n)
-  
-  # Bing <- tidytext::get_sentiments(lexicon = "bing") %>% 
-  #  dplyr::rename(c("Token" = "word", 
-  #                  "Sentiment" = "sentiment"))
-  
+
   # function main body
   TD_PosNeg_Words <- DataFrameTidy %>%
     dplyr::inner_join(
       y = tidytext::get_sentiments(lexicon = "bing"), 
       by = c("Token" = "word")) %>% 
-    # dplyr::inner_join(Bing, by = "Token") %>% 
     dplyr::filter(!(Token %in% filterword)) %>% 
     dplyr::count(Token, sentiment) %>%
     dplyr::ungroup() %>% 
