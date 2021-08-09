@@ -4,7 +4,7 @@
 ## saotd 0.3.0
 
 * Updated `saotd` to work properly with the `dplyr` 1.0.0 update.
-* Removed the `tweet_worldmap`, lat/long no longer provided via Twitter API.
+* Removed the `tweet_worldmap` function, lat/long no longer provided via Twitter API.
 
 ## saotd 0.2.0
 

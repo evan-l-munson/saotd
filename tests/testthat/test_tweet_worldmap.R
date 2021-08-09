@@ -3,7 +3,7 @@ testthat::context("Plot Tweets across the World")
 
 # Test Data
 # Data for hashtag
-test_HT_df <- dplyr::data_frame(
+test_HT_df <- dplyr::tibble(
   text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!
            I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
            "cats are the best most amazing friends anyone could ask for "),
@@ -16,7 +16,7 @@ test_HT_df <- dplyr::data_frame(
 p <- saotd::tweet_worldmap(DataFrame = test_HT_df, HT_Topic = "hashtag")
 
 # Data for topic 
-test_Topic_df <- dplyr::data_frame(
+test_Topic_df <- dplyr::tibble(
   text = c("I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!  
            I really hate my love to hate on my stupid dog, he is the worst friend anyone could ever ask for!",
            "cats are the best most amazing friends anyone could ask for except when they are being miserable horrible terrible demon spawn"),

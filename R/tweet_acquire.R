@@ -17,7 +17,7 @@
 #'   \code{Callback URL} of \code{http://127.0.0.1:1410}.
 #' @param access_token Twitter Application management access token 
 #'   (apps.twitter.com).
-#' @param access_secret Twitter Application management access secret token 
+#' @param access_token_secret Twitter Application management access secret token 
 #'   (apps.twitter.com).
 #' @param query A single query or a list of queries the user has specified.  
 #'   Character string, not to exceed 500 characters.  To search for tweets 
