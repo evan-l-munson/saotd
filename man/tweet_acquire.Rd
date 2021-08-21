@@ -28,6 +28,9 @@ secret key.  Application must have \code{Read and write} access level and
 \item{access_token}{Twitter Application management access token 
 (apps.twitter.com).}
 
+\item{access_token_secret}{Twitter Application management access secret token 
+(apps.twitter.com).}
+
 \item{query}{A single query or a list of queries the user has specified.
 Character string, not to exceed 500 characters.  To search for tweets 
 containing at least one of multiple possible terms, separate each search 
@@ -46,9 +49,6 @@ Twitter API will be returned.}
 
 \item{distinct}{Logical.  If distinct = TRUE, the function removes multiple 
 Tweets that originate from the same Twitter id at the exact same time.}
-
-\item{access_secret}{Twitter Application management access secret token 
-(apps.twitter.com).}
 }
 \value{
 A Data Frame with tweets and meta data.

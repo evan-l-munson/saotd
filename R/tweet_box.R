@@ -50,10 +50,10 @@ tweet_box <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  hashtag <- dplyr::quo(hashtag)
+  hashtags <- dplyr::quo(hashtags)
   Topic <- dplyr::quo(Topic)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
-  
+
   # function main body
   if(HT_Topic == "hashtag") {
     

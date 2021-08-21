@@ -48,9 +48,9 @@ tweet_min_scores <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  # hashtag <- dplyr::quo(hashtag)
-  # Topic <- dplyr::quo(Topic)
-  # TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
+  hashtags <- dplyr::quo(hashtags)
+  Topic <- dplyr::quo(Topic)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   
   # function main body
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {

@@ -43,7 +43,7 @@ merge_terms <- function(DataFrame,
   # function main body
   merging <-  DataFrame %>% 
     dplyr::mutate(
-      text = gsub(x = text,
+      text = gsub(x = term,
                   pattern = term, 
                   replacement = term_replacement, 
                   ignore.case = ignore_case))

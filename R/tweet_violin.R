@@ -46,7 +46,7 @@ tweet_violin <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  hashtag <- dplyr::quo(hashtag)
+  hashtags <- dplyr::quo(hashtags)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   Topic <- dplyr::quo(Topic)
   

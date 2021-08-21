@@ -44,7 +44,7 @@ tweet_time <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  hashtag <- dplyr::quo(hashtag)
+  hashtags <- dplyr::quo(hashtags)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   DayScore <- dplyr::quo(DayScore)
   Topic <- dplyr::quo(Topic)

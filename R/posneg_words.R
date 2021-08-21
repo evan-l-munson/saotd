@@ -54,7 +54,7 @@ posneg_words <- function(DataFrameTidy,
   
   # configure defusing operators for packages checking
   Token <- dplyr::quo(Token)
-  Sentiment <- dplyr::quo(Sentiment)
+  sentiment <- dplyr::quo(sentiment)
   n <- dplyr::quo(n)
 
   # function main body

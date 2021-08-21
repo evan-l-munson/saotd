@@ -50,6 +50,7 @@ tweet_distribution <- function(DataFrameTidyScores,
   # configure defusing operators for packages checking
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   bin_width <- dplyr::quo(bin_width)
+  hashtags <- dplyr::quo(hashtags)
   
   # function main body
   if(HT_Topic == "hashtag") {

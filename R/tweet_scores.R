@@ -42,10 +42,10 @@ tweet_scores <- function(DataFrameTidy,
   # configure defusing operators for packages checking
   text <- dplyr::quo(text)
   method <- dplyr::quo(method)
-  hashtag <- dplyr::quo(hashtag)
-  created <- dplyr::quo(created)
+  hashtags <- dplyr::quo(hashtags)
+  created_at <- dplyr::quo(created_at)
   key <- dplyr::quo(key)
-  Sentiment <- dplyr::quo(Sentiment)
+  sentiment <- dplyr::quo(sentiment)
   n <- dplyr::quo(n)
   positive <- dplyr::quo(positive)
   negative <- dplyr::quo(negative)

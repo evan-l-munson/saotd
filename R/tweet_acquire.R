@@ -93,6 +93,16 @@ tweet_acquire <- function(twitter_app,
                           reduced_tweets = TRUE,
                           distinct = TRUE) {
   
+  # configure defusing operators for packages checking
+  screen_name <- dplyr::quo(screen_name)
+  created_at <- dplyr::quo(created_at)
+  key <- dplyr::quo(key)
+  user_id <- dplyr::quo(user_id)
+  status_id <- dplyr::quo(status_id)
+  text <- dplyr::quo(text)
+  hashtags <- dplyr::quo(hashtags)
+  location <- dplyr::quo(locations)
+
   ## authenticate via web browser
   user_token <- rtweet::create_token(
     app = twitter_app,
