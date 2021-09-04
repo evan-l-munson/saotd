@@ -1,30 +1,34 @@
 # DO NOT CHANGE the "init" and "install" sections below
 
+# Download script file from GitHub
 init:
   ps: |
-        Get-Date
         $ErrorActionPreference = "Stop"
+        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
+        Import-Module '..\appveyor-tool.ps1'
+
 install:
-  ps: |
-        Import-Module '.\scripts\appveyor-tool.ps1'
-        Bootstrap
+  ps: Bootstrap
+
+cache:
+  - C:\RLibrary
+
+environment:
+  NOT_CRAN: true
+  # env vars that may need to be set, at least temporarily, from time to time
+  # see https://github.com/krlmlr/r-appveyor#readme for details
+  # USE_RTOOLS: true
+  # R_REMOTES_STANDALONE: true
 
 # Adapt as necessary starting from here
 
-environment:
-  R_VERSION: stable
-  
 build_script:
-
   - travis-tool.sh install_deps
-  - travis-tool.sh r_binary_install curl
 
 test_script:
-
   - travis-tool.sh run_tests
 
 on_failure:
-
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
 
