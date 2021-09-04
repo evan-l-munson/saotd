@@ -27,7 +27,7 @@
 #' @return A ggraph plot.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' TD_Bigram <- bigram(DataFrame = data)

@@ -15,7 +15,7 @@
 #' @return A Tidy tibble.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' 
 #' data <- raw_tweets

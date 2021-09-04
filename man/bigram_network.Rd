@@ -43,7 +43,7 @@ Displays the Bi-Gram Network.  Bi-Gram networks builds on
   a tabular display of Bi-Gram words.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Bigram <- bigram(DataFrame = data)

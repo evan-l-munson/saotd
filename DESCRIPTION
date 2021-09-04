@@ -51,7 +51,7 @@ Suggests: testthat,
     rmarkdown,
     httr,
     base64enc
-Depends: R (>= 3.3.0)
+Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
     MPFR (>= 4.0.0), 

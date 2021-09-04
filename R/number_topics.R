@@ -25,7 +25,7 @@
 #' @return A Tidy DataFrame.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' LDA_Topic_Plot <- number_topics(DataFrame = data,

@@ -15,7 +15,7 @@
 #' @return A tribble.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' TD_Trigram <- trigram(DataFrame = data)

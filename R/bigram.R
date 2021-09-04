@@ -15,7 +15,7 @@
 #' @return A tibble.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' TD_Bigram <- bigram(DataFrame = data)

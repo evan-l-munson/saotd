@@ -20,7 +20,7 @@
 #' @importFrom dplyr mutate
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' data <- merge_terms(DataFrame = data, 

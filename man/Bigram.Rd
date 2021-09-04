@@ -18,7 +18,7 @@ Determines and displays the text Bi-Grams within the Twitter
   combination of two consecutive words.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Bigram <- bigram(DataFrame = data)

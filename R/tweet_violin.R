@@ -14,7 +14,7 @@
 #' @return A ggplot violin plot.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)

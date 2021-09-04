@@ -14,7 +14,7 @@
 #' @return A tibble.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' TD_Unigram <- unigram(DataFrame = data)
