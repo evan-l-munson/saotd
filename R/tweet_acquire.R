@@ -101,7 +101,7 @@ tweet_acquire <- function(twitter_app,
   status_id <- dplyr::quo(status_id)
   text <- dplyr::quo(text)
   hashtags <- dplyr::quo(hashtags)
-  location <- dplyr::quo(locations)
+  location <- dplyr::quo(location)
 
   ## authenticate via web browser
   user_token <- rtweet::create_token(

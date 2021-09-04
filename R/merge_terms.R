@@ -40,6 +40,9 @@ merge_terms <- function(DataFrame,
     stop('The input for this function is a data frame.')
   }
   
+  # configure defusing operators for packages checking
+  text <- dplyr::quo(text)
+  
   # function main body
   merging <-  DataFrame %>% 
     dplyr::mutate(
