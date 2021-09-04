@@ -4,30 +4,36 @@
 \alias{tweet_topics}
 \title{Tweet Topics}
 \usage{
-tweet_topics(DataFrame, clusters, method = "Gibbs", set_seed = 1234,
-  num_terms = 10)
+tweet_topics(
+  DataFrame,
+  clusters,
+  method = "Gibbs",
+  num_terms = 10,
+  set_seed = 1234
+)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 
 \item{clusters}{The number of latent clusters.}
 
 \item{method}{method = "Gibbs"}
 
-\item{set_seed}{Seed for reproducable results.}
-
 \item{num_terms}{The desired number of terms to be returned for each topic.}
+
+\item{set_seed}{Seed for reproducible results.}
 }
 \value{
 Returns LDA topics.
 }
 \description{
-Determines the Latent topics within a dataframe by using Latent Dirichlet Allocation (LDA) model parameters.  
-Uses the `ldatuning` package and outputs an ldatuning plot.  
-Prepares Tweet text, creates DTM, conducts LDA, display data terms associated with each topic.
+Determines the Latent topics within a data frame by using Latent 
+  Dirichlet Allocation (LDA) model parameters.  Uses the `ldatuning` package 
+  and outputs an ldatuning plot.  Prepares Tweet text, creates DTM, conducts 
+  LDA, display data terms associated with each topic.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 LDA_data <- tweet_topics(DataFrame = data,

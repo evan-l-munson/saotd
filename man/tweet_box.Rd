@@ -7,18 +7,21 @@
 tweet_box(DataFrameTidyScores, HT_Topic)
 }
 \arguments{
-\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
+\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd 
+and scored.}
 
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
+data select:  "topic".}
 }
 \value{
 A ggplot box plot.
 }
 \description{
-Displays the distribution scores of either hashtag or topic Twitter data.
+Displays the distribution scores of either hashtag or topic 
+ Twitter data.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

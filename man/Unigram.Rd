@@ -7,16 +7,18 @@
 unigram(DataFrame)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 }
 \value{
-A tribble.
+A tibble.
 }
 \description{
-Determines and displays the text Uni-Grams within the Twitter data in sequence from the most used to the least used.  A Uni-Gram is a single word.
+Determines and displays the text Uni-Grams within the Twitter 
+  data in sequence from the most used to the least used.  A Uni-Gram is a 
+  single word.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Unigram <- unigram(DataFrame = data)

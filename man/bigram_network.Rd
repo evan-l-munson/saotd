@@ -4,16 +4,26 @@
 \alias{bigram_network}
 \title{Twitter Bi-Gram Network}
 \usage{
-bigram_network(BiGramDataFrame, number = 300, layout = "fr",
-  edge_color = "royalblue", node_color = "black", node_size = 3,
-  set_seed = 1234)
+bigram_network(
+  BiGramDataFrame,
+  number,
+  layout = "fr",
+  edge_color = "royalblue",
+  node_color = "black",
+  node_size = 3,
+  set_seed = 1234
+)
 }
 \arguments{
-\item{BiGramDataFrame}{DataFrame of Bi-Grams.}
+\item{BiGramDataFrame}{Data Frame of Bi-Grams.}
 
-\item{number}{The minimum desired number of Bi-Gram occurances to be displayed (number = 300, would display all Bi-Grams that have at least 300 instances.)}
+\item{number}{The minimum desired number of Bi-Gram occurrences to be 
+displayed (number = 300, would display all Bi-Grams that have at least 
+300 instances).}
 
-\item{layout}{Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"}
+\item{layout}{Desired layout from the `ggraph` package.
+Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", 
+"mds", "randomly", "fr", "kk", "drl", "lgl"}
 
 \item{edge_color}{User desired edge color.}
 
@@ -21,16 +31,19 @@ bigram_network(BiGramDataFrame, number = 300, layout = "fr",
 
 \item{node_size}{User desired node size.}
 
-\item{set_seed}{Seed for reproducable results.}
+\item{set_seed}{Seed for reproducible results.}
 }
 \value{
 A ggraph plot.
 }
 \description{
-Displays the Bi-Gram Network.  Bi-Gram networks builds on computed Bi-Grams.  Bi-Gram networks serve as a visualization tool that displays the relationships between the words simultaneously as opposed to a tabular display of Bi-Gram words.
+Displays the Bi-Gram Network.  Bi-Gram networks builds on 
+  computed Bi-Grams.  Bi-Gram networks serve as a visualization tool that 
+  displays the relationships between the words simultaneously as opposed to 
+  a tabular display of Bi-Gram words.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Bigram <- bigram(DataFrame = data)

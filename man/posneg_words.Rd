@@ -11,16 +11,17 @@ posneg_words(DataFrameTidy, num_words, filterword = NULL)
 
 \item{num_words}{Desired number of words to be returned.}
 
-\item{filterword}{Word or words to be removed}
+\item{filterword}{Word or words to be removed.}
 }
 \value{
 A ggplot
 }
 \description{
-Determines and displays the most positive and negative words within the twitter data.
+Determines and displays the most positive and negative words 
+  within the twitter data.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

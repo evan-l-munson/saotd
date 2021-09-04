@@ -1,5 +1,4 @@
 ---
-title: "Sentiment Analysis of Twitter Data (saotd)"
 output: github_document
 keep_md: yes
 ---
@@ -13,6 +12,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README_New-"
 )
 ```
+
+# Sentiment Analysis of Twitter Data <img src="man/hex_saotd.png" align="right" width="150" height="150" />
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![Build Status](https://travis-ci.org/evan-l-munson/saotd.svg?branch=master)](https://travis-ci.org/evan-l-munson/saotd)

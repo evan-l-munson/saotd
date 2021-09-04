@@ -7,19 +7,24 @@
 tweet_tidy(DataFrame)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 }
 \value{
-A Tidy DataFrame.
+A Tidy tibble.
 }
 \description{
-Function to Tidy Twitter Data and remove all emoticons, punctuation, weblinks while maintaiing actual Tweet.
+Function to Tidy Twitter Data.  This function will remove a 
+  significant amount of the original twitter metadata, as it is not needed 
+  to determine the sentiment fo the tweets. This function will remove all 
+  emoticons, punctuation, weblinks while maintaining actual Tweet text.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
+
 data <- raw_tweets
 tidy_data <- tweet_tidy(DataFrame = data)
 tidy_data
+
 }
 }

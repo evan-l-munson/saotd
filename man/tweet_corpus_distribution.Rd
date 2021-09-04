@@ -4,8 +4,12 @@
 \alias{tweet_corpus_distribution}
 \title{Twitter Corpus Distribution}
 \usage{
-tweet_corpus_distribution(DataFrameTidyScores, binwidth = 1,
-  color = "black", fill = "white")
+tweet_corpus_distribution(
+  DataFrameTidyScores,
+  binwidth = 1,
+  color = "black",
+  fill = "grey"
+)
 }
 \arguments{
 \item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
@@ -23,7 +27,7 @@ A ggplot.
 Determines the scores distribution for the entire Twitter data corpus.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

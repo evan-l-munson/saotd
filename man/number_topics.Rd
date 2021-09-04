@@ -4,13 +4,20 @@
 \alias{number_topics}
 \title{Number Topics}
 \usage{
-number_topics(DataFrame, num_cores, min_clusters = 2,
-  max_clusters = 12, skip = 2, set_seed = 1234)
+number_topics(
+  DataFrame,
+  num_cores,
+  min_clusters = 2,
+  max_clusters = 12,
+  skip = 2,
+  set_seed = 1234
+)
 }
 \arguments{
-\item{DataFrame}{DataFrame of Twitter Data.}
+\item{DataFrame}{Data Frame of Twitter Data.}
 
-\item{num_cores}{The number of CPU cores to processes models simultaneously (2L for dual core processor).}
+\item{num_cores}{The number of CPU cores to processes models simultaneously 
+(2L for dual core processor).}
 
 \item{min_clusters}{Lower range for the number of clusters.}
 
@@ -18,17 +25,19 @@ number_topics(DataFrame, num_cores, min_clusters = 2,
 
 \item{skip}{Integer; The number of clusters to skip between entries.}
 
-\item{set_seed}{Seed for reproducable results.}
+\item{set_seed}{Seed for reproducible results.}
 }
 \value{
 A Tidy DataFrame.
 }
 \description{
-Determines the optimal number of Latent topics within a dataframe by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-Uses the `ldatuning` package and outputs an ldatuning plot.  __This process can be time consuming depending on the size of the input dataframe.__
+Determines the optimal number of Latent topics within a 
+  data frame by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
+  Uses the `ldatuning` package and outputs an ldatuning plot.  __This process 
+  can be time consuming depending on the size of the input data frame.__
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 LDA_Topic_Plot <- number_topics(DataFrame = data,

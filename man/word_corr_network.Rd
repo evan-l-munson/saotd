@@ -4,16 +4,24 @@
 \alias{word_corr_network}
 \title{Twitter Word Correlations Plot}
 \usage{
-word_corr_network(WordCorr, Correlation = 0.15, layout = "fr",
-  edge_color = "royalblue", node_color = "black", node_size = 2,
-  set_seed = 1234)
+word_corr_network(
+  WordCorr,
+  Correlation = 0.15,
+  layout = "fr",
+  edge_color = "royalblue",
+  node_color = "black",
+  node_size = 2,
+  set_seed = 1234
+)
 }
 \arguments{
-\item{WordCorr}{DataFrame of Word Correlations.}
+\item{WordCorr}{Data Frame of Word Correlations.}
 
 \item{Correlation}{Minimum level of correlation to be displayed.}
 
-\item{layout}{Desired layout from the `ggraph` package.  Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", "mds", "randomly", "fr", "kk", "drl", "lgl"}
+\item{layout}{Desired layout from the `ggraph` package.
+Acceptable layouts:  "star", "circle", "gem", "dh", "graphopt", "grid", 
+"mds", "randomly", "fr", "kk", "drl", "lgl"}
 
 \item{edge_color}{User desired edge color.}
 
@@ -21,16 +29,18 @@ word_corr_network(WordCorr, Correlation = 0.15, layout = "fr",
 
 \item{node_size}{User desired node size.}
 
-\item{set_seed}{Seed for reproducable results.}
+\item{set_seed}{Seed for reproducible results.}
 }
 \value{
 An igraph plot
 }
 \description{
-The word correlation network displays the mutual relationship between words.  The correlation network shows higher correlations with a thicker and darker edge color.
+The word correlation network displays the mutual relationship 
+  between words.  The correlation network shows higher correlations with a 
+  thicker and darker edge color.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

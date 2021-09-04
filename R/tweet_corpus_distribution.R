@@ -14,7 +14,7 @@
 #' @return A ggplot.
 #' 
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
@@ -28,16 +28,22 @@
 #' }
 #' @export
 
-tweet_corpus_distribution <- function(DataFrameTidyScores, binwidth = 1, color = "black", fill = "white") {
+tweet_corpus_distribution <- function(DataFrameTidyScores, 
+                                      binwidth = 1,
+                                      color = "black",
+                                      fill = "grey") {
   
+  # input checks
   if(!is.data.frame(DataFrameTidyScores)) {
     stop('The input for this function is a data frame.')
   }
   
+  # configure defusing operators for packages checking
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   n <- dplyr::quo(n)
   
-  TD_Corpus_Distribution <- DataFrameTidyScores %>% 
+  # function main body
+    TD_Corpus_Distribution <- DataFrameTidyScores %>% 
     dplyr::group_by(TweetSentimentScore) %>% 
     dplyr::count() %>% 
     ggplot2::ggplot(ggplot2::aes(x = TweetSentimentScore, y = n)) +
@@ -47,5 +53,7 @@ tweet_corpus_distribution <- function(DataFrameTidyScores, binwidth = 1, color =
     ggplot2::xlab('Sentiment') +
     ggplot2::ylab('Count') +
     ggplot2::theme_bw()
+    
   return(TD_Corpus_Distribution)
+    
 }
