@@ -20,7 +20,7 @@ Function to Calculate Sentiment Scores that will account for
   sentiment by hashtag or topic.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

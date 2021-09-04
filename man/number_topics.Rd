@@ -37,7 +37,7 @@ Determines the optimal number of Latent topics within a
   can be time consuming depending on the size of the input data frame.__
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 LDA_Topic_Plot <- number_topics(DataFrame = data,

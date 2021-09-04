@@ -29,7 +29,7 @@ Function to merge terms within a data frame and prevent
   will allow all be converted into a single term.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 data <- merge_terms(DataFrame = data, 

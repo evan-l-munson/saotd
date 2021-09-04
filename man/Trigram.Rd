@@ -18,7 +18,7 @@ Determines and displays the text Tri-Grams within the Twitter
   combination of three consecutive words.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Trigram <- trigram(DataFrame = data)

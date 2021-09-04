@@ -33,7 +33,7 @@ Determines the Latent topics within a data frame by using Latent
   LDA, display data terms associated with each topic.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 LDA_data <- tweet_topics(DataFrame = data,

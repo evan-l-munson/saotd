@@ -18,7 +18,7 @@ Determines and displays the text Uni-Grams within the Twitter
   single word.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 TD_Unigram <- unigram(DataFrame = data)

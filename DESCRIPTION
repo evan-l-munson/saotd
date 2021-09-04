@@ -45,6 +45,7 @@ Imports:
     magrittr, 
     ldatuning, 
     topicmodels
+    tibble
 RoxygenNote: 7.1.1
 Suggests: testthat,
     knitr,

@@ -40,7 +40,7 @@ The word correlation network displays the mutual relationship
   thicker and darker edge color.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)

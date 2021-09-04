@@ -19,7 +19,7 @@ Function to Tidy Twitter Data.  This function will remove a
   emoticons, punctuation, weblinks while maintaining actual Tweet text.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 
 data <- raw_tweets

@@ -62,7 +62,7 @@ Function will enable a user to access the Twitter API through
   entries per query.
 }
 \examples{
-\donttest{
+\dontrun{
 twitter_app <- "super_app"
 consumer_api_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
 consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"

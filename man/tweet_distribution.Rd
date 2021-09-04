@@ -33,7 +33,7 @@ Determines the scores distribution by hashtag or topic for
   Twitter data.
 }
 \examples{
-\donttest{
+\dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
