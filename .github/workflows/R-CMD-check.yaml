@@ -20,6 +20,10 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           use-public-rspm: true
+          
+      - name: Install GSL on MacOS (for topicmodels)
+        if: runner.os == 'macOS'
+        run: brew install gsl
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
