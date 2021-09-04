@@ -7,17 +7,21 @@
 tweet_min_scores(DataFrameTidyScores, HT_Topic, HT_Topic_Selection = NULL)
 }
 \arguments{
-\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
+\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd 
+and scored.}
 
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
+data select:  "topic".}
 
-\item{HT_Topic_Selection}{THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.}
+\item{HT_Topic_Selection}{THe hashtag or topic to be investigated.  NULL will 
+find min across entire dataframe.}
 }
 \value{
-A Tidy DataFrame.
+A Tibble.
 }
 \description{
-Determines the minimum scores for either the entire dataset or the minimum scores associated with a hashtag or topic analysis.
+Determines the minimum scores for either the entire dataset or 
+  the minimum scores associated with a hashtag or topic analysis.
 }
 \examples{
 \donttest{

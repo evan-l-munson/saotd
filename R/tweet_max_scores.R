@@ -52,9 +52,9 @@ tweet_max_scores <- function(DataFrameTidyScores,
   }
   
   # configure defusing operators for packages checking
-  hashtags <- rlang::sym(hashtags)
-  Topic <- rlang::sym(Topic)
-  TweetSentimentScore <- rlang::sym(TweetSentimentScore)
+  hashtags <- dplyr::quo(hashtags)
+  Topic <- dplyr::quo(Topic)
+  TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
 
   # function main body
   if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {

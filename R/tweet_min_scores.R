@@ -1,17 +1,21 @@
 
 #' @title Twitter Data Minimum Scores
 #'
-#' @description Determines the minimum scores for either the entire dataset or the minimum scores associated with a hashtag or topic analysis.
+#' @description Determines the minimum scores for either the entire dataset or 
+#'   the minimum scores associated with a hashtag or topic analysis.
 #'
-#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd and scored.
-#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic data select:  "topic".
-#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will find min across entire dataframe.
+#' @param DataFrameTidyScores DataFrame of Twitter Data that has been tidy'd 
+#'   and scored.
+#' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic 
+#'   data select:  "topic".
+#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will 
+#'   find min across entire dataframe.
 #' 
 #' @importFrom dplyr arrange filter quo
 #' @importFrom utils head
 #' @importFrom tidyr unnest
 #' 
-#' @return A Tidy DataFrame.
+#' @return A Tibble.
 #' 
 #' @examples 
 #' \donttest{
