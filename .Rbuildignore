@@ -19,3 +19,4 @@ tests/testthat/.httr-oauth
 ^packrat/
 ^\.Rprofile$
 ^\.Renviron$
+^\.github$

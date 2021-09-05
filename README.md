@@ -7,8 +7,7 @@
 [![R-CMD-check](https://github.com/evan-l-munson/saotd/workflows/R-CMD-check/badge.svg)](https://github.com/evan-l-munson/saotd/actions?workflow=R-CMD-check)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
-[![Total
-Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
 
 [![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
