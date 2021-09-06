@@ -9,10 +9,10 @@
 #' 
 #' \describe{
 #'  \item{id}{ID of this status.}
-#'  \item{hashtag}{Hashtag that the individual tweet was acquired from.}
+#'  \item{hashtags}{Hashtag that the individual tweet was acquired from.}
 #'  \item{screenName}{Screen name of the user who posted this status.}
 #'  \item{text}{The text of the status.}
-#'  \item{created}{When this status was created.}
+#'  \item{created_at}{When this status was created.}
 #'  \item{key}{Unique key based on the tweets originators user id and the created date time group.}
 #'  }
 #'
