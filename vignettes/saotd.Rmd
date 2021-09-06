@@ -9,7 +9,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 # Sentiment Analysis of Twitter Data (saotd)
@@ -88,14 +88,13 @@ tweets <- tweet_acquire(
   query = "#icecream",
   num_tweets = 100,
   distinct = TRUE)
-         
 ```
 
 ## Explore
 
 You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](<https://www.kaggle.com/crowdflower/twitter-airline-sentiment>) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
 
-```{r raw_tweets}
+```{r raw_tweets cache=TRUE, cache.path='saotd_cache/'}
 set.seed(4321)
 
 data("raw_tweets")
@@ -106,7 +105,7 @@ TD <- raw_tweets %>%
 
 The first tweet of the dataset is: "@SouthwestAir I filled in the form on the website too. Darn it all. I guess I'll just have to cross my fingers.", and when it is cleaned and tidy'd it becomes:
 
-```{r tidy}
+```{r tidy cache=TRUE, cache.path='saotd_cache/'}
 TD_Tidy <- 
   saotd::tweet_tidy(
     DataFrame = TD)
