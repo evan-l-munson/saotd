@@ -95,21 +95,23 @@ tweets <- tweet_acquire(
 
 You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](<https://www.kaggle.com/crowdflower/twitter-airline-sentiment>) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
 
-```{r raw_tweets, cache=TRUE, cache.path='saotd_cache/'}
+```{r raw_tweets}
+set.seed(4321)
+
 data("raw_tweets")
 TD <- raw_tweets %>% 
   dplyr::sample_n(size = 5000, 
                   replace = TRUE)
 ```
 
-The second tweet of the dataset is:  __`{r} TD$text[2]`__, and when it is cleaned and tidy'd it becomes:
+The first tweet of the dataset is: "@SouthwestAir I filled in the form on the website too. Darn it all. I guess I'll just have to cross my fingers.", and when it is cleaned and tidy'd it becomes:
 
-```{r tidy, cache=TRUE, cache.path='saotd_cache/'}
+```{r tidy}
 TD_Tidy <- 
   saotd::tweet_tidy(
     DataFrame = TD)
 
-TD_Tidy$Token[3:8] %>% 
+TD_Tidy$Token[1:9] %>% 
   knitr::kable("html")
 ```
 
@@ -117,7 +119,7 @@ The cleaning process removes:  "@", "#" and "RT" symbols, Weblinks, Punctuation,
 
 We will now investigate Uni-Grams, Bi-Grams and Tri-Grams.
 
-```{r unigram, message=FALSE, cache=TRUE, cache.path='saotd_cache/'}
+```{r unigram, cache=TRUE, cache.path='saotd_cache/'}
 saotd::unigram(DataFrame = TD) %>% 
   dplyr::top_n(10) %>% 
   knitr::kable("html", caption = "Twitter data Uni-Grams")
