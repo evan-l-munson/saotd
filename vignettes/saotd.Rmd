@@ -72,37 +72,28 @@ With these steps complete you now have access to the twitter API.
 To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](<https://dev.twitter.com/apps/>) page.  You will also need to select the #hashtags you are interested in and the numer of tweets requested per #hashtag.
 
 ```{r tweet_acquire, echo=TRUE, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'}
-consumer_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
-consumer_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+consumer_api_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
+consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-access_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+access_token_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 hashtags <- c("#job", "#Friday", "#fail", "#icecream", "#random", "#kitten", "#airline")
 
-test_tweets <- file.path(tempdir(), "test_tweets.RData")
-
-tweets <- 
-  saotd::tweet_acquire(
-    consumer_key = consumer_key,
-    consumer_secret = consumer_secret,
-    access_token = access_token, 
-    access_secret = access_secret,
-    HT = hashtags,
-    num_tweets = 1000,
-    file_name = test_tweets, 
-    distinct = TRUE)
+tweets <- tweet_acquire(
+  twitter_app = "twitter_app",
+  consumer_api_key = Sys.getenv('consumer_api_key'),
+  consumer_api_secret_key = Sys.getenv('consumer_api_secret_key'),
+  access_token = Sys.getenv('access_token'),
+  access_token_secret = Sys.getenv('access_token_secret'),
+  query = "#icecream",
+  num_tweets = 100,
+  distinct = TRUE)
          
-load("test_tweets")
-```
-
-```{r eval=FALSE, echo=TRUE}
-print("Don't run me")
 ```
 
 ## Explore
 
 You can acquire your own data or use the dataset included with the package.  We will be using the included data `raw_tweets`.  This dataset was acquired from a [Twitter US Airline Sentiment](<https://www.kaggle.com/crowdflower/twitter-airline-sentiment>) Kaggle competition, from December 2017.  The dataset contains 14,487 tweets from 6 different hashtags (2,604 x #American, 2,220 x #Delta, 2,420 x #Southwest, 3,822 x #United, 2,913 x #US Airways, 504 x #Virgin America). 
-
 
 ```{r raw_tweets, cache=TRUE, cache.path='saotd_cache/'}
 data("raw_tweets")
@@ -111,7 +102,7 @@ TD <- raw_tweets %>%
                   replace = TRUE)
 ```
 
-The second tweet of the dataset is:  __`r TD$text[2]`__, and when it is cleaned and tidy'd it becomes:
+The second tweet of the dataset is:  __`{r} TD$text[2]`__, and when it is cleaned and tidy'd it becomes:
 
 ```{r tidy, cache=TRUE, cache.path='saotd_cache/'}
 TD_Tidy <- 
@@ -257,7 +248,7 @@ Furthermore if we wanted to observe the most positive or negative hashtag scores
 saotd::tweet_max_scores(
   DataFrameTidyScores = TD_Scores, 
   HT_Topic = "hashtag", 
-  HT_Topic_Selection = "kitten")
+  HT_Topic_Selection = "United")
 ```
 
 ## Topic Analysis
@@ -353,9 +344,9 @@ Furthermore if we wanted to observe the most positive or negative scores associa
 
 ```{r topic_filtered_max_scores, cache=TRUE, cache.path='saotd_cache/'}
 saotd::tweet_max_scores(
-  DataFrameTidyScores = TD_Topics_Scores, 
-                        HT_Topic = "topic", 
-                        HT_Topic_Selection = "United")
+  DataFrameTidyScores = TD_Topics_Scores,
+                        HT_Topic = "topic",
+                        HT_Topic_Selection = "luggage")
 ```
 
 ## Visualizations
@@ -376,9 +367,9 @@ Additionally if we wanted to see the score distributions per each hashtag, we ca
 ```{r tweet_distribution, fig.align='center', cache=TRUE, cache.path='saotd_cache/'}
 saotd::tweet_distribution(
   DataFrameTidyScores = TD_Scores, 
-  binwidth = 1,
-  HT_Topic = "hashtag",
-  color = "black",
+  HT_Topic = "hashtag", 
+  bin_width = 1, 
+  color = "black", 
   fill = "white")
 ```
 
@@ -424,8 +415,8 @@ Additionally if we wanted to see the score distributions per each topic, we can 
 ```{r topic_tweet_distribution, fig.align='center', cache=TRUE, cache.path='saotd_cache/'}
 saotd::tweet_distribution(
   DataFrameTidyScores = TD_Topics_Scores, 
-  binwidth = 1,
   HT_Topic = "topic", 
+  bin_width = 1, 
   color = "black", 
   fill = "white")
 ```
