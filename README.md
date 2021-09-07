@@ -1,7 +1,7 @@
 
 <!-- don't edit the .md file, instead edit the .Rmd -->
 
-# Sentiment Analysis of Twitter Data <img src="man/hex_saotd.png" align="right" width="150" height="150" />
+# Sentiment Analysis of Twitter Data <img src="man/figures/hex_saotd.png" align="right" width="150" height="150" />
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![R-CMD-check](https://github.com/evan-l-munson/saotd/workflows/R-CMD-check/badge.svg)](https://github.com/evan-l-munson/saotd/actions?workflow=R-CMD-check)
