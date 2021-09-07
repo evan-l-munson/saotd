@@ -8,7 +8,7 @@
 #'   and scored.
 #' @param HT_Topic If using hashtag data select:  "hashtag".  If using topic 
 #'   data select:  "topic".
-#' @param HT_Topic_Selection THe hashtag or topic to be investigated.  NULL will 
+#' @param HT_Topic_Selection The hashtag or topic to be investigated.  NULL will 
 #'   find min across entire dataframe.
 #' 
 #' @importFrom dplyr arrange filter quo
