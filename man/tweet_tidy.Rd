@@ -15,7 +15,7 @@ A Tidy tibble.
 \description{
 Function to Tidy Twitter Data.  This function will remove a 
   significant amount of the original twitter metadata, as it is not needed 
-  to determine the sentiment fo the tweets. This function will remove all 
+  to determine the sentiment of the tweets. This function will remove all 
   emoticons, punctuation, weblinks while maintaining actual Tweet text.
 }
 \examples{

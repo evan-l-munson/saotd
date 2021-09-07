@@ -13,7 +13,7 @@ and scored.}
 \item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
 data select:  "topic".}
 
-\item{HT_Topic_Selection}{THe hashtag or topic to be investigated.  NULL will 
+\item{HT_Topic_Selection}{The hashtag or topic to be investigated.  NULL will 
 find min across entire dataframe.}
 }
 \value{
