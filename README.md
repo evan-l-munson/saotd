@@ -142,7 +142,7 @@ Calculation, and Visualizations.
     -   `tweet_time` displays how the Twitter data sentiment scores
         through time.  
     -   `tweet_worldmap` function is not longer exported, as the Twitter data 
-        does not contain lattitude and longitude values.displays the location of 
+        does not contain latitude and longitude values.displays the location of 
         a Tweet across the globe by hashtag or topic.
 
 ## Example
@@ -156,7 +156,7 @@ utils::vignette("saotd")
 
 ## Meta
 
--   Licence:
+-   license:
 
     -   All code is licensed GPL.
     -   All data is from public data sources.
