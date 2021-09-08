@@ -17,7 +17,7 @@ test <- saotd::merge_terms(
   DataFrame = test_MergeTerms_df, 
   term = "best friend", 
   term_replacement = "BFF")
-test <- test$text[1]
+test <- test[[1]]
 
 # tests
 testthat::test_that("Merge.Terms is being properly computed", {

@@ -29,7 +29,7 @@ test_HT <-
     DataFrameTidyScores = test_HT_Scores_Tidy_df, 
     HT_Topic = "hashtag")
 
-test_HT <- test_HT$TweetSentimentScore[1]
+test_HT <- test_HT[[1, 8]]
 
 check_HT <- -3
 
@@ -39,7 +39,7 @@ test_HT_selection <-
     DataFrameTidyScores = test_HT_Scores_Tidy_df, 
     HT_Topic = "hashtag", HT_Topic_Selection = "dog")
 
-test_HT_selection <- test_HT_selection$TweetSentimentScore[1]
+test_HT_selection <- test_HT_selection[[1, 8]]
 
 check_HT_selection <- -2
 
