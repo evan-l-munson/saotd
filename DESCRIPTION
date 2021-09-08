@@ -42,14 +42,14 @@ Imports:
     stats, 
     magrittr, 
     ldatuning, 
-    topicmodels,
-    tibble
+    topicmodels
 RoxygenNote: 7.1.1
 Suggests: testthat,
     knitr,
     rmarkdown,
     httr,
-    base64enc
+    base64enc,
+    tibble
 Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
