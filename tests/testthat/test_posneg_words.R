@@ -14,7 +14,7 @@ test_HT_Tidy_df <- saotd::tweet_tidy(
 test_HT_PosNeg <- saotd::posneg_words(
   DataFrameTidy = test_HT_Tidy_df, 
   num_words = 1)
-test_HT <- test_HT_PosNeg$data[2]
+test_HT <- test_HT_PosNeg[[1]][2]
 
 check_HT <- dplyr::tibble(
   sentiment = as.character(c("negative", "positive")))
@@ -31,7 +31,7 @@ test_Topic_Tidy_df <- saotd::tweet_tidy(
 test_Topic_PosNeg <- saotd::posneg_words(
   DataFrameTidy = test_Topic_Tidy_df, 
   num_words = 1)
-test_Topic <- test_Topic_PosNeg$data[2]
+test_Topic <- test_Topic_PosNeg[[1]][2]
 
 check_Topic <- dplyr::tibble(
   sentiment = as.character(c("negative", "positive")))

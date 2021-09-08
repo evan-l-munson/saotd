@@ -45,9 +45,9 @@ true_Tidy_df <- tibble::tribble(
   text2, as.character("icecream")
 )
 
-true <- true_Tidy_df$Token
+true <- true_Tidy_df[[2]]
 test <- saotd::tweet_tidy(DataFrame = test_Tidy_df)
-test <- test$Token
+test <- test[[10]]
 
 # tests
 testthat::test_that("The tweet_tidy function is working as properly", {

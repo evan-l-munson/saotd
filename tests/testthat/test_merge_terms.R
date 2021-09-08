@@ -11,7 +11,7 @@ correct_MergeTerms_df <- tibble::tribble(
   "I really love my dog, he is the BFF anyone could ever ask for!")
 
 # It is easier to check a string than directly compare dataframes.
-check <- correct_MergeTerms_df$text[1]
+check <- correct_MergeTerms_df[[1]]
 
 test <- saotd::merge_terms(
   DataFrame = test_MergeTerms_df, 

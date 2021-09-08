@@ -35,7 +35,7 @@ test_HT_Scores_Tidy_df <-
     DataFrameTidy = test_HT_Tidy_df, 
     HT_Topic = "hashtag")
 
-test_HT <- test_HT_Scores_Tidy_df$TweetSentiment
+test_HT <- test_HT_Scores_Tidy_df[[9]]
 
 check_HT <- "positive"
 
@@ -73,7 +73,7 @@ test_Topic_Scores_Tidy_df <-
     DataFrameTidy = test_Topic_Tidy_df, 
     HT_Topic = "topic")
 
-test_Topic <- test_Topic_Scores_Tidy_df$TweetSentiment
+test_Topic <- test_Topic_Scores_Tidy_df[[9]]
 
 check_Topic <- "negative"
 

@@ -70,7 +70,7 @@ test_Topic <-
     DataFrameTidyScores = test_Topic_Scores_Tidy_df, 
     HT_Topic = "topic")
 
-test_Topic <- test_Topic$TweetSentimentScore[1]
+test_Topic <- test_Topic[[1, 8]]
 
 check_Topic <- -3
 
@@ -81,7 +81,7 @@ test_Topic_selection <-
     HT_Topic = "topic", 
     HT_Topic_Selection = "dog")
 
-test_Topic_selection <- test_Topic_selection$TweetSentimentScore[1]
+test_Topic_selection <- test_Topic_selection[[1, 8]]
 
 check_Topic_selection <- -2
 
