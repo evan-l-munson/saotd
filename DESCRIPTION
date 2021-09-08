@@ -31,10 +31,8 @@ Imports:
     stringr, 
     tidytext, 
     rtweet, 
-    purrr, 
     tidyr, 
     igraph, 
-    maps,
     ggplot2, 
     ggraph,
     scales, 
@@ -44,8 +42,7 @@ Imports:
     stats, 
     magrittr, 
     ldatuning, 
-    topicmodels,
-    tibble
+    topicmodels
 RoxygenNote: 7.1.1
 Suggests: testthat,
     knitr,
