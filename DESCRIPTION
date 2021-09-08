@@ -44,7 +44,8 @@ Imports:
     ldatuning, 
     topicmodels
 RoxygenNote: 7.1.1
-Suggests: testthat,
+Suggests: 
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     httr,
@@ -57,3 +58,4 @@ SystemRequirements: GSL (>=2.4),
     udunits2 (>=2.2.26-3)
 Encoding: UTF-8
 LazyLoad: true
+Config/testthat/edition: 3
