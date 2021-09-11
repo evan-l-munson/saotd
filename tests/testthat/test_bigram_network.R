@@ -1,6 +1,4 @@
 
-testthat::context("Plot Bigram Network")
-
 # Test data
 text <- "This is the website for “R for Data Science”. This book will teach you 
   how to do data science with R: You’ll learn how to get your data into R, get 
@@ -43,7 +41,8 @@ testthat::test_that("The bigram_network function is working as properly", {
 
 testthat::test_that("The bigram_network plot retunrs ggplot object", {
   
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
   
 })
 

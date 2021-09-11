@@ -1,6 +1,4 @@
 
-testthat::context("Word Correlation")
-
 # Test Data
 test_WordCorr_df <- tibble::tribble(
   ~user_id, 

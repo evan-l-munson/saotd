@@ -1,6 +1,4 @@
 
-testthat::context("Compute Bigrams")
-
 # Test Data
 text <- "This is the website for “R for Data Science”. 
   This book will teach you how to do data science with R: 

@@ -1,6 +1,4 @@
 
-testthat::context("Plot Tweet Score Violin Plot")
-
 # Test Data
 # Data for hashtag
 test_HT_df <- dplyr::tibble(
@@ -57,12 +55,14 @@ testthat::test_that("The tweet_violin function properly ingests data frame", {
 
 testthat::test_that("The tweet_violin plot retunrs ggplot object when using hashtags", {
   
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
   
 })
 
 testthat::test_that("The tweet_violin plot retunrs ggplot object when using topics", {
   
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
   
 })

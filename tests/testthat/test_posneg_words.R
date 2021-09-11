@@ -1,6 +1,4 @@
 
-testthat::context("Compute Tweet Positive and Negative Words")
-
 # Test Data
 test_HT_df <- dplyr::tibble(
   text = "I really love and hate my dog, he is the best most amazing friend anyone could ever ask for!  
@@ -64,12 +62,14 @@ testthat::test_that("The tweet_scores function computes the scores correctly for
 
 testthat::test_that("The posneg_words plot using hashtags retunrs ggplot object", {
   
-  testthat::expect_is(test_HT_PosNeg, "ggplot")
+  testthat::expect_type(object = test_HT_PosNeg,
+                        type =  "list")
   
 })
 
 testthat::test_that("The posneg_words plot using topics retunrs ggplot object", {
   
-  testthat::expect_is(test_Topic_PosNeg, "ggplot")
+  testthat::expect_type(object = test_Topic_PosNeg,
+                        type =  "list")
   
 })

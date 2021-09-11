@@ -1,6 +1,4 @@
 
-testthat::context("Compute the numer of Tweet Topics")
-
 # Test Data
 
 # build text strings
@@ -35,6 +33,7 @@ testthat::test_that("The number_topics function properly ingests data frame", {
 
 testthat::test_that("The number_topics plot retunrs ggplot object", {
   
-  testthat::expect_is(test_NumberTopics, "ggplot")
+  testthat::expect_type(object = test_NumberTopics,
+                        type =  "list")
   
 })

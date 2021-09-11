@@ -1,6 +1,4 @@
 
-testthat::context("Plot Score Distribution")
-
 # Test Data
 
 test_HT_df <- dplyr::tibble(
@@ -35,7 +33,8 @@ testthat::test_that("The tweet_corpus_distribution function properly ingests dat
 
 testthat::test_that("The tweet_corpus_distribution plot retunrs ggplot object", {
 
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
 
 })
 

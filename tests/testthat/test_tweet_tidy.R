@@ -1,6 +1,4 @@
 
-testthat::context("Tidy Tweet Data")
-
 # Test Data
 text1 <- "Really love my dog, he is the best friend anyone could ever ask for!"
 text2 <- "RT I want @coolguy24 to meet me for #icecream!!!! https://t.co/v4nta"

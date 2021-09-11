@@ -1,6 +1,4 @@
 
-testthat::context("Compute Unigrams")
-
 # Test Data
 text <- "I really love my dog, he is the best friend anyone could ever ask for!"
 test_unigram_df <- as.data.frame(x = text)

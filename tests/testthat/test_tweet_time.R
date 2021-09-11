@@ -1,6 +1,4 @@
 
-testthat::context("Plot Tweet Score Over time Plot")
-
 # Test Data
 # Data for hashtag
 test_HT_df <- dplyr::tibble(
@@ -58,12 +56,14 @@ testthat::test_that("The tweet_time function properly ingests data frame", {
 
 testthat::test_that("The tweet_time plot retunrs ggplot object when using hashtags", {
   
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
   
 })
 
 testthat::test_that("The tweet_time plot retunrs ggplot object when using topics", {
   
-  expect_is(t, "ggplot")
+  expect_type(object = t,
+              type =  "list")
   
 })

@@ -1,6 +1,4 @@
 
-testthat::context("Merge Terms")
-
 # Create text for test
 text <- "I really love my dog, he is the best friend anyone could ever ask for!"
 test_MergeTerms_df <- as.data.frame(x = text, stringsAsFactors = FALSE)

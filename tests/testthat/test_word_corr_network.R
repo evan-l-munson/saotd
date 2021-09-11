@@ -1,6 +1,4 @@
 
-testthat::context("Word Correlation Network Diagram")
-
 # Test Data
 test_WordCorr_df <- tibble::tribble(
   ~user_id, 
@@ -88,7 +86,8 @@ testthat::test_that("The word_corr_network function is working as properly", {
 
 testthat::test_that("The word_corr_network retunrs ggplot object", {
 
-  testthat::expect_is(p, "ggplot")
+  testthat::expect_type(object = p,
+                        type =  "list")
   
 })
 
