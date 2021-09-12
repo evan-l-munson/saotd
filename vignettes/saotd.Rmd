@@ -11,8 +11,6 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
                       # eval = requireNamespace("rtweet", quietly = TRUE))
-install.packages('rtweet',repos = "https://cloud.r-project.org/")
-library(rtweet)
 ```
 
 # Sentiment Analysis of Twitter Data (saotd)
