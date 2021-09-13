@@ -41,12 +41,9 @@ The `saotd` package is broken down into five different phases:
 
 ```{r packages, warning=FALSE, message=FALSE}
 library(saotd)
-library(rtweet)
-library(tidytext)
 library(dplyr)
 library(stringr)
 library(knitr)
-library(utils)
 ```
 
 ## Acquire
