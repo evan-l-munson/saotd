@@ -30,12 +30,30 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
+            
+      - name: Install GSL on MacOS (for topicmodels)
+        if: runner.os == 'macOS'
+        run: brew install gsl
+            
+      - name: Install dependencies + extra pkgs for tests
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("data.table")
+          remotes::install_cran("topicmodels")
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("Rmpfr")
+
+        shell: Rscript {0}
 
       - name: Restore packages
         shell: Rscript {0}
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
+          
+      - name: Install GSL on MacOS (for topicmodels)
+        if: runner.os == 'macOS'
+        run: brew install gsl
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
