@@ -44,14 +44,6 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
-            
-      - name: Install dependencies + extra pkgs for tests
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("data.table")
-          remotes::install_cran("topicmodels")
-          remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
 
       - name: Restore packages
         shell: Rscript {0}
