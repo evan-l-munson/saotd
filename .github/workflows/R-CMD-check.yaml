@@ -44,6 +44,28 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+        
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          
+      - name: Install system dependencies # for Rmpfr
+        if: runner.os == 'Linux'
+        run: |
+          udo apt-get install libmpfr-dev
+            
+      - name: Install dependencies + extra pkgs for tests
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("data.table")
+          remotes::install_cran("topicmodels")
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("Rmpfr")
+        shell: Rscript {0}
 
       - name: Restore packages
         shell: Rscript {0}
