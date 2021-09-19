@@ -33,7 +33,10 @@ jobs:
             
       - name: Install GSL on MacOS (for topicmodels)
         if: runner.os == 'macOS'
-        run: brew install gsl
+        run: |
+          brew install gsl
+          brew install gmp
+          brew install mpfr
         
       - name: Query dependencies
         run: |
@@ -48,8 +51,6 @@ jobs:
           remotes::install_cran("data.table")
           remotes::install_cran("topicmodels")
           remotes::install_cran("rcmdcheck")
-          remotes::install_cran("Rmpfr")
-
         shell: Rscript {0}
 
       - name: Restore packages
@@ -57,10 +58,6 @@ jobs:
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
-          
-      - name: Install GSL on MacOS (for topicmodels)
-        if: runner.os == 'macOS'
-        run: brew install gsl
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
