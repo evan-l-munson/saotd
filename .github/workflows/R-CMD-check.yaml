@@ -12,7 +12,7 @@ jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}  
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       RENV_PATHS_ROOT: ~/.local/share/renv
 
@@ -37,6 +37,14 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+        
+      - name: Install dependencies + extra pkgs for tests
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("topicmodels")
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("Rmpfr")
+        shell: Rscript {0}
 
       - name: Cache packages
         uses: actions/cache@v1
@@ -59,12 +67,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-      - name: Install dependencies + extra pkgs for tests
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("topicmodels")
-          remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
 
       - name: Check
         env:
