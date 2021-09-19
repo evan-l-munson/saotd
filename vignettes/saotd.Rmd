@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 
 # Sentiment Analysis of Twitter Data (saotd)
 
-## Twitter Introduction
+## Twitter Introduction  
 
 Recent years have witnessed the rapid growth of social media platforms in which users can publish their individual thoughts and opinions (e.g., Facebook, Twitter, Google+ and several blogs).  The rise in popularity of social media has changed the world wide web from a static repository to a dynamic forum for anyone to voice their opinion across the globe.  This new dimension of _User Generated Content_ opens up a new and dynamic source of insight to individuals, organizations and governments.
 
