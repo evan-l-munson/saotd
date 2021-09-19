@@ -53,10 +53,10 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
           
-      - name: Install system dependencies # for Rmpfr
+      - name: Install system dependencies ()for Rmpfr)
         if: runner.os == 'Linux'
         run: |
-          udo apt-get install libmpfr-dev
+          sudo apt-get install libmpfr-dev
             
       - name: Install dependencies + extra pkgs for tests
         run: |
