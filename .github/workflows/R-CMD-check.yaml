@@ -22,6 +22,10 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           use-public-rspm: true
+          cache-version: 2
+          extra-packages: |
+            ggplot2
+            rcmdcheck
           
       - name: Query dependencies
         run: |
