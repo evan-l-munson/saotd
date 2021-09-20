@@ -23,6 +23,13 @@ jobs:
         with:
           use-public-rspm: true
           
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+          
       - name: Cache packages
         uses: actions/cache@v1
         with:
@@ -31,19 +38,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-renv-
             
+      - name: Install system dependencies on Linux
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
+          
+      - name: Install system dependencies on macOS
+        if: runner.os == 'macOS'
+        run: |
+          # XQuartz is needed by vdiffr
+          brew install xquartz
+          # Use only binary packages
+          echo 'options(pkgType = "binary")' >> ~/.Rprofile
+            
       - name: Install GSL on MacOS (for topicmodels)
         if: runner.os == 'macOS'
         run: |
           brew install gsl
           brew install gmp
           brew install mpfr
-        
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
         
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -53,7 +69,7 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
           
-      - name: Install system dependencies ()for Rmpfr)
+      - name: Install system dependencies (for Rmpfr)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install libmpfr-dev
@@ -82,10 +98,7 @@ jobs:
           restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-${{ matrix.config.r }}-
 
       - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-          _R_CHECK_FORCE_SUGGESTS_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
       - name: Show testthat output
