@@ -23,7 +23,7 @@ Authors@R: c(
            )
 Maintainer: Evan Munson <evan.l.munson@gmail.com>
 BugReports: https://github.com/evan-l-munson/saotd/issues
-Description: This analytic is an in initial foray into sentiment analysis.  This analytic will allow a user to access the Twitter API (once they create their own developer account), ingest tweets of their interest, clean / tidy data, perform topic modeling if interested, compute sentiment scores utilizing the x  bing Lexicon, and output visualizations.
+Description: This analytic is an in initial foray into sentiment analysis.  This analytic will allow a user to access the Twitter API (once they create their own developer account), ingest tweets of their interest, clean / tidy data, perform topic modeling if interested, compute sentiment scores utilizing the Bing Lexicon, and output visualizations.
 License: GPL (>= 2)
 URL: https://github.com/evan-l-munson/saotd
 Imports: 

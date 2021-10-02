@@ -54,7 +54,7 @@ However is you want to acquire your own tweets, you will first have to:
 
 1. Create a [twitter](<https://twitter.com/>) account or sign into existing account.
 
-2. Use your twitter login, to sign into [Twitter Developers](<https://dev.twitter.com/apps/>)
+2. Use your twitter login, to sign into [Twitter Developers](<https://developer.twitter.com/apps>)
 
 3. Navigate to My Applications.
 

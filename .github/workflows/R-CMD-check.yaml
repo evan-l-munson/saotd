@@ -83,6 +83,7 @@ jobs:
           remotes::install_cran("data.table")
           remotes::install_cran("topicmodels")
           remotes::install_cran("rcmdcheck")
+          remotes::install_cran("ggplot2")
         shell: Rscript {0}
 
       - name: Check
