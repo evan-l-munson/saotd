@@ -44,14 +44,6 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
-          
-      - name: Cache packages
-          uses: actions/cache@v1
-          with:
-            path: ${{ env.RENV_PATHS_ROOT }}
-            key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-renv-
 
       - uses: r-lib/actions/setup-pandoc@v1
 
@@ -65,6 +57,21 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install gsl
 
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ matrix.config.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ matrix.config.os }}-${{ hashFiles('.github/R-version') }}-2-
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
@@ -72,12 +79,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-
-      - name: Restore packages
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
       
       - name: Install dependencies + extra pkgs for tests
         run: |
