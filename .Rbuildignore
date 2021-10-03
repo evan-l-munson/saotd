@@ -5,17 +5,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.*\.httr-oauth$
-^\.travis\.yml$
-^\.circleci
 ^README.Rmd$
 ^.*\.o$
 ^.*\.dll$
 ^.*\.so$
 ^.*\.RData$
-^appveyor\.yml$
 tests/testthat/.httr-oauth
 ^paper.bib$
 ^paper.md$
-^packrat/
 ^\.Rprofile$
 ^\.github$
