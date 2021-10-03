@@ -77,13 +77,14 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+      
       - name: Install dependencies + extra pkgs for tests
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("data.table")
           remotes::install_cran("topicmodels")
           remotes::install_cran("rcmdcheck")
-          remotes::install_cran("ggplot2")
+          remotes::install_cran("ggplot2", force = TRUE)
         shell: Rscript {0}
 
       - name: Check
