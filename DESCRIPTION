@@ -57,7 +57,7 @@ Suggests:
     base64enc,
     tibble
 Remotes:
-    r-lib/ggplot2
+    r-lib/ggplot2@*release
 Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
