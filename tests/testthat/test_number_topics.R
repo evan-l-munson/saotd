@@ -17,7 +17,7 @@ test_df <- tibble::tribble(
 # computer number of topics
 test_NumberTopics <- saotd::number_topics(
   DataFrame = test_df, 
-  num_cores = 1L, 
+  num_cores = 2L, 
   min_clusters = 2, 
   max_clusters = 4, 
   skip = 1, 
