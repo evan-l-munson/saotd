@@ -58,6 +58,7 @@ jobs:
           brew install gsl
           brew install gmp
           brew install mpfr
+          brew install libomp
 
       - name: Query dependencies
         run: |
@@ -87,6 +88,7 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("data.table")
           remotes::install_cran("topicmodels")
+          remotes::install_cran"ldatuning")
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("Rmpfr")
         shell: Rscript {0}
