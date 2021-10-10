@@ -12,4 +12,4 @@ tests/testthat/.httr-oauth
 ^paper.bib$
 ^paper.md$
 ^\.Rprofile$
-^\.github$
+^\.github$ 
