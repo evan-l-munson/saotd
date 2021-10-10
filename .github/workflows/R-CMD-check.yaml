@@ -51,9 +51,17 @@ jobs:
         run: |
           brew install --cask xquartz
           brew install pkg-config cairo
+          
       - name: Install GSL on MacOS (for topicmodels)
         if: runner.os == 'macOS'
         run: brew install gsl
+        
+      - name: Install GSL on MacOS (for topicmodels)
+        if: runner.os == 'macOS'
+        run: |
+          brew install gsl
+          brew install gmp
+          brew install mpfr
 
       - name: Query dependencies
         run: |
@@ -77,6 +85,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          
       - name: Install dependencies + extra pkgs for tests
         run: |
           remotes::install_deps(dependencies = TRUE)

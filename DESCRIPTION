@@ -56,8 +56,6 @@ Suggests:
     httr,
     base64enc,
     tibble
-Remotes:
-    github::tidyverse/ggplot2
 Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 
