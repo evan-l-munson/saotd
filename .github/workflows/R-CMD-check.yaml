@@ -59,6 +59,8 @@ jobs:
           brew install gmp
           brew install mpfr
           brew install libomp
+          brew install curl
+          brew install openssl
 
       - name: Query dependencies
         run: |
