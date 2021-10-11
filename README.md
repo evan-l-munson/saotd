@@ -5,7 +5,7 @@
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
 [![R-CMD-check](https://github.com/evan-l-munson/saotd/workflows/R-CMD-check/badge.svg)](https://github.com/evan-l-munson/saotd/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg)](https://codecov.io/gh/evan-l-munson/saotd)
+[![Coverage Status](https://img.shields.io/codecov/c/github/evan-l-munson/saotd/master.svg)](https://codecov.io/github/evan-l-munson/saotd?branch=master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
 

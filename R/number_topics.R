@@ -40,7 +40,7 @@
 #' @export
 
 number_topics <- function(DataFrame, 
-                          num_cores, 
+                          num_cores = 2L, 
                           min_clusters = 2, 
                           max_clusters = 12, 
                           skip = 2, 
