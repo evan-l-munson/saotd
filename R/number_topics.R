@@ -41,7 +41,7 @@
 #' @export
 
 number_topics <- function(DataFrame, 
-                          num_cores = 2L, 
+                          num_cores = 1L, 
                           min_clusters = 2, 
                           max_clusters = 12, 
                           skip = 2, 
@@ -104,7 +104,8 @@ number_topics <- function(DataFrame,
       from = min_clusters, 
       to = max_clusters, 
       by = skip),
-    metrics = c("Griffiths2004", 
+    metrics = c(
+      #"Griffiths2004", 
                 "CaoJuan2009", 
                 "Arun2010", 
                 "Deveaud2014"),

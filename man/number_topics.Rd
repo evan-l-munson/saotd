@@ -6,7 +6,7 @@
 \usage{
 number_topics(
   DataFrame,
-  num_cores = 2L,
+  num_cores = 1L,
   min_clusters = 2,
   max_clusters = 12,
   skip = 2,
@@ -32,9 +32,10 @@ A Tidy DataFrame.
 }
 \description{
 Determines the optimal number of Latent topics within a 
-  data frame by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-  Uses the `ldatuning` package and outputs an ldatuning plot.  __This process 
-  can be time consuming depending on the size of the input data frame.__
+  data frame by tuning the Latent Dirichlet Allocation (LDA) model 
+  parameters.  Uses the `ldatuning` package and outputs an ldatuning plot.  
+  __This process can be time consuming depending on the size of the input 
+  data frame.__
 }
 \examples{
 \dontrun{

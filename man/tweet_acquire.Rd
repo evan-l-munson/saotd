@@ -21,15 +21,15 @@ tweet_acquire(
 
 \item{consumer_api_key}{Twitter Application management consumer API key.}
 
-\item{consumer_api_secret_key}{Twitter Application management consumer API 
+\item{consumer_api_secret_key}{Twitter Application management consumer API
 secret key.  Application must have \code{Read and write} access level and
 \code{Callback URL} of \code{http://127.0.0.1:1410}.}
 
 \item{access_token}{Twitter Application management access token 
 (apps.twitter.com).}
 
-\item{access_token_secret}{Twitter Application management access secret token 
-(apps.twitter.com).}
+\item{access_token_secret}{Twitter Application management access secret 
+token (apps.twitter.com).}
 
 \item{query}{A single query or a list of queries the user has specified.
 Character string, not to exceed 500 characters.  To search for tweets 
@@ -54,11 +54,11 @@ Tweets that originate from the same Twitter id at the exact same time.}
 A Data Frame with tweets and meta data.
 }
 \description{
-Function will enable a user to access the Twitter API through 
-  the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a 
-  user has a Twitter developers account and has received their individual 
-  consumer key, consumer secret key, access token, and access secret they 
-  can acquire Tweets based on a list of hashtags and a requested number of 
+Function will enable a user to access the Twitter API through
+  the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a
+  user has a Twitter developers account and has received their individual
+  consumer key, consumer secret key, access token, and access secret they
+  can acquire Tweets based on a list of hashtags and a requested number of
   entries per query.
 }
 \examples{
@@ -80,8 +80,8 @@ tweets <- tweet_acquire(
   distinct = TRUE)
                         
 Or the Twitter API keys and tokens can be saved as an .Renviron file in the 
-working directory.  If using a `.Renviron` file, the data should be saved like 
-the below example:
+working directory.  If using a `.Renviron` file, the data should be saved 
+like the below example:
 
 consumer_api_key=XXXXXXXXXXXXXXXXXXXXXXXXX
 consumer_api_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

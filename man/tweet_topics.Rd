@@ -27,7 +27,7 @@ tweet_topics(
 Returns LDA topics.
 }
 \description{
-Determines the Latent topics within a data frame by using Latent 
+Determines the Latent topics within a data frame by using Latent
   Dirichlet Allocation (LDA) model parameters.  Uses the `ldatuning` package 
   and outputs an ldatuning plot.  Prepares Tweet text, creates DTM, conducts 
   LDA, display data terms associated with each topic.

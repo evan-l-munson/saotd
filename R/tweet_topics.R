@@ -44,7 +44,7 @@ tweet_topics <- function(DataFrame,
     stop('The input for this function is a data frame.')
   }
   
-  if(!is.numeric(clusters)) {
+  if (!is.numeric(clusters)) {
     stop('The input must be a numerical value.')
   }
   
