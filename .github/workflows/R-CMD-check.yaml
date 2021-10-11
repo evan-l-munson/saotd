@@ -27,6 +27,7 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'oldrel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
@@ -45,17 +46,9 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Install system dependencies on MacOS (for vdiffr and ldatuning)
+      - name: Install system dependencies on MacOS (topicmodels)
         if: runner.os == 'macOS'
-        run: |
-          brew install --cask xquartz
-          brew install pkg-config cairo
-          brew install gsl
-          brew install gmp
-          brew install mpfr
-          brew install libomp
-          brew install curl
-          brew install openssl
+        run: brew install gsl
 
       - name: Query dependencies
         run: |
