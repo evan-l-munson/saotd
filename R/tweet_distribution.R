@@ -13,57 +13,58 @@
 #' @param fill The interior color of the bins.
 #' 
 #' @importFrom ggplot2 ggplot geom_histogram facet_wrap theme ggtitle xlab ylab theme_bw
-#' 
+#'
 #' @return A facet wrap ggplot.
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-#'                            HT_Topic = "hashtag") 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data,
+#'                            HT_Topic = "hashtag")
 #' Dist <- tweet_distribution(DataFrameTidyScores = score_data,
 #'                      HT_Topic = "hashtag",
 #'                      bin_width = 1,
-#'                      color = "black", 
+#'                      color = "black",
 #'                      fill = "white")
 #' Dist
 #' }
 #' @export
 
-tweet_distribution <- function(DataFrameTidyScores, 
-                               HT_Topic, 
-                               bin_width = 1, 
-                               color = "black", 
+tweet_distribution <- function(DataFrameTidyScores,
+                               HT_Topic,
+                               bin_width = 1,
+                               color = "black",
                                fill = "black") {
+  
   # input checks
-  if(!is.data.frame(DataFrameTidyScores)) {
-    stop('The input for this function is a data frame.')
+  if (!is.data.frame(DataFrameTidyScores)) {
+    stop("The input for this function is a data frame.")
   }
   
-  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either hashtag for analysis using 
-         hashtags, or topic for analysis looking at topics.')
+  if (!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop("HT_Topic requires an input of either hashtag for analysis using 
+         hashtags, or topic for analysis looking at topics.")
   }
-  
+
   # configure defusing operators for packages checking
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
   bin_width <- dplyr::quo(bin_width)
   hashtags <- dplyr::quo(hashtags)
-  
+
   # function main body
-  if(HT_Topic == "hashtag") {
-    
+  if (HT_Topic == "hashtag") {
+
     TD_HT_Distribution <- DataFrameTidyScores %>%
       tidyr::unnest(
-        cols = hashtags, 
-        keep_empty = FALSE) %>% 
+        cols = hashtags,
+        keep_empty = FALSE) %>%
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
       ggplot2::geom_bar(
-        stat = "count", 
-        # binwidth = bin_width, 
-        colour = color, 
+        stat = "count",
+        # binwidth = bin_width,
+        colour = color,
         fill = fill) +
       ggplot2::facet_wrap(~hashtags, ncol = 2) +
       ggplot2::theme(legend.position = "none") +
@@ -71,12 +72,12 @@ tweet_distribution <- function(DataFrameTidyScores,
       ggplot2::xlab('Sentiment') +
       ggplot2::ylab('Count') +
       ggplot2::theme_bw()
-    
+
     return(TD_HT_Distribution)
-    
+
   } else {
-    
-    TD_Topic_Distribution <- DataFrameTidyScores %>% 
+
+    TD_Topic_Distribution <- DataFrameTidyScores %>%
       ggplot2::ggplot(ggplot2::aes(TweetSentimentScore)) +
       ggplot2::geom_bar(
         stat = "count",
@@ -89,8 +90,9 @@ tweet_distribution <- function(DataFrameTidyScores,
       ggplot2::xlab('Sentiment') +
       ggplot2::ylab('Count') +
       ggplot2::theme_bw()
-    
+
     return(TD_Topic_Distribution)
-    
+
   }
+
 }

@@ -1,7 +1,7 @@
 #' @name saotd
-#' 
+#'
 #' @title Sentiment Analysis of Twitter Data 
-#' 
+#'
 #' @keywords internal
 #' @docType package
 #'

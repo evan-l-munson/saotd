@@ -23,5 +23,5 @@ library(saotd)
 data <- raw_tweets
 TD_Bigram <- bigram(DataFrame = data)
 TD_Bigram
-}                
+}
 }

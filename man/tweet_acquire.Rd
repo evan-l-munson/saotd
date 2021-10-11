@@ -78,7 +78,7 @@ tweets <- tweet_acquire(
   query = "#icecream",
   num_tweets = 100,
   distinct = TRUE)
-                        
+
 Or the Twitter API keys and tokens can be saved as an .Renviron file in the 
 working directory.  If using a `.Renviron` file, the data should be saved 
 like the below example:

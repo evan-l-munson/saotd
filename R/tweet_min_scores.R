@@ -10,90 +10,90 @@
 #'   data select:  "topic".
 #' @param HT_Topic_Selection The hashtag or topic to be investigated.  NULL will 
 #'   find min across entire dataframe.
-#' 
+#'
 #' @importFrom dplyr arrange filter quo
 #' @importFrom utils head
 #' @importFrom tidyr unnest
-#' 
+#'
 #' @return A Tibble.
-#' 
-#' @examples 
+#'
+#' @examples
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data,
 #'                            HT_Topic = "hashtag")
-#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data,
 #'                                HT_Topic = "hashtag")
 #'                             
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
-#' score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+#' score_data <- tweet_scores(DataFrameTidy = tidy_data,
 #'                      HT_Topic = "hashtag")
-#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+#' min_scores <- tweet_min_scores(DataFrameTidyScores = score_data,
 #'                                HT_Topic = "hashtag",
 #'                                HT_Topic_Selection = "icecream")
 #' }
 #' @export
 
-tweet_min_scores <- function(DataFrameTidyScores, 
-                             HT_Topic, 
+tweet_min_scores <- function(DataFrameTidyScores,
+                             HT_Topic,
                              HT_Topic_Selection = NULL) {
-  
+
   # input checks
-  if(!is.data.frame(DataFrameTidyScores)) {
-    stop('The input for this function is a data frame.')
+  if (!is.data.frame(DataFrameTidyScores)) {
+    stop("The input for this function is a data frame.")
   }
-  
-  if(!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
-    stop('HT_Topic requires an input of either hashtag for analysis using 
-         hashtags, or topic for analysis looking at topics.')
+
+  if (!(("hashtag" %in% HT_Topic) | ("topic" %in% HT_Topic))) {
+    stop("HT_Topic requires an input of either hashtag for analysis using 
+         hashtags, or topic for analysis looking at topics.")
   }
-  
+
   # configure defusing operators for packages checking
   hashtags <- dplyr::quo(hashtags)
   Topic <- dplyr::quo(Topic)
   TweetSentimentScore <- dplyr::quo(TweetSentimentScore)
-  
+
   # function main body
-  if(HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
-    
-    TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange((TweetSentimentScore)) %>% 
+  if (HT_Topic == "hashtag" & is.null(HT_Topic_Selection)) {
+
+    TD_HT_noSel_Min_Scores <- DataFrameTidyScores %>%
+      dplyr::arrange((TweetSentimentScore)) %>%
       utils::head()
-    
+
     return(TD_HT_noSel_Min_Scores)
-    
-  } else if(HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
-    
-    TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>% 
+
+  } else if (HT_Topic == "hashtag" & !is.null(HT_Topic_Selection)) {
+
+    TD_HT_Sel_Min_Scores <- DataFrameTidyScores %>%
       tidyr::unnest(
-        cols = hashtags, 
-        keep_empty = FALSE) %>% 
-      dplyr::filter(hashtags == HT_Topic_Selection) %>% 
-      dplyr::arrange((TweetSentimentScore)) %>% 
+        cols = hashtags,
+        keep_empty = FALSE) %>%
+      dplyr::filter(hashtags == HT_Topic_Selection) %>%
+      dplyr::arrange((TweetSentimentScore)) %>%
       utils::head()
-    
+
     return(TD_HT_Sel_Min_Scores)
-    
-  } else if(HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
-    
-    TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::arrange((TweetSentimentScore)) %>% 
+
+  } else if (HT_Topic == "topic" & is.null(HT_Topic_Selection)) {
+
+    TD_Topic_noSel_Min_Scores <- DataFrameTidyScores %>%
+      dplyr::arrange((TweetSentimentScore)) %>%
       utils::head()
-    
+
     return(TD_Topic_noSel_Min_Scores)
-    
+
   } else {
-    
-    TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>% 
-      dplyr::filter(Topic == HT_Topic_Selection) %>% 
-      dplyr::arrange((TweetSentimentScore)) %>% 
+
+    TD_Topic_Sel_Min_Scores <- DataFrameTidyScores %>%
+      dplyr::filter(Topic == HT_Topic_Selection) %>%
+      dplyr::arrange((TweetSentimentScore)) %>%
       utils::head()
-    
+
     return(TD_Topic_Sel_Min_Scores)
-    
+
   }
-  
+
 }

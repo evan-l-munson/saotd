@@ -25,16 +25,16 @@ Displays the distribution scores of either hashtag or topic
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "hashtag") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "hashtag")
 ht_box <- tweet_box(DataFrameTidyScores = score_data,
                     HT_Topic = "hashtag")
 ht_box
-               
+
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "topic") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "topic")
 topic_box <- tweet_box(DataFrameTidyScores = score_data,
                        HT_Topic = "topic") 
 topic_box                    

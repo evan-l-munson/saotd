@@ -2,19 +2,19 @@
 #'
 #' @description Determines and displays the most positive and negative words 
 #'   within the twitter data.
-#' 
+#'
 #' @param DataFrameTidy DataFrame of Twitter Data that has been tidy'd.
 #' @param num_words Desired number of words to be returned.
 #' @param filterword Word or words to be removed.
-#' 
+#'
 #' @importFrom dplyr mutate inner_join group_by count filter ungroup top_n quo
 #' @importFrom tidytext get_sentiments
 #' @importFrom stats reorder
 #' @import ggplot2
-#' 
+#'
 #' @return A ggplot
-#' 
-#' @examples 
+#'
+#' @examples
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
@@ -22,14 +22,14 @@
 #' posneg <- posneg_words(DataFrameTidy = tidy_data,
 #'                        n = 10)
 #' posneg
-#'                           
+#'
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
 #' posneg <- posneg_words(DataFrameTidy = tidy_data,
 #'                        n = 10,
 #'                        filterword = "fail")
 #' posneg
-#'                           
+#'
 #' data <- raw_tweets
 #' tidy_data <- Tidy(DataFrame = data)
 #' posneg <- posneg_words(DataFrameTidy = tidy_data,
@@ -42,16 +42,16 @@
 posneg_words <- function(DataFrameTidy,
                          num_words,
                          filterword = NULL) {
-  
+
   # input checks
-  if(!is.data.frame(DataFrameTidy)) {
-    stop('The input for this function is a data frame.')
+  if (!is.data.frame(DataFrameTidy)) {
+    stop("The input for this function is a data frame.")
   }
-  
-  if(!is.numeric(num_words)) {
-    stop('Enter a number.')
+
+  if (!is.numeric(num_words)) {
+    stop("Enter a number.")
   }
-  
+
   # configure defusing operators for packages checking
   Token <- dplyr::quo(Token)
   sentiment <- dplyr::quo(sentiment)
@@ -60,11 +60,11 @@ posneg_words <- function(DataFrameTidy,
   # function main body
   TD_PosNeg_Words <- DataFrameTidy %>%
     dplyr::inner_join(
-      y = tidytext::get_sentiments(lexicon = "bing"), 
-      by = c("Token" = "word")) %>% 
-    dplyr::filter(!(Token %in% filterword)) %>% 
+      y = tidytext::get_sentiments(lexicon = "bing"),
+      by = c("Token" = "word")) %>%
+    dplyr::filter(!(Token %in% filterword)) %>%
     dplyr::count(Token, sentiment) %>%
-    dplyr::ungroup() %>% 
+    dplyr::ungroup() %>%
     dplyr::group_by(sentiment) %>%
     dplyr::top_n(n = num_words) %>%
     dplyr::ungroup() %>%
@@ -75,9 +75,9 @@ posneg_words <- function(DataFrameTidy,
     ggplot2::labs(y = "Count",
                   x = NULL) +
     ggplot2::theme_bw() +
-    ggplot2::ggtitle('Most common positive and negative words utilizing the Bing Lexicon') +
+    ggplot2::ggtitle("Most common positive and negative words utilizing the Bing Lexicon") +
     ggplot2::coord_flip()
-  
+
   return(TD_PosNeg_Words)
-  
+
 }

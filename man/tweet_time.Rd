@@ -7,33 +7,37 @@
 tweet_time(DataFrameTidyScores, HT_Topic)
 }
 \arguments{
-\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
+\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd 
+and scored.}
 
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
+data select:  "topic".}
 }
 \value{
 A ggplot plot.
 }
 \description{
-Displays the Twitter data sentiment scores through time.  The sentiment scores by hashtag or topic are summed per day and plotted to show the change in sentiment through time.
+Displays the Twitter data sentiment scores through time.  The 
+  sentiment scores by hashtag or topic are summed per day and plotted to 
+  show the change in sentiment through time.
 }
 \examples{
 \dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "hashtag") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "hashtag")
 ht_time <- tweet_time(DataFrameTidyScores = score_data,
                       HT_Topic = "hashtag")
 ht_time
-               
+
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "topic") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "topic")
 topic_time <- tweet_time(DataFrameTidyScores = score_data,
-                         HT_Topic = "topic") 
+                         HT_Topic = "topic")
 topic_time                    
 }
 }

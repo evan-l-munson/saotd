@@ -28,16 +28,16 @@ Determines the minimum scores for either the entire dataset or
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
                            HT_Topic = "hashtag")
-min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+min_scores <- tweet_min_scores(DataFrameTidyScores = score_data,
                                HT_Topic = "hashtag")
                             
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
                      HT_Topic = "hashtag")
-min_scores <- tweet_min_scores(DataFrameTidyScores = score_data, 
+min_scores <- tweet_min_scores(DataFrameTidyScores = score_data,
                                HT_Topic = "hashtag",
                                HT_Topic_Selection = "icecream")
 }

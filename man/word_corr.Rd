@@ -25,7 +25,7 @@ The word correlation displays the mutual relationship between
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-TD_Word_Corr <- word_corr(DataFrameTidy = tidy_data, 
+TD_Word_Corr <- word_corr(DataFrameTidy = tidy_data,
                           number = 500,
                           sort = TRUE)
 

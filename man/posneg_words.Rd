@@ -28,14 +28,14 @@ tidy_data <- Tidy(DataFrame = data)
 posneg <- posneg_words(DataFrameTidy = tidy_data,
                        n = 10)
 posneg
-                          
+
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 posneg <- posneg_words(DataFrameTidy = tidy_data,
                        n = 10,
                        filterword = "fail")
 posneg
-                          
+
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
 posneg <- posneg_words(DataFrameTidy = tidy_data,

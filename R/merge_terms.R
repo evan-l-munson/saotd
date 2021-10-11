@@ -14,43 +14,43 @@
 #' @param ignore_case True is the default setting and will ignore case 
 #'   sensitivity of the selected terms.  Selecting FALSE will maintain 
 #'   case sensitivity.
-#' 
+#'
 #' @return A Tibble with user selected term replacement.
-#' 
+#'
 #' @importFrom dplyr mutate
-#' 
+#'
 #' @examples 
 #' \dontrun{
 #' library(saotd)
 #' data <- raw_tweets
-#' data <- merge_terms(DataFrame = data, 
-#'                     term = "ice cream", 
+#' data <- merge_terms(DataFrame = data,
+#'                     term = "ice cream",
 #'                     term_replacement = "ice_cream")
-#' data 
+#' data
 #' }
 #' @export
 
-merge_terms <- function(DataFrame, 
-                        term, 
+merge_terms <- function(DataFrame,
+                        term,
                         term_replacement,
-                        ignore_case = TRUE){
-  
+                        ignore_case = TRUE) {
+
   # input checking
-  if(!is.data.frame(DataFrame)) {
-    stop('The input for this function is a data frame.')
+  if (!is.data.frame(DataFrame)) {
+    stop("The input for this function is a data frame.")
   }
-  
+
   # configure defusing operators for packages checking
   text <- dplyr::quo(text)
-  
+
   # function main body
-  merging <-  DataFrame %>% 
+  merging <-  DataFrame %>%
     dplyr::mutate(
       text = gsub(x = text,
-                  pattern = term, 
-                  replacement = term_replacement, 
+                  pattern = term,
+                  replacement = term_replacement,
                   ignore.case = ignore_case))
-  
+
   return(merging)
-  
+
 }

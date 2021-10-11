@@ -32,9 +32,9 @@ Function to merge terms within a data frame and prevent
 \dontrun{
 library(saotd)
 data <- raw_tweets
-data <- merge_terms(DataFrame = data, 
-                    term = "ice cream", 
+data <- merge_terms(DataFrame = data,
+                    term = "ice cream",
                     term_replacement = "ice_cream")
-data 
+data
 }
 }

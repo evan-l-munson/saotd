@@ -24,7 +24,7 @@ Function to Calculate Sentiment Scores that will account for
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
                            HT_Topic = "hashtag")
 score_data
 }

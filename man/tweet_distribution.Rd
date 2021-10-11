@@ -37,12 +37,12 @@ Determines the scores distribution by hashtag or topic for
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "hashtag") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "hashtag")
 Dist <- tweet_distribution(DataFrameTidyScores = score_data,
                      HT_Topic = "hashtag",
                      bin_width = 1,
-                     color = "black", 
+                     color = "black",
                      fill = "white")
 Dist
 }

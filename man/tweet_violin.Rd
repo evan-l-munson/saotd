@@ -7,31 +7,34 @@
 tweet_violin(DataFrameTidyScores, HT_Topic)
 }
 \arguments{
-\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd and scored.}
+\item{DataFrameTidyScores}{DataFrame of Twitter Data that has been tidy'd 
+and scored.}
 
-\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic data select:  "topic".}
+\item{HT_Topic}{If using hashtag data select:  "hashtag".  If using topic 
+data select:  "topic".}
 }
 \value{
 A ggplot violin plot.
 }
 \description{
-Displays the distribution scores of either hashtag or topic Twitter data.
+Displays the distribution scores of either hashtag or topic 
+  Twitter data.
 }
 \examples{
 \dontrun{
 library(saotd)
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "hashtag") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "hashtag")
 ht_violin <- tweet_violin(DataFrameTidyScores = score_data,
                           HT_Topic = "hashtag")
 ht_violin
-               
+
 data <- raw_tweets
 tidy_data <- Tidy(DataFrame = data)
-score_data <- tweet_scores(DataFrameTidy = tidy_data, 
-                           HT_Topic = "topic") 
+score_data <- tweet_scores(DataFrameTidy = tidy_data,
+                           HT_Topic = "topic")
 topic_violin <- tweet_violin(DataFrameTidyScores = score_data,
                              HT_Topic = "topic") 
 topic_violin                    

@@ -34,12 +34,12 @@
 #'   Twitter API will be returned.
 #' @param distinct Logical.  If distinct = TRUE, the function removes multiple 
 #'   Tweets that originate from the same Twitter id at the exact same time.
-#'   
+#'
 #' @importFrom rtweet create_token search_tweets
 #' @importFrom dplyr mutate distinct
-#' 
+#'
 #' @return A Data Frame with tweets and meta data.
-#' 
+#'
 #' @examples 
 #' \dontrun{
 #' twitter_app <- "super_app"
@@ -47,7 +47,7 @@
 #' consumer_api_secret_key <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 #' access_token <- "XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 #' access_token_secret <- "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-#' 
+#'
 #' tweets <- tweet_acquire(
 #'   twitter_app = "twitter_app",
 #'   consumer_api_key = consumer_api_key,
@@ -57,19 +57,19 @@
 #'   query = "#icecream",
 #'   num_tweets = 100,
 #'   distinct = TRUE)
-#'                         
+#'
 #' Or the Twitter API keys and tokens can be saved as an .Renviron file in the 
 #' working directory.  If using a `.Renviron` file, the data should be saved 
 #' like the below example:
-#' 
+#'
 #' consumer_api_key=XXXXXXXXXXXXXXXXXXXXXXXXX
 #' consumer_api_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #' access_token=XXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #' access_token_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-#' 
+#'
 #' The `tweet_acquire` function would access the keys and tokens using the 
 #' `Sys.getenv()` function and would appear like the below example:
-#' 
+#'
 #' tweets <- tweet_acquire(
 #'   twitter_app = "twitter_app",
 #'   consumer_api_key = Sys.getenv('consumer_api_key'),
@@ -109,11 +109,10 @@ tweet_acquire <- function(twitter_app,
     consumer_key = consumer_api_key,
     consumer_secret = consumer_api_secret_key,
     access_token = access_token,
-    access_secret = access_token_secret
-  )
-  
+    access_secret = access_token_secret)
+
   # pull and format tweets
-  raw_tweets <- 
+  raw_tweets <-
     rtweet::search_tweets(
       token = user_token,
       q = query,
@@ -125,27 +124,27 @@ tweet_acquire <- function(twitter_app,
   
   if (reduced_tweets == TRUE) {
     
-    reduced <- raw_tweets %>% 
-      dplyr::select(user_id, 
-                    status_id, 
+    reduced <- raw_tweets %>%
+      dplyr::select(user_id,
+                    status_id,
                     created_at,
-                    screen_name, 
-                    text, 
-                    hashtags, 
-                    location, 
-                    key, 
+                    screen_name,
+                    text,
+                    hashtags,
+                    location,
+                    key,
                     query)
-    
+
     return(reduced)
-    
+
   } else if (reduced_tweets == FALSE) {
-    
+
     return(raw_tweets)
-    
+
   } else {
-    
-    message("Please make a selection for 'reduced_tweets") 
-    
+
+    message("Please make a selection for 'reduced_tweets")
+
   }
-  
+
 }
