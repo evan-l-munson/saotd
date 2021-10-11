@@ -55,7 +55,8 @@ Suggests:
     rmarkdown,
     httr,
     base64enc,
-    tibble
+    tibble,
+    covr
 Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 SystemRequirements: GSL (>=2.4), 

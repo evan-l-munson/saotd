@@ -14,7 +14,7 @@ on:
       - main
       - master
 
-name: R-CMD-check
+name: test-coverage
 
 jobs:
   R-CMD-check:
