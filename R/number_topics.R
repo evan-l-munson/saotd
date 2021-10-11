@@ -2,9 +2,10 @@
 #' @title Number Topics
 #'
 #' @description Determines the optimal number of Latent topics within a 
-#'   data frame by tuning the Latent Dirichlet Allocation (LDA) model parameters.  
-#'   Uses the `ldatuning` package and outputs an ldatuning plot.  __This process 
-#'   can be time consuming depending on the size of the input data frame.__
+#'   data frame by tuning the Latent Dirichlet Allocation (LDA) model 
+#'   parameters.  Uses the `ldatuning` package and outputs an ldatuning plot.  
+#'   __This process can be time consuming depending on the size of the input 
+#'   data frame.__
 #'
 #' @param DataFrame Data Frame of Twitter Data.
 #' @param num_cores The number of CPU cores to processes models simultaneously 
@@ -45,8 +46,9 @@ number_topics <- function(DataFrame,
                           max_clusters = 12, 
                           skip = 2, 
                           set_seed = 1234) {
+  
   # input checks
-  if(!is.data.frame(DataFrame)) {
+  if (!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
   }
   
@@ -116,7 +118,8 @@ number_topics <- function(DataFrame,
   values <- base::data.frame(
     values["topics"], 
     base::apply(columns, 2, 
-                function(column) {scales::rescale(
+                function(column) {
+                  scales::rescale(
                   column, 
                   to = c(0, 1), 
                   from = range(column))}))

@@ -1,24 +1,24 @@
 
-# tweet_acquire -----------------------------------------------------------------
+# tweet_acquire ----------------------------------------------------------------
 
 #' @title Acquire Twitter Tweets
 #'
-#' @description Function will enable a user to access the Twitter API through 
-#'   the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a 
-#'   user has a Twitter developers account and has received their individual 
-#'   consumer key, consumer secret key, access token, and access secret they 
-#'   can acquire Tweets based on a list of hashtags and a requested number of 
+#' @description Function will enable a user to access the Twitter API through
+#'   the [Twitter Developers Account](https://dev.twitter.com/) site.  Once a
+#'   user has a Twitter developers account and has received their individual
+#'   consumer key, consumer secret key, access token, and access secret they
+#'   can acquire Tweets based on a list of hashtags and a requested number of
 #'   entries per query.
-#' 
+#'
 #' @param twitter_app The name of user created Twitter Application.
 #' @param consumer_api_key Twitter Application management consumer API key.
-#' @param consumer_api_secret_key Twitter Application management consumer API 
+#' @param consumer_api_secret_key Twitter Application management consumer API
 #'   secret key.  Application must have \code{Read and write} access level and
 #'   \code{Callback URL} of \code{http://127.0.0.1:1410}.
 #' @param access_token Twitter Application management access token 
 #'   (apps.twitter.com).
-#' @param access_token_secret Twitter Application management access secret token 
-#'   (apps.twitter.com).
+#' @param access_token_secret Twitter Application management access secret 
+#'   token (apps.twitter.com).
 #' @param query A single query or a list of queries the user has specified.  
 #'   Character string, not to exceed 500 characters.  To search for tweets 
 #'   containing at least one of multiple possible terms, separate each search 
@@ -59,8 +59,8 @@
 #'   distinct = TRUE)
 #'                         
 #' Or the Twitter API keys and tokens can be saved as an .Renviron file in the 
-#' working directory.  If using a `.Renviron` file, the data should be saved like 
-#' the below example:
+#' working directory.  If using a `.Renviron` file, the data should be saved 
+#' like the below example:
 #' 
 #' consumer_api_key=XXXXXXXXXXXXXXXXXXXXXXXXX
 #' consumer_api_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -123,7 +123,7 @@ tweet_acquire <- function(twitter_app,
       query = query) %>%
     dplyr::distinct(key, .keep_all = distinct)
   
-  if(reduced_tweets == TRUE) {
+  if (reduced_tweets == TRUE) {
     
     reduced <- raw_tweets %>% 
       dplyr::select(user_id, 

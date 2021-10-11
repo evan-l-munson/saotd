@@ -1,7 +1,7 @@
 
 #' @title Tweet Topics
 #'
-#' @description Determines the Latent topics within a data frame by using Latent 
+#' @description Determines the Latent topics within a data frame by using Latent
 #'   Dirichlet Allocation (LDA) model parameters.  Uses the `ldatuning` package 
 #'   and outputs an ldatuning plot.  Prepares Tweet text, creates DTM, conducts 
 #'   LDA, display data terms associated with each topic.
@@ -40,7 +40,7 @@ tweet_topics <- function(DataFrame,
                          set_seed = 1234) {
   
   # input checks
-  if(!is.data.frame(DataFrame)) {
+  if (!is.data.frame(DataFrame)) {
     stop('The input for this function is a data frame.')
   }
   
@@ -106,8 +106,8 @@ tweet_topics <- function(DataFrame,
   topicProbabilities <- as.data.frame(ldaout@gamma)
   data.topics <- topicmodels::topics(ldaout, 1)
   data.terms <- as.data.frame(
-    topicmodels::terms(ldaout, 
-                       num_terms), 
+    topicmodels::terms(ldaout,
+                       num_terms),
     stringsAsFactors = FALSE)
   print(data.terms)
   
@@ -123,7 +123,7 @@ tweet_topics <- function(DataFrame,
   # Clean up and rename columns to match previous data frames
   tweettopics <- tweettopics.df %>% 
     dplyr::select(c("ArticleNo", "Topic")) %>% 
-    dplyr::rename(c("key" ="ArticleNo"))
+    dplyr::rename(c("key" = "ArticleNo"))
   
   # Join original Twitter data frame with Tweet topics
   tweet_topics <- dplyr::inner_join(
