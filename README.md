@@ -68,7 +68,7 @@ Calculation, and Visualizations.
         choosing by accessing the Twitter API. In order to do this the
         user needs to have a [Twitter](https://twitter.com) account.
         Additionally once the user has an account they will then need to
-        sign up for a [Twitter Developers](https://dev.twitter.com/)
+        sign up for a [Twitter Developers](https://developer.twitter.com/apps)
         account. Once a user has a Twitter developers account and has
         received their individual consumer key, consumer secret key,
         access token, and access secret key, they can acquire Tweets
