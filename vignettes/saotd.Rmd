@@ -135,7 +135,7 @@ saotd::trigram(DataFrame = TD) %>%
   knitr::kable("html", caption = "Twitter data Tri-Grams")
 ```
 
-Now that we have the Uni-Grams we can see that canceled and flight are referring to cancelled flight and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
+Now that we have the Uni-Grams we can see that canceled and flight are referring to canceled flight and may be good set of words to merge into a single term.  Additionally, pet and pets could also be merged to observe more uniqueness in the data.
 
 ```{r merge, message=FALSE, message=FALSE, error=FALSE, cache=TRUE, cache.path='saotd_cache/'}
 TD_Merge <- 

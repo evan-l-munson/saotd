@@ -30,6 +30,7 @@ Description: This analytic is an in initial foray into sentiment analysis.
     utilizing the Bing Lexicon, and output visualizations.
 License: GPL (>= 2)
 URL: https://github.com/evan-l-munson/saotd
+Language: en-US
 Imports: 
     dplyr, 
     widyr,
