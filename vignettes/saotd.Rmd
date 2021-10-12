@@ -52,9 +52,9 @@ To explore the data manipulation functions of `saotd` we will use the built in d
 
 However is you want to acquire your own tweets, you will first have to:
 
-1. Create a [twitter](<https://twitter.com/>) account or sign into existing account.
+1. Create a [twitter](https://twitter.com/) account or sign into existing account.
 
-2. Use your twitter login, to sign into [Twitter Developers](<https://developer.twitter.com/apps>)
+2. Use your twitter login, to sign into [Twitter Developers](https://developer.twitter.com/apps)
 
 3. Navigate to My Applications.
 
@@ -68,7 +68,7 @@ However is you want to acquire your own tweets, you will first have to:
     
 With these steps complete you now have access to the twitter API.
 
-To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](<https://dev.twitter.com/apps/>) page.  You will also need to select the #hashtags you are interested in and the number of tweets requested per #hashtag.
+To acquire your own dataset of tweets you can use the `saotd::tweet_acquire` function and insert your consumer key, consumer secret key, access token and access secret key gained from the [Twitter Developers](https://developer.twitter.com/apps) page.  You will also need to select the #hashtags you are interested in and the number of tweets requested per #hashtag.
 
 ```{r tweet_acquire, echo=TRUE, eval=FALSE, cache=TRUE, cache.path='saotd_cache/'}
 consumer_api_key <- "XXXXXXXXXXXXXXXXXXXXXXXXX"
