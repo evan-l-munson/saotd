@@ -16,3 +16,4 @@ tests/testthat/.httr-oauth
 .git
 ^CRAN-RELEASE$
 ^cran-comments\.md$
+^.*\.Renviron$

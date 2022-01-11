@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg?token=dosG0Ck4Tm)](https://app.codecov.io/gh/evan-l-munson/saotd)
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
-
+![GitHub last commit](https://img.shields.io/github/last-commit/evan-l-munson/saotd?style=plastic)
 [![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](https://joss.theoj.org/papers/10.21105/joss.00764)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
 
