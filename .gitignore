@@ -5,7 +5,7 @@ inst/doc
 .Rhistory
 .RData
 .Ruserdata
-.Renviron
+*.Renviron
 *.httr-oauth
 hidden/
 src/*.so
