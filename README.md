@@ -27,7 +27,7 @@ foundation of data and will build a methodology utilizing a topic
 modeling and lexicographical approach to analyze the sentiment and
 opinions of text in English to determine a general sentiment such as
 positive or negative. The more people express themselves on social
-media, this application can be used to gauge the general feeling of
+media, this application can be use1`d to gauge the general feeling of
 people.
 
 ## Package
