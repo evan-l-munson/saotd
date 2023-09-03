@@ -1,14 +1,14 @@
 
 # Sentiment Analysis of Twitter Data <img src="man/figures/hex_saotd.png" align="right" width="150" height="150" />
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd)](https://cran.r-project.org/package=saotd)
-[![R-CMD-check](https://github.com/evan-l-munson/saotd/workflows/R-CMD-check/badge.svg)](https://github.com/evan-l-munson/saotd/actions?workflow=R-CMD-check)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/saotd?style=flat-square)](https://cran.r-project.org/package=saotd)
+[![R-CMD-check](https://github.com/evan-l-munson/saotd/workflows/R-CMD-check/badge.svg?style=flat-square)](https://github.com/evan-l-munson/saotd/actions?workflow=R-CMD-check)
 [![codecov](https://codecov.io/gh/evan-l-munson/saotd/branch/master/graph/badge.svg?token=dosG0Ck4Tm)](https://app.codecov.io/gh/evan-l-munson/saotd)
 [![Downloads](http://cranlogs.r-pkg.org/badges/saotd)](https://CRAN.R-project.org/package=saotd)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/saotd?color=orange)](https://CRAN.R-project.org/package=saotd)
-
+![GitHub last commit](https://img.shields.io/github/last-commit/evan-l-munson/saotd?style=plastic)
 [![status](http://joss.theoj.org/papers/e6002792b44f50039afc22dbe3d4a086/status.svg)](https://joss.theoj.org/papers/10.21105/joss.00764)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg)](https://doi.org/10.5281/zenodo.2578973)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2578973.svg?)](https://doi.org/10.5281/zenodo.2578973)
 
 ## Purpose 
 
@@ -27,7 +27,7 @@ foundation of data and will build a methodology utilizing a topic
 modeling and lexicographical approach to analyze the sentiment and
 opinions of text in English to determine a general sentiment such as
 positive or negative. The more people express themselves on social
-media, this application can be used to gauge the general feeling of
+media, this application can be use1`d to gauge the general feeling of
 people.
 
 ## Package

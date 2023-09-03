@@ -4,6 +4,7 @@
 #'
 #' @keywords internal
 #' @docType package
+#' @aliases saotd-package
 #'
 #' @description  This analytic is an in initial foray into sentiment analysis.  
 #'   This analytic will allow a user to access the Twitter API (once they 

@@ -37,3 +37,4 @@ testthat::test_that("The number_topics plot retunrs ggplot object", {
                         type =  "list")
   
 })
+

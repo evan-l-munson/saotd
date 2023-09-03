@@ -93,6 +93,19 @@ tweet_acquire <- function(twitter_app,
                           reduced_tweets = TRUE,
                           distinct = TRUE) {
   
+  # input checks
+  if(is.numeric(query)) {
+    stop("The input for 'query' is a character.")
+  }
+  
+  if (!is.numeric(num_tweets)) {
+    stop("The input for 'num_tweets' is a number.")
+  }
+  
+  if (is.character(num_tweets)) {
+    stop("The input for 'num_tweets' is a number.")
+  }
+  
   # configure defusing operators for packages checking
   screen_name <- dplyr::quo(screen_name)
   created_at <- dplyr::quo(created_at)
