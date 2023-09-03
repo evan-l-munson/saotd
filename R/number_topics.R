@@ -138,7 +138,7 @@ number_topics <- function(DataFrame,
                                   y = "value",
                                   group = "variable")) +
     ggplot2::geom_line() +
-    ggplot2::geom_point(aes_string(shape = "variable"),
+    ggplot2::geom_point(aes(shape = "variable"),
                         size = 3) +
     ggplot2::guides(
       size = "none",
