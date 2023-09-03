@@ -1,9 +1,10 @@
 
 # saotd News
 
-## saotd 0.3.1
+## saotd 0.3.1 - 03SEP2023
 
 * Updated the saotd vignette.
+* Corrected `roxygen` breaking change by updating saotd/man/saotd.Rd' with @aliases saotd-package.
 
 ## saotd 0.3.0 - 13OCT2021
 
